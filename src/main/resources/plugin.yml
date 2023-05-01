@@ -1,0 +1,7 @@
+name: HyperSpecies
+version: '${project.version}'
+main: net.toujoustudios.hyperspecies.main.HyperSpecies
+api-version: 1.19
+author: Toujou Studios
+authors:
+  - IanToujou
