@@ -1,5 +1,7 @@
 package net.toujoustudios.hyperspecies.main;
 
+import net.toujoustudios.hyperspecies.command.AbilityCommand;
+import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.event.PlayerJoinListener;
 import net.toujoustudios.hyperspecies.loader.Loader;
 import net.toujoustudios.hyperspecies.ui.SelectSpeciesUI;
@@ -25,16 +27,15 @@ public final class HyperSpecies extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        super.onDisable();
+        PlayerManager.unloadAll();
     }
 
     @SuppressWarnings("all")
     public void registerCommands() {
-
+        getCommand("ability").setExecutor(new AbilityCommand());
     }
 
     public void registerUI() {
-
         pluginManager.registerEvents(new SelectSpeciesUI(), this);
     }
 

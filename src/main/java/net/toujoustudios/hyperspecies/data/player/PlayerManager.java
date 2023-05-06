@@ -1,6 +1,7 @@
-package net.toujoustudios.hyperspecies.data;
+package net.toujoustudios.hyperspecies.data.player;
 
 import net.toujoustudios.hyperspecies.config.Config;
+import net.toujoustudios.hyperspecies.data.species.Species;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 
@@ -14,13 +15,11 @@ public class PlayerManager {
     private static final YamlConfiguration playerConfig = Config.getConfigFile("playerdata.yml");
 
     private final UUID uuid;
-    private boolean muted;
-    private String muteReason;
+    private Species species;
 
     public PlayerManager(UUID uuid) {
         this.uuid = uuid;
-        muted = playerConfig.getBoolean("Data." + uuid + ".Mute.Enabled");
-        muteReason = playerConfig.getString("Data." + uuid + ".Mute.Reason");
+        species = Species.getSpecies(playerConfig.getString("Data." + uuid + ".Species"));
     }
 
     public static PlayerManager getPlayer(UUID uuid) {
@@ -42,6 +41,7 @@ public class PlayerManager {
     }
 
     public void save() {
+        playerConfig.set("Player." + uuid + ".Species", species.getName());
         Config.saveToFile(playerConfig, "playerdata.yml");
     }
 
@@ -63,29 +63,15 @@ public class PlayerManager {
 
     // GETTERS AND SETTERS
 
-    public boolean isMuted() {
-        return muted;
+    public Species getSpecies() {
+        return species;
     }
 
-    public String getMuteReason() {
-        return isMuted() ? muteReason : "None";
+    public void setSpecies(Species species) {
+        this.species = species;
     }
 
     // CUSTOM METHODS
-
-    public void mute() {
-        mute(null);
-    }
-
-    public void mute(String reason) {
-        this.muted = true;
-        this.muteReason = reason;
-    }
-
-    public void unmute() {
-        this.muted = false;
-        this.muteReason = null;
-    }
 
     // STATIC METHODS
 

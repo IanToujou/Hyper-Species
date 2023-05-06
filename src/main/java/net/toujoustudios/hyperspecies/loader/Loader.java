@@ -1,7 +1,8 @@
 package net.toujoustudios.hyperspecies.loader;
 
 import net.toujoustudios.hyperspecies.config.Config;
-import net.toujoustudios.hyperspecies.data.PlayerManager;
+import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.data.species.SpeciesInitializer;
 import net.toujoustudios.hyperspecies.item.ItemList;
 import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
@@ -56,6 +57,8 @@ public class Loader {
                 PlayerManager.getPlayers().put(player.getUniqueId(), playerManager);
             }
         }
+
+        SpeciesInitializer.initialize();
 
         Logger.log(LogLevel.INFORMATION, "Post initialization completed.");
         state = LoaderState.END;

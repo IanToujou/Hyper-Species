@@ -5,3 +5,21 @@ api-version: 1.19
 author: Toujou Studios
 authors:
   - IanToujou
+
+commands:
+  ability:
+    description: Force and use an ability.
+    permission: hyperspecies.command.message
+
+permissions:
+  hyperspecies.group.player:
+    description: The player group.
+    children:
+      hyperspecies.command.ability: false
+  hyperspecies.group.admin:
+    description: The administrator group. Grants all permissions.
+    children:
+      hyperspecies.command.ability: true
+  hyperspecies.command.ability:
+    description: Allows players to use the ability command.
+    default: false
