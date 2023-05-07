@@ -4,7 +4,9 @@ import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.species.Species;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -16,9 +18,13 @@ public class PlayerManager {
 
     private final UUID uuid;
     private Species species;
+    private boolean selectingAbility;
+    private ArrayList<ItemStack> savedInventory;
 
     public PlayerManager(UUID uuid) {
         this.uuid = uuid;
+        this.selectingAbility = false;
+        this.savedInventory = new ArrayList<>();
         species = Species.getSpecies(playerConfig.getString("Data." + uuid + ".Species"));
     }
 
@@ -69,6 +75,22 @@ public class PlayerManager {
 
     public void setSpecies(Species species) {
         this.species = species;
+    }
+
+    public boolean isSelectingAbility() {
+        return selectingAbility;
+    }
+
+    public void setSelectingAbility(boolean selectingAbility) {
+        this.selectingAbility = selectingAbility;
+    }
+
+    public ArrayList<ItemStack> getSavedInventory() {
+        return savedInventory;
+    }
+
+    public void setSavedInventory(ArrayList<ItemStack> savedInventory) {
+        this.savedInventory = savedInventory;
     }
 
     // CUSTOM METHODS

@@ -21,12 +21,12 @@ public class AbilityCommand implements CommandExecutor {
             return false;
         }
 
-        if(args.length != 0) {
+        if(args.length == 0) {
             player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", this.getUsage()));
             return false;
         }
 
-        playerManager.getSpecies().getAbilities().get(0).execute(player);
+        playerManager.getSpecies().getAbilities().get(Integer.parseInt(args[0])).execute(player);
 
         return false;
 

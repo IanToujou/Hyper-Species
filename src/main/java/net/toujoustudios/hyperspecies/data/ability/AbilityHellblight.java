@@ -12,10 +12,12 @@ public class AbilityHellblight extends Ability {
     }
 
     @Override
-    public void execute(Player player) {
+    public boolean execute(Player player) {
 
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WITHER_AMBIENT, 3, 1.5f);
         player.getWorld().spawnParticle(Particle.SMOKE_LARGE, player.getLocation(), 300, 5, 0, 5);
+
+        return true;
 
     }
 

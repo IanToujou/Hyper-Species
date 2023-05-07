@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.data.species;
 
+import net.toujoustudios.hyperspecies.data.ability.AbilityDemonicRage;
 import net.toujoustudios.hyperspecies.data.ability.AbilityEnhancingFlame;
 import net.toujoustudios.hyperspecies.data.ability.AbilityHellblight;
 import net.toujoustudios.hyperspecies.data.ability.AbilityMeteorStrike;
@@ -13,8 +14,8 @@ public class SpeciesInitializer {
     public static void initialize() {
 
         ArrayList<SubSpecies> demonSpecies = new ArrayList<>();
-        demonSpecies.add(new SubSpecies("Hellspawn", List.of(new AbilityHellblight(), new AbilityMeteorStrike())));
-        demonSpecies.add(new SubSpecies("Arch Angel", List.of(new AbilityHellblight())));
+        demonSpecies.add(new SubSpecies("Hellspawn", null));
+        demonSpecies.add(new SubSpecies("Arch Angel", null));
 
         ArrayList<SubSpecies> elfSpecies = new ArrayList<>();
         elfSpecies.add(new SubSpecies("Dryad", null));
@@ -48,7 +49,12 @@ public class SpeciesInitializer {
         wolfSpecies.add(new SubSpecies("Snow Wolf", null));
         wolfSpecies.add(new SubSpecies("Forest Wolf", null));
 
-        Species.createSpecies("Demon", ItemList.DEMON, List.of(new AbilityEnhancingFlame()), demonSpecies);
+        Species.createSpecies("Demon", ItemList.DEMON, List.of(
+                new AbilityHellblight(),
+                new AbilityMeteorStrike(),
+                new AbilityEnhancingFlame(),
+                new AbilityDemonicRage()
+        ), demonSpecies);
         Species.createSpecies("Elf", ItemList.ELF, null, elfSpecies);
         Species.createSpecies("Reptile", ItemList.REPTILE, null, reptileSpecies);
         Species.createSpecies("Angel", ItemList.ANGEL, null, angelSpecies);

@@ -43,6 +43,7 @@ public class Loader {
         HyperSpecies.getInstance().registerUI();
         HyperSpecies.getInstance().registerEvents();
         HyperSpecies.getInstance().registerCommands();
+        SpeciesInitializer.initialize();
         Logger.log(LogLevel.INFORMATION, "Initialization completed.");
     }
 
@@ -57,8 +58,6 @@ public class Loader {
                 PlayerManager.getPlayers().put(player.getUniqueId(), playerManager);
             }
         }
-
-        SpeciesInitializer.initialize();
 
         Logger.log(LogLevel.INFORMATION, "Post initialization completed.");
         state = LoaderState.END;

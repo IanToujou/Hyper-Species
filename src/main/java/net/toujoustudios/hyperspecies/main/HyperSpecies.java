@@ -2,6 +2,7 @@ package net.toujoustudios.hyperspecies.main;
 
 import net.toujoustudios.hyperspecies.command.AbilityCommand;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.event.PlayerInteractListener;
 import net.toujoustudios.hyperspecies.event.PlayerJoinListener;
 import net.toujoustudios.hyperspecies.loader.Loader;
 import net.toujoustudios.hyperspecies.ui.SelectSpeciesUI;
@@ -41,6 +42,7 @@ public final class HyperSpecies extends JavaPlugin {
 
     public void registerEvents() {
         pluginManager.registerEvents(new PlayerJoinListener(), this);
+        pluginManager.registerEvents(new PlayerInteractListener(), this);
     }
 
     public PluginManager getPluginManager() {

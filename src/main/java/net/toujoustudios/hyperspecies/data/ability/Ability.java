@@ -3,8 +3,6 @@ package net.toujoustudios.hyperspecies.data.ability;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.List;
-
 public abstract class Ability {
 
     private final String name;
@@ -19,7 +17,13 @@ public abstract class Ability {
         this.delay = delay;
     }
 
-    public abstract void execute(Player player);
+    /**
+     * Executes the ability, without draining mana or applying any delay. The mana and delay should be managed externally.
+     *
+     * @param player The player that is executing the spell.
+     * @return A boolean whether the spell has been executed successfully or not.
+     */
+    public abstract boolean execute(Player player);
 
     public String getName() {
         return name;
