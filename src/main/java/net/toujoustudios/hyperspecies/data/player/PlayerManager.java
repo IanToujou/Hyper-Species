@@ -17,12 +17,20 @@ public class PlayerManager {
     private static final YamlConfiguration playerConfig = Config.getConfigFile("playerdata.yml");
 
     private final UUID uuid;
+    private int health;
+    private int mana;
+    private int armor;
+    private int shield;
     private Species species;
     private boolean selectingAbility;
     private ArrayList<ItemStack> savedInventory;
 
     public PlayerManager(UUID uuid) {
         this.uuid = uuid;
+        this.health = 20;
+        this.mana = 20;
+        this.armor = 0;
+        this.shield = 0;
         this.selectingAbility = false;
         this.savedInventory = new ArrayList<>();
         species = Species.getSpecies(playerConfig.getString("Data." + uuid + ".Species"));
@@ -68,6 +76,39 @@ public class PlayerManager {
     }
 
     // GETTERS AND SETTERS
+
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    public int getArmor() {
+        return armor;
+    }
+
+    public void setArmor(int armor) {
+        this.armor = armor;
+    }
+
+    public int getShield() {
+        return shield;
+    }
+
+    public void setShield(int shield) {
+        this.shield = shield;
+    }
 
     public Species getSpecies() {
         return species;
