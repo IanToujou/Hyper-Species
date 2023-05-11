@@ -55,7 +55,7 @@ public class PlayerManager {
     }
 
     public void save() {
-        playerConfig.set("Player." + uuid + ".Species", species.getName());
+        playerConfig.set("Data." + uuid + ".Species", species.getName());
         Config.saveToFile(playerConfig, "playerdata.yml");
     }
 

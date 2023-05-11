@@ -31,6 +31,8 @@ public class PlayerInteractListener implements Listener {
         PlayerManager playerManager = PlayerManager.getPlayer(player);
         Action action = event.getAction();
 
+        if(playerManager.getSpecies() == null) return;
+
         if(playerManager.isSelectingAbility()) {
 
             event.setCancelled(true);

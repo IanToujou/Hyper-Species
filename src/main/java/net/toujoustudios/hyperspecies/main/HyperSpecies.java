@@ -1,5 +1,7 @@
 package net.toujoustudios.hyperspecies.main;
 
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.toujoustudios.hyperspecies.command.AbilityCommand;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.event.PlayerInteractListener;
@@ -25,6 +27,27 @@ public final class HyperSpecies extends JavaPlugin {
         instance = this;
         this.pluginManager = Bukkit.getPluginManager();
         Loader.startLoading();
+
+        Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+
+            @Override
+            public void run() {
+
+                Bukkit.getOnlinePlayers().forEach((player -> {
+
+                    int health = Math.round((float)player.getHealth());
+                    int mana = 20;
+                    int shield = 20;
+                    String text = "§cHealth: " + health + " §7- §bMana: " + mana + " §7- §eShield: " + shield;
+
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(text));
+
+                }));
+
+            }
+
+        }, 10, 10);
+
     }
 
     @Override

@@ -22,30 +22,38 @@ public class AbilityMeteorStrike extends Ability {
         Block block = player.getTargetBlock(null, 50);
         if(block.getType() == Material.AIR) return false;
         Location impactLocation = block.getLocation();
-        Location spawnLocation = impactLocation.add(0, 100, 0);
+        Location spawnLocation = impactLocation.add(0, 150, 0);
 
         player.getWorld().spawnParticle(Particle.FLAME, player.getLocation(), 100, 0.2, 0.1, 0.2);
+        player.getWorld().spawnParticle(Particle.SMOKE_LARGE, player.getLocation(), 20, 0.2, 0.1, 0.2);
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 3, 0.5f);
+        Bukkit.getOnlinePlayers().forEach(all -> {
+            all.sendMessage("§cThe sky turns pitch black and the gates of hell are opening to bring the corruption to this world...");
+        });
 
         final int[] times = {0};
         new BukkitRunnable() {
 
             @Override
             public void run() {
-                player.getWorld().spawnParticle(Particle.SMOKE_LARGE, player.getLocation(), 10, 0.2, 0.1, 0.2);
-                if(times[0] >= 15) this.cancel();
+                player.getWorld().spawnParticle(Particle.CRIT, player.getLocation().add(0, 3*times[0], 0), 50, 0, 3, 0);
+                if(times[0] >= 5) this.cancel();
                 times[0]++;
             }
 
-        }.runTaskTimer(HyperSpecies.getInstance(), 0, 5);
+        }.runTaskTimer(HyperSpecies.getInstance(), 0, 10);
 
-        Fireball entity = (Fireball) player.getWorld().spawnEntity(spawnLocation, EntityType.FIREBALL);
-        entity.setCustomName("Demon Meteor");
-        entity.setCustomNameVisible(false);
-        entity.setDirection(new Vector(0, -3, 0));
-        entity.setGlowing(true);
-        entity.setIsIncendiary(false);
-        entity.setYield(0);
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
+
+            Fireball entity = (Fireball) player.getWorld().spawnEntity(spawnLocation, EntityType.FIREBALL);
+            entity.setCustomName("Demon Meteor");
+            entity.setCustomNameVisible(false);
+            entity.setDirection(new Vector(0, -3, 0));
+            entity.setGlowing(true);
+            entity.setIsIncendiary(false);
+            entity.setYield(0);
+
+        }, 100);
 
         return true;
 
