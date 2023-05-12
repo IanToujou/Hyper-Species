@@ -14,7 +14,7 @@ import org.bukkit.potion.PotionEffectType;
 public class AbilityEnhancingFlame extends Ability {
 
     public AbilityEnhancingFlame() {
-        super("Enhancing Flame", ItemList.DEMON_ABILITY_ENHANCING_FLAME, 1, 1);
+        super("Enhancing Flame", ItemList.DEMON_ABILITY_ENHANCING_FLAME, 5, 90);
     }
 
     @Override

@@ -13,7 +13,7 @@ import org.bukkit.util.Vector;
 public class AbilityMeteorStrike extends Ability {
 
     public AbilityMeteorStrike() {
-        super("Meteor Strike", ItemList.DEMON_ABILITY_METEOR_STRIKE, 1, 1);
+        super("Meteor Strike", ItemList.DEMON_ABILITY_METEOR_STRIKE, 12, 180);
     }
 
     @Override

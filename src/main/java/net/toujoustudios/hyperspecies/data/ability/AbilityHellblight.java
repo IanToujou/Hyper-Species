@@ -14,7 +14,7 @@ import java.util.Collection;
 public class AbilityHellblight extends Ability {
 
     public AbilityHellblight() {
-        super("Hellblight", ItemList.DEMON_ABILITY_HELLBLIGHT, 1, 1);
+        super("Hellblight", ItemList.DEMON_ABILITY_HELLBLIGHT, 6, 60);
     }
 
     @Override

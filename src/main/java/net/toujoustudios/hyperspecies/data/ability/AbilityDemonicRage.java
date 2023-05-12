@@ -7,7 +7,7 @@ public class AbilityDemonicRage extends Ability {
 
 
     public AbilityDemonicRage() {
-        super("Demonic Rage", ItemList.DEMON_ABILITY_DEMONIC_RAGE, 1, 1);
+        super("Demonic Rage", ItemList.DEMON_ABILITY_DEMONIC_RAGE, 10, 120);
     }
 
     @Override

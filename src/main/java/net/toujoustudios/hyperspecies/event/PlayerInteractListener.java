@@ -42,14 +42,26 @@ public class PlayerInteractListener implements Listener {
                 if(item.getItemMeta().getDisplayName().contains("§cCancel")) {
                     player.sendTitle("", "§cCancelled", 5, 10, 5);
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.6f);
-                } else if(item.getItemMeta().getDisplayName().contains("§a")) {
+                } else if(item.getItemMeta().getDisplayName().contains("§a") || item.getItemMeta().getDisplayName().contains("§c")) {
 
                     if(item.getItemMeta().getLore() == null) return;
                     if(item.getItemMeta().getLore().size() < 1) return;
                     int abilityId = Integer.parseInt(item.getItemMeta().getLore().get(0));
                     Ability ability = playerManager.getSpecies().getAbilities().get(abilityId);
 
-                    if(ability.execute(player)) {
+                    if(playerManager.getCooldownAbilities().contains(ability)) {
+                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.4f);
+                        player.sendTitle("", "§cCooling Down", 5, 10, 5);
+                        return;
+                    }
+
+                    if(playerManager.getMana() < ability.getManaCost()) {
+                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.4f);
+                        player.sendTitle("", "§cNo Mana", 5, 10, 5);
+                        return;
+                    }
+
+                    if(playerManager.useAbility(ability)) {
                         player.sendTitle("", "§a" + ability.getName(), 5, 10, 5);
                     } else {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.4f);
@@ -86,18 +98,20 @@ public class PlayerInteractListener implements Listener {
 
             Ability ability = playerManager.getSpecies().getAbilities().get(i);
             ItemStack item = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
+            if(playerManager.getMana() < ability.getManaCost()) item.setType(Material.ORANGE_STAINED_GLASS_PANE);
+            if(playerManager.getCooldownAbilities().contains(ability)) item.setType(Material.RED_STAINED_GLASS_PANE);
             ItemMeta itemMeta = item.getItemMeta();
             assert itemMeta != null;
             itemMeta.setDisplayName("§a" + ability.getName() + " §7- §b" + ability.getManaCost() + " Mana");
+            if(playerManager.getMana() < ability.getManaCost()) itemMeta.setDisplayName("§c" + ability.getName() + " §7- §b" + ability.getManaCost() + " Mana");
+            if(playerManager.getCooldownAbilities().contains(ability)) itemMeta.setDisplayName("§c" + ability.getName() + " §7- §6Cooling Down");
             itemMeta.setLore(List.of(String.valueOf(i)));
             item.setItemMeta(itemMeta);
             player.getInventory().setItem(1+i, item);
 
         }
 
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
-            cooldownPlayers.remove(player.getUniqueId());
-        }, 5);
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> cooldownPlayers.remove(player.getUniqueId()), 5);
 
     }
 

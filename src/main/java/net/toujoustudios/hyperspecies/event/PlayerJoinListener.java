@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.event;
 
+import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.ui.SelectSpeciesUI;
 import org.bukkit.entity.Player;
@@ -14,6 +15,8 @@ public class PlayerJoinListener implements Listener {
 
         Player player = event.getPlayer();
         PlayerManager playerManager = PlayerManager.getPlayer(player);
+
+        if(player.isOp()) player.sendMessage(Config.MESSAGE_NOTIFICATION_ADMIN_INFO);
 
         if(playerManager.getSpecies() == null) {
             SelectSpeciesUI.openInventory(player);
