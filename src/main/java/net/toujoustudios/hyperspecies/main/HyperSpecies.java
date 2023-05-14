@@ -57,6 +57,7 @@ public final class HyperSpecies extends JavaPlugin {
 
         })), 5, 5);
 
+        // Regeneration
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> Bukkit.getOnlinePlayers().forEach((player -> {
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
@@ -74,6 +75,16 @@ public final class HyperSpecies extends JavaPlugin {
             }
 
         })), 20, 20);
+
+        // Passive
+        Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> Bukkit.getOnlinePlayers().forEach((player -> {
+
+            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            if(playerManager.getSpecies() == null) return;
+            if(playerManager.getSpecies().getPassive() == null) return;
+            playerManager.getSpecies().getPassive().execute(player);
+
+        })), 5, 5);
 
     }
 

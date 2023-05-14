@@ -1,9 +1,11 @@
 package net.toujoustudios.hyperspecies.data.species;
 
-import net.toujoustudios.hyperspecies.data.ability.AbilityDemonicRage;
-import net.toujoustudios.hyperspecies.data.ability.AbilityEnhancingFlame;
-import net.toujoustudios.hyperspecies.data.ability.AbilityHellblight;
-import net.toujoustudios.hyperspecies.data.ability.AbilityMeteorStrike;
+import net.toujoustudios.hyperspecies.data.ability.active.AbilityDemonicRage;
+import net.toujoustudios.hyperspecies.data.ability.active.AbilityEnhancingFlame;
+import net.toujoustudios.hyperspecies.data.ability.active.AbilityHellblight;
+import net.toujoustudios.hyperspecies.data.ability.active.AbilityMeteorStrike;
+import net.toujoustudios.hyperspecies.data.ability.passive.PassiveDemon;
+import net.toujoustudios.hyperspecies.data.ability.passive.PassiveElf;
 import net.toujoustudios.hyperspecies.item.ItemList;
 
 import java.util.ArrayList;
@@ -54,15 +56,15 @@ public class SpeciesInitializer {
                 new AbilityMeteorStrike(),
                 new AbilityEnhancingFlame(),
                 new AbilityDemonicRage()
-        ), demonSpecies);
-        Species.createSpecies("Elf", ItemList.ELF, null, elfSpecies);
-        Species.createSpecies("Reptile", ItemList.REPTILE, null, reptileSpecies);
-        Species.createSpecies("Angel", ItemList.ANGEL, null, angelSpecies);
-        Species.createSpecies("Human", ItemList.HUMAN, null, humanSpecies);
-        Species.createSpecies("Aquatilia", ItemList.AQUATILIA, null, aquatiliaSpecies);
-        Species.createSpecies("Feline", ItemList.FELINE, null, felineSpecies);
-        Species.createSpecies("Dwarf", ItemList.DWARF, null, dwarfSpecies);
-        Species.createSpecies("Wolf", ItemList.WOLF, null, wolfSpecies);
+        ), demonSpecies, new PassiveDemon());
+        Species.createSpecies("Elf", ItemList.ELF, null, elfSpecies, new PassiveElf());
+        Species.createSpecies("Reptile", ItemList.REPTILE, null, reptileSpecies, null);
+        Species.createSpecies("Angel", ItemList.ANGEL, null, angelSpecies, null);
+        Species.createSpecies("Human", ItemList.HUMAN, null, humanSpecies, null);
+        Species.createSpecies("Aquatilia", ItemList.AQUATILIA, null, aquatiliaSpecies, null);
+        Species.createSpecies("Feline", ItemList.FELINE, null, felineSpecies, null);
+        Species.createSpecies("Dwarf", ItemList.DWARF, null, dwarfSpecies, null);
+        Species.createSpecies("Wolf", ItemList.WOLF, null, wolfSpecies, null);
     }
 
 }

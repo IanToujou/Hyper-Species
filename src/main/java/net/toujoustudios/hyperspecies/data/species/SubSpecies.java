@@ -1,6 +1,6 @@
 package net.toujoustudios.hyperspecies.data.species;
 
-import net.toujoustudios.hyperspecies.data.ability.Ability;
+import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 
 import java.util.List;
 

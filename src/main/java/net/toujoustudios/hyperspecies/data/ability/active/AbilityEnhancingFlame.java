@@ -1,4 +1,4 @@
-package net.toujoustudios.hyperspecies.data.ability;
+package net.toujoustudios.hyperspecies.data.ability.active;
 
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.item.ItemList;

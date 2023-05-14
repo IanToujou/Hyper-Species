@@ -1,4 +1,4 @@
-package net.toujoustudios.hyperspecies.data.ability;
+package net.toujoustudios.hyperspecies.data.ability.active;
 
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
