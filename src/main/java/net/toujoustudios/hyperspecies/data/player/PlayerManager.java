@@ -3,13 +3,11 @@ package net.toujoustudios.hyperspecies.data.player;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.ability.Ability;
 import net.toujoustudios.hyperspecies.data.species.Species;
-import net.toujoustudios.hyperspecies.data.species.SubSpecies;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,31 +21,41 @@ public class PlayerManager {
 
     private final UUID uuid;
     private double health;
-    private int maxHealth;
-    private int healthRegeneration;
+    private double maxHealth;
+    private double healthRegeneration;
     private double mana;
     private double maxMana;
     private double manaRegeneration;
-    private double armor;
     private double shield;
+    private double maxShield;
     private Species species;
     private boolean selectingAbility;
+    private boolean regenerationCoolingDown;
     private ArrayList<ItemStack> savedInventory;
     private ArrayList<Ability> cooldownAbilities;
 
     public PlayerManager(UUID uuid) {
+
         this.uuid = uuid;
-        this.health = 20;
-        this.maxHealth = 20;
-        this.mana = 20;
-        this.maxMana = 20;
-        this.manaRegeneration = 0.1;
-        this.armor = 0;
-        this.shield = 10;
-        this.selectingAbility = false;
-        this.savedInventory = new ArrayList<>();
-        this.cooldownAbilities = new ArrayList<>();
+        maxHealth = 50;
+        maxMana = 20;
+        manaRegeneration = 0.1;
+        maxShield = (double) maxHealth / 2;
+
+        if(playerConfig.isSet("Data." + uuid + ".Stats.Health")) health = playerConfig.getDouble("Data." + uuid + ".Stats.Health");
+        else health = maxHealth;
+        if(playerConfig.isSet("Data." + uuid + ".Stats.Mana")) mana = playerConfig.getDouble("Data." + uuid + ".Stats.Mana");
+        else mana = maxMana;
+        if(playerConfig.isSet("Data." + uuid + ".Stats.Shield")) shield = playerConfig.getDouble("Data." + uuid + ".Stats.Shield");
+        else shield = 0;
+
+        selectingAbility = false;
+        regenerationCoolingDown = false;
+        savedInventory = new ArrayList<>();
+        cooldownAbilities = new ArrayList<>();
+
         species = Species.getSpecies(playerConfig.getString("Data." + uuid + ".Species.Main"));
+
     }
 
     public static PlayerManager getPlayer(UUID uuid) {
@@ -71,6 +79,9 @@ public class PlayerManager {
     public void save() {
         playerConfig.set("Data." + uuid + ".Species.Main", species.getName());
         playerConfig.set("Data." + uuid + ".Species.Sub", -1);
+        playerConfig.set("Data." + uuid + ".Stats.Health", health);
+        playerConfig.set("Data." + uuid + ".Stats.Mana", mana);
+        playerConfig.set("Data." + uuid + ".Stats.Shield", shield);
         Config.saveToFile(playerConfig, "playerdata.yml");
     }
 
@@ -120,19 +131,19 @@ public class PlayerManager {
         this.health = health;
     }
 
-    public int getMaxHealth() {
+    public double getMaxHealth() {
         return maxHealth;
     }
 
-    public void setMaxHealth(int maxHealth) {
+    public void setMaxHealth(double maxHealth) {
         this.maxHealth = maxHealth;
     }
 
-    public int getHealthRegeneration() {
+    public double getHealthRegeneration() {
         return healthRegeneration;
     }
 
-    public void setHealthRegeneration(int healthRegeneration) {
+    public void setHealthRegeneration(double healthRegeneration) {
         this.healthRegeneration = healthRegeneration;
     }
 
@@ -160,20 +171,20 @@ public class PlayerManager {
         this.manaRegeneration = manaRegeneration;
     }
 
-    public double getArmor() {
-        return armor;
-    }
-
-    public void setArmor(double armor) {
-        this.armor = armor;
-    }
-
     public double getShield() {
         return shield;
     }
 
     public void setShield(double shield) {
         this.shield = shield;
+    }
+
+    public double getMaxShield() {
+        return maxShield;
+    }
+
+    public void setMaxShield(double maxShield) {
+        this.maxShield = maxShield;
     }
 
     public Species getSpecies() {
@@ -190,6 +201,14 @@ public class PlayerManager {
 
     public void setSelectingAbility(boolean selectingAbility) {
         this.selectingAbility = selectingAbility;
+    }
+
+    public boolean isRegenerationCoolingDown() {
+        return regenerationCoolingDown;
+    }
+
+    public void setRegenerationCoolingDown(boolean regenerationCoolingDown) {
+        this.regenerationCoolingDown = regenerationCoolingDown;
     }
 
     public ArrayList<ItemStack> getSavedInventory() {

@@ -5,6 +5,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -45,13 +46,14 @@ public class ProjectileHitListener implements Listener {
                 if(block.getType() == Material.AIR) block.setType(Material.MAGMA_BLOCK);
             });
 
-            projectile.getWorld().spawnParticle(Particle.LAVA, location, 1000, 2, 2, 2);
+            projectile.getWorld().spawnParticle(Particle.LAVA, location, 500, 2, 2, 2);
+            projectile.getWorld().spawnParticle(Particle.FLAME, location.add(0, -2, 0), 500, 4, 1, 4);
 
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
             double radiusSquared = damageRadius*damageRadius;
             players.forEach(player -> {
                 if(player.getLocation().distanceSquared(location) <= radiusSquared) {
-                    player.damage(10, projectile);
+                    player.damage(20, projectile);
                 }
             });
 

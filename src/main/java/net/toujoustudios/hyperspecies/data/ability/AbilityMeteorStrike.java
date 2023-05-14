@@ -27,9 +27,6 @@ public class AbilityMeteorStrike extends Ability {
         player.getWorld().spawnParticle(Particle.FLAME, player.getLocation(), 100, 0.2, 0.1, 0.2);
         player.getWorld().spawnParticle(Particle.SMOKE_LARGE, player.getLocation(), 20, 0.2, 0.1, 0.2);
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 3, 0.5f);
-        Bukkit.getOnlinePlayers().forEach(all -> {
-            all.sendMessage("§cThe sky turns pitch black and the gates of hell are opening to bring the corruption to this world...");
-        });
 
         final int[] times = {0};
         new BukkitRunnable() {

@@ -33,7 +33,7 @@ public class Loader {
 
         if(cancelled) return;
 
-        Logger.log(LogLevel.INFORMATION, "Pre initialization completed.");
+        Logger.log(LogLevel.DEBUG, "Pre initialization completed.");
 
     }
 
@@ -44,7 +44,7 @@ public class Loader {
         HyperSpecies.getInstance().registerEvents();
         HyperSpecies.getInstance().registerCommands();
         SpeciesInitializer.initialize();
-        Logger.log(LogLevel.INFORMATION, "Initialization completed.");
+        Logger.log(LogLevel.DEBUG, "Initialization completed.");
     }
 
     public static void postInitialize() {
@@ -59,7 +59,8 @@ public class Loader {
             }
         }
 
-        Logger.log(LogLevel.INFORMATION, "Post initialization completed.");
+        Logger.log(LogLevel.DEBUG, "Post initialization completed.");
+        Logger.log(LogLevel.INFORMATION, "Plugin loaded successfully.");
         state = LoaderState.END;
 
     }

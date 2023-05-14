@@ -4,13 +4,11 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.toujoustudios.hyperspecies.command.AbilityCommand;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
-import net.toujoustudios.hyperspecies.event.EntityDamageListener;
-import net.toujoustudios.hyperspecies.event.PlayerInteractListener;
-import net.toujoustudios.hyperspecies.event.PlayerJoinListener;
-import net.toujoustudios.hyperspecies.event.ProjectileHitListener;
+import net.toujoustudios.hyperspecies.event.*;
 import net.toujoustudios.hyperspecies.loader.Loader;
 import net.toujoustudios.hyperspecies.ui.SelectSpeciesUI;
 import org.bukkit.Bukkit;
+import org.bukkit.GameRule;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -30,6 +28,10 @@ public final class HyperSpecies extends JavaPlugin {
         this.pluginManager = Bukkit.getPluginManager();
         Loader.startLoading();
 
+        Bukkit.getServer().getWorlds().forEach(world -> {
+            world.setGameRule(GameRule.NATURAL_REGENERATION, false);
+        });
+
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> Bukkit.getOnlinePlayers().forEach((player -> {
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
@@ -37,10 +39,13 @@ public final class HyperSpecies extends JavaPlugin {
             int scale = (int) Math.pow(10, 1);
 
             double health = (double) Math.round(playerManager.getHealth() * scale) / scale;
+            if(health >= playerManager.getMaxHealth()) health = playerManager.getMaxHealth();
             double realHealth = (playerManager.getHealth() / playerManager.getMaxHealth()) * 20;
             double mana = (double) Math.round(playerManager.getMana() * scale) / scale;
             double shield = (double) Math.round(playerManager.getShield() * scale) / scale;
-            String text = "§c❤ " + health + " §7- §b\uD83D\uDD25 " + mana + " §7- §e⛨ " + shield;
+            String text = "§c❤ " + health + "/" + playerManager.getMaxHealth() + " §7- §b\uD83D\uDD25 " + mana + "/" + playerManager.getMaxMana() + " §7- §e⛨ " + shield;
+
+            if(realHealth >= 20) realHealth = 20;
 
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(text));
             if(!player.isDead()) {
@@ -59,6 +64,13 @@ public final class HyperSpecies extends JavaPlugin {
                 playerManager.setMana(playerManager.getMana() + playerManager.getManaRegeneration());
             } else {
                 playerManager.setMana(playerManager.getMaxMana());
+            }
+
+            if(!player.isDead() && playerManager.getHealth() > 0) {
+                if(!playerManager.isRegenerationCoolingDown() && playerManager.getHealthRegeneration() <= 0) {
+                    playerManager.setHealthRegeneration(0.2);
+                }
+                playerManager.setHealth(Math.min(playerManager.getHealth() + playerManager.getHealthRegeneration(), playerManager.getMaxHealth()));
             }
 
         })), 20, 20);
@@ -84,6 +96,8 @@ public final class HyperSpecies extends JavaPlugin {
         pluginManager.registerEvents(new PlayerInteractListener(), this);
         pluginManager.registerEvents(new ProjectileHitListener(), this);
         pluginManager.registerEvents(new EntityDamageListener(), this);
+        pluginManager.registerEvents(new InventoryClickListener(), this);
+        pluginManager.registerEvents(new EntityRegainHealthListener(), this);
     }
 
     public PluginManager getPluginManager() {
