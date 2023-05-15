@@ -7,19 +7,19 @@ authors:
   - IanToujou
 
 commands:
-  ability:
-    description: Force and use an ability.
-    permission: hyperspecies.command.message
+  emote:
+    description: Use an emote on yourself or another player.
+    permission: hyperspecies.command.emote
 
 permissions:
   hyperspecies.group.player:
     description: The player group.
     children:
-      hyperspecies.command.ability: false
+      hyperspecies.command.emote: true
   hyperspecies.group.admin:
     description: The administrator group. Grants all permissions.
     children:
-      hyperspecies.command.ability: true
-  hyperspecies.command.ability:
-    description: Allows players to use the ability command.
-    default: false
+      hyperspecies.command.emote: true
+  hyperspecies.command.emote:
+    description: Allows players to use the emote command.
+    default: true

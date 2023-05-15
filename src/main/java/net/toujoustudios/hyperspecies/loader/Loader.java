@@ -1,6 +1,7 @@
 package net.toujoustudios.hyperspecies.loader;
 
 import net.toujoustudios.hyperspecies.config.Config;
+import net.toujoustudios.hyperspecies.data.ability.emote.Emote;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.data.species.SpeciesInitializer;
 import net.toujoustudios.hyperspecies.item.ItemList;
@@ -30,6 +31,7 @@ public class Loader {
         Config.initialize();
         ItemList.initialize();
         SelectSpeciesUI.initialize();
+        Emote.initialize();
 
         if(cancelled) return;
 
