@@ -23,6 +23,10 @@ public abstract class Emote {
         createEmote(new EmoteCry());
         createEmote(new EmoteCuddle());
         createEmote(new EmoteKiss());
+        createEmote(new EmoteNom());
+        createEmote(new EmoteLick());
+        createEmote(new EmotePurr());
+        createEmote(new EmoteTickle());
     }
 
     public static void createEmote(Emote emote) {
