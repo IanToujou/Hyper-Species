@@ -77,7 +77,7 @@ public class SelectSpeciesUI implements Listener {
                 PlayerManager playerManager = PlayerManager.getPlayer(player);
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
                 player.closeInventory();
-                player.sendMessage(Config.MESSAGE_NOTIFICATION_SPECIES_SELECT.replace("{Species}", className));
+                player.sendMessage(Config.MESSAGE_INFO_SPECIES_SELECT.replace("{Species}", className));
                 playerManager.setSpecies(Species.getSpecies(className));
 
             } else if(material == Material.ENDER_EYE) {

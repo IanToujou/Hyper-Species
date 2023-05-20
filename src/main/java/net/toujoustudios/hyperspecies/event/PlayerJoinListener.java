@@ -16,7 +16,7 @@ public class PlayerJoinListener implements Listener {
         Player player = event.getPlayer();
         PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-        if(player.isOp()) player.sendMessage(Config.MESSAGE_NOTIFICATION_ADMIN_INFO);
+        if(player.isOp()) player.sendMessage(Config.MESSAGE_INFO_ADMIN);
 
         if(playerManager.getSpecies() == null) {
             SelectSpeciesUI.openInventory(player);

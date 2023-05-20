@@ -2,7 +2,6 @@ package net.toujoustudios.hyperspecies.command;
 
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.ability.emote.Emote;
-import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -17,8 +16,6 @@ public class EmoteCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
 
         if(!(commandSender instanceof Player player)) return false;
-
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
 
         if(!player.hasPermission("hyperspecies.command.emote")) {
             player.sendMessage(Config.MESSAGE_ERROR_PERMISSION);
@@ -53,11 +50,11 @@ public class EmoteCommand implements CommandExecutor {
                 return false;
             }
 
-            emote.execute(player, target);
+            if(!emote.execute(player, target)) player.sendMessage(Config.MESSAGE_ERROR_EMOTE_PERFORM);
             return false;
 
         } else {
-            emote.execute(player, null);
+            if(!emote.execute(player, null)) player.sendMessage(Config.MESSAGE_ERROR_EMOTE_PERFORM);
         }
 
         return false;

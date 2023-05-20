@@ -3,6 +3,7 @@ package net.toujoustudios.hyperspecies.main;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.toujoustudios.hyperspecies.command.EmoteCommand;
+import net.toujoustudios.hyperspecies.command.EmoteListCommand;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.event.*;
 import net.toujoustudios.hyperspecies.loader.Loader;
@@ -96,6 +97,8 @@ public final class HyperSpecies extends JavaPlugin {
     @SuppressWarnings("all")
     public void registerCommands() {
         getCommand("emote").setExecutor(new EmoteCommand());
+        getCommand("e").setExecutor(new EmoteCommand());
+        getCommand("emotelist").setExecutor(new EmoteListCommand());
     }
 
     public void registerUI() {
