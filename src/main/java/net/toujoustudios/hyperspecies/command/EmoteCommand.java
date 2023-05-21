@@ -1,7 +1,7 @@
 package net.toujoustudios.hyperspecies.command;
 
 import net.toujoustudios.hyperspecies.config.Config;
-import net.toujoustudios.hyperspecies.data.ability.emote.Emote;
+import net.toujoustudios.hyperspecies.data.emote.Emote;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

@@ -1,4 +1,4 @@
-package net.toujoustudios.hyperspecies.data.ability.emote;
+package net.toujoustudios.hyperspecies.data.emote;
 
 import org.bukkit.entity.Player;
 

@@ -3,7 +3,11 @@ package net.toujoustudios.hyperspecies.data.ability.active;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
+
 public abstract class Ability {
+
+    private static final HashMap<String, Ability> abilities = new HashMap<>();
 
     private final String name;
     private final ItemStack icon;
@@ -15,6 +19,15 @@ public abstract class Ability {
         this.icon = icon;
         this.manaCost = manaCost;
         this.delay = delay;
+    }
+
+    public static void createAbility(Ability ability) {
+        abilities.put(ability.getName(), ability);
+    }
+
+    public static Ability getAbility(String name) {
+        if(abilities.containsKey(name)) return abilities.get(name);
+        return null;
     }
 
     /**
@@ -39,6 +52,10 @@ public abstract class Ability {
 
     public int getDelay() {
         return delay;
+    }
+
+    public static HashMap<String, Ability> getAbilities() {
+        return abilities;
     }
 
 }

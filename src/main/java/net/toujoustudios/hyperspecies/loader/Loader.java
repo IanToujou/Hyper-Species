@@ -1,7 +1,8 @@
 package net.toujoustudios.hyperspecies.loader;
 
 import net.toujoustudios.hyperspecies.config.Config;
-import net.toujoustudios.hyperspecies.data.ability.emote.Emote;
+import net.toujoustudios.hyperspecies.data.ability.active.AbilityInitializer;
+import net.toujoustudios.hyperspecies.data.emote.Emote;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.data.species.SpeciesInitializer;
 import net.toujoustudios.hyperspecies.item.ItemList;
@@ -45,6 +46,7 @@ public class Loader {
         HyperSpecies.getInstance().registerUI();
         HyperSpecies.getInstance().registerEvents();
         HyperSpecies.getInstance().registerCommands();
+        AbilityInitializer.initialize();
         SpeciesInitializer.initialize();
         Logger.log(LogLevel.DEBUG, "Initialization completed.");
     }

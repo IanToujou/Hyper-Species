@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.data.ability.active;
 
+import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.item.ItemList;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
@@ -18,6 +19,10 @@ public class AbilityMeteorStrike extends Ability {
 
     @Override
     public boolean execute(Player player) {
+
+        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        int xp = playerManager.getAbilityExperience(this);
+        int level = playerManager.getLevelFromExperience(xp);
 
         Block block = player.getTargetBlock(null, 50);
         if(block.getType() == Material.AIR) return false;

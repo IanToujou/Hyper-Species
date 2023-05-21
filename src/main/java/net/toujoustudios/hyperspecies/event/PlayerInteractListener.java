@@ -46,8 +46,14 @@ public class PlayerInteractListener implements Listener {
 
                     if(item.getItemMeta().getLore() == null) return;
                     if(item.getItemMeta().getLore().size() < 1) return;
-                    int abilityId = Integer.parseInt(item.getItemMeta().getLore().get(0));
-                    Ability ability = playerManager.getSpecies().getAbilities().get(abilityId);
+                    String abilityName = item.getItemMeta().getLore().get(0);
+                    Ability ability = Ability.getAbility(abilityName);
+
+                    if(ability == null) {
+                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.4f);
+                        player.sendTitle("", "§cFailed", 5, 10, 5);
+                        return;
+                    }
 
                     if(playerManager.getCooldownAbilities().contains(ability)) {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.4f);
@@ -105,7 +111,7 @@ public class PlayerInteractListener implements Listener {
             itemMeta.setDisplayName("§a" + ability.getName() + " §7- §b" + ability.getManaCost() + " Mana");
             if(playerManager.getMana() < ability.getManaCost()) itemMeta.setDisplayName("§c" + ability.getName() + " §7- §b" + ability.getManaCost() + " Mana");
             if(playerManager.getCooldownAbilities().contains(ability)) itemMeta.setDisplayName("§c" + ability.getName() + " §7- §6Cooling Down");
-            itemMeta.setLore(List.of(String.valueOf(i)));
+            itemMeta.setLore(List.of(ability.getName()));
             item.setItemMeta(itemMeta);
             player.getInventory().setItem(1+i, item);
 
