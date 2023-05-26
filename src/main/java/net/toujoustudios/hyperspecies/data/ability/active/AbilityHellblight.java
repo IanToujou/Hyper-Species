@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.data.ability.active;
 
-import net.toujoustudios.hyperspecies.item.ItemList;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -14,7 +13,7 @@ import java.util.Collection;
 public class AbilityHellblight extends Ability {
 
     public AbilityHellblight() {
-        super("Hellblight", ItemList.DEMON_ABILITY_HELLBLIGHT, 6, 60);
+        super("Hellblight", 6, 60);
     }
 
     @Override

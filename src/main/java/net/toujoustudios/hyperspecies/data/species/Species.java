@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.data.species;
 
-import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.ability.passive.PassiveAbility;
 import org.bukkit.inventory.ItemStack;
 
@@ -14,14 +13,12 @@ public class Species {
 
     private final String name;
     private final ItemStack icon;
-    private final List<Ability> abilities;
     private final List<SubSpecies> subSpecies;
     private final PassiveAbility passive;
 
-    public Species(String name, ItemStack icon, List<Ability> abilities, List<SubSpecies> subSpecies, PassiveAbility passive) {
+    public Species(String name, ItemStack icon, List<SubSpecies> subSpecies, PassiveAbility passive) {
         this.name = name;
         this.icon = icon;
-        this.abilities = abilities;
         this.subSpecies = subSpecies;
         this.passive = passive;
     }
@@ -31,8 +28,15 @@ public class Species {
         return null;
     }
 
-    public static void createSpecies(String name, ItemStack icon, List<Ability> abilities, List<SubSpecies> subSpecies, PassiveAbility passive) {
-        species.put(name, new Species(name, icon, (abilities==null ? new ArrayList<>() : abilities), (subSpecies==null ? new ArrayList<>() : subSpecies), passive));
+    public static void createSpecies(String name, ItemStack icon, List<SubSpecies> subSpecies, PassiveAbility passive) {
+        species.put(name, new Species(name, icon, (subSpecies==null ? new ArrayList<>() : subSpecies), passive));
+    }
+
+    public SubSpecies getSubSpecies(String name) {
+        for(SubSpecies all : subSpecies) {
+            if(all.getName().equalsIgnoreCase(name)) return all;
+        }
+        return null;
     }
 
     // GETTERS AND SETTERS
@@ -43,10 +47,6 @@ public class Species {
 
     public ItemStack getIcon() {
         return icon;
-    }
-
-    public List<Ability> getAbilities() {
-        return abilities;
     }
 
     public List<SubSpecies> getSubSpecies() {

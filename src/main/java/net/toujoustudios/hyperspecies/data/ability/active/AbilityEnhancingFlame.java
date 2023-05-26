@@ -1,7 +1,5 @@
 package net.toujoustudios.hyperspecies.data.ability.active;
 
-import net.toujoustudios.hyperspecies.data.player.PlayerManager;
-import net.toujoustudios.hyperspecies.item.ItemList;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -14,13 +12,12 @@ import org.bukkit.potion.PotionEffectType;
 public class AbilityEnhancingFlame extends Ability {
 
     public AbilityEnhancingFlame() {
-        super("Enhancing Flame", ItemList.DEMON_ABILITY_ENHANCING_FLAME, 5, 90);
+        super("Enhancing Flame", 5, 90);
     }
 
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
         Location location = player.getLocation();
         Block block = location.getBlock();
 

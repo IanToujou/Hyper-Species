@@ -100,9 +100,9 @@ public class PlayerInteractListener implements Listener {
 
         player.getInventory().setItem(0, ItemList.CANCEL);
 
-        for(int i = 0; i < playerManager.getSpecies().getAbilities().size(); i++) {
+        for(int i = 0; i < playerManager.getAbilities().size(); i++) {
 
-            Ability ability = playerManager.getSpecies().getAbilities().get(i);
+            Ability ability = playerManager.getAbilities().get(i);
             ItemStack item = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
             if(playerManager.getMana() < ability.getManaCost()) item.setType(Material.ORANGE_STAINED_GLASS_PANE);
             if(playerManager.getCooldownAbilities().contains(ability)) item.setType(Material.RED_STAINED_GLASS_PANE);

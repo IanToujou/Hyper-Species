@@ -3,6 +3,7 @@ package net.toujoustudios.hyperspecies.data.player;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.species.Species;
+import net.toujoustudios.hyperspecies.data.species.SubSpecies;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -15,7 +16,6 @@ public class PlayerManager {
 
     private static final HashMap<UUID, PlayerManager> players = new HashMap<>();
     private static final YamlConfiguration playerConfig = Config.getConfigFile("playerdata.yml");
-
     private final UUID uuid;
     private int experience;
     private double health;
@@ -27,16 +27,18 @@ public class PlayerManager {
     private double shield;
     private double maxShield;
     private Species species;
+    private SubSpecies subSpecies;
+    private final List<Ability> abilities;
     private boolean selectingAbility;
     private boolean regenerationCoolingDown;
     private ArrayList<ItemStack> savedInventory;
-    private ArrayList<Ability> cooldownAbilities;
-    private int speciesExperience;
-    private final HashMap<Ability, Integer> abilityExperiences = new HashMap<>();
+    private ArrayList<Ability> abilityCooldowns;
+    private final HashMap<String, Integer> abilityExperiences = new HashMap<>();
 
     public PlayerManager(UUID uuid) {
 
         this.uuid = uuid;
+
         if(playerConfig.isSet("Data." + uuid + ".Character.Experience.Main")) experience = playerConfig.getInt("Data." + uuid + ".Character.Experience.Main");
         else experience = 0;
 
@@ -55,9 +57,25 @@ public class PlayerManager {
         selectingAbility = false;
         regenerationCoolingDown = false;
         savedInventory = new ArrayList<>();
-        cooldownAbilities = new ArrayList<>();
+        abilityCooldowns = new ArrayList<>();
 
         species = Species.getSpecies(playerConfig.getString("Data." + uuid + ".Character.Species"));
+        if(species != null) subSpecies = species.getSubSpecies(playerConfig.getString("Data." + uuid + ".Character.SubSpecies"));
+        else subSpecies = null;
+
+        abilities = new ArrayList<>();
+
+        playerConfig.getStringList("Data." + uuid + ".Character.Abilities").forEach(item -> {
+            if(!abilities.contains(Ability.getAbility(item))) abilities.add(Ability.getAbility(item));
+        });
+
+        abilities.forEach(ability -> {
+            if(playerConfig.contains("Data." + uuid + ".Character.Experience.Ability." + ability)) {
+                abilityExperiences.put(ability.getName(), playerConfig.getInt("Data." + uuid + ".Character.Experience.Ability." + ability));
+            } else {
+                abilityExperiences.put(ability.getName(), 0);
+            }
+        });
 
     }
 
@@ -74,21 +92,18 @@ public class PlayerManager {
 
     // BASE METHODS
 
-    public void unload() {
-        save();
-        destroy();
-    }
-
     public void save() {
 
         playerConfig.set("Data." + uuid + ".Points.Health", health);
         playerConfig.set("Data." + uuid + ".Points.Mana", mana);
         playerConfig.set("Data." + uuid + ".Points.Shield", shield);
-        playerConfig.set("Data." + uuid + ".Character.Species", species.getName());
-        playerConfig.set("Data." + uuid + ".Character.SubSpecies", -1);
         playerConfig.set("Data." + uuid + ".Character.Experience.Main", experience);
-        playerConfig.set("Data." + uuid + ".Character.Experience.Species", speciesExperience);
-        abilityExperiences.forEach((ability, integer) -> playerConfig.set("Data." + uuid + ".Character.Experience.Ability." + ability.getName(), integer));
+        abilityExperiences.forEach((ability, integer) -> playerConfig.set("Data." + uuid + ".Character.Experience.Ability." + ability, integer));
+        playerConfig.set("Data." + uuid + ".Character.Species", species.getName());
+        playerConfig.set("Data." + uuid + ".Character.SubSpecies", (subSpecies != null ? subSpecies.getName() : null));
+        ArrayList<String> names = new ArrayList<>();
+        abilities.forEach(ability -> names.add(ability.getName()));
+        playerConfig.set("Data." + uuid + ".Character.Abilities", names);
 
         Config.saveToFile(playerConfig, "playerdata.yml");
     }
@@ -105,10 +120,6 @@ public class PlayerManager {
         }
     }
 
-    public void destroy() {
-        players.remove(uuid);
-    }
-
     // CUSTOM METHODS
 
     public boolean useAbility(Ability ability) {
@@ -116,23 +127,19 @@ public class PlayerManager {
         if(getCooldownAbilities().contains(ability)) return false;
         if(getMana() < ability.getManaCost()) return false;
         if(ability.execute(Bukkit.getPlayer(uuid))) {
-            int xp = getAbilityExperience(ability);
-            int level = getLevelFromExperience(xp);
-            Objects.requireNonNull(Bukkit.getPlayer(uuid)).sendMessage("Executing ability: §c" + ability.getName() + "§r with level §b" + level + "§r (§e" + xp + ")");
             setMana(getMana() - ability.getManaCost());
-            addAbilityExperience(ability, 20);
-            addCooldownAbility(ability);
+            addAbilityCooldown(ability);
             return true;
         } else return false;
     }
 
-    public void addCooldownAbility(Ability ability) {
-        this.cooldownAbilities.add(ability);
-        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> this.cooldownAbilities.remove(ability), ability.getDelay() * 20L);
+    public void addAbilityCooldown(Ability ability) {
+        abilityCooldowns.add(ability);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> abilityCooldowns.remove(ability), ability.getDelay() * 20L);
     }
 
-    public void removeCooldownAbility(Ability ability) {
-        this.cooldownAbilities.remove(ability);
+    public void removeAbilityCooldown(Ability ability) {
+        abilityCooldowns.remove(ability);
     }
 
     public int getLevelFromExperience(int experience) {
@@ -227,6 +234,26 @@ public class PlayerManager {
         this.species = species;
     }
 
+    public SubSpecies getSubSpecies() {
+        return subSpecies;
+    }
+
+    public void setSubSpecies(SubSpecies subSpecies) {
+        this.subSpecies = subSpecies;
+    }
+
+    public List<Ability> getAbilities() {
+        return abilities;
+    }
+
+    public void addAbility(Ability ability) {
+        if(!abilities.contains(ability)) abilities.add(ability);
+    }
+
+    public void removeAbility(Ability ability) {
+        abilities.remove(ability);
+    }
+
     public boolean isSelectingAbility() {
         return selectingAbility;
     }
@@ -252,33 +279,25 @@ public class PlayerManager {
     }
 
     public ArrayList<Ability> getCooldownAbilities() {
-        return cooldownAbilities;
+        return abilityCooldowns;
     }
 
     public void setCooldownAbilities(ArrayList<Ability> cooldownAbilities) {
-        this.cooldownAbilities = cooldownAbilities;
+        this.abilityCooldowns = cooldownAbilities;
     }
 
-    public int getSpeciesExperience() {
-        return speciesExperience;
-    }
-
-    public void setSpeciesExperience(int speciesExperience) {
-        this.speciesExperience = speciesExperience;
-    }
-
-    public HashMap<Ability, Integer> getAbilityExperiences() {
+    public HashMap<String, Integer> getAbilityExperiences() {
         return abilityExperiences;
     }
 
     public int getAbilityExperience(Ability ability) {
-        return abilityExperiences.getOrDefault(ability, 0);
+        return abilityExperiences.getOrDefault(ability.getName(), 0);
     }
 
     public void addAbilityExperience(Ability ability, int experience) {
-        int oldExperience = abilityExperiences.getOrDefault(ability, 0);
-        abilityExperiences.remove(ability);
-        abilityExperiences.put(ability, oldExperience+experience);
+        int oldExperience = abilityExperiences.getOrDefault(ability.getName(), 0);
+        abilityExperiences.remove(ability.getName());
+        abilityExperiences.put(ability.getName(), oldExperience + experience);
     }
 
     // STATIC METHODS

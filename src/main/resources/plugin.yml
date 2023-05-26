@@ -15,6 +15,11 @@ commands:
   emotelist:
     description: Show a list of all the emotes available.
     permission: hyperspecies.command.emotelist
+    aliases:
+      - elist
+  ability:
+    description: Use an ability without consuming mana or activating a delay.
+    permission: hyperspecies.command.ability
 
 permissions:
   hyperspecies.group.player:
@@ -22,14 +27,19 @@ permissions:
     children:
       hyperspecies.command.emote: true
       hyperspecies.command.emotelist: true
+      hyperspecies.command.ability: false
   hyperspecies.group.admin:
     description: The administrator group. Grants all permissions.
     children:
       hyperspecies.command.emote: true
       hyperspecies.command.emotelist: true
+      hyperspecies.command.ability: true
   hyperspecies.command.emote:
     description: Allows players to use the emote command.
     default: true
   hyperspecies.command.emotelist:
     description: Allows players to use the emotelist command.
     default: true
+  hyperspecies.command.ability:
+    description: Allows players to use the ability command.
+    default: false

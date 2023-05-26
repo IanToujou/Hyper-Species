@@ -1,7 +1,6 @@
 package net.toujoustudios.hyperspecies.data.ability.active;
 
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
-import net.toujoustudios.hyperspecies.item.ItemList;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Bukkit;
 import org.bukkit.Particle;
@@ -14,7 +13,7 @@ public class AbilityDemonicRage extends Ability {
 
 
     public AbilityDemonicRage() {
-        super("Demonic Rage", ItemList.DEMON_ABILITY_DEMONIC_RAGE, 10, 120);
+        super("Demonic Rage", 10, 120);
     }
 
     @Override
@@ -29,9 +28,7 @@ public class AbilityDemonicRage extends Ability {
         player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20*30, 1, false, false, true));
         playerManager.setManaRegeneration(0.4);
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
-            playerManager.setManaRegeneration(0.1);
-        }, 20 * 30);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> playerManager.setManaRegeneration(0.1), 20 * 30);
 
         return true;
 

@@ -19,6 +19,7 @@ public class Config {
     public static String MESSAGE_ERROR_PLAYER_SELF;
     public static String MESSAGE_ERROR_EMOTE_INVALID;
     public static String MESSAGE_ERROR_EMOTE_PERFORM;
+    public static String MESSAGE_ERROR_ABILITY_INVALID;
     public static String MESSAGE_ERROR_NO_SPECIES;
     public static String MESSAGE_INFO_ADMIN;
     public static String MESSAGE_INFO_SPECIES_SELECT;
@@ -42,6 +43,7 @@ public class Config {
             if(!configuration.isSet("Message.Error.PlayerSelf")) configuration.set("Message.Error.PlayerSelf", "{Prefix} §cYou cannot do that to yourself§8.");
             if(!configuration.isSet("Message.Error.EmoteInvalid")) configuration.set("Message.Error.EmoteInvalid", "{Prefix} §cThe selected emote is invalid§8.");
             if(!configuration.isSet("Message.Error.EmotePerform")) configuration.set("Message.Error.EmotePerform", "{Prefix} §cThe emote could not be performed§8.");
+            if(!configuration.isSet("Message.Error.AbilityInvalid")) configuration.set("Message.Error.AbilityInvalid", "{Prefix} §cThe ability does not exist§8.");
             if(!configuration.isSet("Message.Error.NoSpecies")) configuration.set("Message.Error.NoSpecies", "§cYou need to select a species in order to continue.");
             if(!configuration.isSet("Message.Info.Admin")) configuration.set("Message.Info.Admin", "{Prefix} §cWarning§8: §7HyperSpecies changes a lot about how things work in your server§8.§7 We recommend turning off other plugins that influence the gameplay directly§8.");
             if(!configuration.isSet("Message.Info.SpeciesSelect")) configuration.set("Message.Info.SpeciesSelect", "{Prefix} §7Congratulations§8!§7 You selected the species§8: §b{Species}");
@@ -65,9 +67,10 @@ public class Config {
             if(!configuration.isSet("Message.Error.PlayerSelf")) configuration.set("Message.Error.PlayerSelf", "{Prefix} §cYou cannot do that to yourself§8.");
             if(!configuration.isSet("Message.Error.EmoteInvalid")) configuration.set("Message.Error.EmoteInvalid", "{Prefix} §cThe selected emote is invalid§8.");
             if(!configuration.isSet("Message.Error.EmotePerform")) configuration.set("Message.Error.EmotePerform", "{Prefix} §cThe emote could not be performed§8.");
+            if(!configuration.isSet("Message.Error.AbilityInvalid")) configuration.set("Message.Error.AbilityInvalid", "{Prefix} §cThe ability does not exist§8.");
             if(!configuration.isSet("Message.Error.NoSpecies")) configuration.set("Message.Error.NoSpecies", "§cYou need to select a species in order to continue.");
             if(!configuration.isSet("Message.Info.Admin")) configuration.set("Message.Info.Admin", "{Prefix} §cWarning§8: §7HyperSpecies changes a lot about how things work in your server§8.§7 We recommend turning off other plugins that influence the gameplay directly§8.");
-            if(!configuration.isSet("Message.Info.SpeciesSelect")) configuration.set("Message.Info.SpeciesSelect", "{Prefix} §7Congratulations§8!§7 You selected the species§8: §b{Species}");
+            if(!configuration.isSet("Message.Info.SpeciesSelect")) configuration.set("Message.Info.SpeciesSelect", "{Prefix} §7Congratulations§8!§7 You selected the species§8: §e{Species}");
             if(!configuration.isSet("Message.Info.EmoteList")) configuration.set("Message.Info.EmoteList", "{Prefix} §7Below is a list of all the emotes available§8:");
 
             try {
@@ -88,6 +91,7 @@ public class Config {
         MESSAGE_ERROR_PLAYER_SELF = settingsConfig.getString("Message.Error.PlayerSelf").replace("{Prefix}", MESSAGE_PREFIX);
         MESSAGE_ERROR_EMOTE_INVALID = settingsConfig.getString("Message.Error.EmoteInvalid").replace("{Prefix}", MESSAGE_PREFIX);
         MESSAGE_ERROR_EMOTE_PERFORM = settingsConfig.getString("Message.Error.EmotePerform").replace("{Prefix}", MESSAGE_PREFIX);
+        MESSAGE_ERROR_ABILITY_INVALID = settingsConfig.getString("Message.Error.AbilityInvalid").replace("{Prefix}", MESSAGE_PREFIX);
         MESSAGE_ERROR_NO_SPECIES = settingsConfig.getString("Message.Error.NoSpecies");
         MESSAGE_INFO_ADMIN = settingsConfig.getString("Message.Info.Admin").replace("{Prefix}", MESSAGE_PREFIX);
         MESSAGE_INFO_SPECIES_SELECT = settingsConfig.getString("Message.Info.SpeciesSelect").replace("{Prefix}", MESSAGE_PREFIX);

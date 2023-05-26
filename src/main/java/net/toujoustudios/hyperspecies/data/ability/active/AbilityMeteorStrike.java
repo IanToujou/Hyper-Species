@@ -1,7 +1,6 @@
 package net.toujoustudios.hyperspecies.data.ability.active;
 
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
-import net.toujoustudios.hyperspecies.item.ItemList;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -14,7 +13,7 @@ import org.bukkit.util.Vector;
 public class AbilityMeteorStrike extends Ability {
 
     public AbilityMeteorStrike() {
-        super("Meteor Strike", ItemList.DEMON_ABILITY_METEOR_STRIKE, 12, 180);
+        super("Meteor Strike", 12, 180);
     }
 
     @Override

@@ -26,8 +26,10 @@ public class PassiveElf extends PassiveAbility{
         biomes.add(Biome.BAMBOO_JUNGLE);
         biomes.add(Biome.SPARSE_JUNGLE);
 
-        if(biomes.contains(player.getLocation().getBlock().getBiome())) {
-            playerManager.setHealthRegeneration(0.5);
+        if(biomes.contains(player.getLocation().add(0, -1, 0).getBlock().getBiome())) {
+            playerManager.setHealthRegeneration(0.2);
+        } else {
+            if(!playerManager.isRegenerationCoolingDown()) playerManager.setHealthRegeneration(0.2);
         }
 
         ArrayList<Material> dioriteBlocks = new ArrayList<>();
@@ -39,9 +41,9 @@ public class PassiveElf extends PassiveAbility{
         dioriteBlocks.add(Material.POLISHED_DIORITE_SLAB);
         dioriteBlocks.add(Material.POLISHED_DIORITE_STAIRS);
 
-        if(dioriteBlocks.contains(player.getLocation().getBlock().getType())) {
-            playerManager.setManaRegeneration(0.5);
-        }
+        if(dioriteBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
+            playerManager.setManaRegeneration(0.3);
+        } else playerManager.setManaRegeneration(0.1);
 
         ArrayList<Material> woodBlocks = new ArrayList<>();
         woodBlocks.add(Material.OAK_WOOD);
@@ -63,7 +65,7 @@ public class PassiveElf extends PassiveAbility{
         woodBlocks.add(Material.CRIMSON_STEM);
         woodBlocks.add(Material.CRIMSON_PLANKS);
 
-        if(woodBlocks.contains(player.getLocation().getBlock().getType())) {
+        if(woodBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * 10, 0, false, false, true));
         }
 
