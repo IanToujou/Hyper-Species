@@ -1,12 +1,14 @@
-package net.toujoustudios.hyperspecies.data.species;
+package net.toujoustudios.hyperspecies.loader;
 
 import net.toujoustudios.hyperspecies.data.ability.passive.PassiveDemon;
 import net.toujoustudios.hyperspecies.data.ability.passive.PassiveElf;
+import net.toujoustudios.hyperspecies.data.species.Species;
+import net.toujoustudios.hyperspecies.data.species.SubSpecies;
 import net.toujoustudios.hyperspecies.item.ItemList;
 
 import java.util.ArrayList;
 
-public class SpeciesInitializer {
+public class SpeciesLoader {
 
     @SuppressWarnings("all")
     public static void initialize() {

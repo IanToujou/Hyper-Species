@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.data.ability.active;
 
+import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Bukkit;
@@ -13,7 +14,7 @@ public class AbilityDemonicRage extends Ability {
 
 
     public AbilityDemonicRage() {
-        super("Demonic Rage", 10, 120);
+        super("Demonic Rage", Element.LAVA, 10, 120);
     }
 
     @Override

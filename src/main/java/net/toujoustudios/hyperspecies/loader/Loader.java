@@ -1,10 +1,7 @@
 package net.toujoustudios.hyperspecies.loader;
 
 import net.toujoustudios.hyperspecies.config.Config;
-import net.toujoustudios.hyperspecies.data.ability.active.AbilityInitializer;
-import net.toujoustudios.hyperspecies.data.emote.Emote;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
-import net.toujoustudios.hyperspecies.data.species.SpeciesInitializer;
 import net.toujoustudios.hyperspecies.item.ItemList;
 import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
@@ -32,7 +29,7 @@ public class Loader {
         Config.initialize();
         ItemList.initialize();
         SelectSpeciesUI.initialize();
-        Emote.initialize();
+        EmoteLoader.initialize();
 
         if(cancelled) return;
 
@@ -46,8 +43,8 @@ public class Loader {
         HyperSpecies.getInstance().registerUI();
         HyperSpecies.getInstance().registerEvents();
         HyperSpecies.getInstance().registerCommands();
-        AbilityInitializer.initialize();
-        SpeciesInitializer.initialize();
+        AbilityLoader.initialize();
+        SpeciesLoader.initialize();
         Logger.log(LogLevel.DEBUG, "Initialization completed.");
     }
 

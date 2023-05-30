@@ -1,6 +1,8 @@
-package net.toujoustudios.hyperspecies.data.ability.active;
+package net.toujoustudios.hyperspecies.loader;
 
-public class AbilityInitializer {
+import net.toujoustudios.hyperspecies.data.ability.active.*;
+
+public class AbilityLoader {
 
     public static void initialize() {
 

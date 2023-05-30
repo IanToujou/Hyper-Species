@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.data.ability.active;
 
+import net.toujoustudios.hyperspecies.data.element.Element;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -12,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 public class AbilityEnhancingFlame extends Ability {
 
     public AbilityEnhancingFlame() {
-        super("Enhancing Flame", 5, 90);
+        super("Enhancing Flame", Element.FIRE, 5, 90);
     }
 
     @Override
