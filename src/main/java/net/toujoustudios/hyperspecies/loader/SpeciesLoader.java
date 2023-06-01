@@ -2,11 +2,13 @@ package net.toujoustudios.hyperspecies.loader;
 
 import net.toujoustudios.hyperspecies.data.ability.passive.PassiveDemon;
 import net.toujoustudios.hyperspecies.data.ability.passive.PassiveElf;
+import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.data.species.SubSpecies;
 import net.toujoustudios.hyperspecies.item.ItemList;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SpeciesLoader {
 
@@ -49,15 +51,78 @@ public class SpeciesLoader {
         wolfSpecies.add(new SubSpecies("Snow Wolf", null));
         wolfSpecies.add(new SubSpecies("Forest Wolf", null));
 
-        Species.createSpecies("Demon", ItemList.DEMON, demonSpecies, new PassiveDemon());
-        Species.createSpecies("Elf", ItemList.ELF, elfSpecies, new PassiveElf());
-        Species.createSpecies("Reptile", ItemList.REPTILE, reptileSpecies, null);
-        Species.createSpecies("Angel", ItemList.ANGEL, angelSpecies, null);
-        Species.createSpecies("Human", ItemList.HUMAN, humanSpecies, null);
-        Species.createSpecies("Aquatilia", ItemList.AQUATILIA, aquatiliaSpecies, null);
-        Species.createSpecies("Feline", ItemList.FELINE, felineSpecies, null);
-        Species.createSpecies("Dwarf", ItemList.DWARF, dwarfSpecies, null);
-        Species.createSpecies("Wolf", ItemList.WOLF, wolfSpecies, null);
+        Species.createSpecies(
+                "Demon",
+                ItemList.DEMON,
+                demonSpecies,
+                new PassiveDemon(),
+                List.of(Element.WATER, Element.FAIRY, Element.LIGHT)
+        );
+
+        Species.createSpecies(
+                "Elf",
+                ItemList.ELF,
+                elfSpecies,
+                new PassiveElf(),
+                List.of(Element.FIRE, Element.ELECTRO, Element.DARK)
+        );
+
+        Species.createSpecies(
+                "Reptile",
+                ItemList.REPTILE,
+                reptileSpecies,
+                null,
+                List.of(Element.FAIRY, Element.PSYCHIC, Element.LIGHT)
+        );
+
+        Species.createSpecies(
+                "Angel",
+                ItemList.ANGEL,
+                angelSpecies,
+                null,
+                List.of(Element.FIRE, Element.EARTH, Element.DARK)
+        );
+
+        Species.createSpecies(
+                "Human",
+                ItemList.HUMAN,
+                humanSpecies,
+                null,
+                null
+        );
+
+        Species.createSpecies(
+                "Aquatilia",
+                ItemList.AQUATILIA,
+                aquatiliaSpecies,
+                null,
+                List.of(Element.EARTH, Element.ELECTRO, Element.AIR)
+        );
+
+        Species.createSpecies(
+                "Feline",
+                ItemList.FELINE,
+                felineSpecies,
+                null,
+                List.of(Element.WATER, Element.ELECTRO, Element.NORMAL)
+        );
+
+        Species.createSpecies(
+                "Dwarf",
+                ItemList.DWARF,
+                dwarfSpecies,
+                null,
+                List.of(Element.FLORA, Element.FAIRY, Element.PSYCHIC)
+        );
+
+        Species.createSpecies(
+                "Wolf",
+                ItemList.WOLF,
+                wolfSpecies,
+                null,
+                List.of(Element.FIRE, Element.AIR, Element.PSYCHIC)
+        );
+
     }
 
 }
