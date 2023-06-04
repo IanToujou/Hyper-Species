@@ -15,7 +15,7 @@ import org.bukkit.inventory.Inventory;
 
 import java.util.HashMap;
 
-public class SelectSpeciesUI implements Listener {
+public class SpeciesUI implements Listener {
 
     private static final HashMap<Integer, Inventory> inventories = new HashMap<>();
 
@@ -32,31 +32,31 @@ public class SelectSpeciesUI implements Listener {
             Material material = event.getCurrentItem().getType();
             if(material == Material.FIRE_CHARGE) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                openInventory(player, SelectSpeciesPage.DEMON.getIndex());
+                openInventory(player, SpeciesPage.DEMON.getIndex());
             } else if(material == Material.SWEET_BERRIES) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                openInventory(player, SelectSpeciesPage.ELF.getIndex());
+                openInventory(player, SpeciesPage.ELF.getIndex());
             } else if(material == Material.NAUTILUS_SHELL) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                openInventory(player, SelectSpeciesPage.REPTILE.getIndex());
+                openInventory(player, SpeciesPage.REPTILE.getIndex());
             } else if(material == Material.TOTEM_OF_UNDYING) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                openInventory(player, SelectSpeciesPage.ANGEL.getIndex());
+                openInventory(player, SpeciesPage.ANGEL.getIndex());
             } else if(material == Material.MINECART) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                openInventory(player, SelectSpeciesPage.HUMAN.getIndex());
+                openInventory(player, SpeciesPage.HUMAN.getIndex());
             } else if(material == Material.HEART_OF_THE_SEA) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                openInventory(player, SelectSpeciesPage.AQUATILIA.getIndex());
+                openInventory(player, SpeciesPage.AQUATILIA.getIndex());
             } else if(material == Material.PHANTOM_MEMBRANE) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                openInventory(player, SelectSpeciesPage.FELINE.getIndex());
+                openInventory(player, SpeciesPage.FELINE.getIndex());
             } else if(material == Material.RAW_GOLD) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                openInventory(player, SelectSpeciesPage.DWARF.getIndex());
+                openInventory(player, SpeciesPage.DWARF.getIndex());
             } else if(material == Material.BONE) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                openInventory(player, SelectSpeciesPage.WOLF.getIndex());
+                openInventory(player, SpeciesPage.WOLF.getIndex());
             }
 
         } else if(event.getView().getTitle().contains("Species: ")) {
@@ -67,7 +67,7 @@ public class SelectSpeciesUI implements Listener {
             Material material = event.getCurrentItem().getType();
             String className = event.getView().getTitle().split(" ")[1];
 
-            if(material == Material.RED_CONCRETE) {
+            if(material == Material.PLAYER_HEAD) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 openInventory(player);
@@ -101,95 +101,88 @@ public class SelectSpeciesUI implements Listener {
         pageMain.setItem(23, ItemList.FELINE);
         pageMain.setItem(25, ItemList.DWARF);
         pageMain.setItem(28, ItemList.WOLF);
-        inventories.put(SelectSpeciesPage.MAIN.getIndex(), pageMain);
+        inventories.put(SpeciesPage.MAIN.getIndex(), pageMain);
 
         // DEMON
 
         Inventory pageDemon = Bukkit.createInventory(null, 9*3, "Species: Demon");
         for(int i = 0; i < pageDemon.getSize(); i++) pageDemon.setItem(i, ItemList.FILLER);
-        pageDemon.setItem(10, ItemList.DEMON);
-        pageDemon.setItem(12, ItemList.DEMON_PASSIVE_ABILITIES);
-        pageDemon.setItem(15, ItemList.CONFIRM);
-        pageDemon.setItem(16, ItemList.CANCEL);
-        inventories.put(SelectSpeciesPage.DEMON.getIndex(), pageDemon);
+        pageDemon.setItem(10, ItemList.PREVIOUS);
+        pageDemon.setItem(13, ItemList.DEMON_PASSIVE_ABILITIES);
+        pageDemon.setItem(16, ItemList.CONFIRM);
+        inventories.put(SpeciesPage.DEMON.getIndex(), pageDemon);
 
         // ELF
 
         Inventory pageElf = Bukkit.createInventory(null, 9*3, "Species: Elf");
         for(int i = 0; i < pageElf.getSize(); i++) pageElf.setItem(i, ItemList.FILLER);
-        pageElf.setItem(10, ItemList.ELF);
-        pageElf.setItem(12, ItemList.ELF_PASSIVE_ABILITIES);
-        pageElf.setItem(15, ItemList.CONFIRM);
-        pageElf.setItem(16, ItemList.CANCEL);
-        inventories.put(SelectSpeciesPage.ELF.getIndex(), pageElf);
+        pageElf.setItem(10, ItemList.PREVIOUS);
+        pageElf.setItem(13, ItemList.ELF_PASSIVE_ABILITIES);
+        pageElf.setItem(16, ItemList.CONFIRM);
+        inventories.put(SpeciesPage.ELF.getIndex(), pageElf);
 
         // REPTILE
 
         Inventory pageReptile = Bukkit.createInventory(null, 9*3, "Species: Reptile");
         for(int i = 0; i < pageReptile.getSize(); i++) pageReptile.setItem(i, ItemList.FILLER);
-        pageReptile.setItem(10, ItemList.REPTILE);
-        pageReptile.setItem(12, ItemList.REPTILE_PASSIVE_ABILITIES);
-        pageReptile.setItem(15, ItemList.CONFIRM);
-        pageReptile.setItem(16, ItemList.CANCEL);
-        inventories.put(SelectSpeciesPage.REPTILE.getIndex(), pageReptile);
+        pageReptile.setItem(10, ItemList.PREVIOUS);
+        pageReptile.setItem(13, ItemList.REPTILE_PASSIVE_ABILITIES);
+        pageReptile.setItem(16, ItemList.CONFIRM);
+        inventories.put(SpeciesPage.REPTILE.getIndex(), pageReptile);
 
         // ANGEL
 
         Inventory pageAngel = Bukkit.createInventory(null, 9*3, "Species: Angel");
         for(int i = 0; i < pageAngel.getSize(); i++) pageAngel.setItem(i, ItemList.FILLER);
-        pageAngel.setItem(10, ItemList.ANGEL);
-        pageAngel.setItem(12, ItemList.ANGEL_PASSIVE_ABILITIES);
-        pageAngel.setItem(15, ItemList.CONFIRM);
-        pageAngel.setItem(16, ItemList.CANCEL);
-        inventories.put(SelectSpeciesPage.ANGEL.getIndex(), pageAngel);
+        pageAngel.setItem(10, ItemList.PREVIOUS);
+        pageAngel.setItem(13, ItemList.ANGEL_PASSIVE_ABILITIES);
+        pageAngel.setItem(16, ItemList.CONFIRM);
+        inventories.put(SpeciesPage.ANGEL.getIndex(), pageAngel);
 
         // HUMAN
 
         Inventory pageHuman = Bukkit.createInventory(null, 9*3, "Species: Human");
         for(int i = 0; i < pageHuman.getSize(); i++) pageHuman.setItem(i, ItemList.FILLER);
-        pageHuman.setItem(10, ItemList.HUMAN);
-        pageHuman.setItem(12, ItemList.HUMAN_PASSIVE_ABILITIES);
-        pageHuman.setItem(15, ItemList.CONFIRM);
-        pageHuman.setItem(16, ItemList.CANCEL);
-        inventories.put(SelectSpeciesPage.HUMAN.getIndex(), pageHuman);
+        pageHuman.setItem(10, ItemList.PREVIOUS);
+        pageHuman.setItem(13, ItemList.HUMAN_PASSIVE_ABILITIES);
+        pageHuman.setItem(16, ItemList.CONFIRM);
+        inventories.put(SpeciesPage.HUMAN.getIndex(), pageHuman);
 
         // AQUATILIA
 
         Inventory pageAquatilia = Bukkit.createInventory(null, 9*3, "Species: Aquatilia");
         for(int i = 0; i < pageAquatilia.getSize(); i++) pageAquatilia.setItem(i, ItemList.FILLER);
-        pageAquatilia.setItem(10, ItemList.AQUATILIA);
-        pageAquatilia.setItem(12, ItemList.AQUATILIA_PASSIVE_ABILITIES);
-        pageAquatilia.setItem(15, ItemList.CONFIRM);
-        pageAquatilia.setItem(16, ItemList.CANCEL);
-        inventories.put(SelectSpeciesPage.AQUATILIA.getIndex(), pageAquatilia);
+        pageAquatilia.setItem(10, ItemList.PREVIOUS);
+        pageAquatilia.setItem(13, ItemList.AQUATILIA_PASSIVE_ABILITIES);
+        pageAquatilia.setItem(16, ItemList.CONFIRM);
+        inventories.put(SpeciesPage.AQUATILIA.getIndex(), pageAquatilia);
 
         // FELINE
 
         Inventory pageFeline = Bukkit.createInventory(null, 9*3, "Species: Feline");
         for(int i = 0; i < pageFeline.getSize(); i++) pageFeline.setItem(i, ItemList.FILLER);
-        pageFeline.setItem(10, ItemList.FELINE);
-        pageFeline.setItem(12, ItemList.FELINE_PASSIVE_ABILITIES);
-        pageFeline.setItem(15, ItemList.CONFIRM);
-        pageFeline.setItem(16, ItemList.CANCEL);
-        inventories.put(SelectSpeciesPage.FELINE.getIndex(), pageFeline);
+        pageFeline.setItem(10, ItemList.PREVIOUS);
+        pageFeline.setItem(13, ItemList.FELINE_PASSIVE_ABILITIES);
+        pageFeline.setItem(16, ItemList.CONFIRM);
+        inventories.put(SpeciesPage.FELINE.getIndex(), pageFeline);
 
         // DWARF
 
         Inventory pageDwarf = Bukkit.createInventory(null, 9*3, "Species: Dwarf");
         for(int i = 0; i < pageDwarf.getSize(); i++) pageDwarf.setItem(i, ItemList.FILLER);
         pageDwarf.setItem(10, ItemList.PREVIOUS);
-        pageDwarf.setItem(12, ItemList.DWARF_PASSIVE_ABILITIES);
+        pageDwarf.setItem(13, ItemList.DWARF_PASSIVE_ABILITIES);
         pageDwarf.setItem(16, ItemList.CONFIRM);
-        inventories.put(SelectSpeciesPage.DWARF.getIndex(), pageDwarf);
+        inventories.put(SpeciesPage.DWARF.getIndex(), pageDwarf);
 
         // WOLF
 
         Inventory pageWolf = Bukkit.createInventory(null, 9*3, "Species: Wolf");
         for(int i = 0; i < pageWolf.getSize(); i++) pageWolf.setItem(i, ItemList.FILLER);
         pageWolf.setItem(10, ItemList.PREVIOUS);
-        pageWolf.setItem(12, ItemList.WOLF_PASSIVE_ABILITIES);
+        pageWolf.setItem(13, ItemList.WOLF_PASSIVE_ABILITIES);
         pageWolf.setItem(16, ItemList.CONFIRM);
-        inventories.put(SelectSpeciesPage.WOLF.getIndex(), pageWolf);
+        inventories.put(SpeciesPage.WOLF.getIndex(), pageWolf);
 
     }
 

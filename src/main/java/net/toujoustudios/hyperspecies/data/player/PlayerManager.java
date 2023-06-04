@@ -4,6 +4,7 @@ import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.data.species.SubSpecies;
+import net.toujoustudios.hyperspecies.data.team.Team;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -15,7 +16,7 @@ import java.util.*;
 public class PlayerManager {
 
     private static final HashMap<UUID, PlayerManager> players = new HashMap<>();
-    private static final YamlConfiguration playerConfig = Config.getConfigFile("playerdata.yml");
+    private static final YamlConfiguration playerConfig = Config.getConfigFile("players.yml");
     private final UUID uuid;
     private int experience;
     private double health;
@@ -26,6 +27,7 @@ public class PlayerManager {
     private double manaRegeneration;
     private double shield;
     private double maxShield;
+    private Team team;
     private Species species;
     private SubSpecies subSpecies;
     private final List<Ability> abilities;
@@ -58,6 +60,8 @@ public class PlayerManager {
         regenerationCoolingDown = false;
         savedInventory = new ArrayList<>();
         abilityCooldowns = new ArrayList<>();
+
+        team = Team.getTeam(playerConfig.getString("Data." + uuid + ".Character.Team"));
 
         species = Species.getSpecies(playerConfig.getString("Data." + uuid + ".Character.Species"));
         if(species != null) subSpecies = species.getSubSpecies(playerConfig.getString("Data." + uuid + ".Character.SubSpecies"));
@@ -100,12 +104,13 @@ public class PlayerManager {
         playerConfig.set("Data." + uuid + ".Character.Experience.Main", experience);
         abilityExperiences.forEach((ability, integer) -> playerConfig.set("Data." + uuid + ".Character.Experience.Ability." + ability, integer));
         playerConfig.set("Data." + uuid + ".Character.Species", species.getName());
+        playerConfig.set("Data." + uuid + ".Character.Team", team.getName());
         playerConfig.set("Data." + uuid + ".Character.SubSpecies", (subSpecies != null ? subSpecies.getName() : null));
         ArrayList<String> names = new ArrayList<>();
         abilities.forEach(ability -> names.add(ability.getName()));
         playerConfig.set("Data." + uuid + ".Character.Abilities", names);
 
-        Config.saveToFile(playerConfig, "playerdata.yml");
+        Config.saveToFile(playerConfig, "players.yml");
     }
 
     public static void unloadAll() {
@@ -224,6 +229,14 @@ public class PlayerManager {
 
     public void setMaxShield(double maxShield) {
         this.maxShield = maxShield;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public Species getSpecies() {

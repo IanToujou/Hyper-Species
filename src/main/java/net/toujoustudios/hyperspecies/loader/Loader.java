@@ -6,7 +6,8 @@ import net.toujoustudios.hyperspecies.item.ItemList;
 import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
-import net.toujoustudios.hyperspecies.ui.SelectSpeciesUI;
+import net.toujoustudios.hyperspecies.ui.SpeciesUI;
+import net.toujoustudios.hyperspecies.ui.TeamUI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -28,7 +29,8 @@ public class Loader {
         state = LoaderState.PRE_INIT;
         Config.initialize();
         ItemList.initialize();
-        SelectSpeciesUI.initialize();
+        SpeciesUI.initialize();
+        TeamUI.initialize();
         EmoteLoader.initialize();
 
         if(cancelled) return;
@@ -45,6 +47,7 @@ public class Loader {
         HyperSpecies.getInstance().registerCommands();
         AbilityLoader.initialize();
         SpeciesLoader.initialize();
+        TeamLoader.initialize();
         Logger.log(LogLevel.DEBUG, "Initialization completed.");
     }
 

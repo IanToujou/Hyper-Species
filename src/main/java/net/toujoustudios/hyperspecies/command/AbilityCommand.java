@@ -2,6 +2,8 @@ package net.toujoustudios.hyperspecies.command;
 
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.ability.active.Ability;
+import net.toujoustudios.hyperspecies.log.LogLevel;
+import net.toujoustudios.hyperspecies.log.Logger;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,6 +15,7 @@ public class AbilityCommand implements CommandExecutor {
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
 
         if(!(commandSender instanceof Player player)) return false;
+        else Logger.log(LogLevel.ERROR, "You cannot use this command in the console.");
 
         if(!player.hasPermission("hyperspecies.command.ability")) {
             player.sendMessage(Config.MESSAGE_ERROR_PERMISSION);

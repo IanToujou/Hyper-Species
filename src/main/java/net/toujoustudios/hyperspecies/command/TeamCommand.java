@@ -1,15 +1,16 @@
 package net.toujoustudios.hyperspecies.command;
 
 import net.toujoustudios.hyperspecies.config.Config;
-import net.toujoustudios.hyperspecies.data.emote.Emote;
 import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
+import net.toujoustudios.hyperspecies.ui.TeamUI;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class EmoteListCommand implements CommandExecutor {
+public class TeamCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
@@ -17,7 +18,7 @@ public class EmoteListCommand implements CommandExecutor {
         if(!(commandSender instanceof Player player)) return false;
         else Logger.log(LogLevel.ERROR, "You cannot use this command in the console.");
 
-        if(!player.hasPermission("hyperspecies.command.emotelist")) {
+        if(!player.hasPermission("hyperspecies.command.team")) {
             player.sendMessage(Config.MESSAGE_ERROR_PERMISSION);
             return false;
         }
@@ -27,21 +28,14 @@ public class EmoteListCommand implements CommandExecutor {
             return false;
         }
 
-        player.sendMessage(Config.MESSAGE_INFO_EMOTE_LIST);
-
-        Emote.getEmotes().forEach((s, emote) -> {
-            if(emote.isTargeting()) {
-                player.sendMessage("§7- §d/emote " + emote.getName());
-            } else player.sendMessage("§7- §b/emote " + emote.getName());
-        });
-        player.sendMessage(Config.MESSAGE_PREFIX + " §7Note§8: §7Emotes listed in §dmagenta §7need a target player§8.");
-
+        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+        TeamUI.openInventory(player);
         return false;
 
     }
 
     public String getUsage() {
-        return "/emotelist";
+        return "/team";
     }
 
 }

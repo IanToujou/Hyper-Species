@@ -13,7 +13,7 @@ public class ItemList {
     public static ItemStack NEXT = new ItemStack(Material.PLAYER_HEAD);
     public static ItemStack PREVIOUS = new ItemStack(Material.PLAYER_HEAD);
     public static ItemStack CONFIRM = new ItemStack(Material.GREEN_CONCRETE);
-    public static ItemStack CANCEL = new ItemStack(Material.RED_CONCRETE);
+    public static ItemStack CANCEL = new ItemStack(Material.BARRIER);
     public static ItemStack DEMON = new ItemStack(Material.FIRE_CHARGE);
     public static ItemStack DEMON_PASSIVE_ABILITIES = new ItemStack(Material.ENDER_PEARL);
     public static ItemStack ELF = new ItemStack(Material.SWEET_BERRIES);
@@ -32,6 +32,8 @@ public class ItemList {
     public static ItemStack DWARF_PASSIVE_ABILITIES = new ItemStack(Material.ENDER_PEARL);
     public static ItemStack WOLF = new ItemStack(Material.BONE);
     public static ItemStack WOLF_PASSIVE_ABILITIES = new ItemStack(Material.ENDER_PEARL);
+    public static ItemStack TEAM_BROWSE = new ItemStack(Material.ENDER_EYE);
+    public static ItemStack TEAM_CREATE = new ItemStack(Material.NETHER_STAR);
 
     @SuppressWarnings("all")
     public static void initialize() {
@@ -126,6 +128,19 @@ public class ItemList {
         ));
         REPTILE.setItemMeta(reptileMeta);
 
+        ItemMeta reptilePassiveAbilitiesMeta = REPTILE_PASSIVE_ABILITIES.getItemMeta();
+        reptilePassiveAbilitiesMeta.setDisplayName("§6Passive Abilities");
+        reptilePassiveAbilitiesMeta.setLore(List.of(
+                "§7[§a+§7] Speed boost in swamps, deserts and water",
+                "§7[§a+§7] Resistance",
+                "§7[§a+§7] No fall damage",
+                "",
+                "§7[§c-§7] Slowness in cold biomes",
+                "§7[§c-§7] More damage taken if no armor",
+                "§7[§c-§7] Cannot gain shields from other classes"
+        ));
+        REPTILE_PASSIVE_ABILITIES.setItemMeta(reptilePassiveAbilitiesMeta);
+
         // ANGEL
 
         ItemMeta angelMeta = ANGEL.getItemMeta();
@@ -159,25 +174,45 @@ public class ItemList {
         humanMeta.setDisplayName("§6Human");
         humanMeta.setLore(List.of(
                 "§7Humans are boring you say? Humanity has come",
-                "§7a long way, buildingcities, developing technologies",
+                "§7a long way, building cities, developing technologies",
                 "§7and going to war.",
                 "§r",
                 "§b▶ Click to find out more!"
         ));
         HUMAN.setItemMeta(humanMeta);
 
+        ItemMeta humanPassiveAbilitiesMeta = HUMAN_PASSIVE_ABILITIES.getItemMeta();
+        humanPassiveAbilitiesMeta.setDisplayName("§6Passive Abilities");
+        humanPassiveAbilitiesMeta.setLore(List.of(
+                "§7No passive abilities."
+        ));
+        HUMAN_PASSIVE_ABILITIES.setItemMeta(humanPassiveAbilitiesMeta);
+
         // AQUATILIA
 
-        ItemMeta seaCreatureMeta = AQUATILIA.getItemMeta();
-        seaCreatureMeta.setDisplayName("§6Aquatilia");
-        seaCreatureMeta.setLore(List.of(
+        ItemMeta aquatiliaMeta = AQUATILIA.getItemMeta();
+        aquatiliaMeta.setDisplayName("§6Aquatilia");
+        aquatiliaMeta.setLore(List.of(
                 "§7Sea creatures live under the sea, using",
                 "§7their environment to their advance. They",
                 "§7gain underwater vision, haste, speed.",
                 "§r",
                 "§b▶ Click to find out more!"
         ));
-        AQUATILIA.setItemMeta(seaCreatureMeta);
+        AQUATILIA.setItemMeta(aquatiliaMeta);
+
+        ItemMeta aquatiliaPassiveAbilitiesMeta = AQUATILIA_PASSIVE_ABILITIES.getItemMeta();
+        aquatiliaPassiveAbilitiesMeta.setDisplayName("§6Passive Abilities");
+        aquatiliaPassiveAbilitiesMeta.setLore(List.of(
+                "§7[§a+§7] Haste, speed and breathing underwater",
+                "§7[§a+§7] Night vision underwater",
+                "§7[§a+§7] Strength and regeneration on corals",
+                "",
+                "§7[§c-§7] Need to drink water on land",
+                "§7[§c-§7] Damage in nether",
+                "§7[§c-§7] Slowness on land"
+        ));
+        AQUATILIA_PASSIVE_ABILITIES.setItemMeta(aquatiliaPassiveAbilitiesMeta);
 
         // FELINE
 
@@ -219,6 +254,18 @@ public class ItemList {
                 "§b▶ Click to find out more!"
         ));
         WOLF.setItemMeta(wolfMeta);
+
+        // OTHER
+
+        ItemMeta teamBrowseMeta = TEAM_BROWSE.getItemMeta();
+        teamBrowseMeta.setDisplayName("§eBrowse Teams");
+        teamBrowseMeta.setLore(List.of("§7Browse existing teams."));
+        TEAM_BROWSE.setItemMeta(teamBrowseMeta);
+
+        ItemMeta teamCreateMeta = TEAM_CREATE.getItemMeta();
+        teamCreateMeta.setDisplayName("§aCreate Team");
+        teamCreateMeta.setLore(List.of("§7Create a new team on your own."));
+        TEAM_CREATE.setItemMeta(teamCreateMeta);
 
     }
 

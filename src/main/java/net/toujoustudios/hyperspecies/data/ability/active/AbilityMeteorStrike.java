@@ -14,7 +14,7 @@ import org.bukkit.util.Vector;
 public class AbilityMeteorStrike extends Ability {
 
     public AbilityMeteorStrike() {
-        super("Meteor Strike", Element.LAVA, 12, 180);
+        super("Meteor Strike", Element.FIRE, 12, 180);
     }
 
     @Override

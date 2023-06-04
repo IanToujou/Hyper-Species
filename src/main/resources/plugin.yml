@@ -17,6 +17,9 @@ commands:
     permission: hyperspecies.command.emotelist
     aliases:
       - elist
+  team:
+    description: Show and manage your team.
+    permission: hyperspecies.command.team
   ability:
     description: Use an ability without consuming mana or activating a delay.
     permission: hyperspecies.command.ability
@@ -27,18 +30,30 @@ permissions:
     children:
       hyperspecies.command.emote: true
       hyperspecies.command.emotelist: true
+      hyperspecies.command.team: true
       hyperspecies.command.ability: false
   hyperspecies.group.admin:
     description: The administrator group. Grants all permissions.
     children:
       hyperspecies.command.emote: true
       hyperspecies.command.emotelist: true
+      hyperspecies.command.team: true
       hyperspecies.command.ability: true
+  hyperspecies.group.moderator:
+    description: The administrator group. Grants all permissions.
+    children:
+      hyperspecies.command.emote: true
+      hyperspecies.command.emotelist: true
+      hyperspecies.command.team: true
+      hyperspecies.command.ability: false
   hyperspecies.command.emote:
     description: Allows players to use the emote command.
     default: true
   hyperspecies.command.emotelist:
     description: Allows players to use the emotelist command.
+    default: true
+  hyperspecies.command.team:
+    description: Allows players to use the team command.
     default: true
   hyperspecies.command.ability:
     description: Allows players to use the ability command.

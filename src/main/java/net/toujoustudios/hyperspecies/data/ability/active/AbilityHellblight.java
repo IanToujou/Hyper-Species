@@ -14,7 +14,7 @@ import java.util.Collection;
 public class AbilityHellblight extends Ability {
 
     public AbilityHellblight() {
-        super("Hellblight", Element.ASH, 4, 60);
+        super("Hellblight", Element.FIRE, 4, 60);
     }
 
     @Override

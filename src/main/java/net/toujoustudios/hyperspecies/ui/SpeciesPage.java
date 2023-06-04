@@ -1,6 +1,6 @@
 package net.toujoustudios.hyperspecies.ui;
 
-public enum SelectSpeciesPage {
+public enum SpeciesPage {
 
     MAIN(0),
     DEMON(1),
@@ -15,7 +15,7 @@ public enum SelectSpeciesPage {
 
     private final int index;
 
-    SelectSpeciesPage(int index) {
+    SpeciesPage(int index) {
         this.index = index;
     }
 

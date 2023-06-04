@@ -5,10 +5,13 @@ import net.md_5.bungee.api.chat.TextComponent;
 import net.toujoustudios.hyperspecies.command.AbilityCommand;
 import net.toujoustudios.hyperspecies.command.EmoteCommand;
 import net.toujoustudios.hyperspecies.command.EmoteListCommand;
+import net.toujoustudios.hyperspecies.command.TeamCommand;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.data.team.Team;
 import net.toujoustudios.hyperspecies.event.*;
 import net.toujoustudios.hyperspecies.loader.Loader;
-import net.toujoustudios.hyperspecies.ui.SelectSpeciesUI;
+import net.toujoustudios.hyperspecies.ui.SpeciesUI;
+import net.toujoustudios.hyperspecies.ui.TeamUI;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
 import org.bukkit.plugin.PluginManager;
@@ -93,6 +96,7 @@ public final class HyperSpecies extends JavaPlugin {
     @Override
     public void onDisable() {
         PlayerManager.unloadAll();
+        Team.unloadAll();
     }
 
     @SuppressWarnings("all")
@@ -101,11 +105,13 @@ public final class HyperSpecies extends JavaPlugin {
         getCommand("e").setExecutor(new EmoteCommand());
         getCommand("emotelist").setExecutor(new EmoteListCommand());
         getCommand("elist").setExecutor(new EmoteListCommand());
+        getCommand("team").setExecutor(new TeamCommand());
         getCommand("ability").setExecutor(new AbilityCommand());
     }
 
     public void registerUI() {
-        pluginManager.registerEvents(new SelectSpeciesUI(), this);
+        pluginManager.registerEvents(new SpeciesUI(), this);
+        pluginManager.registerEvents(new TeamUI(), this);
     }
 
     public void registerEvents() {
@@ -115,6 +121,7 @@ public final class HyperSpecies extends JavaPlugin {
         pluginManager.registerEvents(new EntityDamageListener(), this);
         pluginManager.registerEvents(new InventoryClickListener(), this);
         pluginManager.registerEvents(new EntityRegainHealthListener(), this);
+        pluginManager.registerEvents(new PlayerChatListener(), this);
     }
 
     public PluginManager getPluginManager() {

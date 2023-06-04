@@ -14,7 +14,7 @@ public class AbilityDemonicRage extends Ability {
 
 
     public AbilityDemonicRage() {
-        super("Demonic Rage", Element.LAVA, 10, 120);
+        super("Demonic Rage", Element.FIRE, 10, 120);
     }
 
     @Override
