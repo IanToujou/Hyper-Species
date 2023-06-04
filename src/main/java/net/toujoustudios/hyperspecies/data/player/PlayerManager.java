@@ -5,11 +5,18 @@ import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.data.species.SubSpecies;
 import net.toujoustudios.hyperspecies.data.team.Team;
+import net.toujoustudios.hyperspecies.log.LogLevel;
+import net.toujoustudios.hyperspecies.log.Logger;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
+import org.yaml.snakeyaml.Yaml;
 
 import java.util.*;
 
@@ -17,6 +24,7 @@ public class PlayerManager {
 
     private static final HashMap<UUID, PlayerManager> players = new HashMap<>();
     private static final YamlConfiguration playerConfig = Config.getConfigFile("players.yml");
+    private static final YamlConfiguration teamConfig = Config.getConfigFile("teams.yml");
     private final UUID uuid;
     private int experience;
     private double health;
@@ -68,6 +76,7 @@ public class PlayerManager {
         else subSpecies = null;
 
         abilities = new ArrayList<>();
+        abilities.add(Ability.getAbility("Meteor Strike"));
 
         playerConfig.getStringList("Data." + uuid + ".Character.Abilities").forEach(item -> {
             if(!abilities.contains(Ability.getAbility(item))) abilities.add(Ability.getAbility(item));
@@ -80,6 +89,16 @@ public class PlayerManager {
                 abilityExperiences.put(ability.getName(), 0);
             }
         });
+
+        ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
+        assert scoreboardManager != null;
+        final Scoreboard scoreboard = scoreboardManager.getNewScoreboard();
+        final org.bukkit.scoreboard.Team scoreboardTeam = scoreboard.registerNewTeam("e");
+        scoreboardTeam.setColor(ChatColor.AQUA);
+        scoreboardTeam.setDisplayName(team.getName());
+        scoreboardTeam.setAllowFriendlyFire(true);
+        scoreboardTeam.addEntry(Bukkit.getPlayer(uuid).getName());
+        scoreboardTeam.setPrefix("§e" + (species.getName()!=null ? species.getName() : "None") + " §7| ");
 
     }
 
@@ -103,14 +122,15 @@ public class PlayerManager {
         playerConfig.set("Data." + uuid + ".Points.Shield", shield);
         playerConfig.set("Data." + uuid + ".Character.Experience.Main", experience);
         abilityExperiences.forEach((ability, integer) -> playerConfig.set("Data." + uuid + ".Character.Experience.Ability." + ability, integer));
-        playerConfig.set("Data." + uuid + ".Character.Species", species.getName());
-        playerConfig.set("Data." + uuid + ".Character.Team", team.getName());
+        playerConfig.set("Data." + uuid + ".Character.Species", (species != null ? species.getName() : null));
+        playerConfig.set("Data." + uuid + ".Character.Team", (team != null ? team.getName() : null));
         playerConfig.set("Data." + uuid + ".Character.SubSpecies", (subSpecies != null ? subSpecies.getName() : null));
         ArrayList<String> names = new ArrayList<>();
         abilities.forEach(ability -> names.add(ability.getName()));
         playerConfig.set("Data." + uuid + ".Character.Abilities", names);
 
         Config.saveToFile(playerConfig, "players.yml");
+
     }
 
     public static void unloadAll() {

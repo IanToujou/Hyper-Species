@@ -95,8 +95,8 @@ public final class HyperSpecies extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        PlayerManager.unloadAll();
         Team.unloadAll();
+        PlayerManager.unloadAll();
     }
 
     @SuppressWarnings("all")

@@ -42,9 +42,10 @@ public class Team {
         ArrayList<String> list = new ArrayList<>();
         for(Map.Entry<String, Team> entry : teams.entrySet()) {
             teams.get(entry.getKey()).save();
-            list.add(teams.get(entry.getKey()).name);
+            list.add(entry.getKey());
         }
         teamConfig.set("List", list);
+        Config.saveToFile(teamConfig, "teams.yml");
     }
 
     public static Team getTeam(String name) {
