@@ -5,18 +5,13 @@ import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.data.species.SubSpecies;
 import net.toujoustudios.hyperspecies.data.team.Team;
-import net.toujoustudios.hyperspecies.log.LogLevel;
-import net.toujoustudios.hyperspecies.log.Logger;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.ScoreboardManager;
-import org.yaml.snakeyaml.Yaml;
 
 import java.util.*;
 
@@ -90,15 +85,7 @@ public class PlayerManager {
             }
         });
 
-        ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
-        assert scoreboardManager != null;
-        final Scoreboard scoreboard = scoreboardManager.getNewScoreboard();
-        final org.bukkit.scoreboard.Team scoreboardTeam = scoreboard.registerNewTeam("e");
-        scoreboardTeam.setColor(ChatColor.AQUA);
-        scoreboardTeam.setDisplayName(team.getName());
-        scoreboardTeam.setAllowFriendlyFire(true);
-        scoreboardTeam.addEntry(Bukkit.getPlayer(uuid).getName());
-        scoreboardTeam.setPrefix("§e" + (species.getName()!=null ? species.getName() : "None") + " §7| ");
+        refreshScoreboard();
 
     }
 
@@ -133,15 +120,15 @@ public class PlayerManager {
 
     }
 
-    public static void unloadAll() {
-        saveAll();
-        players.clear();
+    public void destroy() {
+        players.remove(uuid);
     }
 
-    public static void saveAll() {
+    public static void unloadAll() {
         if(players == null || players.size() == 0) return;
         for(Map.Entry<UUID, PlayerManager> entry : players.entrySet()) {
             players.get(entry.getKey()).save();
+            players.get(entry.getKey()).destroy();
         }
     }
 
@@ -175,6 +162,21 @@ public class PlayerManager {
             else break;
         }
         return level;
+    }
+
+    public void refreshScoreboard() {
+
+        Scoreboard board = HyperSpecies.getInstance().getScoreboard();
+
+        if(board.getTeam(uuid.toString()) != null && board.getTeams().size() > 0) {
+            board.getTeam(uuid.toString()).unregister();
+        }
+
+        final org.bukkit.scoreboard.Team scoreboardTeam = HyperSpecies.getInstance().getScoreboard().registerNewTeam(uuid.toString());
+        scoreboardTeam.setColor(ChatColor.GRAY);
+        scoreboardTeam.setPrefix((species!=null ? species.getPrefix() : "§7None") + " §7| ");
+        scoreboardTeam.addEntry(Bukkit.getPlayer(uuid).getName());
+
     }
 
     // GETTERS AND SETTERS

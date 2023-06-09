@@ -53,6 +53,7 @@ public class SpeciesLoader {
 
         Species.createSpecies(
                 "Demon",
+                "§cDemon",
                 ItemList.DEMON,
                 demonSpecies,
                 new PassiveDemon(),
@@ -61,6 +62,7 @@ public class SpeciesLoader {
 
         Species.createSpecies(
                 "Elf",
+                "§2Elf",
                 ItemList.ELF,
                 elfSpecies,
                 new PassiveElf(),
@@ -69,6 +71,7 @@ public class SpeciesLoader {
 
         Species.createSpecies(
                 "Reptile",
+                "§3Reptile",
                 ItemList.REPTILE,
                 reptileSpecies,
                 null,
@@ -77,6 +80,7 @@ public class SpeciesLoader {
 
         Species.createSpecies(
                 "Angel",
+                "§eAngel",
                 ItemList.ANGEL,
                 angelSpecies,
                 null,
@@ -85,6 +89,7 @@ public class SpeciesLoader {
 
         Species.createSpecies(
                 "Human",
+                "§dHuman",
                 ItemList.HUMAN,
                 humanSpecies,
                 null,
@@ -93,6 +98,7 @@ public class SpeciesLoader {
 
         Species.createSpecies(
                 "Aquatilia",
+                "§bAqua",
                 ItemList.AQUATILIA,
                 aquatiliaSpecies,
                 null,
@@ -101,6 +107,7 @@ public class SpeciesLoader {
 
         Species.createSpecies(
                 "Feline",
+                "§aFeline",
                 ItemList.FELINE,
                 felineSpecies,
                 null,
@@ -109,6 +116,7 @@ public class SpeciesLoader {
 
         Species.createSpecies(
                 "Dwarf",
+                "§6Dwarf",
                 ItemList.DWARF,
                 dwarfSpecies,
                 null,
@@ -117,6 +125,7 @@ public class SpeciesLoader {
 
         Species.createSpecies(
                 "Wolf",
+                "§8Wolf",
                 ItemList.WOLF,
                 wolfSpecies,
                 null,

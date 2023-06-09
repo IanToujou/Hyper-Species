@@ -13,13 +13,15 @@ public class Species {
     private static final HashMap<String, Species> species = new HashMap<>();
 
     private final String name;
+    private final String prefix;
     private final ItemStack icon;
     private final List<SubSpecies> subSpecies;
     private final PassiveAbility passive;
     private final List<Element> weaknesses;
 
-    public Species(String name, ItemStack icon, List<SubSpecies> subSpecies, PassiveAbility passive, List<Element> weaknesses) {
+    public Species(String name, String prefix, ItemStack icon, List<SubSpecies> subSpecies, PassiveAbility passive, List<Element> weaknesses) {
         this.name = name;
+        this.prefix = prefix;
         this.icon = icon;
         this.subSpecies = subSpecies;
         this.passive = passive;
@@ -31,9 +33,10 @@ public class Species {
         return null;
     }
 
-    public static void createSpecies(String name, ItemStack icon, List<SubSpecies> subSpecies, PassiveAbility passive, List<Element> weaknesses) {
+    public static void createSpecies(String name, String prefix, ItemStack icon, List<SubSpecies> subSpecies, PassiveAbility passive, List<Element> weaknesses) {
         species.put(name, new Species(
                 name,
+                prefix,
                 icon,
                 (subSpecies==null ? new ArrayList<>() : subSpecies),
                 passive,
@@ -52,6 +55,10 @@ public class Species {
 
     public String getName() {
         return name;
+    }
+
+    public String getPrefix() {
+        return prefix;
     }
 
     public ItemStack getIcon() {

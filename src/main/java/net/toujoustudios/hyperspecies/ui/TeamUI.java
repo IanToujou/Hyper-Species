@@ -13,10 +13,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,6 +49,18 @@ public class TeamUI implements Listener {
                 creatingTeamPlayers.add(player.getUniqueId());
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in the §bname§7 of the new team§8.");
                 player.closeInventory();
+            }
+
+        } else if(event.getView().getTitle().equals("Browse Teams")) {
+
+            if(event.getCurrentItem() == null) return;
+            event.setCancelled(true);
+
+            Material material = event.getCurrentItem().getType();
+
+            if(material == Material.PLAYER_HEAD) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                openInventory(player);
             }
 
         }
@@ -85,9 +101,29 @@ public class TeamUI implements Listener {
         pageMain.setItem(13, ItemList.TEAM_BROWSE);
         pageMain.setItem(16, ItemList.TEAM_CREATE);
 
-        inventories.put(SpeciesPage.MAIN.getIndex(), pageMain);
+        Inventory pageBrowse = Bukkit.createInventory(null, 9*4, "Browse Teams");
+        for(int i = 27; i < pageBrowse.getSize(); i++) pageBrowse.setItem(i, ItemList.FILLER);
+        pageBrowse.setItem(31, ItemList.PREVIOUS);
 
+        AtomicInteger i = new AtomicInteger();
+        Team.getTeams().forEach((name, team) -> {
+            ItemStack item = new ItemStack(Material.ENDER_EYE);
+            ItemMeta itemMeta = item.getItemMeta();
+            assert itemMeta != null;
+            itemMeta.setDisplayName(team.getColor() + team.getName());
+            itemMeta.setLore(List.of("§7Status: §eInvite"));
+            item.setItemMeta(itemMeta);
+            pageBrowse.setItem(i.get(), item);
+            i.getAndIncrement();
+        });
 
+        inventories.put(TeamPage.MAIN.getIndex(), pageMain);
+        inventories.put(TeamPage.BROWSE.getIndex(), pageBrowse);
+
+    }
+
+    public static void refresh() {
+        initialize();
     }
 
     public static void openInventory(Player player) {

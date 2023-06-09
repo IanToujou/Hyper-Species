@@ -79,6 +79,7 @@ public class SpeciesUI implements Listener {
                 player.closeInventory();
                 player.sendMessage(Config.MESSAGE_INFO_SPECIES_SELECT.replace("{Species}", className));
                 playerManager.setSpecies(Species.getSpecies(className));
+                playerManager.refreshScoreboard();
 
             }
 

@@ -10,7 +10,10 @@ import java.io.IOException;
 
 public class Config {
 
-    //Message
+    // General
+    public static boolean DEBUG;
+
+    // Message
     public static String MESSAGE_PREFIX;
     public static String MESSAGE_PREFIX_ROLEPLAY;
     public static String MESSAGE_ERROR_PERMISSION;
@@ -35,6 +38,7 @@ public class Config {
 
             YamlConfiguration configuration = YamlConfiguration.loadConfiguration(settingsConfigFile);
 
+            if(!configuration.isSet("General.Debug")) configuration.set("General.Debug", false);
             if(!configuration.isSet("Message.Prefix")) configuration.set("Message.Prefix", "§2HyperSpecies §8|");
             if(!configuration.isSet("Message.PrefixRoleplay")) configuration.set("Message.PrefixRoleplay", "§6RP §8|");
             if(!configuration.isSet("Message.Error.Permission")) configuration.set("Message.Error.Permission", "{Prefix} §cYou do not have the permission to perform this command§8.");
@@ -60,6 +64,7 @@ public class Config {
             Logger.log(LogLevel.WARNING, "Configuration file settings.yml not found. Creating now...");
             YamlConfiguration configuration = YamlConfiguration.loadConfiguration(new File("src/resources/" + HyperSpecies.PLUGIN_NAME + "/settings.yml"));
 
+            if(!configuration.isSet("General.Debug")) configuration.set("General.Debug", false);
             if(!configuration.isSet("Message.Prefix")) configuration.set("Message.Prefix", "§2HyperSpecies §8|");
             if(!configuration.isSet("Message.Error.Permission")) configuration.set("Message.Error.Permission", "{Prefix} §cYou do not have the permission to perform this command§8.");
             if(!configuration.isSet("Message.Error.Syntax")) configuration.set("Message.Error.Syntax", "{Prefix} §cThe command syntax is not correct§8. §cUsage§8: §e{Usage}");
@@ -83,6 +88,7 @@ public class Config {
 
         YamlConfiguration settingsConfig = YamlConfiguration.loadConfiguration(settingsConfigFile);
 
+        DEBUG = settingsConfig.getBoolean("General.Debug");
         MESSAGE_PREFIX = settingsConfig.getString("Message.Prefix");
         MESSAGE_PREFIX_ROLEPLAY = settingsConfig.getString("Message.PrefixRoleplay");
         MESSAGE_ERROR_PERMISSION = settingsConfig.getString("Message.Error.Permission").replace("{Prefix}", MESSAGE_PREFIX);

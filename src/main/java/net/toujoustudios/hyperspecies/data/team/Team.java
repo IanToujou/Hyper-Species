@@ -1,6 +1,7 @@
 package net.toujoustudios.hyperspecies.data.team;
 
 import net.toujoustudios.hyperspecies.config.Config;
+import net.toujoustudios.hyperspecies.ui.TeamUI;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.util.*;
@@ -30,6 +31,7 @@ public class Team {
         members.forEach(member -> memberList.add(member.toString()));
         teamConfig.set("Data." + name + ".Members", memberList);
         Config.saveToFile(teamConfig, "teams.yml");
+
     }
 
     public static void unloadAll() {
@@ -55,6 +57,7 @@ public class Team {
 
     public static void createTeam(String name, String color, UUID owner, List<UUID> members) {
         teams.put(name, new Team(name, color, owner, (members!=null ? members : Collections.emptyList())));
+        TeamUI.refresh();
     }
 
     public String getName() {
@@ -91,6 +94,10 @@ public class Team {
 
     public void removeMember(UUID uuid) {
         members.remove(uuid);
+    }
+
+    public static HashMap<String, Team> getTeams() {
+        return teams;
     }
 
 }

@@ -23,6 +23,9 @@ commands:
   ability:
     description: Use an ability without consuming mana or activating a delay.
     permission: hyperspecies.command.ability
+  reset:
+    description: Reset your character, losing all of your progress.
+    permission: hyperspecies.command.reset
 
 permissions:
   hyperspecies.group.player:
@@ -32,6 +35,7 @@ permissions:
       hyperspecies.command.emotelist: true
       hyperspecies.command.team: true
       hyperspecies.command.ability: false
+      hyperspecies.command.reset: true
   hyperspecies.group.admin:
     description: The administrator group. Grants all permissions.
     children:
@@ -39,6 +43,7 @@ permissions:
       hyperspecies.command.emotelist: true
       hyperspecies.command.team: true
       hyperspecies.command.ability: true
+      hyperspecies.command.reset: true
   hyperspecies.group.moderator:
     description: The administrator group. Grants all permissions.
     children:
@@ -46,6 +51,7 @@ permissions:
       hyperspecies.command.emotelist: true
       hyperspecies.command.team: true
       hyperspecies.command.ability: false
+      hyperspecies.command.reset: true
   hyperspecies.command.emote:
     description: Allows players to use the emote command.
     default: true
@@ -58,3 +64,6 @@ permissions:
   hyperspecies.command.ability:
     description: Allows players to use the ability command.
     default: false
+  hyperspecies.command.reset:
+    description: Allows players to use the reset command.
+    default: true

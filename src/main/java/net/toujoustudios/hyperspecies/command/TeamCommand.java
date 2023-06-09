@@ -15,8 +15,10 @@ public class TeamCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
 
-        if(!(commandSender instanceof Player player)) return false;
-        else Logger.log(LogLevel.ERROR, "You cannot use this command in the console.");
+        if(!(commandSender instanceof Player player)) {
+            Logger.log(LogLevel.ERROR, "You cannot use this command in the console.");
+            return false;
+        }
 
         if(!player.hasPermission("hyperspecies.command.team")) {
             player.sendMessage(Config.MESSAGE_ERROR_PERMISSION);

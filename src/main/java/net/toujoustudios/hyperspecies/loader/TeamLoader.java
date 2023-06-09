@@ -17,10 +17,11 @@ public class TeamLoader {
         List<String> teams = teamConfig.getStringList("List");
 
         teams.forEach(team -> {
-            String color = teamConfig.getString("Team." + team + ".Color");
-            String owner = teamConfig.getString("Team." + team + ".Owner");
+            String color = teamConfig.getString("Data." + team + ".Color");
+            String owner = teamConfig.getString("Data." + team + ".Owner");
             List<UUID> members = new ArrayList<>();
-            teamConfig.getStringList("Team." + team + ".Members").forEach(member -> members.add(UUID.fromString(member)));
+            if(teamConfig.getStringList("Data." + team + ".Members").size() > 0)
+                teamConfig.getStringList("Data." + team + ".Members").forEach(member -> members.add(UUID.fromString(member)));
             assert owner != null;
             Team.createTeam(team, color, UUID.fromString(owner), members);
         });

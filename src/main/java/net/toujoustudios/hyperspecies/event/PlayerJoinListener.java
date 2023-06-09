@@ -22,6 +22,8 @@ public class PlayerJoinListener implements Listener {
             SpeciesUI.openInventory(player);
         }
 
+        playerManager.refreshScoreboard();
+
     }
 
 }

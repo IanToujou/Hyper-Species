@@ -2,20 +2,20 @@ package net.toujoustudios.hyperspecies.main;
 
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.toujoustudios.hyperspecies.command.AbilityCommand;
-import net.toujoustudios.hyperspecies.command.EmoteCommand;
-import net.toujoustudios.hyperspecies.command.EmoteListCommand;
-import net.toujoustudios.hyperspecies.command.TeamCommand;
+import net.toujoustudios.hyperspecies.command.*;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.data.team.Team;
 import net.toujoustudios.hyperspecies.event.*;
 import net.toujoustudios.hyperspecies.loader.Loader;
+import net.toujoustudios.hyperspecies.ui.ResetUI;
 import net.toujoustudios.hyperspecies.ui.SpeciesUI;
 import net.toujoustudios.hyperspecies.ui.TeamUI;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.ScoreboardManager;
 
 public final class HyperSpecies extends JavaPlugin {
 
@@ -25,18 +25,23 @@ public final class HyperSpecies extends JavaPlugin {
 
     private static HyperSpecies instance;
     private PluginManager pluginManager;
+    private Scoreboard scoreboard;
 
     @Override
     public void onEnable() {
 
         instance = this;
+
         this.pluginManager = Bukkit.getPluginManager();
+        ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
+        scoreboard = scoreboardManager.getNewScoreboard();
         Loader.startLoading();
 
         Bukkit.getServer().getWorlds().forEach(world -> {
             world.setGameRule(GameRule.NATURAL_REGENERATION, false);
         });
 
+        // Main Thread
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> Bukkit.getOnlinePlayers().forEach((player -> {
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
@@ -59,6 +64,8 @@ public final class HyperSpecies extends JavaPlugin {
             } else {
                 playerManager.setHealth(playerManager.getMaxHealth());
             }
+
+            player.setScoreboard(scoreboard);
 
         })), 5, 5);
 
@@ -107,11 +114,13 @@ public final class HyperSpecies extends JavaPlugin {
         getCommand("elist").setExecutor(new EmoteListCommand());
         getCommand("team").setExecutor(new TeamCommand());
         getCommand("ability").setExecutor(new AbilityCommand());
+        getCommand("reset").setExecutor(new ResetCommand());
     }
 
     public void registerUI() {
         pluginManager.registerEvents(new SpeciesUI(), this);
         pluginManager.registerEvents(new TeamUI(), this);
+        pluginManager.registerEvents(new ResetUI(), this);
     }
 
     public void registerEvents() {
@@ -126,6 +135,10 @@ public final class HyperSpecies extends JavaPlugin {
 
     public PluginManager getPluginManager() {
         return pluginManager;
+    }
+
+    public Scoreboard getScoreboard() {
+        return scoreboard;
     }
 
     public static HyperSpecies getInstance() {

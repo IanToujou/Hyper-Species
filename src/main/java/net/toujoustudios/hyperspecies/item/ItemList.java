@@ -34,6 +34,8 @@ public class ItemList {
     public static ItemStack WOLF_PASSIVE_ABILITIES = new ItemStack(Material.ENDER_PEARL);
     public static ItemStack TEAM_BROWSE = new ItemStack(Material.ENDER_EYE);
     public static ItemStack TEAM_CREATE = new ItemStack(Material.NETHER_STAR);
+    public static ItemStack RESET_CHARACTER = new ItemStack(Material.RED_CONCRETE);
+    public static ItemStack RESET_CHARACTER_CONFIRM = new ItemStack(Material.REDSTONE_BLOCK);
 
     @SuppressWarnings("all")
     public static void initialize() {
@@ -266,6 +268,16 @@ public class ItemList {
         teamCreateMeta.setDisplayName("§aCreate Team");
         teamCreateMeta.setLore(List.of("§7Create a new team on your own."));
         TEAM_CREATE.setItemMeta(teamCreateMeta);
+
+        ItemMeta resetCharacterMeta = RESET_CHARACTER.getItemMeta();
+        resetCharacterMeta.setDisplayName("§cReset Character");
+        resetCharacterMeta.setLore(List.of("§7Are you sure you want to reset", "§7all your progress?", "§r", "§cThis cannot be undone§7!", "§r", "§7Click to continue."));
+        RESET_CHARACTER.setItemMeta(resetCharacterMeta);
+
+        ItemMeta resetCharacterConfirmMeta = RESET_CHARACTER_CONFIRM.getItemMeta();
+        resetCharacterConfirmMeta.setDisplayName("§c§lARE YOU SURE?");
+        resetCharacterConfirmMeta.setLore(List.of("§7Are you sure you want to reset", "§7all your progress?", "§r", "§cThis cannot be undone§7!", "§r", "§7Click to continue."));
+        RESET_CHARACTER_CONFIRM.setItemMeta(resetCharacterConfirmMeta);
 
     }
 
