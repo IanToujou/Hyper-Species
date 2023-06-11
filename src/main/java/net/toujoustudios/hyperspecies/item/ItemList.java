@@ -34,6 +34,9 @@ public class ItemList {
     public static ItemStack WOLF_PASSIVE_ABILITIES = new ItemStack(Material.ENDER_PEARL);
     public static ItemStack TEAM_BROWSE = new ItemStack(Material.ENDER_EYE);
     public static ItemStack TEAM_CREATE = new ItemStack(Material.NETHER_STAR);
+    public static ItemStack TEAM_SETTINGS = new ItemStack(Material.REDSTONE);
+    public static ItemStack TEAM_LEAVE = new ItemStack(Material.PUFFERFISH);
+    public static ItemStack TEAM_LEAVE_CONFIRM = new ItemStack(Material.PUFFERFISH);
     public static ItemStack RESET_CHARACTER = new ItemStack(Material.RED_CONCRETE);
     public static ItemStack RESET_CHARACTER_CONFIRM = new ItemStack(Material.REDSTONE_BLOCK);
 
@@ -265,9 +268,24 @@ public class ItemList {
         TEAM_BROWSE.setItemMeta(teamBrowseMeta);
 
         ItemMeta teamCreateMeta = TEAM_CREATE.getItemMeta();
-        teamCreateMeta.setDisplayName("§aCreate Team");
+        teamCreateMeta.setDisplayName("§eCreate Team");
         teamCreateMeta.setLore(List.of("§7Create a new team on your own."));
         TEAM_CREATE.setItemMeta(teamCreateMeta);
+
+        ItemMeta teamSettingsMeta = TEAM_SETTINGS.getItemMeta();
+        teamSettingsMeta.setDisplayName("§eSettings");
+        teamSettingsMeta.setLore(List.of("§7Adjust your team's settings."));
+        TEAM_SETTINGS.setItemMeta(teamSettingsMeta);
+
+        ItemMeta teamLeaveMeta = TEAM_LEAVE.getItemMeta();
+        teamLeaveMeta.setDisplayName("§cLeave Team");
+        teamLeaveMeta.setLore(List.of("§7Leave the team you are in."));
+        TEAM_LEAVE.setItemMeta(teamLeaveMeta);
+
+        ItemMeta teamLeaveConfirmMeta = TEAM_LEAVE_CONFIRM.getItemMeta();
+        teamLeaveConfirmMeta.setDisplayName("§c§lARE YOU SURE?");
+        teamLeaveConfirmMeta.setLore(List.of("§7Are you sure you want to leave?", "§r", "§7This action cannot be undone.", "§7You need to be re-invited into", "§7the team in order to join back."));
+        TEAM_LEAVE_CONFIRM.setItemMeta(teamLeaveConfirmMeta);
 
         ItemMeta resetCharacterMeta = RESET_CHARACTER.getItemMeta();
         resetCharacterMeta.setDisplayName("§cReset Character");

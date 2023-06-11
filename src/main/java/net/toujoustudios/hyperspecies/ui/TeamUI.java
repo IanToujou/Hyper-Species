@@ -12,15 +12,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
@@ -30,6 +30,20 @@ public class TeamUI implements Listener {
 
     private static final HashMap<Integer, Inventory> inventories = new HashMap<>();
     private static final ArrayList<UUID> creatingTeamPlayers = new ArrayList<>();
+
+    @EventHandler
+    public void onInventoryOpen(InventoryOpenEvent event) {
+
+        Player player = (Player) event.getPlayer();
+
+        if(event.getView().getTitle().equals("Team: ")) {
+
+            PlayerManager playerManager = PlayerManager.getPlayer(player);
+
+
+        }
+
+    }
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
@@ -62,10 +76,90 @@ public class TeamUI implements Listener {
             event.setCancelled(true);
 
             Material material = event.getCurrentItem().getType();
+            if(event.getCurrentItem().getItemMeta() == null) return;
+            String name = event.getCurrentItem().getItemMeta().getDisplayName();
 
             if(material == Material.PLAYER_HEAD) {
+
+                //stuff
+
+            } else if(material == Material.BARRIER) {
+
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 openInventory(player);
+
+            } else if(material == Material.ENDER_EYE) {
+
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+
+            }
+
+        } else if(event.getView().getTitle().startsWith("Team: ")) {
+
+            if(event.getCurrentItem() == null) return;
+            event.setCancelled(true);
+
+            Material material = event.getCurrentItem().getType();
+
+            if(material == Material.BARRIER) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                player.closeInventory();
+            } else if(material == Material.REDSTONE) {
+
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                PlayerManager playerManager = PlayerManager.getPlayer(player);
+
+                if(playerManager.getTeam().getOwner().equals(player.getUniqueId())) {
+                    openInventory(player, TeamPage.SETTINGS_ADMIN.getIndex());
+                } else {
+                    openInventory(player, TeamPage.SETTINGS.getIndex());
+                }
+
+            }
+
+        } else if(event.getView().getTitle().equals("Team Settings")) {
+
+            if(event.getCurrentItem() == null) return;
+            event.setCancelled(true);
+
+            Material material = event.getCurrentItem().getType();
+
+            if(material == Material.PLAYER_HEAD) {
+
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                player.closeInventory();
+
+            } else if(material == Material.PUFFERFISH) {
+
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                openInventory(player, TeamPage.LEAVE_CONFIRM.getIndex());
+
+            }
+
+        } else if(event.getView().getTitle().equals("Leave Team")) {
+
+            if(event.getCurrentItem() == null) return;
+            event.setCancelled(true);
+
+            Material material = event.getCurrentItem().getType();
+
+            if(material == Material.BARRIER) {
+
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                player.closeInventory();
+
+            } else if(material == Material.PUFFERFISH) {
+
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                player.closeInventory();
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7You left your team and are all alone now§8.");
+
+                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                playerManager.getTeam().setOwner(null);
+                Objects.requireNonNull(Team.getTeam(playerManager.getTeam().getName())).setOwner(null);
+                playerManager.setTeam(null);
+                TeamUI.refresh();
+
             }
 
         }
@@ -88,7 +182,7 @@ public class TeamUI implements Listener {
             }
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
             player.sendMessage(Config.MESSAGE_PREFIX + " §7The team §b" + name + "§7 has been created§8.");
-            Team.createTeam(name, "§f", player.getUniqueId(), TeamStatus.INVITE, null);
+            Team.createTeam(name, null, "§e", player.getUniqueId(), TeamStatus.INVITE, null);
             PlayerManager playerManager = PlayerManager.getPlayer(player);
             playerManager.setTeam(Team.getTeam(name));
             getCreatingTeamPlayers().remove(player.getUniqueId());
@@ -106,39 +200,71 @@ public class TeamUI implements Listener {
         pageMain.setItem(13, ItemList.TEAM_BROWSE);
         pageMain.setItem(16, ItemList.TEAM_CREATE);
 
-        Inventory pageBrowse = Bukkit.createInventory(null, 9*4, "Browse Teams");
-        for(int i = 27; i < pageBrowse.getSize(); i++) pageBrowse.setItem(i, ItemList.FILLER);
-        pageBrowse.setItem(31, ItemList.PREVIOUS);
+        // BROWSE
 
-        AtomicInteger i = new AtomicInteger();
+        Inventory pageBrowse = Bukkit.createInventory(null, 9*5, "Browse Teams");
+        for(int i = 0; i < 9; i++) pageBrowse.setItem(i, ItemList.FILLER);
+        for(int i = 36; i < pageBrowse.getSize(); i++) pageBrowse.setItem(i, ItemList.FILLER);
+        pageBrowse.setItem(36, ItemList.PREVIOUS);
+        pageBrowse.setItem(40, ItemList.CANCEL);
+        pageBrowse.setItem(44, ItemList.NEXT);
+
+        AtomicInteger num = new AtomicInteger();
         Team.getTeams().forEach((name, team) -> {
 
-            StringBuilder memberBuilder = new StringBuilder();
-            memberBuilder.append("§7Members:\n");
+            if(team.getOwner() != null) {
+                ArrayList<String> lore = new ArrayList<>();
 
-            if(team.getMembers().size() > 0) {
-                team.getMembers().forEach(member -> {
-                    memberBuilder.append("§7- §b").append(Bukkit.getOfflinePlayer(member).getName());
-                });
-            } else memberBuilder.append("§8None");
+                if(team.getDescription() != null && team.getDescription().length() > 0) {
+                    String[] descriptionLines = team.getDescription().split(" ");
+                    for (String descriptionLine : descriptionLines) {
+                        lore.add("§7" + descriptionLine);
+                    }
+                } else {
+                    lore.add("§8No Description");
+                }
 
-            ItemStack item = new ItemStack(Material.ENDER_EYE);
-            ItemMeta itemMeta = item.getItemMeta();
-            assert itemMeta != null;
-            itemMeta.setDisplayName(team.getColor() + team.getName());
-            itemMeta.setLore(List.of(
-                    "§7Status: " + team.getStatus().getColor() + team.getStatus().getName(),
-                    "§7Owner: §b" + Bukkit.getOfflinePlayer(team.getOwner()).getName(),
-                    "§r",
-                    memberBuilder.toString()
-            ));
-            item.setItemMeta(itemMeta);
-            pageBrowse.setItem(i.get(), item);
-            i.getAndIncrement();
+                lore.add("§r");
+                lore.add("§7Status: " + team.getStatus().getColor() + team.getStatus().getName());
+                lore.add("§7Owner: §b" + Bukkit.getOfflinePlayer(team.getOwner()).getName());
+                lore.add("§r");
+                lore.add("§7Members:");
+
+                if(team.getMembers().size() > 0) {
+                    team.getMembers().forEach(member -> lore.add("§8- §b" + Bukkit.getOfflinePlayer(member).getName()));
+                } else lore.add("§8No Members");
+
+                ItemStack item = new ItemStack(Material.ENDER_EYE);
+                ItemMeta itemMeta = item.getItemMeta();
+                assert itemMeta != null;
+                itemMeta.setDisplayName(team.getColor() + team.getName());
+                itemMeta.setLore(lore);
+                item.setItemMeta(itemMeta);
+                pageBrowse.setItem(num.get()+9, item);
+                num.getAndIncrement();
+            }
+
         });
+
+        // SETTINGS
+
+        Inventory pageSettings = Bukkit.createInventory(null, 9*3, "Team Settings");
+        for(int i = 0; i < pageSettings.getSize(); i++) pageSettings.setItem(i, ItemList.FILLER);
+        pageSettings.setItem(10, ItemList.PREVIOUS);
+        pageSettings.setItem(16, ItemList.TEAM_LEAVE);
+
+        // LEAVE CONFIRM
+
+        Inventory pageLeaveConfirm = Bukkit.createInventory(null, 9*3, "Leave Team");
+        for(int i = 0; i < pageLeaveConfirm.getSize(); i++) pageLeaveConfirm.setItem(i, ItemList.FILLER);
+        pageLeaveConfirm.setItem(16, ItemList.CANCEL);
+        pageLeaveConfirm.setItem(10, ItemList.TEAM_LEAVE_CONFIRM);
 
         inventories.put(TeamPage.MAIN.getIndex(), pageMain);
         inventories.put(TeamPage.BROWSE.getIndex(), pageBrowse);
+        inventories.put(TeamPage.SETTINGS.getIndex(), pageSettings);
+        inventories.put(TeamPage.SETTINGS_ADMIN.getIndex(), pageSettings);
+        inventories.put(TeamPage.LEAVE_CONFIRM.getIndex(), pageLeaveConfirm);
 
     }
 

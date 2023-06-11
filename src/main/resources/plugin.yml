@@ -21,7 +21,7 @@ commands:
     description: Show and manage your team.
     permission: hyperspecies.command.team
   ability:
-    description: Use an ability without consuming mana or activating a delay.
+    description: Use an ability by force.
     permission: hyperspecies.command.ability
   reset:
     description: Reset your character, losing all of your progress.
@@ -63,7 +63,7 @@ permissions:
     default: true
   hyperspecies.command.ability:
     description: Allows players to use the ability command.
-    default: false
+    default: op
   hyperspecies.command.reset:
     description: Allows players to use the reset command.
     default: true
