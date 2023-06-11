@@ -19,7 +19,6 @@ public class PlayerManager {
 
     private static final HashMap<UUID, PlayerManager> players = new HashMap<>();
     private static final YamlConfiguration playerConfig = Config.getConfigFile("players.yml");
-    private static final YamlConfiguration teamConfig = Config.getConfigFile("teams.yml");
     private final UUID uuid;
     private int experience;
     private double health;
@@ -164,7 +163,10 @@ public class PlayerManager {
         return level;
     }
 
+    @SuppressWarnings("all")
     public void refreshScoreboard() {
+
+        if(Bukkit.getPlayer(uuid) == null) return;
 
         Scoreboard board = HyperSpecies.getInstance().getScoreboard();
 

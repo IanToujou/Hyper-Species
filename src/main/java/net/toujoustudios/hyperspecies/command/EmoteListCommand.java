@@ -29,14 +29,14 @@ public class EmoteListCommand implements CommandExecutor {
             return false;
         }
 
-        player.sendMessage(Config.MESSAGE_INFO_EMOTE_LIST);
+        player.sendMessage(Config.MESSAGE_PREFIX + " §7Below is a list of all the emotes available§8:");
 
         Emote.getEmotes().forEach((s, emote) -> {
             if(emote.isTargeting()) {
                 player.sendMessage("§7- §d/emote " + emote.getName());
             } else player.sendMessage("§7- §b/emote " + emote.getName());
         });
-        player.sendMessage(Config.MESSAGE_PREFIX + " §7Note§8: §7Emotes listed in §dmagenta §7need a target player§8.");
+        player.sendMessage(Config.MESSAGE_PREFIX + " §7Note§8: §7Emotes in §dmagenta §7need a target player§8.");
 
         return false;
 

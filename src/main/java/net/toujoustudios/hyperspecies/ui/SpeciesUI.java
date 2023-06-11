@@ -77,7 +77,7 @@ public class SpeciesUI implements Listener {
                 PlayerManager playerManager = PlayerManager.getPlayer(player);
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
                 player.closeInventory();
-                player.sendMessage(Config.MESSAGE_INFO_SPECIES_SELECT.replace("{Species}", className));
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7You selected the species §b" + className + "§8.");
                 playerManager.setSpecies(Species.getSpecies(className));
                 playerManager.refreshScoreboard();
 

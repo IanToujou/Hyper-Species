@@ -14,12 +14,14 @@ public class Team {
     private String name;
     private String color;
     private UUID owner;
+    private TeamStatus status;
     private final List<UUID> members;
 
-    public Team(String name, String color, UUID owner, List<UUID> members) {
+    public Team(String name, String color, UUID owner, TeamStatus status, List<UUID> members) {
         this.name = name;
         this.color = color;
         this.owner = owner;
+        this.status = status;
         this.members = members;
     }
 
@@ -27,6 +29,7 @@ public class Team {
 
         teamConfig.set("Data." + name + ".Color", color);
         teamConfig.set("Data." + name + ".Owner", owner.toString());
+        teamConfig.set("Data." + name + ".Status", status.getName());
         ArrayList<String> memberList = new ArrayList<>();
         members.forEach(member -> memberList.add(member.toString()));
         teamConfig.set("Data." + name + ".Members", memberList);
@@ -55,8 +58,8 @@ public class Team {
         return null;
     }
 
-    public static void createTeam(String name, String color, UUID owner, List<UUID> members) {
-        teams.put(name, new Team(name, color, owner, (members!=null ? members : Collections.emptyList())));
+    public static void createTeam(String name, String color, UUID owner, TeamStatus status, List<UUID> members) {
+        teams.put(name, new Team(name, color, owner, status, (members!=null ? members : Collections.emptyList())));
         TeamUI.refresh();
     }
 
@@ -82,6 +85,14 @@ public class Team {
 
     public void setOwner(UUID owner) {
         this.owner = owner;
+    }
+
+    public TeamStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(TeamStatus status) {
+        this.status = status;
     }
 
     public List<UUID> getMembers() {

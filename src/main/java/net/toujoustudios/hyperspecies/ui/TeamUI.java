@@ -3,6 +3,7 @@ package net.toujoustudios.hyperspecies.ui;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.data.team.Team;
+import net.toujoustudios.hyperspecies.data.team.TeamStatus;
 import net.toujoustudios.hyperspecies.item.ItemList;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -15,6 +16,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -49,6 +51,9 @@ public class TeamUI implements Listener {
                 creatingTeamPlayers.add(player.getUniqueId());
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in the §bname§7 of the new team§8.");
                 player.closeInventory();
+            } else if(material == Material.BARRIER) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                player.closeInventory();
             }
 
         } else if(event.getView().getTitle().equals("Browse Teams")) {
@@ -82,8 +87,8 @@ public class TeamUI implements Listener {
                 return;
             }
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
-            player.sendMessage(Config.MESSAGE_PREFIX + " §aThe team §b" + name + "§a has been successfully created§8.");
-            Team.createTeam(name, "§f", player.getUniqueId(), null);
+            player.sendMessage(Config.MESSAGE_PREFIX + " §7The team §b" + name + "§7 has been created§8.");
+            Team.createTeam(name, "§f", player.getUniqueId(), TeamStatus.INVITE, null);
             PlayerManager playerManager = PlayerManager.getPlayer(player);
             playerManager.setTeam(Team.getTeam(name));
             getCreatingTeamPlayers().remove(player.getUniqueId());
@@ -107,11 +112,26 @@ public class TeamUI implements Listener {
 
         AtomicInteger i = new AtomicInteger();
         Team.getTeams().forEach((name, team) -> {
+
+            StringBuilder memberBuilder = new StringBuilder();
+            memberBuilder.append("§7Members:\n");
+
+            if(team.getMembers().size() > 0) {
+                team.getMembers().forEach(member -> {
+                    memberBuilder.append("§7- §b").append(Bukkit.getOfflinePlayer(member).getName());
+                });
+            } else memberBuilder.append("§8None");
+
             ItemStack item = new ItemStack(Material.ENDER_EYE);
             ItemMeta itemMeta = item.getItemMeta();
             assert itemMeta != null;
             itemMeta.setDisplayName(team.getColor() + team.getName());
-            itemMeta.setLore(List.of("§7Status: §eInvite"));
+            itemMeta.setLore(List.of(
+                    "§7Status: " + team.getStatus().getColor() + team.getStatus().getName(),
+                    "§7Owner: §b" + Bukkit.getOfflinePlayer(team.getOwner()).getName(),
+                    "§r",
+                    memberBuilder.toString()
+            ));
             item.setItemMeta(itemMeta);
             pageBrowse.setItem(i.get(), item);
             i.getAndIncrement();
