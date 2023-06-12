@@ -16,9 +16,9 @@ public class Team {
     private String color;
     private UUID owner;
     private TeamStatus status;
-    private final List<UUID> members;
+    private ArrayList<UUID> members;
 
-    public Team(String name, String description, String color, UUID owner, TeamStatus status, List<UUID> members) {
+    public Team(String name, String description, String color, UUID owner, TeamStatus status, ArrayList<UUID> members) {
         this.name = name;
         this.description = description;
         this.color = color;
@@ -29,13 +29,25 @@ public class Team {
 
     public void save() {
 
-        teamConfig.set("Data." + name + ".Color", color);
-        teamConfig.set("Data." + name + ".Owner", (owner!=null ? owner.toString() : null));
-        teamConfig.set("Data." + name + ".Status", status.getName());
-        ArrayList<String> memberList = new ArrayList<>();
-        members.forEach(member -> memberList.add(member.toString()));
-        teamConfig.set("Data." + name + ".Members", memberList);
-        Config.saveToFile(teamConfig, "teams.yml");
+        if(owner == null && members.size() > 0) {
+            int random = new Random().nextInt(members.size());
+            owner = members.get(random);
+            members.remove(random);
+        }
+
+        if(owner == null && members.size() == 0) {
+            teamConfig.set("Data." + name, null);
+            Config.saveToFile(teamConfig, "teams.yml");
+        } else {
+            teamConfig.set("Data." + name + ".Color", color);
+            teamConfig.set("Data." + name + ".Description", description);
+            teamConfig.set("Data." + name + ".Owner", (owner!=null ? owner.toString() : null));
+            teamConfig.set("Data." + name + ".Status", status.getName());
+            ArrayList<String> memberList = new ArrayList<>();
+            members.forEach(member -> memberList.add(member.toString()));
+            teamConfig.set("Data." + name + ".Members", memberList);
+            Config.saveToFile(teamConfig, "teams.yml");
+        }
 
     }
 
@@ -53,7 +65,7 @@ public class Team {
         ArrayList<String> list = new ArrayList<>();
         for(Map.Entry<String, Team> entry : teams.entrySet()) {
             teams.get(entry.getKey()).save();
-            if(teams.get(entry.getKey()) != null) list.add(entry.getKey());
+            if(teams.get(entry.getKey()).getOwner() != null) list.add(entry.getKey());
         }
         teamConfig.set("List", list);
         Config.saveToFile(teamConfig, "teams.yml");
@@ -64,8 +76,8 @@ public class Team {
         return null;
     }
 
-    public static void createTeam(String name, String description, String color, UUID owner, TeamStatus status, List<UUID> members) {
-        teams.put(name, new Team(name, description, color, owner, status, (members!=null ? members : Collections.emptyList())));
+    public static void createTeam(String name, String description, String color, UUID owner, TeamStatus status, ArrayList<UUID> members) {
+        teams.put(name, new Team(name, description, color, owner, status, (members!=null ? members : new ArrayList<>())));
         TeamUI.refresh();
     }
 
@@ -114,7 +126,9 @@ public class Team {
     }
 
     public void addMember(UUID uuid) {
-        members.add(uuid);
+        ArrayList<UUID> newMembers = members;
+        newMembers.add(uuid);
+        members = newMembers;
     }
 
     public void removeMember(UUID uuid) {

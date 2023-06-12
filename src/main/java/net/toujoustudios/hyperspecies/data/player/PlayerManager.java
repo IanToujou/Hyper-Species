@@ -29,7 +29,7 @@ public class PlayerManager {
     private double manaRegeneration;
     private double shield;
     private double maxShield;
-    private Team team;
+    private String team;
     private Species species;
     private SubSpecies subSpecies;
     private final List<Ability> abilities;
@@ -63,7 +63,7 @@ public class PlayerManager {
         savedInventory = new ArrayList<>();
         abilityCooldowns = new ArrayList<>();
 
-        team = Team.getTeam(playerConfig.getString("Data." + uuid + ".Character.Team"));
+        team = playerConfig.getString("Data." + uuid + ".Character.Team");
 
         species = Species.getSpecies(playerConfig.getString("Data." + uuid + ".Character.Species"));
         if(species != null) subSpecies = species.getSubSpecies(playerConfig.getString("Data." + uuid + ".Character.SubSpecies"));
@@ -109,7 +109,7 @@ public class PlayerManager {
         playerConfig.set("Data." + uuid + ".Character.Experience.Main", experience);
         abilityExperiences.forEach((ability, integer) -> playerConfig.set("Data." + uuid + ".Character.Experience.Ability." + ability, integer));
         playerConfig.set("Data." + uuid + ".Character.Species", (species != null ? species.getName() : null));
-        playerConfig.set("Data." + uuid + ".Character.Team", (team != null ? team.getName() : null));
+        playerConfig.set("Data." + uuid + ".Character.Team", team);
         playerConfig.set("Data." + uuid + ".Character.SubSpecies", (subSpecies != null ? subSpecies.getName() : null));
         ArrayList<String> names = new ArrayList<>();
         abilities.forEach(ability -> names.add(ability.getName()));
@@ -127,8 +127,8 @@ public class PlayerManager {
         if(players == null || players.size() == 0) return;
         for(Map.Entry<UUID, PlayerManager> entry : players.entrySet()) {
             players.get(entry.getKey()).save();
-            players.get(entry.getKey()).destroy();
         }
+        players.clear();
     }
 
     // CUSTOM METHODS
@@ -256,11 +256,15 @@ public class PlayerManager {
     }
 
     public Team getTeam() {
-        return team;
+        return Team.getTeam(team);
     }
 
-    public void setTeam(Team team) {
+    public void setTeam(String team) {
         this.team = team;
+    }
+
+    public boolean hasTeam() {
+        return (Team.getTeam(team) != null);
     }
 
     public Species getSpecies() {

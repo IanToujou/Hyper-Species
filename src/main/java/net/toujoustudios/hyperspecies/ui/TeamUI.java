@@ -18,10 +18,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,6 +27,7 @@ public class TeamUI implements Listener {
 
     private static final HashMap<Integer, Inventory> inventories = new HashMap<>();
     private static final ArrayList<UUID> creatingTeamPlayers = new ArrayList<>();
+    private static final HashMap<UUID, String> teamJoinRequests = new HashMap<>();
 
     @EventHandler
     public void onInventoryOpen(InventoryOpenEvent event) {
@@ -91,6 +89,44 @@ public class TeamUI implements Listener {
             } else if(material == Material.ENDER_EYE) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                player.closeInventory();
+
+                Team team = Team.getTeam(name.substring(2));
+
+                if(team == null || team.getOwner() == null) {
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
+                    player.sendMessage(Config.MESSAGE_PREFIX + " §cYou are unable to join this team§8.");
+                    return;
+                }
+
+                if(team.getStatus() == TeamStatus.OPEN) {
+
+                    PlayerManager playerManager = PlayerManager.getPlayer(player);
+                    playerManager.setTeam(team.getName());
+                    team.addMember(player.getUniqueId());
+
+                } else if(team.getStatus() == TeamStatus.INVITE) {
+
+                    Player target = Bukkit.getPlayer(team.getOwner());
+
+                    if(target == null) {
+                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
+                        player.sendMessage(Config.MESSAGE_PREFIX + " §cThe owner of the team is not online§8.");
+                        return;
+                    }
+
+                    target.playSound(target.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
+                    player.sendMessage(Config.MESSAGE_PREFIX + " §7You sent a join request to the team§8.");
+                    target.sendMessage(Config.MESSAGE_PREFIX + " §e" + player.getName() + "§7 wants to join your team§8.");
+                    target.sendMessage(Config.MESSAGE_PREFIX + " §7Please use §b/team accept " + player.getName() + "§7 to §aaccept§8.");
+                    target.sendMessage(Config.MESSAGE_PREFIX + " §7Or use §b/team deny " + player.getName() + "§7 to §cdeny§8.");
+                    teamJoinRequests.put(player.getUniqueId(), team.getName());
+
+                } else {
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
+                    player.sendMessage(Config.MESSAGE_PREFIX + " §cThis team is closed and private§8.");
+                }
 
             }
 
@@ -155,8 +191,16 @@ public class TeamUI implements Listener {
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You left your team and are all alone now§8.");
 
                 PlayerManager playerManager = PlayerManager.getPlayer(player);
-                playerManager.getTeam().setOwner(null);
-                Objects.requireNonNull(Team.getTeam(playerManager.getTeam().getName())).setOwner(null);
+
+                if(playerManager.getTeam().getOwner() == player.getUniqueId()) {
+                    playerManager.getTeam().setOwner(null);
+                } else {
+                    playerManager.getTeam().removeMember(player.getUniqueId());
+                    int random = new Random().nextInt(playerManager.getTeam().getMembers().size());
+                    playerManager.getTeam().setOwner(playerManager.getTeam().getMembers().get(random));
+                    playerManager.getTeam().getMembers().remove(random);
+                }
+
                 playerManager.setTeam(null);
                 TeamUI.refresh();
 
@@ -176,15 +220,31 @@ public class TeamUI implements Listener {
             String name = event.getMessage();
             Pattern pattern = Pattern.compile("^[ A-Za-z]+$");
             Matcher matcher = pattern.matcher(name);
+            if(name.equalsIgnoreCase("cancel")) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §cTeam creation has been cancelled§8.");
+                return;
+            }
             if(!matcher.matches()) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §cThe team name can only contain letters and spaces§8.");
+                return;
+            }
+            if(Team.getTeam(name) != null) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §cA team with this name already exists§8.");
+                return;
+            }
+            if(name.length() > 30) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §cThe name cannot be longer than 30 characters§8.");
                 return;
             }
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
             player.sendMessage(Config.MESSAGE_PREFIX + " §7The team §b" + name + "§7 has been created§8.");
             Team.createTeam(name, null, "§e", player.getUniqueId(), TeamStatus.INVITE, null);
             PlayerManager playerManager = PlayerManager.getPlayer(player);
-            playerManager.setTeam(Team.getTeam(name));
+            playerManager.setTeam(name);
             getCreatingTeamPlayers().remove(player.getUniqueId());
         }
 
@@ -283,6 +343,10 @@ public class TeamUI implements Listener {
 
     public static ArrayList<UUID> getCreatingTeamPlayers() {
         return creatingTeamPlayers;
+    }
+
+    public static HashMap<UUID, String> getTeamJoinRequests() {
+        return teamJoinRequests;
     }
 
 }

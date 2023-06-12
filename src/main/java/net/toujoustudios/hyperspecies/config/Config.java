@@ -60,6 +60,7 @@ public class Config {
 
             if(!configuration.isSet("General.Debug")) configuration.set("General.Debug", false);
             if(!configuration.isSet("Message.Prefix")) configuration.set("Message.Prefix", "§2HyperSpecies §8|");
+            if(!configuration.isSet("Message.PrefixRoleplay")) configuration.set("Message.PrefixRoleplay", "§6RP §8|");
             if(!configuration.isSet("Message.Error.Permission")) configuration.set("Message.Error.Permission", "{Prefix} §cYou do not have the permission to perform this command§8.");
             if(!configuration.isSet("Message.Error.Syntax")) configuration.set("Message.Error.Syntax", "{Prefix} §cThe command syntax is not correct§8. §cUsage§8: §e{Usage}");
             if(!configuration.isSet("Message.Error.PlayerInvalid")) configuration.set("Message.Error.PlayerInvalid", "{Prefix} §cThe given player is invalid§8.");
