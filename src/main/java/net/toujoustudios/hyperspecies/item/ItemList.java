@@ -35,6 +35,12 @@ public class ItemList {
     public static ItemStack TEAM_BROWSE = new ItemStack(Material.ENDER_EYE);
     public static ItemStack TEAM_CREATE = new ItemStack(Material.NETHER_STAR);
     public static ItemStack TEAM_SETTINGS = new ItemStack(Material.REDSTONE);
+    public static ItemStack TEAM_CHANGE_NAME = new ItemStack(Material.NAME_TAG);
+    public static ItemStack TEAM_CHANGE_DESCRIPTION = new ItemStack(Material.MINECART);
+    public static ItemStack TEAM_CHANGE_STATUS = new ItemStack(Material.PURPLE_DYE);
+    public static ItemStack TEAM_CHANGE_STATUS_CLOSED = new ItemStack(Material.GRAY_DYE);
+    public static ItemStack TEAM_CHANGE_STATUS_INVITE = new ItemStack(Material.PURPLE_DYE);
+    public static ItemStack TEAM_CHANGE_STATUS_OPEN = new ItemStack(Material.LIME_DYE);
     public static ItemStack TEAM_LEAVE = new ItemStack(Material.PUFFERFISH);
     public static ItemStack TEAM_LEAVE_CONFIRM = new ItemStack(Material.PUFFERFISH);
     public static ItemStack RESET_CHARACTER = new ItemStack(Material.RED_CONCRETE);
@@ -276,6 +282,21 @@ public class ItemList {
         teamSettingsMeta.setDisplayName("§eSettings");
         teamSettingsMeta.setLore(List.of("§7Adjust your team's settings."));
         TEAM_SETTINGS.setItemMeta(teamSettingsMeta);
+
+        ItemMeta teamChangeNameMeta = TEAM_CHANGE_NAME.getItemMeta();
+        teamChangeNameMeta.setDisplayName("§eChange Name");
+        teamChangeNameMeta.setLore(List.of("§7Change your team's public name."));
+        TEAM_CHANGE_NAME.setItemMeta(teamChangeNameMeta);
+
+        ItemMeta teamChangeDescriptionMeta = TEAM_CHANGE_DESCRIPTION.getItemMeta();
+        teamChangeDescriptionMeta.setDisplayName("§eChange Description");
+        teamChangeDescriptionMeta.setLore(List.of("§7Change your team's description."));
+        TEAM_CHANGE_DESCRIPTION.setItemMeta(teamChangeDescriptionMeta);
+
+        ItemMeta teamChangeStatusMeta = TEAM_CHANGE_STATUS.getItemMeta();
+        teamChangeStatusMeta.setDisplayName("§eChange Status");
+        teamChangeStatusMeta.setLore(List.of("§7Change your team's status."));
+        TEAM_CHANGE_STATUS.setItemMeta(teamChangeStatusMeta);
 
         ItemMeta teamLeaveMeta = TEAM_LEAVE.getItemMeta();
         teamLeaveMeta.setDisplayName("§cLeave Team");

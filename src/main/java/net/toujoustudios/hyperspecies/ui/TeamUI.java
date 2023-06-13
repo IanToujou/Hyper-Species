@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -27,21 +26,9 @@ public class TeamUI implements Listener {
 
     private static final HashMap<Integer, Inventory> inventories = new HashMap<>();
     private static final ArrayList<UUID> creatingTeamPlayers = new ArrayList<>();
+    private static final ArrayList<UUID> changingNamePlayers = new ArrayList<>();
+    private static final ArrayList<UUID> changingDescriptionPlayers = new ArrayList<>();
     private static final HashMap<UUID, String> teamJoinRequests = new HashMap<>();
-
-    @EventHandler
-    public void onInventoryOpen(InventoryOpenEvent event) {
-
-        Player player = (Player) event.getPlayer();
-
-        if(event.getView().getTitle().equals("Team: ")) {
-
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
-
-
-        }
-
-    }
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
@@ -170,6 +157,52 @@ public class TeamUI implements Listener {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 openInventory(player, TeamPage.LEAVE_CONFIRM.getIndex());
 
+            } else if(material == Material.NAME_TAG) {
+
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                player.closeInventory();
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in a new team name§8.");
+                changingNamePlayers.add(player.getUniqueId());
+
+            } else if(material == Material.MINECART) {
+
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                player.closeInventory();
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in a new team description§8.");
+                changingDescriptionPlayers.add(player.getUniqueId());
+
+            } else if(material == Material.PURPLE_DYE) {
+
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                openInventory(player, TeamPage.SETTINGS_STATUS.getIndex());
+
+            }
+
+        } else if(event.getView().getTitle().equals("Change Status")) {
+
+            if(event.getCurrentItem() == null) return;
+            event.setCancelled(true);
+
+            Material material = event.getCurrentItem().getType();
+            PlayerManager playerManager = PlayerManager.getPlayer(player);
+
+            if(material == Material.PLAYER_HEAD) {
+
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                openInventory(player, TeamPage.SETTINGS_ADMIN.getIndex());
+
+            } else if(material == Material.GRAY_DYE) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7You changed the status to§8: §cClosed§8.");
+                playerManager.getTeam().setStatus(TeamStatus.CLOSED);
+            } else if(material == Material.PURPLE_DYE) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7You changed the status to§8: §dInvite§8.");
+                playerManager.getTeam().setStatus(TeamStatus.INVITE);
+            } else if(material == Material.LIME_DYE) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7You changed the status to§8: §aOpen§8.");
+                playerManager.getTeam().setStatus(TeamStatus.OPEN);
             }
 
         } else if(event.getView().getTitle().equals("Leave Team")) {
@@ -223,6 +256,7 @@ public class TeamUI implements Listener {
             if(name.equalsIgnoreCase("cancel")) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §cTeam creation has been cancelled§8.");
+                creatingTeamPlayers.remove(player.getUniqueId());
                 return;
             }
             if(!matcher.matches()) {
@@ -246,6 +280,67 @@ public class TeamUI implements Listener {
             PlayerManager playerManager = PlayerManager.getPlayer(player);
             playerManager.setTeam(name);
             getCreatingTeamPlayers().remove(player.getUniqueId());
+        } else if(getChangingNamePlayers().contains(player.getUniqueId())) {
+
+            event.setCancelled(true);
+            String name = event.getMessage();
+            Pattern pattern = Pattern.compile("^[ A-Za-z]+$");
+            Matcher matcher = pattern.matcher(name);
+            if(name.equalsIgnoreCase("cancel")) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §cTeam name change has been cancelled§8.");
+                changingNamePlayers.remove(player.getUniqueId());
+                return;
+            }
+            if(!matcher.matches()) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §cThe team name can only contain letters and spaces§8.");
+                return;
+            }
+            if(Team.getTeam(name) != null) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §cA team with this name already exists§8.");
+                return;
+            }
+            if(name.length() > 30) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §cThe name cannot be longer than 30 characters§8.");
+                return;
+            }
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
+            player.sendMessage(Config.MESSAGE_PREFIX + " §7The team got renamed to §b" + name + "§8.");
+            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            playerManager.getTeam().setName(name);
+            getChangingNamePlayers().remove(player.getUniqueId());
+
+        } else if(getChangingDescriptionPlayers().contains(player.getUniqueId())) {
+
+            event.setCancelled(true);
+            String description = event.getMessage();
+            Pattern pattern = Pattern.compile("^[ A-Za-z]+$");
+            Matcher matcher = pattern.matcher(description);
+            if(description.equalsIgnoreCase("cancel")) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §cTeam description change has been cancelled§8.");
+                changingDescriptionPlayers.remove(player.getUniqueId());
+                return;
+            }
+            if(!matcher.matches()) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §cThe team name can only contain letters and spaces§8.");
+                return;
+            }
+            if(description.length() > 150) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §cThe description cannot be longer than 150 characters§8.");
+                return;
+            }
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
+            player.sendMessage(Config.MESSAGE_PREFIX + " §7The team description got changed§8.");
+            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            playerManager.getTeam().setDescription(description);
+            getChangingDescriptionPlayers().remove(player.getUniqueId());
+
         }
 
     }
@@ -313,6 +408,25 @@ public class TeamUI implements Listener {
         pageSettings.setItem(10, ItemList.PREVIOUS);
         pageSettings.setItem(16, ItemList.TEAM_LEAVE);
 
+        // SETTINGS ADMIN
+
+        Inventory pageAdmin = Bukkit.createInventory(null, 9*5, "Team Settings");
+        for(int i = 0; i < pageAdmin.getSize(); i++) pageAdmin.setItem(i, ItemList.FILLER);
+        pageAdmin.setItem(10, ItemList.TEAM_CHANGE_NAME);
+        pageAdmin.setItem(13, ItemList.TEAM_CHANGE_DESCRIPTION);
+        pageAdmin.setItem(16, ItemList.TEAM_CHANGE_STATUS);
+        pageAdmin.setItem(29, ItemList.PREVIOUS);
+        pageAdmin.setItem(33, ItemList.TEAM_LEAVE);
+
+        // CHANGE STATUS
+
+        Inventory pageStatus = Bukkit.createInventory(null, 9*3, "Change Status");
+        for(int i = 0; i < pageStatus.getSize(); i++) pageStatus.setItem(i, ItemList.FILLER);
+        pageStatus.setItem(10, ItemList.PREVIOUS);
+        pageStatus.setItem(12, ItemList.TEAM_CHANGE_STATUS_CLOSED);
+        pageStatus.setItem(14, ItemList.TEAM_CHANGE_STATUS_INVITE);
+        pageStatus.setItem(16, ItemList.TEAM_CHANGE_STATUS_OPEN);
+
         // LEAVE CONFIRM
 
         Inventory pageLeaveConfirm = Bukkit.createInventory(null, 9*3, "Leave Team");
@@ -323,7 +437,8 @@ public class TeamUI implements Listener {
         inventories.put(TeamPage.MAIN.getIndex(), pageMain);
         inventories.put(TeamPage.BROWSE.getIndex(), pageBrowse);
         inventories.put(TeamPage.SETTINGS.getIndex(), pageSettings);
-        inventories.put(TeamPage.SETTINGS_ADMIN.getIndex(), pageSettings);
+        inventories.put(TeamPage.SETTINGS_ADMIN.getIndex(), pageAdmin);
+        inventories.put(TeamPage.SETTINGS_STATUS.getIndex(), pageStatus);
         inventories.put(TeamPage.LEAVE_CONFIRM.getIndex(), pageLeaveConfirm);
 
     }
@@ -343,6 +458,14 @@ public class TeamUI implements Listener {
 
     public static ArrayList<UUID> getCreatingTeamPlayers() {
         return creatingTeamPlayers;
+    }
+
+    public static ArrayList<UUID> getChangingNamePlayers() {
+        return changingNamePlayers;
+    }
+
+    public static ArrayList<UUID> getChangingDescriptionPlayers() {
+        return changingDescriptionPlayers;
     }
 
     public static HashMap<UUID, String> getTeamJoinRequests() {

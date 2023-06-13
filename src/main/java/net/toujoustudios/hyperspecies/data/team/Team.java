@@ -11,6 +11,7 @@ public class Team {
     private static final HashMap<String, Team> teams = new HashMap<>();
     private static final YamlConfiguration teamConfig = Config.getConfigFile("teams.yml");
 
+    private final ArrayList<String> oldNames = new ArrayList<>();
     private String name;
     private String description;
     private String color;
@@ -19,6 +20,7 @@ public class Team {
     private ArrayList<UUID> members;
 
     public Team(String name, String description, String color, UUID owner, TeamStatus status, ArrayList<UUID> members) {
+        oldNames.add(name);
         this.name = name;
         this.description = description;
         this.color = color;
@@ -28,6 +30,10 @@ public class Team {
     }
 
     public void save() {
+
+        oldNames.forEach(oldName -> teamConfig.set("Data." + oldName, null));
+
+        Config.saveToFile(teamConfig, "teams.yml");
 
         if(owner == null && members.size() > 0) {
             int random = new Random().nextInt(members.size());
@@ -86,6 +92,7 @@ public class Team {
     }
 
     public void setName(String name) {
+        oldNames.add(this.name);
         this.name = name;
     }
 
