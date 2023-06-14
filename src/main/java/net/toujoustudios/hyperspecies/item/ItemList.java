@@ -43,6 +43,8 @@ public class ItemList {
     public static ItemStack TEAM_CHANGE_STATUS_OPEN = new ItemStack(Material.LIME_DYE);
     public static ItemStack TEAM_LEAVE = new ItemStack(Material.PUFFERFISH);
     public static ItemStack TEAM_LEAVE_CONFIRM = new ItemStack(Material.PUFFERFISH);
+    public static ItemStack TEAM_KICK_PLAYER = new ItemStack(Material.FIRE_CHARGE);
+    public static ItemStack TEAM_PROMOTE_PLAYER = new ItemStack(Material.MAGMA_CREAM);
     public static ItemStack RESET_CHARACTER = new ItemStack(Material.RED_CONCRETE);
     public static ItemStack RESET_CHARACTER_CONFIRM = new ItemStack(Material.REDSTONE_BLOCK);
 
@@ -298,6 +300,21 @@ public class ItemList {
         teamChangeStatusMeta.setLore(List.of("§7Change your team's status."));
         TEAM_CHANGE_STATUS.setItemMeta(teamChangeStatusMeta);
 
+        ItemMeta teamChangeStatusClosedMeta = TEAM_CHANGE_STATUS_CLOSED.getItemMeta();
+        teamChangeStatusClosedMeta.setDisplayName("§cClosed");
+        teamChangeStatusClosedMeta.setLore(List.of("§7Nobody can join the team."));
+        TEAM_CHANGE_STATUS_CLOSED.setItemMeta(teamChangeStatusClosedMeta);
+
+        ItemMeta teamChangeStatusInviteMeta = TEAM_CHANGE_STATUS_INVITE.getItemMeta();
+        teamChangeStatusInviteMeta.setDisplayName("§dInvite");
+        teamChangeStatusInviteMeta.setLore(List.of("§7Players need to request to join."));
+        TEAM_CHANGE_STATUS_INVITE.setItemMeta(teamChangeStatusInviteMeta);
+
+        ItemMeta teamChangeStatusOpenMeta = TEAM_CHANGE_STATUS_OPEN.getItemMeta();
+        teamChangeStatusOpenMeta.setDisplayName("§aOpen");
+        teamChangeStatusOpenMeta.setLore(List.of("§7Everybody can join without asking."));
+        TEAM_CHANGE_STATUS_OPEN.setItemMeta(teamChangeStatusOpenMeta);
+
         ItemMeta teamLeaveMeta = TEAM_LEAVE.getItemMeta();
         teamLeaveMeta.setDisplayName("§cLeave Team");
         teamLeaveMeta.setLore(List.of("§7Leave the team you are in."));
@@ -307,6 +324,16 @@ public class ItemList {
         teamLeaveConfirmMeta.setDisplayName("§c§lARE YOU SURE?");
         teamLeaveConfirmMeta.setLore(List.of("§7Are you sure you want to leave?", "§r", "§7This action cannot be undone.", "§7You need to be re-invited into", "§7the team in order to join back."));
         TEAM_LEAVE_CONFIRM.setItemMeta(teamLeaveConfirmMeta);
+
+        ItemMeta teamKickPlayerMeta = TEAM_KICK_PLAYER.getItemMeta();
+        teamKickPlayerMeta.setDisplayName("§cKick Player");
+        teamKickPlayerMeta.setLore(List.of("§7Kick this player from your team."));
+        TEAM_KICK_PLAYER.setItemMeta(teamKickPlayerMeta);
+
+        ItemMeta teamPromotePlayerMeta = TEAM_PROMOTE_PLAYER.getItemMeta();
+        teamPromotePlayerMeta.setDisplayName("§ePromote Player");
+        teamPromotePlayerMeta.setLore(List.of("§7Set this player as the team owner.", "§r", "§cWarning: §7You will lose your ownership."));
+        TEAM_PROMOTE_PLAYER.setItemMeta(teamPromotePlayerMeta);
 
         ItemMeta resetCharacterMeta = RESET_CHARACTER.getItemMeta();
         resetCharacterMeta.setDisplayName("§cReset Character");

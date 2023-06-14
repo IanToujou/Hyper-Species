@@ -7,6 +7,7 @@ import net.toujoustudios.hyperspecies.data.team.TeamStatus;
 import net.toujoustudios.hyperspecies.item.ItemList;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,6 +17,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -31,6 +33,7 @@ public class TeamUI implements Listener {
     private static final HashMap<UUID, String> teamJoinRequests = new HashMap<>();
 
     @EventHandler
+    @SuppressWarnings("deprecation")
     public void onInventoryClick(InventoryClickEvent event) {
 
         Player player = (Player) event.getWhoClicked();
@@ -123,6 +126,8 @@ public class TeamUI implements Listener {
             event.setCancelled(true);
 
             Material material = event.getCurrentItem().getType();
+            if(event.getCurrentItem().getItemMeta() == null) return;
+            String name = event.getCurrentItem().getItemMeta().getDisplayName();
 
             if(material == Material.BARRIER) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
@@ -137,6 +142,67 @@ public class TeamUI implements Listener {
                 } else {
                     openInventory(player, TeamPage.SETTINGS.getIndex());
                 }
+
+            } else if(material == Material.PLAYER_HEAD) {
+
+                PlayerManager playerManager = PlayerManager.getPlayer(player);
+
+                if(!playerManager.getTeam().getOwner().equals(player.getUniqueId())) return;
+
+                OfflinePlayer target = Bukkit.getOfflinePlayer(name.substring(2));
+
+                if(target.getUniqueId().equals(player.getUniqueId())) return;
+
+                Inventory inventory = Bukkit.createInventory(null, 3*9, "Team Player: " + target.getName());
+                for(int i = 0; i < inventory.getSize(); i++) inventory.setItem(i, ItemList.FILLER);
+                inventory.setItem(10, ItemList.PREVIOUS);
+
+                ItemStack skull = new ItemStack(Material.PLAYER_HEAD);
+                SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
+                assert skullMeta != null;
+                skullMeta.setOwningPlayer(target);
+                skullMeta.setDisplayName("§e" + target.getName());
+                skull.setItemMeta(skullMeta);
+
+                inventory.setItem(12, skull);
+                inventory.setItem(14, ItemList.TEAM_KICK_PLAYER);
+                inventory.setItem(16, ItemList.TEAM_PROMOTE_PLAYER);
+
+                player.openInventory(inventory);
+
+            }
+
+        } else if(event.getView().getTitle().startsWith("Team Player: ")) {
+
+            if(event.getCurrentItem() == null) return;
+            event.setCancelled(true);
+
+            Material material = event.getCurrentItem().getType();
+            OfflinePlayer target = Bukkit.getOfflinePlayer(event.getView().getTitle().split(" ")[2]);
+            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager targetManager = PlayerManager.getPlayer(target.getUniqueId());
+
+            if(material == Material.PLAYER_HEAD) {
+
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                player.closeInventory();
+
+            } else if(material == Material.FIRE_CHARGE) {
+
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §cYou kicked §e" + target.getName() + " §cout of the team§8.");
+                playerManager.getTeam().removeMember(target.getUniqueId());
+                targetManager.setTeam(null);
+                player.closeInventory();
+
+            } else if(material == Material.MAGMA_CREAM) {
+
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7You promoted §e" + target.getName() + " §7to be the owner§8.");
+                playerManager.getTeam().setOwner(target.getUniqueId());
+                playerManager.getTeam().removeMember(target.getUniqueId());
+                playerManager.getTeam().addMember(player.getUniqueId());
+                player.closeInventory();
 
             }
 
@@ -195,14 +261,17 @@ public class TeamUI implements Listener {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You changed the status to§8: §cClosed§8.");
                 playerManager.getTeam().setStatus(TeamStatus.CLOSED);
+                player.closeInventory();
             } else if(material == Material.PURPLE_DYE) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You changed the status to§8: §dInvite§8.");
                 playerManager.getTeam().setStatus(TeamStatus.INVITE);
+                player.closeInventory();
             } else if(material == Material.LIME_DYE) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You changed the status to§8: §aOpen§8.");
                 playerManager.getTeam().setStatus(TeamStatus.OPEN);
+                player.closeInventory();
             }
 
         } else if(event.getView().getTitle().equals("Leave Team")) {
@@ -225,13 +294,18 @@ public class TeamUI implements Listener {
 
                 PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-                if(playerManager.getTeam().getOwner() == player.getUniqueId()) {
+                if(playerManager.getTeam().getOwner().toString().equals(player.getUniqueId().toString())) {
+
                     playerManager.getTeam().setOwner(null);
+
+                    if(playerManager.getTeam().getMembers().size() > 0) {
+                        int random = new Random().nextInt(playerManager.getTeam().getMembers().size());
+                        playerManager.getTeam().setOwner(playerManager.getTeam().getMembers().get(random));
+                        playerManager.getTeam().getMembers().remove(random);
+                    }
+
                 } else {
                     playerManager.getTeam().removeMember(player.getUniqueId());
-                    int random = new Random().nextInt(playerManager.getTeam().getMembers().size());
-                    playerManager.getTeam().setOwner(playerManager.getTeam().getMembers().get(random));
-                    playerManager.getTeam().getMembers().remove(random);
                 }
 
                 playerManager.setTeam(null);
