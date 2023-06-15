@@ -115,6 +115,7 @@ public final class HyperSpecies extends JavaPlugin {
         getCommand("team").setExecutor(new TeamCommand());
         getCommand("ability").setExecutor(new AbilityCommand());
         getCommand("reset").setExecutor(new ResetCommand());
+        getCommand("tree").setExecutor(new TreeCommand());
     }
 
     public void registerUI() {

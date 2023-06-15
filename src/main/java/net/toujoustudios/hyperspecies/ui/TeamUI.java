@@ -27,6 +27,7 @@ import java.util.regex.Pattern;
 public class TeamUI implements Listener {
 
     private static final HashMap<Integer, Inventory> inventories = new HashMap<>();
+    private static final HashMap<Integer, Inventory> teamBrowsePages = new HashMap<>();
     private static final ArrayList<UUID> creatingTeamPlayers = new ArrayList<>();
     private static final ArrayList<UUID> changingNamePlayers = new ArrayList<>();
     private static final ArrayList<UUID> changingDescriptionPlayers = new ArrayList<>();
@@ -47,7 +48,7 @@ public class TeamUI implements Listener {
 
             if(material == Material.ENDER_EYE) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                openInventory(player, TeamPage.BROWSE.getIndex());
+                player.openInventory(teamBrowsePages.get(0));
             } else if(material == Material.NETHER_STAR) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
                 creatingTeamPlayers.add(player.getUniqueId());
@@ -58,7 +59,7 @@ public class TeamUI implements Listener {
                 player.closeInventory();
             }
 
-        } else if(event.getView().getTitle().equals("Browse Teams")) {
+        } else if(event.getView().getTitle().startsWith("Browse Teams: ")) {
 
             if(event.getCurrentItem() == null) return;
             event.setCancelled(true);
@@ -66,10 +67,26 @@ public class TeamUI implements Listener {
             Material material = event.getCurrentItem().getType();
             if(event.getCurrentItem().getItemMeta() == null) return;
             String name = event.getCurrentItem().getItemMeta().getDisplayName();
+            int page = Integer.parseInt(event.getView().getTitle().split(" ")[3]);
+            int pageIndex = page-1;
 
             if(material == Material.PLAYER_HEAD) {
 
-                //stuff
+                if(name.equals("§eBack")) {
+
+                    if(teamBrowsePages.get(pageIndex-1) == null) return;
+
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                    player.openInventory(teamBrowsePages.get(pageIndex-1));
+
+                } else if(name.equals("§eNext")) {
+
+                    if(teamBrowsePages.get(pageIndex+1) == null) return;
+
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                    player.openInventory(teamBrowsePages.get(pageIndex+1));
+
+                }
 
             } else if(material == Material.BARRIER) {
 
@@ -429,52 +446,6 @@ public class TeamUI implements Listener {
         pageMain.setItem(13, ItemList.TEAM_BROWSE);
         pageMain.setItem(16, ItemList.TEAM_CREATE);
 
-        // BROWSE
-
-        Inventory pageBrowse = Bukkit.createInventory(null, 9*5, "Browse Teams");
-        for(int i = 0; i < 9; i++) pageBrowse.setItem(i, ItemList.FILLER);
-        for(int i = 36; i < pageBrowse.getSize(); i++) pageBrowse.setItem(i, ItemList.FILLER);
-        pageBrowse.setItem(36, ItemList.PREVIOUS);
-        pageBrowse.setItem(40, ItemList.CANCEL);
-        pageBrowse.setItem(44, ItemList.NEXT);
-
-        AtomicInteger num = new AtomicInteger();
-        Team.getTeams().forEach((name, team) -> {
-
-            if(team.getOwner() != null) {
-                ArrayList<String> lore = new ArrayList<>();
-
-                if(team.getDescription() != null && team.getDescription().length() > 0) {
-                    String[] descriptionLines = team.getDescription().split(" ");
-                    for (String descriptionLine : descriptionLines) {
-                        lore.add("§7" + descriptionLine);
-                    }
-                } else {
-                    lore.add("§8No Description");
-                }
-
-                lore.add("§r");
-                lore.add("§7Status: " + team.getStatus().getColor() + team.getStatus().getName());
-                lore.add("§7Owner: §b" + Bukkit.getOfflinePlayer(team.getOwner()).getName());
-                lore.add("§r");
-                lore.add("§7Members:");
-
-                if(team.getMembers().size() > 0) {
-                    team.getMembers().forEach(member -> lore.add("§8- §b" + Bukkit.getOfflinePlayer(member).getName()));
-                } else lore.add("§8No Members");
-
-                ItemStack item = new ItemStack(Material.ENDER_EYE);
-                ItemMeta itemMeta = item.getItemMeta();
-                assert itemMeta != null;
-                itemMeta.setDisplayName(team.getColor() + team.getName());
-                itemMeta.setLore(lore);
-                item.setItemMeta(itemMeta);
-                pageBrowse.setItem(num.get()+9, item);
-                num.getAndIncrement();
-            }
-
-        });
-
         // SETTINGS
 
         Inventory pageSettings = Bukkit.createInventory(null, 9*3, "Team Settings");
@@ -509,11 +480,76 @@ public class TeamUI implements Listener {
         pageLeaveConfirm.setItem(10, ItemList.TEAM_LEAVE_CONFIRM);
 
         inventories.put(TeamPage.MAIN.getIndex(), pageMain);
-        inventories.put(TeamPage.BROWSE.getIndex(), pageBrowse);
         inventories.put(TeamPage.SETTINGS.getIndex(), pageSettings);
         inventories.put(TeamPage.SETTINGS_ADMIN.getIndex(), pageAdmin);
         inventories.put(TeamPage.SETTINGS_STATUS.getIndex(), pageStatus);
         inventories.put(TeamPage.LEAVE_CONFIRM.getIndex(), pageLeaveConfirm);
+
+        int count = Team.getTeams().size();
+        int pages = (int) Math.floor((double) count / 27) + 1;
+        ArrayList<Team> teams = new ArrayList<>();
+        Team.getTeams().forEach((name, team) -> teams.add(team));
+
+        for(int i = 0; i < pages; i++) {
+
+            int currentPage = i+1;
+
+            Inventory pageBrowse = Bukkit.createInventory(null, 9*5, "Browse Teams: Page " + currentPage);
+            for(int j = 0; j < 9; j++) pageBrowse.setItem(j, ItemList.FILLER);
+            for(int j = 36; j < pageBrowse.getSize(); j++) pageBrowse.setItem(j, ItemList.FILLER);
+            pageBrowse.setItem(40, ItemList.CANCEL);
+            if(currentPage != 1) pageBrowse.setItem(36, ItemList.PREVIOUS);
+            if(currentPage < pages) pageBrowse.setItem(44, ItemList.NEXT);
+
+            List<Team> teamsInPage;
+
+            if(teams.size() < (currentPage*27)) {
+                teamsInPage = teams.subList((i*27), teams.size());
+            } else {
+                teamsInPage = teams.subList((i*27), (i*27)+27);
+            }
+
+            int j = 0;
+            for(Team team : teamsInPage) {
+
+                if(team.getOwner() != null) {
+                    ArrayList<String> lore = new ArrayList<>();
+
+                    if(team.getDescription() != null && team.getDescription().length() > 0) {
+                        String[] descriptionLines = team.getDescription().split(" ");
+                        for (String descriptionLine : descriptionLines) {
+                            lore.add("§7" + descriptionLine);
+                        }
+                    } else {
+                        lore.add("§8No Description");
+                    }
+
+                    lore.add("§r");
+                    lore.add("§7Status: " + team.getStatus().getColor() + team.getStatus().getName());
+                    lore.add("§7Owner: §b" + Bukkit.getOfflinePlayer(team.getOwner()).getName());
+                    lore.add("§r");
+                    lore.add("§7Members:");
+
+                    if(team.getMembers().size() > 0) {
+                        team.getMembers().forEach(member -> lore.add("§8- §b" + Bukkit.getOfflinePlayer(member).getName()));
+                    } else lore.add("§8No Members");
+
+                    ItemStack item = new ItemStack(Material.ENDER_EYE);
+                    ItemMeta itemMeta = item.getItemMeta();
+                    assert itemMeta != null;
+                    itemMeta.setDisplayName(team.getColor() + team.getName());
+                    itemMeta.setLore(lore);
+                    item.setItemMeta(itemMeta);
+                    pageBrowse.setItem(j+9, item);
+                    j++;
+
+                }
+
+            }
+
+            teamBrowsePages.put(i, pageBrowse);
+
+        }
 
     }
 

@@ -3,11 +3,10 @@ package net.toujoustudios.hyperspecies.ui;
 public enum TeamPage {
 
     MAIN(0),
-    BROWSE(1),
-    SETTINGS(2),
-    SETTINGS_ADMIN(3),
-    SETTINGS_STATUS(4),
-    LEAVE_CONFIRM(5);
+    SETTINGS(1),
+    SETTINGS_ADMIN(2),
+    SETTINGS_STATUS(3),
+    LEAVE_CONFIRM(4);
 
     private final int index;
 

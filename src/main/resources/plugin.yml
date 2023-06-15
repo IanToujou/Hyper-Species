@@ -26,6 +26,9 @@ commands:
   reset:
     description: Reset your character, losing all of your progress.
     permission: hyperspecies.command.reset
+  tree:
+    description: Open up the ability tree.
+    permission: hyperspecies.command.tree
 
 permissions:
   hyperspecies.group.player:
@@ -36,6 +39,7 @@ permissions:
       hyperspecies.command.team: true
       hyperspecies.command.ability: false
       hyperspecies.command.reset: true
+      hyperspecies.command.tree: true
   hyperspecies.group.admin:
     description: The administrator group. Grants all permissions.
     children:
@@ -44,6 +48,7 @@ permissions:
       hyperspecies.command.team: true
       hyperspecies.command.ability: true
       hyperspecies.command.reset: true
+      hyperspecies.command.tree: true
   hyperspecies.group.moderator:
     description: The administrator group. Grants all permissions.
     children:
@@ -52,6 +57,7 @@ permissions:
       hyperspecies.command.team: true
       hyperspecies.command.ability: false
       hyperspecies.command.reset: true
+      hyperspecies.command.tree: true
   hyperspecies.command.emote:
     description: Allows players to use the emote command.
     default: true
@@ -66,4 +72,7 @@ permissions:
     default: op
   hyperspecies.command.reset:
     description: Allows players to use the reset command.
+    default: true
+  hyperspecies.command.tree:
+    description: Allows players to use the tree command.
     default: true
