@@ -52,7 +52,7 @@ public class TeamUI implements Listener {
             } else if(material == Material.NETHER_STAR) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
                 creatingTeamPlayers.add(player.getUniqueId());
-                player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in the §bname§7 of the new team§8.");
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in the §bname§7 of the new team§8. §7Type §bcancel§7 to cancel§8.");
                 player.closeInventory();
             } else if(material == Material.BARRIER) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
@@ -244,14 +244,14 @@ public class TeamUI implements Listener {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.closeInventory();
-                player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in a new team name§8.");
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in a new team name§8. §7Type §bcancel§7 to cancel§8.");
                 changingNamePlayers.add(player.getUniqueId());
 
             } else if(material == Material.MINECART) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.closeInventory();
-                player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in a new team description§8.");
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in a new team description§8. §7Type §bcancel§7 to cancel§8.");
                 changingDescriptionPlayers.add(player.getUniqueId());
 
             } else if(material == Material.PURPLE_DYE) {

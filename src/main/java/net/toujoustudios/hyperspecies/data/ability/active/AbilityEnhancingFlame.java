@@ -10,10 +10,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.List;
+
 public class AbilityEnhancingFlame extends Ability {
 
     public AbilityEnhancingFlame() {
-        super("Enhancing Flame", Element.FIRE, 5, 90);
+        super("Enhancing Flame", List.of("§8Enhances the users weapons, allowing", "§8them to deal fire damage and potentially", "§8setting the enemies on fire."), Element.FIRE, 5, 90, Material.BLAZE_POWDER);
     }
 
     @Override

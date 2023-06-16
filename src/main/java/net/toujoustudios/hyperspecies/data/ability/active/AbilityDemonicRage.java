@@ -4,17 +4,20 @@ import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.List;
+
 public class AbilityDemonicRage extends Ability {
 
 
     public AbilityDemonicRage() {
-        super("Demonic Rage", Element.FIRE, 10, 120);
+        super("Demonic Rage", List.of("§7Balls"), Element.FIRE, 10, 120, Material.POPPED_CHORUS_FRUIT);
     }
 
     @Override

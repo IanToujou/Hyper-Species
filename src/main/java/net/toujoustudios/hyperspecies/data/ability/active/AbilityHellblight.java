@@ -3,6 +3,7 @@ package net.toujoustudios.hyperspecies.data.ability.active;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -10,11 +11,13 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Collection;
+import java.util.List;
 
 public class AbilityHellblight extends Ability {
 
     public AbilityHellblight() {
-        super("Hellblight", Element.FIRE, 4, 60);
+
+        super("Hellblight", List.of("§7Balls"), Element.FIRE, 4, 60, Material.GUNPOWDER);
     }
 
     @Override

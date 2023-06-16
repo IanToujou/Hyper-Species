@@ -11,10 +11,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import java.util.List;
+
 public class AbilityMeteorStrike extends Ability {
 
     public AbilityMeteorStrike() {
-        super("Meteor Strike", Element.FIRE, 12, 180);
+        super("Meteor Strike", List.of("§7Balls"), Element.FIRE, 12, 180, Material.FIRE_CHARGE);
     }
 
     @Override

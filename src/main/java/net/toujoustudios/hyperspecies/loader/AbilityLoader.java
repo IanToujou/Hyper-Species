@@ -19,7 +19,7 @@ public class AbilityLoader {
         enhancingFlameAbilities.put(1, Ability.getAbility("Hellblight"));
         enhancingFlameAbilities.put(2, Ability.getAbility("Demonic Rage"));
         enhancingFlameAbilities.put(10, Ability.getAbility("Meteor Strike"));
-        AbilityTree.createTree("Enhancing Flame", new AbilityTree(enhancingFlameAbilities));
+        AbilityTree.createTree("Enhancing Flame", new AbilityTree(enhancingFlameAbilities, 0));
 
     }
 

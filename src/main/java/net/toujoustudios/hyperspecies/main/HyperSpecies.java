@@ -7,6 +7,7 @@ import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.data.team.Team;
 import net.toujoustudios.hyperspecies.event.*;
 import net.toujoustudios.hyperspecies.loader.Loader;
+import net.toujoustudios.hyperspecies.ui.AbilityTreeUI;
 import net.toujoustudios.hyperspecies.ui.ResetUI;
 import net.toujoustudios.hyperspecies.ui.SpeciesUI;
 import net.toujoustudios.hyperspecies.ui.TeamUI;
@@ -122,6 +123,7 @@ public final class HyperSpecies extends JavaPlugin {
         pluginManager.registerEvents(new SpeciesUI(), this);
         pluginManager.registerEvents(new TeamUI(), this);
         pluginManager.registerEvents(new ResetUI(), this);
+        pluginManager.registerEvents(new AbilityTreeUI(), this);
     }
 
     public void registerEvents() {

@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.item;
 
+import net.toujoustudios.hyperspecies.data.element.Element;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -47,6 +48,19 @@ public class ItemList {
     public static ItemStack TEAM_PROMOTE_PLAYER = new ItemStack(Material.MAGMA_CREAM);
     public static ItemStack RESET_CHARACTER = new ItemStack(Material.RED_CONCRETE);
     public static ItemStack RESET_CHARACTER_CONFIRM = new ItemStack(Material.REDSTONE_BLOCK);
+    public static ItemStack TREE_TRACK_LOCKED = new ItemStack(Material.GRAY_DYE);
+    public static ItemStack TREE_TRACK_UNLOCKED = new ItemStack(Material.GREEN_DYE);
+    public static ItemStack ELEMENT_FIRE = new ItemStack(Element.FIRE.getMaterial());
+    public static ItemStack ELEMENT_EARTH = new ItemStack(Element.EARTH.getMaterial());
+    public static ItemStack ELEMENT_WATER = new ItemStack(Element.WATER.getMaterial());
+    public static ItemStack ELEMENT_FLORA = new ItemStack(Element.FLORA.getMaterial());
+    public static ItemStack ELEMENT_FAIRY = new ItemStack(Element.FAIRY.getMaterial());
+    public static ItemStack ELEMENT_ELECTRO = new ItemStack(Element.ELECTRO.getMaterial());
+    public static ItemStack ELEMENT_AIR = new ItemStack(Element.AIR.getMaterial());
+    public static ItemStack ELEMENT_PSYCHIC = new ItemStack(Element.PSYCHIC.getMaterial());
+    public static ItemStack ELEMENT_NORMAL = new ItemStack(Element.NORMAL.getMaterial());
+    public static ItemStack ELEMENT_LIGHT = new ItemStack(Element.LIGHT.getMaterial());
+    public static ItemStack ELEMENT_DARK = new ItemStack(Element.DARK.getMaterial());
 
     @SuppressWarnings("all")
     public static void initialize() {
@@ -344,6 +358,14 @@ public class ItemList {
         resetCharacterConfirmMeta.setDisplayName("§c§lARE YOU SURE?");
         resetCharacterConfirmMeta.setLore(List.of("§7Are you sure you want to reset", "§7all your progress?", "§r", "§cThis cannot be undone§7!", "§r", "§7Click to continue."));
         RESET_CHARACTER_CONFIRM.setItemMeta(resetCharacterConfirmMeta);
+
+        ItemMeta treeTrackLockedMeta = TREE_TRACK_LOCKED.getItemMeta();
+        treeTrackLockedMeta.setDisplayName(" ");
+        TREE_TRACK_LOCKED.setItemMeta(treeTrackLockedMeta);
+
+        ItemMeta treeTrackUnlockedMeta = TREE_TRACK_UNLOCKED.getItemMeta();
+        treeTrackUnlockedMeta.setDisplayName(" ");
+        TREE_TRACK_UNLOCKED.setItemMeta(treeTrackUnlockedMeta);
 
     }
 
