@@ -16,7 +16,16 @@ import java.util.List;
 public class AbilityMeteorStrike extends Ability {
 
     public AbilityMeteorStrike() {
-        super("Meteor Strike", List.of("§7Balls"), Element.FIRE, 12, 180, Material.FIRE_CHARGE);
+        super(
+                "Meteor Strike",
+                List.of("§7Balls"),
+                Element.FIRE,
+                AbilityType.DAMAGE,
+                12,
+                180,
+                Material.FIRE_CHARGE,
+                0
+        );
     }
 
     @Override

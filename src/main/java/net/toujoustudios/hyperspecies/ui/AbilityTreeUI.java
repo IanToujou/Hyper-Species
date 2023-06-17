@@ -33,7 +33,20 @@ public class AbilityTreeUI implements Listener {
 
                 if(tree != null) {
 
-                    player.openInventory(tree.buildInventory());
+                    player.openInventory(tree.buildInventory(player));
+
+                }
+
+            } else if(material == Material.BARRIER) {
+
+                player.closeInventory();
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+
+            } else if(material == Material.PLAYER_HEAD) {
+
+                if(name.contains("Previous")) {
+
+                } else if(name.contains("Next")) {
 
                 }
 
@@ -49,7 +62,7 @@ public class AbilityTreeUI implements Listener {
             if(material == Material.BARRIER) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                player.openInventory(AbilityTree.buildMainInventory());
+                player.openInventory(AbilityTree.buildMainInventory(player));
 
             }
 

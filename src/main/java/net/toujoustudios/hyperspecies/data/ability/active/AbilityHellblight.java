@@ -17,7 +17,16 @@ public class AbilityHellblight extends Ability {
 
     public AbilityHellblight() {
 
-        super("Hellblight", List.of("§7Balls"), Element.FIRE, 4, 60, Material.GUNPOWDER);
+        super(
+                "Hellblight",
+                List.of("§8Create a dark cloud that deals an", "AoE effect, slowing all enemies in range."),
+                Element.FIRE,
+                AbilityType.DEBUFF,
+                4,
+                60,
+                Material.GUNPOWDER,
+                0
+        );
     }
 
     @Override

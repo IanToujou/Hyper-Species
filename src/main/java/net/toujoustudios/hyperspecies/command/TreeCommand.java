@@ -31,7 +31,7 @@ public class TreeCommand implements CommandExecutor {
         }
 
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-        player.openInventory(AbilityTree.buildMainInventory());
+        player.openInventory(AbilityTree.buildMainInventory(player));
 
         return false;
 

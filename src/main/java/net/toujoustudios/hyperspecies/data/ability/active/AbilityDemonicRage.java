@@ -17,7 +17,16 @@ public class AbilityDemonicRage extends Ability {
 
 
     public AbilityDemonicRage() {
-        super("Demonic Rage", List.of("§7Balls"), Element.FIRE, 10, 120, Material.POPPED_CHORUS_FRUIT);
+        super(
+                "Demonic Rage",
+                List.of("§7Balls"),
+                Element.FIRE,
+                AbilityType.BUFF,
+                10,
+                120,
+                Material.POPPED_CHORUS_FRUIT,
+                0
+        );
     }
 
     @Override
