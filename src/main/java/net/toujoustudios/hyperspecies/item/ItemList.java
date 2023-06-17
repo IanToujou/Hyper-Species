@@ -367,6 +367,50 @@ public class ItemList {
         treeTrackUnlockedMeta.setDisplayName(" ");
         TREE_TRACK_UNLOCKED.setItemMeta(treeTrackUnlockedMeta);
 
+        ItemMeta elementFireMeta = ELEMENT_FIRE.getItemMeta();
+        elementFireMeta.setDisplayName(Element.FIRE.getColor() + Element.FIRE.getName());
+        ELEMENT_FIRE.setItemMeta(elementFireMeta);
+
+        ItemMeta elementEarthMeta = ELEMENT_EARTH.getItemMeta();
+        elementEarthMeta.setDisplayName(Element.EARTH.getColor() + Element.EARTH.getName());
+        ELEMENT_EARTH.setItemMeta(elementEarthMeta);
+
+        ItemMeta elementWaterMeta = ELEMENT_WATER.getItemMeta();
+        elementWaterMeta.setDisplayName(Element.WATER.getColor() + Element.WATER.getName());
+        ELEMENT_WATER.setItemMeta(elementWaterMeta);
+
+        ItemMeta elementFloraMeta = ELEMENT_FLORA.getItemMeta();
+        elementFloraMeta.setDisplayName(Element.FLORA.getColor() + Element.FLORA.getName());
+        ELEMENT_FLORA.setItemMeta(elementFloraMeta);
+
+        ItemMeta elementFairyMeta = ELEMENT_FAIRY.getItemMeta();
+        elementFairyMeta.setDisplayName(Element.FAIRY.getColor() + Element.FAIRY.getName());
+        ELEMENT_FAIRY.setItemMeta(elementFairyMeta);
+
+        ItemMeta elementElectroMeta = ELEMENT_ELECTRO.getItemMeta();
+        elementElectroMeta.setDisplayName(Element.ELECTRO.getColor() + Element.ELECTRO.getName());
+        ELEMENT_ELECTRO.setItemMeta(elementElectroMeta);
+
+        ItemMeta elementAirMeta = ELEMENT_AIR.getItemMeta();
+        elementAirMeta.setDisplayName(Element.AIR.getColor() + Element.AIR.getName());
+        ELEMENT_AIR.setItemMeta(elementAirMeta);
+
+        ItemMeta elementPsychicMeta = ELEMENT_PSYCHIC.getItemMeta();
+        elementPsychicMeta.setDisplayName(Element.PSYCHIC.getColor() + Element.PSYCHIC.getName());
+        ELEMENT_PSYCHIC.setItemMeta(elementPsychicMeta);
+
+        ItemMeta elementNormalMeta = ELEMENT_NORMAL.getItemMeta();
+        elementNormalMeta.setDisplayName(Element.NORMAL.getColor() + Element.NORMAL.getName());
+        ELEMENT_NORMAL.setItemMeta(elementNormalMeta);
+
+        ItemMeta elementLightMeta = ELEMENT_LIGHT.getItemMeta();
+        elementLightMeta.setDisplayName(Element.LIGHT.getColor() + Element.LIGHT.getName());
+        ELEMENT_LIGHT.setItemMeta(elementLightMeta);
+
+        ItemMeta elementDarkMeta = ELEMENT_DARK.getItemMeta();
+        elementDarkMeta.setDisplayName(Element.DARK.getColor() + Element.DARK.getName());
+        ELEMENT_DARK.setItemMeta(elementDarkMeta);
+
     }
 
 }
