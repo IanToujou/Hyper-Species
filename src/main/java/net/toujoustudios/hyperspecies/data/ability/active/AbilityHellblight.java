@@ -25,7 +25,8 @@ public class AbilityHellblight extends Ability {
                 4,
                 60,
                 Material.GUNPOWDER,
-                0
+                0,
+                List.of("Demon")
         );
     }
 

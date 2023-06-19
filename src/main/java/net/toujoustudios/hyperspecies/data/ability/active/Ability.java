@@ -1,6 +1,7 @@
 package net.toujoustudios.hyperspecies.data.ability.active;
 
 import net.toujoustudios.hyperspecies.data.element.Element;
+import net.toujoustudios.hyperspecies.data.species.Species;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -25,10 +26,11 @@ public abstract class Ability {
     private final int delay;
     private final Material material;
     private int maxLevel;
+    private final List<String> species;
 
     private HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
 
-    public Ability(String name, List<String> description, Element element, AbilityType type, int manaCost, int delay, Material material, int maxLevel) {
+    public Ability(String name, List<String> description, Element element, AbilityType type, int manaCost, int delay, Material material, int maxLevel, List<String> species) {
         this.name = name;
         this.description = description;
         this.element = element;
@@ -37,9 +39,10 @@ public abstract class Ability {
         this.delay = delay;
         this.material = material;
         this.secondaryElement = null;
+        this.species = species;
     }
 
-    public Ability(String name, List<String> description, Element element, Element secondaryElement, AbilityType type, int manaCost, int delay, Material material, int maxLevel) {
+    public Ability(String name, List<String> description, Element element, Element secondaryElement, AbilityType type, int manaCost, int delay, Material material, int maxLevel, List<String> species) {
         this.name = name;
         this.description = description;
         this.element = element;
@@ -49,6 +52,7 @@ public abstract class Ability {
         this.delay = delay;
         this.material = material;
         this.maxLevel = maxLevel;
+        this.species = species;
     }
 
     public static void createAbility(Ability ability) {
@@ -118,7 +122,7 @@ public abstract class Ability {
         lore.add("§r");
         List<String> list = new ArrayList<>(Stream.concat(lore.stream(), description.stream()).toList());
         list.add("§r");
-        list.add("§a§lUNLOCKED");
+        list.add("{lockStatus}");
         itemMeta.setLore(list);
         item.setItemMeta(itemMeta);
         return item;
@@ -145,6 +149,14 @@ public abstract class Ability {
         if(fields.get(field) == null || fields.get(field).size() == 0) return 0;
         if(fields.get(field).size() < level) return fields.get(field).get(fields.get(field).size()-1);
         return fields.get(field).get(level);
+    }
+
+    public List<String> getSpecies() {
+        return species;
+    }
+
+    public boolean isAvailableForSpecies(Species species) {
+        return this.species.contains(species.getName());
     }
 
     public static HashMap<String, Ability> getAbilities() {

@@ -29,6 +29,15 @@ commands:
   tree:
     description: Open up the ability tree.
     permission: hyperspecies.command.tree
+  shield:
+    description: Set the shield value for a player.
+    permission: hyperspecies.command.shield
+  health:
+    description: Set the health value for a player.
+    permission: hyperspecies.command.health
+  mana:
+    description: Set the mana value for a player.
+    permission: hyperspecies.command.mana
 
 permissions:
   hyperspecies.group.player:
@@ -40,6 +49,9 @@ permissions:
       hyperspecies.command.ability: false
       hyperspecies.command.reset: true
       hyperspecies.command.tree: true
+      hyperspecies.command.shield: false
+      hyperspecies.command.health: false
+      hyperspecies.command.mana: false
   hyperspecies.group.admin:
     description: The administrator group. Grants all permissions.
     children:
@@ -49,6 +61,9 @@ permissions:
       hyperspecies.command.ability: true
       hyperspecies.command.reset: true
       hyperspecies.command.tree: true
+      hyperspecies:command.shield: true
+      hyperspecies.command.health: true
+      hyperspecies.command.mana: true
   hyperspecies.group.moderator:
     description: The administrator group. Grants all permissions.
     children:
@@ -58,6 +73,9 @@ permissions:
       hyperspecies.command.ability: false
       hyperspecies.command.reset: true
       hyperspecies.command.tree: true
+      hyperspecies.command.shield: false
+      hyperspecies.command.health: false
+      hyperspecies.command.mana: false
   hyperspecies.command.emote:
     description: Allows players to use the emote command.
     default: true
@@ -76,3 +94,12 @@ permissions:
   hyperspecies.command.tree:
     description: Allows players to use the tree command.
     default: true
+  hyperspecies.command.shield:
+    description: Allows players to use the shield command.
+    default: op
+  hyperspecies.command.health:
+    description: Allows players to use the health command.
+    default: op
+  hyperspecies.command.mana:
+    description: Allows players to use the mana command.
+    default: op

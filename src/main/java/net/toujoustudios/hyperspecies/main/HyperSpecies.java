@@ -47,6 +47,9 @@ public final class HyperSpecies extends JavaPlugin {
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
 
+            if(playerManager.getMana() < 0) playerManager.setMana(0);
+            if(playerManager.getShield() < 0) playerManager.setShield(0);
+
             int scale = (int) Math.pow(10, 1);
 
             double health = (double) Math.round(playerManager.getHealth() * scale) / scale;
@@ -117,6 +120,9 @@ public final class HyperSpecies extends JavaPlugin {
         getCommand("ability").setExecutor(new AbilityCommand());
         getCommand("reset").setExecutor(new ResetCommand());
         getCommand("tree").setExecutor(new TreeCommand());
+        getCommand("shield").setExecutor(new ShieldCommand());
+        getCommand("health").setExecutor(new HealthCommand());
+        getCommand("mana").setExecutor(new ManaCommand());
     }
 
     public void registerUI() {

@@ -287,6 +287,10 @@ public class PlayerManager {
         return abilities;
     }
 
+    public boolean hasAbility(Ability ability) {
+        return abilities.contains(ability);
+    }
+
     public void addAbility(Ability ability) {
         if(!abilities.contains(ability)) abilities.add(ability);
     }

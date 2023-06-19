@@ -19,13 +19,14 @@ public class AbilityDemonicRage extends Ability {
     public AbilityDemonicRage() {
         super(
                 "Demonic Rage",
-                List.of("§7Balls"),
+                List.of("§8The user explodes, giving them a strength", "§8buff and mana regeneration of §d0.3/s", "§8for §d10s§8."),
                 Element.FIRE,
                 AbilityType.BUFF,
                 10,
                 120,
                 Material.POPPED_CHORUS_FRUIT,
-                0
+                0,
+                List.of("Demon")
         );
     }
 

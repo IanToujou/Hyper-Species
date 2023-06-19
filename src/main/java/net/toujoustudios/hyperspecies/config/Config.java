@@ -20,6 +20,7 @@ public class Config {
     public static String MESSAGE_ERROR_SYNTAX;
     public static String MESSAGE_ERROR_PLAYER_INVALID;
     public static String MESSAGE_ERROR_PLAYER_SELF;
+    public static String MESSAGE_ERROR_INTEGER_INVALID;
     public static String MESSAGE_ERROR_EMOTE_INVALID;
     public static String MESSAGE_ERROR_EMOTE_PERFORM;
     public static String MESSAGE_ERROR_ABILITY_INVALID;
@@ -42,6 +43,7 @@ public class Config {
             if(!configuration.isSet("Message.Error.Syntax")) configuration.set("Message.Error.Syntax", "{Prefix} §cThe command syntax is not correct§8. §cUsage§8: §e{Usage}");
             if(!configuration.isSet("Message.Error.PlayerInvalid")) configuration.set("Message.Error.PlayerInvalid", "{Prefix} §cThe given player is invalid§8.");
             if(!configuration.isSet("Message.Error.PlayerSelf")) configuration.set("Message.Error.PlayerSelf", "{Prefix} §cYou cannot do that to yourself§8.");
+            if(!configuration.isSet("Message.Error.IntegerInvalid")) configuration.set("Message.Error.IntegerInvalid", "{Prefix} §cThe given value is not a valid integer number§8.");
             if(!configuration.isSet("Message.Error.EmoteInvalid")) configuration.set("Message.Error.EmoteInvalid", "{Prefix} §cThe selected emote is invalid§8.");
             if(!configuration.isSet("Message.Error.EmotePerform")) configuration.set("Message.Error.EmotePerform", "{Prefix} §cThe emote could not be performed§8.");
             if(!configuration.isSet("Message.Error.AbilityInvalid")) configuration.set("Message.Error.AbilityInvalid", "{Prefix} §cThe ability does not exist§8.");
@@ -65,6 +67,7 @@ public class Config {
             if(!configuration.isSet("Message.Error.Syntax")) configuration.set("Message.Error.Syntax", "{Prefix} §cThe command syntax is not correct§8. §cUsage§8: §e{Usage}");
             if(!configuration.isSet("Message.Error.PlayerInvalid")) configuration.set("Message.Error.PlayerInvalid", "{Prefix} §cThe given player is invalid§8.");
             if(!configuration.isSet("Message.Error.PlayerSelf")) configuration.set("Message.Error.PlayerSelf", "{Prefix} §cYou cannot do that to yourself§8.");
+            if(!configuration.isSet("Message.Error.IntegerInvalid")) configuration.set("Message.Error.IntegerInvalid", "{Prefix} §cThe given value is not a valid integer number§8.");
             if(!configuration.isSet("Message.Error.EmoteInvalid")) configuration.set("Message.Error.EmoteInvalid", "{Prefix} §cThe selected emote is invalid§8.");
             if(!configuration.isSet("Message.Error.EmotePerform")) configuration.set("Message.Error.EmotePerform", "{Prefix} §cThe emote could not be performed§8.");
             if(!configuration.isSet("Message.Error.AbilityInvalid")) configuration.set("Message.Error.AbilityInvalid", "{Prefix} §cThe ability does not exist§8.");
@@ -87,6 +90,7 @@ public class Config {
         MESSAGE_ERROR_SYNTAX = settingsConfig.getString("Message.Error.Syntax").replace("{Prefix}", MESSAGE_PREFIX);
         MESSAGE_ERROR_PLAYER_INVALID = settingsConfig.getString("Message.Error.PlayerInvalid").replace("{Prefix}", MESSAGE_PREFIX);
         MESSAGE_ERROR_PLAYER_SELF = settingsConfig.getString("Message.Error.PlayerSelf").replace("{Prefix}", MESSAGE_PREFIX);
+        MESSAGE_ERROR_INTEGER_INVALID = settingsConfig.getString("Message.Error.IntegerInvalid").replace("{Prefix}", MESSAGE_PREFIX);
         MESSAGE_ERROR_EMOTE_INVALID = settingsConfig.getString("Message.Error.EmoteInvalid").replace("{Prefix}", MESSAGE_PREFIX);
         MESSAGE_ERROR_EMOTE_PERFORM = settingsConfig.getString("Message.Error.EmotePerform").replace("{Prefix}", MESSAGE_PREFIX);
         MESSAGE_ERROR_ABILITY_INVALID = settingsConfig.getString("Message.Error.AbilityInvalid").replace("{Prefix}", MESSAGE_PREFIX);

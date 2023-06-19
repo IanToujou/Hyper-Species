@@ -24,7 +24,8 @@ public class AbilityMeteorStrike extends Ability {
                 12,
                 180,
                 Material.FIRE_CHARGE,
-                0
+                0,
+                List.of("Demon")
         );
     }
 

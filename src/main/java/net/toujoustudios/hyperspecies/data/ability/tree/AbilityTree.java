@@ -71,52 +71,57 @@ public class AbilityTree {
 
         abilities.forEach((slot, ability) -> {
 
-            int level = playerManager.getLevelFromExperience(playerManager.getAbilityExperience(ability));
+            if(ability.isAvailableForSpecies(playerManager.getSpecies())) {
 
-            ItemStack item = ability.getItem();
-            ItemMeta itemMeta = item.getItemMeta();
-            assert itemMeta != null;
-            itemMeta.setDisplayName(itemMeta.getDisplayName().replace("{level}", String.valueOf(level)));
-            List<String> oldLore = itemMeta.getLore();
-            ArrayList<String> newLore = new ArrayList<>();
+                int level = playerManager.getLevelFromExperience(playerManager.getAbilityExperience(ability));
 
-            assert oldLore != null;
-            oldLore.forEach(line -> {
-                line = line.replace("{duration}", String.valueOf(ability.getFieldValue(AbilityField.DURATION, level)));
-                newLore.add(line);
-            });
+                ItemStack item = ability.getItem();
+                ItemMeta itemMeta = item.getItemMeta();
+                assert itemMeta != null;
+                itemMeta.setDisplayName(itemMeta.getDisplayName().replace("{level}", String.valueOf(level)));
+                List<String> oldLore = itemMeta.getLore();
+                ArrayList<String> newLore = new ArrayList<>();
 
-            itemMeta.setLore(newLore);
-            item.setItemMeta(itemMeta);
+                assert oldLore != null;
+                oldLore.forEach(line -> {
+                    line = line.replace("{duration}", String.valueOf(ability.getFieldValue(AbilityField.DURATION, level)));
+                    line = line.replace("{lockStatus}", playerManager.hasAbility(ability) ? "§a§lUNLOCKED" : "§c§lLOCKED");
+                    newLore.add(line);
+                });
 
-            // Fill first line
-            if(slot == 1) inventory.setItem(11, ItemList.TREE_TRACK_LOCKED);
-            if(slot == 1) inventory.setItem(12, ItemList.TREE_TRACK_LOCKED);
-            if(slot == 2) inventory.setItem(13, ItemList.TREE_TRACK_LOCKED);
-            if(slot == 2) inventory.setItem(14, ItemList.TREE_TRACK_LOCKED);
-            if(slot == 3) inventory.setItem(15, ItemList.TREE_TRACK_LOCKED);
+                itemMeta.setLore(newLore);
+                item.setItemMeta(itemMeta);
 
-            // Fill second line
-            if(slot == 11) inventory.setItem(29, ItemList.TREE_TRACK_LOCKED);
-            if(slot == 11) inventory.setItem(30, ItemList.TREE_TRACK_LOCKED);
-            if(slot == 12) inventory.setItem(31, ItemList.TREE_TRACK_LOCKED);
-            if(slot == 12) inventory.setItem(32, ItemList.TREE_TRACK_LOCKED);
-            if(slot == 13) inventory.setItem(33, ItemList.TREE_TRACK_LOCKED);
+                // Fill first line
+                if(slot == 1) inventory.setItem(11, ItemList.TREE_TRACK_LOCKED);
+                if(slot == 1) inventory.setItem(12, ItemList.TREE_TRACK_LOCKED);
+                if(slot == 2) inventory.setItem(13, ItemList.TREE_TRACK_LOCKED);
+                if(slot == 2) inventory.setItem(14, ItemList.TREE_TRACK_LOCKED);
+                if(slot == 3) inventory.setItem(15, ItemList.TREE_TRACK_LOCKED);
 
-            if(link == 0) inventory.setItem(19, ItemList.TREE_TRACK_LOCKED);
-            if(link == 1) inventory.setItem(21, ItemList.TREE_TRACK_LOCKED);
-            if(link == 2) inventory.setItem(23, ItemList.TREE_TRACK_LOCKED);
-            if(link == 3) inventory.setItem(25, ItemList.TREE_TRACK_LOCKED);
+                // Fill second line
+                if(slot == 11) inventory.setItem(29, ItemList.TREE_TRACK_LOCKED);
+                if(slot == 11) inventory.setItem(30, ItemList.TREE_TRACK_LOCKED);
+                if(slot == 12) inventory.setItem(31, ItemList.TREE_TRACK_LOCKED);
+                if(slot == 12) inventory.setItem(32, ItemList.TREE_TRACK_LOCKED);
+                if(slot == 13) inventory.setItem(33, ItemList.TREE_TRACK_LOCKED);
 
-            // Set abilities
-            if(slot == 0) inventory.setItem(10, item);
-            if(slot == 1) inventory.setItem(12, item);
-            if(slot == 2) inventory.setItem(14, item);
-            if(slot == 3) inventory.setItem(16, item);
-            if(slot == 10) inventory.setItem(28, item);
-            if(slot == 11) inventory.setItem(30, item);
-            if(slot == 12) inventory.setItem(32, item);
-            if(slot == 13) inventory.setItem(34, item);
+                if(link == 0 && slot == 10) inventory.setItem(19, ItemList.TREE_TRACK_LOCKED);
+                if(link == 1 && slot == 11) inventory.setItem(21, ItemList.TREE_TRACK_LOCKED);
+                if(link == 2 && slot == 12) inventory.setItem(23, ItemList.TREE_TRACK_LOCKED);
+                if(link == 3 && slot == 13) inventory.setItem(25, ItemList.TREE_TRACK_LOCKED);
+
+                // Set abilities
+                if(slot == 0) inventory.setItem(10, item);
+                if(slot == 1) inventory.setItem(12, item);
+                if(slot == 2) inventory.setItem(14, item);
+                if(slot == 3) inventory.setItem(16, item);
+                if(slot == 10) inventory.setItem(28, item);
+                if(slot == 11) inventory.setItem(30, item);
+                if(slot == 12) inventory.setItem(32, item);
+                if(slot == 13) inventory.setItem(34, item);
+
+            }
 
         });
 
