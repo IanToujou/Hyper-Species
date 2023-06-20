@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.random.RandomGenerator;
 
 public class AbilityTree {
 
@@ -73,7 +74,10 @@ public class AbilityTree {
 
             if(ability.isAvailableForSpecies(playerManager.getSpecies())) {
 
-                int level = playerManager.getLevelFromExperience(playerManager.getAbilityExperience(ability));
+                int xp = playerManager.getAbilityExperience(ability);
+                int level = playerManager.getLevelFromExperience(xp);
+                double filledBars = ((double) playerManager.getExperienceSinceLastLevel(xp) / playerManager.getRelativeLevelThreshold(level)) * 50;
+                double emptyBars = 50 - filledBars;
 
                 ItemStack item = ability.getItem();
                 ItemMeta itemMeta = item.getItemMeta();
@@ -82,11 +86,30 @@ public class AbilityTree {
                 List<String> oldLore = itemMeta.getLore();
                 ArrayList<String> newLore = new ArrayList<>();
 
+                StringBuilder barBuilder = new StringBuilder();
+                barBuilder.append("§7[");
+
+                for(int i = 0; i < Math.floor(filledBars); i++) {
+                    barBuilder.append("§a|");
+                }
+
+                for(int i = 0; i < Math.ceil(emptyBars); i++) {
+                    barBuilder.append("§8|");
+                }
+
+                barBuilder.append("§7]");
+
                 assert oldLore != null;
                 oldLore.forEach(line -> {
+                    line = line.replace("{damage}", String.valueOf(ability.getFieldValue(AbilityField.DAMAGE, level)));
                     line = line.replace("{duration}", String.valueOf(ability.getFieldValue(AbilityField.DURATION, level)));
+                    line = line.replace("{rate}", String.valueOf(ability.getFieldValue(AbilityField.RATE, level)));
+                    line = line.replace("{range}", String.valueOf(ability.getFieldValue(AbilityField.RANGE, level)));
                     line = line.replace("{lockStatus}", playerManager.hasAbility(ability) ? "§a§lUNLOCKED" : "§c§lLOCKED");
-                    newLore.add(line);
+                    if(line.contains("{xpBar}")) {
+                        line = line.replace("{xpBar}", barBuilder.toString());
+                        if(playerManager.hasAbility(ability)) newLore.add(line);
+                    } else newLore.add(line);
                 });
 
                 itemMeta.setLore(newLore);

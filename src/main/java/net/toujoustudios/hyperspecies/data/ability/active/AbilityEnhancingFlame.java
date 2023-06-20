@@ -1,6 +1,7 @@
 package net.toujoustudios.hyperspecies.data.ability.active;
 
 import net.toujoustudios.hyperspecies.data.element.Element;
+import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -26,11 +27,11 @@ public class AbilityEnhancingFlame extends Ability {
                 90,
                 Material.BLAZE_POWDER,
                 8,
-                List.of("Demon", "Elf")
+                List.of("Demon")
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(1,3,5,8,10,12,15,18,20));
+        fields.put(AbilityField.DURATION, List.of(10,15,20,25,30,35,40,50,60));
 
         setFields(fields);
 
@@ -39,6 +40,12 @@ public class AbilityEnhancingFlame extends Ability {
     @Override
     public boolean execute(Player player) {
 
+        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        int xp = playerManager.getAbilityExperience(this);
+        int level = playerManager.getLevelFromExperience(xp);
+
+        int duration = getFieldValue(AbilityField.DURATION, level);
+
         Location location = player.getLocation();
         Block block = location.getBlock();
 
@@ -46,7 +53,7 @@ public class AbilityEnhancingFlame extends Ability {
         player.getWorld().spawnParticle(Particle.FLAME, location, 300, 0.3, 0, 0.3);
         player.getWorld().spawnParticle(Particle.LAVA, location, 50, 0, 2, 0);
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20*60, 0, false, false, true));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20*duration, 0, false, false, true));
 
         if(block.getType() == Material.AIR) {
             player.getWorld().getBlockAt(player.getLocation()).setType(Material.FIRE);

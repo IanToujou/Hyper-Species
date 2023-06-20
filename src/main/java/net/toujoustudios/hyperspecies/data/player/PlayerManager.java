@@ -77,8 +77,8 @@ public class PlayerManager {
         });
 
         abilities.forEach(ability -> {
-            if(playerConfig.contains("Data." + uuid + ".Character.Experience.Ability." + ability)) {
-                abilityExperiences.put(ability.getName(), playerConfig.getInt("Data." + uuid + ".Character.Experience.Ability." + ability));
+            if(playerConfig.contains("Data." + uuid + ".Character.Experience.Ability." + ability.getName())) {
+                abilityExperiences.put(ability.getName(), playerConfig.getInt("Data." + uuid + ".Character.Experience.Ability." + ability.getName()));
             } else {
                 abilityExperiences.put(ability.getName(), 0);
             }
@@ -156,11 +156,34 @@ public class PlayerManager {
     public int getLevelFromExperience(int experience) {
         int level = 0;
         while(true) {
-            int threshold = (20 + 10 * level ) * 2;
+            int threshold = getLevelThreshold(level);
             if(experience >= threshold) level++;
             else break;
         }
         return level;
+    }
+
+    public int getExperienceSinceLastLevel(int experience) {
+        int level = 0;
+        while(true) {
+            int threshold = getLevelThreshold(level);
+            if(experience >= threshold) level++;
+            else {
+                if(level == 0) return experience;
+                else return (experience - getLevelThreshold(level-1));
+            }
+        }
+    }
+
+    public int getLevelThreshold(int level) {
+        if(level == 0) return 20;
+        return (20 + 10 * level) * level;
+    }
+
+    public int getRelativeLevelThreshold(int level) {
+        int threshold = getLevelThreshold(level);
+        if(level == 0) return threshold;
+        return threshold - getLevelThreshold(level-1);
     }
 
     @SuppressWarnings("all")
@@ -337,6 +360,10 @@ public class PlayerManager {
 
     public int getAbilityExperience(Ability ability) {
         return abilityExperiences.getOrDefault(ability.getName(), 0);
+    }
+
+    public int getAbilityLevel(Ability ability) {
+        return getLevelFromExperience(getAbilityExperience(ability));
     }
 
     public void addAbilityExperience(Ability ability, int experience) {

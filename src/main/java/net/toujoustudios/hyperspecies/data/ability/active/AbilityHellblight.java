@@ -1,6 +1,7 @@
 package net.toujoustudios.hyperspecies.data.ability.active;
 
 import net.toujoustudios.hyperspecies.data.element.Element;
+import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -11,6 +12,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 public class AbilityHellblight extends Ability {
@@ -19,19 +21,34 @@ public class AbilityHellblight extends Ability {
 
         super(
                 "Hellblight",
-                List.of("§8Create a dark cloud that deals an", "AoE effect, slowing all enemies in range."),
+                List.of("§8Create a dark cloud that deals an", "§8AoE effect, slowing all enemies in", "§8a §d{range}m §8radius for §d{duration}s§8."),
                 Element.FIRE,
                 AbilityType.DEBUFF,
                 4,
                 60,
                 Material.GUNPOWDER,
-                0,
+                8,
                 List.of("Demon")
         );
+
+        HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
+
+        fields.put(AbilityField.RANGE, List.of(8,10,12,15,18,20,24,28,30));
+        fields.put(AbilityField.DURATION, List.of(5,6,7,8,10,12,15,18,20));
+
+        setFields(fields);
+
     }
 
     @Override
     public boolean execute(Player player) {
+
+        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        int xp = playerManager.getAbilityExperience(this);
+        int level = playerManager.getLevelFromExperience(xp);
+
+        int duration = getFieldValue(AbilityField.DURATION, level);
+        int range = getFieldValue(AbilityField.RANGE, level);
 
         Location location = player.getLocation();
 
@@ -39,10 +56,10 @@ public class AbilityHellblight extends Ability {
         player.getWorld().spawnParticle(Particle.SMOKE_LARGE, player.getLocation(), 500, 8, 0, 8);
 
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
-        double radiusSquared = 8*8;
+        double radiusSquared = range*range;
         players.forEach(all -> {
             if(all.getLocation().distanceSquared(location) <= radiusSquared) {
-                if(all != player) all.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20*30, 0, false, false, true));
+                if(all != player) all.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20*duration, 0, false, false, true));
             }
         });
 

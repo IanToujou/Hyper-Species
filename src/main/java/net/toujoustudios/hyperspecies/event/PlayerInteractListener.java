@@ -46,7 +46,7 @@ public class PlayerInteractListener implements Listener {
 
                     if(item.getItemMeta().getLore() == null) return;
                     if(item.getItemMeta().getLore().size() < 1) return;
-                    String abilityName = item.getItemMeta().getLore().get(0);
+                    String abilityName = item.getItemMeta().getLore().get(0).substring(2);
                     Ability ability = Ability.getAbility(abilityName);
 
                     if(ability == null) {
@@ -108,10 +108,10 @@ public class PlayerInteractListener implements Listener {
             if(playerManager.getCooldownAbilities().contains(ability)) item.setType(Material.RED_STAINED_GLASS_PANE);
             ItemMeta itemMeta = item.getItemMeta();
             assert itemMeta != null;
-            itemMeta.setDisplayName("§a" + ability.getName() + " §7- §b" + ability.getManaCost() + " Mana");
+            itemMeta.setDisplayName(ability.getFullName() + " §7(§aLVL " + playerManager.getAbilityLevel(ability) + "§7) §8- §b" + ability.getManaCost() + " Mana");
             if(playerManager.getMana() < ability.getManaCost()) itemMeta.setDisplayName("§c" + ability.getName() + " §7- §b" + ability.getManaCost() + " Mana");
             if(playerManager.getCooldownAbilities().contains(ability)) itemMeta.setDisplayName("§c" + ability.getName() + " §7- §6Cooling Down");
-            itemMeta.setLore(List.of(ability.getName()));
+            itemMeta.setLore(List.of("§7" + ability.getName()));
             item.setItemMeta(itemMeta);
             player.getInventory().setItem(1+i, item);
 

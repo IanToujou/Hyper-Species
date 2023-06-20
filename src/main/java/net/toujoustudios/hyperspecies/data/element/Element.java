@@ -8,17 +8,17 @@ import java.util.List;
 
 public enum Element {
 
-    FIRE("Fire", "§c", Material.RED_STAINED_GLASS_PANE, "\uD83D\uDD25"),
-    EARTH("Earth", "§6", Material.BROWN_STAINED_GLASS_PANE, "Ⓞ"),
-    WATER("Water", "§9", Material.BLUE_STAINED_GLASS_PANE, "\uD83C\uDF0A"),
-    FLORA("Flora", "§2", Material.LIME_STAINED_GLASS_PANE, "✿"),
-    FAIRY("Fairy", "§d", Material.PINK_STAINED_GLASS_PANE, "❃"),
-    ELECTRO("Electro", "§e", Material.YELLOW_STAINED_GLASS_PANE, "⚡"),
-    AIR("Air", "§f", Material.LIGHT_BLUE_STAINED_GLASS_PANE, "☄"),
-    PSYCHIC("Psychic", "§5", Material.PURPLE_STAINED_GLASS_PANE, "☣"),
-    NORMAL("Normal", "§7", Material.LIGHT_GRAY_STAINED_GLASS_PANE, "☯"),
-    LIGHT("Light", "§f", Material.WHITE_STAINED_GLASS_PANE, "۞"),
-    DARK("Dark", "§8", Material.GRAY_STAINED_GLASS_PANE, "₪");
+    FIRE("Fire", "§c", Material.RED_STAINED_GLASS_PANE, "§c\uD83D\uDD25"),
+    EARTH("Earth", "§6", Material.BROWN_STAINED_GLASS_PANE, "§6Ⓞ"),
+    WATER("Water", "§9", Material.BLUE_STAINED_GLASS_PANE, "§9\uD83C\uDF0A"),
+    FLORA("Flora", "§2", Material.LIME_STAINED_GLASS_PANE, "§2✿"),
+    FAIRY("Fairy", "§d", Material.PINK_STAINED_GLASS_PANE, "§d❃"),
+    ELECTRO("Electro", "§e", Material.YELLOW_STAINED_GLASS_PANE, "§e⚡"),
+    AIR("Air", "§f", Material.LIGHT_BLUE_STAINED_GLASS_PANE, "§f☄"),
+    PSYCHIC("Psychic", "§5", Material.PURPLE_STAINED_GLASS_PANE, "§5☣"),
+    NORMAL("Normal", "§7", Material.LIGHT_GRAY_STAINED_GLASS_PANE, "§7☯"),
+    LIGHT("Light", "§f", Material.WHITE_STAINED_GLASS_PANE, "§f۞"),
+    DARK("Dark", "§8", Material.GRAY_STAINED_GLASS_PANE, "§8₪");
 
     private final String name;
     private final String color;
@@ -62,7 +62,7 @@ public enum Element {
     }
 
     public String getFullName() {
-        return color + emoji + " " + name;
+        return emoji + " " + name;
     }
 
 }

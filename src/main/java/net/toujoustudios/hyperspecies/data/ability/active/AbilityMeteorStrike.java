@@ -11,6 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AbilityMeteorStrike extends Ability {
@@ -18,23 +20,28 @@ public class AbilityMeteorStrike extends Ability {
     public AbilityMeteorStrike() {
         super(
                 "Meteor Strike",
-                List.of("§7Balls"),
+                List.of("§8Summons a meteor that strikes from", "§8the sky, dealing " + Element.FIRE.getEmoji() + " {damage} §8in a range", "§8of §d{range}m§8."),
                 Element.FIRE,
+                Element.WATER,
                 AbilityType.DAMAGE,
                 12,
                 180,
                 Material.FIRE_CHARGE,
-                0,
+                8,
                 List.of("Demon")
         );
+
+        HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
+
+        fields.put(AbilityField.RANGE, List.of(8,9,10,12,14,16,18,20,24));
+        fields.put(AbilityField.DAMAGE, List.of(10,12,14,16,18,20,24,28,30));
+
+        setFields(fields);
+
     }
 
     @Override
     public boolean execute(Player player) {
-
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
-        int xp = playerManager.getAbilityExperience(this);
-        int level = playerManager.getLevelFromExperience(xp);
 
         Block block = player.getTargetBlock(null, 50);
         if(block.getType() == Material.AIR) return false;
@@ -60,10 +67,9 @@ public class AbilityMeteorStrike extends Ability {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
 
             Fireball entity = (Fireball) player.getWorld().spawnEntity(spawnLocation, EntityType.FIREBALL);
-            entity.setCustomName("Demon Meteor");
+            entity.setCustomName("Meteor Strike of " + player.getName());
             entity.setCustomNameVisible(false);
             entity.setDirection(new Vector(0, -3, 0));
-            entity.setGlowing(true);
             entity.setIsIncendiary(false);
             entity.setYield(0);
 

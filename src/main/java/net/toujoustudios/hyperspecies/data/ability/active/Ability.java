@@ -76,6 +76,12 @@ public abstract class Ability {
         return name;
     }
 
+    public String getFullName() {
+        if(secondaryElement != null)
+        return element.getEmoji() + " " + secondaryElement.getEmoji() + element.getColor() + " " + name;
+        else return element.getEmoji() + " " + name;
+    }
+
     public List<String> getDescription() {
         return description;
     }
@@ -114,14 +120,14 @@ public abstract class Ability {
         ItemMeta itemMeta = item.getItemMeta();
         assert itemMeta != null;
 
-        if(secondaryElement != null) itemMeta.setDisplayName(element.getColor() + element.getEmoji() + secondaryElement.getColor() + secondaryElement.getEmoji() + element.getColor() + " " + name);
-        else itemMeta.setDisplayName(element.getColor() + element.getEmoji() + " " + name + " §7(§aLVL {level}§7)");
+        itemMeta.setDisplayName(getFullName() + " §7(§aLVL {level}§7)");
         List<String> lore = new ArrayList<>();
-        lore.add("§8" + type.getName());
+        lore.add("§8" + type.getName() + " Spell");
         lore.add("§b" + manaCost + " Mana §8/ §6" + delay + "s");
         lore.add("§r");
         List<String> list = new ArrayList<>(Stream.concat(lore.stream(), description.stream()).toList());
         list.add("§r");
+        list.add("{xpBar}");
         list.add("{lockStatus}");
         itemMeta.setLore(list);
         item.setItemMeta(itemMeta);
