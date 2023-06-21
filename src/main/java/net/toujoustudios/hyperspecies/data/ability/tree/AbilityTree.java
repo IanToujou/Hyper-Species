@@ -11,10 +11,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.checkerframework.checker.units.qual.A;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.random.RandomGenerator;
 
@@ -23,16 +22,21 @@ public class AbilityTree {
     private static final HashMap<String, AbilityTree> trees = new HashMap<>();
 
     private final HashMap<Integer, Ability> abilities;
-    private final int link;
+    private List<Integer> links = new ArrayList<>();
 
     public AbilityTree(HashMap<Integer, Ability> abilities) {
         this.abilities = abilities;
-        this.link = -1;
+        links.add(-1);
     }
 
     public AbilityTree(HashMap<Integer, Ability> abilities, int link) {
         this.abilities = abilities;
-        this.link = link;
+        links.add(link);
+    }
+
+    public AbilityTree(HashMap<Integer, Ability> abilities, List<Integer> links) {
+        this.abilities = abilities;
+        this.links = links;
     }
 
     public static void createTree(String name, AbilityTree tree) {
@@ -52,8 +56,8 @@ public class AbilityTree {
         return abilities;
     }
 
-    public int getLink() {
-        return link;
+    public List<Integer> getLinks() {
+        return links;
     }
 
     public Inventory buildInventory(Player player) {
@@ -129,10 +133,10 @@ public class AbilityTree {
                 if(slot == 12) inventory.setItem(32, ItemList.TREE_TRACK_LOCKED);
                 if(slot == 13) inventory.setItem(33, ItemList.TREE_TRACK_LOCKED);
 
-                if(link == 0 && slot == 10) inventory.setItem(19, ItemList.TREE_TRACK_LOCKED);
-                if(link == 1 && slot == 11) inventory.setItem(21, ItemList.TREE_TRACK_LOCKED);
-                if(link == 2 && slot == 12) inventory.setItem(23, ItemList.TREE_TRACK_LOCKED);
-                if(link == 3 && slot == 13) inventory.setItem(25, ItemList.TREE_TRACK_LOCKED);
+                if(links.contains(0) && slot == 10) inventory.setItem(19, ItemList.TREE_TRACK_LOCKED);
+                if(links.contains(1) && slot == 11) inventory.setItem(21, ItemList.TREE_TRACK_LOCKED);
+                if(links.contains(2) && slot == 12) inventory.setItem(23, ItemList.TREE_TRACK_LOCKED);
+                if(links.contains(3) && slot == 13) inventory.setItem(25, ItemList.TREE_TRACK_LOCKED);
 
                 // Set abilities
                 if(slot == 0) inventory.setItem(10, item);
@@ -156,34 +160,143 @@ public class AbilityTree {
         return trees;
     }
 
-    public static Inventory buildMainInventory(Player player) {
+    public static Inventory buildMainInventory(Player player, int page) {
 
-        Inventory inventory = Bukkit.createInventory(null, 9*6, "Ability Trees");
-        for(int i = inventory.getSize()-9; i < inventory.getSize(); i++) inventory.setItem(i, ItemList.FILLER);
-        inventory.setItem(45, ItemList.PREVIOUS);
-        inventory.setItem(49, ItemList.CANCEL);
-        inventory.setItem(53, ItemList.NEXT);
-        inventory.setItem(0, Element.FIRE.getItem(false));
-        inventory.setItem(9, Element.EARTH.getItem(false));
-        inventory.setItem(18, Element.WATER.getItem(false));
-        inventory.setItem(27, Element.FLORA.getItem(false));
-        inventory.setItem(36, Element.FAIRY.getItem(false));
+        if(page == 0) {
 
-        AtomicInteger i = new AtomicInteger();
-        trees.forEach((name, tree) -> {
-            ItemStack item = new ItemStack(Material.NETHER_STAR);
-            ItemMeta itemMeta = item.getItemMeta();
-            assert itemMeta != null;
-            itemMeta.setDisplayName("§e" + name);
-            itemMeta.setLore(List.of("§7View this ability tree.", "§r", "§7Element: " + tree.getBaseAbility().getElement().getColor() + tree.getBaseAbility().getElement().getName()));
-            item.setItemMeta(itemMeta);
-            int slot = i.get();
-            if(slot==0 || slot==9 || slot==18 || slot==27 || slot==36 || slot==45) slot++;
-            inventory.setItem(slot, item);
-            i.getAndIncrement();
-        });
+            Inventory inventory = Bukkit.createInventory(null, 9*6, "Ability Trees: Page 1");
+            for(int i = inventory.getSize()-9; i < inventory.getSize(); i++) inventory.setItem(i, ItemList.FILLER);
+            inventory.setItem(49, ItemList.CANCEL);
+            inventory.setItem(53, ItemList.NEXT);
+            inventory.setItem(0, Element.FIRE.getItem(false));
+            inventory.setItem(9, Element.EARTH.getItem(false));
+            inventory.setItem(18, Element.WATER.getItem(false));
+            inventory.setItem(27, Element.FLORA.getItem(false));
+            inventory.setItem(36, Element.FAIRY.getItem(false));
 
-        return inventory;
+            int indexFire = 0;
+            int indexEarth = 0;
+            int indexWater = 0;
+            int indexFlora = 0;
+            int indexFairy = 0;
+
+            for(Map.Entry<String, AbilityTree> entry : trees.entrySet()) {
+
+                AbilityTree tree = trees.get(entry.getKey());
+                Element element = tree.getBaseAbility().getElement();
+
+                ItemStack item = new ItemStack(Material.NETHER_STAR);
+                ItemMeta itemMeta = item.getItemMeta();
+                assert itemMeta != null;
+                itemMeta.setDisplayName(tree.getBaseAbility().getFullName());
+                itemMeta.setLore(List.of("§7View this ability tree."));
+                item.setItemMeta(itemMeta);
+
+                if(element == Element.FIRE) {
+                    inventory.setItem(indexFire+1, item);
+                    indexFire++;
+                } else if(element == Element.EARTH) {
+                    inventory.setItem(9+indexEarth+1, item);
+                    indexEarth++;
+                } else if(element == Element.WATER) {
+                    inventory.setItem(18+indexWater+1, item);
+                    indexWater++;
+                } else if(element == Element.FLORA) {
+                    inventory.setItem(27+indexFlora+1, item);
+                    indexFlora++;
+                } else if(element == Element.FAIRY) {
+                    inventory.setItem(36+indexFairy+1, item);
+                    indexFairy++;
+                }
+
+            }
+
+            return inventory;
+
+        } else if(page == 1) {
+
+            Inventory inventory = Bukkit.createInventory(null, 9*6, "Ability Trees: Page 2");
+            for(int i = inventory.getSize()-9; i < inventory.getSize(); i++) inventory.setItem(i, ItemList.FILLER);
+            inventory.setItem(45, ItemList.PREVIOUS);
+            inventory.setItem(49, ItemList.CANCEL);
+            inventory.setItem(53, ItemList.NEXT);
+            inventory.setItem(0, Element.ELECTRO.getItem(false));
+            inventory.setItem(9, Element.AIR.getItem(false));
+            inventory.setItem(18, Element.PSYCHIC.getItem(false));
+            inventory.setItem(27, Element.NORMAL.getItem(false));
+            inventory.setItem(36, Element.LIGHT.getItem(false));
+
+            int indexElectro = 0;
+            int indexAir = 0;
+            int indexPsychic = 0;
+            int indexNormal = 0;
+            int indexLight = 0;
+
+            for(Map.Entry<String, AbilityTree> entry : trees.entrySet()) {
+
+                AbilityTree tree = trees.get(entry.getKey());
+                Element element = tree.getBaseAbility().getElement();
+
+                ItemStack item = new ItemStack(Material.NETHER_STAR);
+                ItemMeta itemMeta = item.getItemMeta();
+                assert itemMeta != null;
+                itemMeta.setDisplayName(tree.getBaseAbility().getFullName());
+                itemMeta.setLore(List.of("§7View this ability tree."));
+                item.setItemMeta(itemMeta);
+
+                if(element == Element.ELECTRO) {
+                    inventory.setItem(indexElectro+1, item);
+                    indexElectro++;
+                } else if(element == Element.AIR) {
+                    inventory.setItem(9+indexAir+1, item);
+                    indexAir++;
+                } else if(element == Element.PSYCHIC) {
+                    inventory.setItem(18+indexPsychic+1, item);
+                    indexPsychic++;
+                } else if(element == Element.NORMAL) {
+                    inventory.setItem(27+indexNormal+1, item);
+                    indexNormal++;
+                } else if(element == Element.LIGHT) {
+                    inventory.setItem(36+indexLight+1, item);
+                    indexLight++;
+                }
+
+            }
+
+            return inventory;
+
+        } else {
+
+            Inventory inventory = Bukkit.createInventory(null, 9*2, "Ability Trees: Page 3");
+            for(int i = inventory.getSize()-9; i < inventory.getSize(); i++) inventory.setItem(i, ItemList.FILLER);
+            inventory.setItem(9, ItemList.PREVIOUS);
+            inventory.setItem(13, ItemList.CANCEL);
+            inventory.setItem(0, Element.DARK.getItem(false));
+
+            int indexDark = 0;
+
+            for(Map.Entry<String, AbilityTree> entry : trees.entrySet()) {
+
+                AbilityTree tree = trees.get(entry.getKey());
+                Element element = tree.getBaseAbility().getElement();
+
+                ItemStack item = new ItemStack(Material.NETHER_STAR);
+                ItemMeta itemMeta = item.getItemMeta();
+                assert itemMeta != null;
+                itemMeta.setDisplayName(tree.getBaseAbility().getFullName());
+                itemMeta.setLore(List.of("§7View this ability tree."));
+                item.setItemMeta(itemMeta);
+
+                if(element == Element.DARK) {
+                    inventory.setItem(indexDark+1, item);
+                    indexDark++;
+                }
+
+            }
+
+            return inventory;
+
+        }
 
     }
 

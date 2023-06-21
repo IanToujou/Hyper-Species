@@ -109,8 +109,8 @@ public class PlayerInteractListener implements Listener {
             ItemMeta itemMeta = item.getItemMeta();
             assert itemMeta != null;
             itemMeta.setDisplayName(ability.getFullName() + " §7(§aLVL " + playerManager.getAbilityLevel(ability) + "§7) §8- §b" + ability.getManaCost() + " Mana");
-            if(playerManager.getMana() < ability.getManaCost()) itemMeta.setDisplayName("§c" + ability.getName() + " §7- §b" + ability.getManaCost() + " Mana");
-            if(playerManager.getCooldownAbilities().contains(ability)) itemMeta.setDisplayName("§c" + ability.getName() + " §7- §6Cooling Down");
+            if(playerManager.getMana() < ability.getManaCost()) itemMeta.setDisplayName(ability.getFullName() + " §7(§aLVL " + playerManager.getAbilityLevel(ability) + "§7) §8- §b" + ability.getManaCost() + " Mana");
+            if(playerManager.getCooldownAbilities().contains(ability)) itemMeta.setDisplayName(ability.getFullName() + " §7(§aLVL " + playerManager.getAbilityLevel(ability) + "§7) §8- §6Cooldown");
             itemMeta.setLore(List.of("§7" + ability.getName()));
             item.setItemMeta(itemMeta);
             player.getInventory().setItem(1+i, item);

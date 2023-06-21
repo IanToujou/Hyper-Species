@@ -16,9 +16,9 @@ public enum Element {
     ELECTRO("Electro", "§e", Material.YELLOW_STAINED_GLASS_PANE, "§e⚡"),
     AIR("Air", "§f", Material.LIGHT_BLUE_STAINED_GLASS_PANE, "§f☄"),
     PSYCHIC("Psychic", "§5", Material.PURPLE_STAINED_GLASS_PANE, "§5☣"),
-    NORMAL("Normal", "§7", Material.LIGHT_GRAY_STAINED_GLASS_PANE, "§7☯"),
+    NORMAL("Normal", "§7", Material.GRAY_STAINED_GLASS_PANE, "§7☯"),
     LIGHT("Light", "§f", Material.WHITE_STAINED_GLASS_PANE, "§f۞"),
-    DARK("Dark", "§8", Material.GRAY_STAINED_GLASS_PANE, "§8₪");
+    DARK("Dark", "§8", Material.BLACK_STAINED_GLASS_PANE, "§8₪");
 
     private final String name;
     private final String color;

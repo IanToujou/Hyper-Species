@@ -28,6 +28,33 @@ public class ProjectileHitListener implements Listener {
 
         Projectile projectile = event.getEntity();
 
+        if(projectile.getType() == EntityType.FIREBALL && projectile.getName().startsWith("Fireball of ")) {
+
+            Player player = Bukkit.getPlayer(projectile.getName().split(" ")[2]);
+            Ability ability = Ability.getAbility("Fireball");
+
+            if(player == null) return;
+            if(ability == null) return;
+
+            PlayerManager playerManager = PlayerManager.getPlayer(player);
+
+            int xp = playerManager.getAbilityExperience(ability);
+            int level = playerManager.getLevelFromExperience(xp);
+            int damage = ability.getFieldValue(AbilityField.DAMAGE, level);
+
+            Location location = projectile.getLocation();
+            projectile.getWorld().spawnParticle(Particle.LAVA, location, 10, 0.1, 0.1, 0.1);
+
+            Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
+            double radiusSquared = 3 * 3;
+            players.forEach(all -> {
+                if(all.getLocation().distanceSquared(location) <= radiusSquared) {
+                    all.damage(damage, projectile);
+                }
+            });
+
+        }
+
         if(projectile.getType() == EntityType.FIREBALL && projectile.getName().startsWith("Meteor Strike of ")) {
 
             Player player = Bukkit.getPlayer(projectile.getName().split(" ")[3]);

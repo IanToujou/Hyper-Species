@@ -22,7 +22,6 @@ public class AbilityMeteorStrike extends Ability {
                 "Meteor Strike",
                 List.of("§8Summons a meteor that strikes from", "§8the sky, dealing " + Element.FIRE.getEmoji() + " {damage} §8in a range", "§8of §d{range}m§8."),
                 Element.FIRE,
-                Element.WATER,
                 AbilityType.DAMAGE,
                 12,
                 180,

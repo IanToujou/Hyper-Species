@@ -15,7 +15,7 @@ public class AbilityTreeUI implements Listener {
 
         Player player = (Player) event.getWhoClicked();
 
-        if(event.getView().getTitle().equals("Ability Trees")) {
+        if(event.getView().getTitle().startsWith("Ability Trees")) {
 
             if(event.getCurrentItem() == null) return;
             event.setCancelled(true);
@@ -23,18 +23,17 @@ public class AbilityTreeUI implements Listener {
             Material material = event.getCurrentItem().getType();
             if(event.getCurrentItem().getItemMeta() == null) return;
             String name = event.getCurrentItem().getItemMeta().getDisplayName();
+            int page = Integer.parseInt(event.getView().getTitle().split(" ")[3]);
 
             if(material == Material.NETHER_STAR) {
 
-                String treeName = name.substring(2);
+                String treeName = name.split(" ", 2)[1];
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
 
                 AbilityTree tree = AbilityTree.getTree(treeName);
 
                 if(tree != null) {
-
                     player.openInventory(tree.buildInventory(player));
-
                 }
 
             } else if(material == Material.BARRIER) {
@@ -44,10 +43,12 @@ public class AbilityTreeUI implements Listener {
 
             } else if(material == Material.PLAYER_HEAD) {
 
-                if(name.contains("Previous")) {
-
+                if(name.contains("Back")) {
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                    player.openInventory(AbilityTree.buildMainInventory(player, page-2));
                 } else if(name.contains("Next")) {
-
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                    player.openInventory(AbilityTree.buildMainInventory(player, page));
                 }
 
             }
@@ -62,7 +63,7 @@ public class AbilityTreeUI implements Listener {
             if(material == Material.BARRIER) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                player.openInventory(AbilityTree.buildMainInventory(player));
+                player.openInventory(AbilityTree.buildMainInventory(player, 0));
 
             }
 

@@ -4,6 +4,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.*;
 import net.toujoustudios.hyperspecies.data.ability.tree.AbilityTree;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class AbilityLoader {
 
@@ -12,14 +13,16 @@ public class AbilityLoader {
         Ability.createAbility(new AbilityEnhancingFlame());
         Ability.createAbility(new AbilityHellblight());
         Ability.createAbility(new AbilityDemonicRage());
+
+        Ability.createAbility(new AbilityFlameShot());
+        Ability.createAbility(new AbilityFireball());
         Ability.createAbility(new AbilityMeteorStrike());
 
-        HashMap<Integer, Ability> enhancingFlameAbilities = new HashMap<>();
-        enhancingFlameAbilities.put(0, Ability.getAbility("Enhancing Flame"));
-        enhancingFlameAbilities.put(1, Ability.getAbility("Hellblight"));
-        enhancingFlameAbilities.put(2, Ability.getAbility("Demonic Rage"));
-        enhancingFlameAbilities.put(10, Ability.getAbility("Meteor Strike"));
-        AbilityTree.createTree("Enhancing Flame", new AbilityTree(enhancingFlameAbilities, 0));
+        HashMap<Integer, Ability> flameShotAbilities = new HashMap<>();
+        flameShotAbilities.put(0, Ability.getAbility("Flame Shot"));
+        flameShotAbilities.put(1, Ability.getAbility("Fireball"));
+        flameShotAbilities.put(2, Ability.getAbility("Meteor Strike"));
+        AbilityTree.createTree("Flame Shot", new AbilityTree(flameShotAbilities, List.of(1,2)));
 
     }
 
