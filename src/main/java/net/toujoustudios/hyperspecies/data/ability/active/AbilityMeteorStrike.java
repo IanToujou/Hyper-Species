@@ -1,7 +1,6 @@
 package net.toujoustudios.hyperspecies.data.ability.active;
 
 import net.toujoustudios.hyperspecies.data.element.Element;
-import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -11,23 +10,23 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class AbilityMeteorStrike extends Ability {
 
     public AbilityMeteorStrike() {
+
         super(
                 "Meteor Strike",
                 List.of("§8Summons a meteor that strikes from", "§8the sky, dealing " + Element.FIRE.getEmoji() + " {damage} §8in a range", "§8of §d{range}m§8."),
                 Element.FIRE,
                 AbilityType.DAMAGE,
-                12,
-                180,
-                Material.FIRE_CHARGE,
                 8,
-                List.of("Demon")
+                180,
+                Material.MAGMA_CREAM,
+                8,
+                List.of("Demon", "Reptile", "Human")
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
@@ -44,6 +43,7 @@ public class AbilityMeteorStrike extends Ability {
 
         Block block = player.getTargetBlock(null, 50);
         if(block.getType() == Material.AIR) return false;
+
         Location impactLocation = block.getLocation();
         Location spawnLocation = impactLocation.add(0, 150, 0);
 
