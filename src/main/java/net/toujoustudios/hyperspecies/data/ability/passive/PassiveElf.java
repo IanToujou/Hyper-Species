@@ -32,6 +32,21 @@ public class PassiveElf extends PassiveAbility{
             if(!playerManager.isRegenerationCoolingDown()) playerManager.setHealthRegeneration(0.2);
         }
 
+        ArrayList<Biome> coldBiomes = new ArrayList<>();
+        coldBiomes.add(Biome.SNOWY_TAIGA);
+        coldBiomes.add(Biome.FROZEN_OCEAN);
+        coldBiomes.add(Biome.FROZEN_PEAKS);
+        coldBiomes.add(Biome.FROZEN_RIVER);
+        coldBiomes.add(Biome.ICE_SPIKES);
+        coldBiomes.add(Biome.SNOWY_BEACH);
+        coldBiomes.add(Biome.SNOWY_PLAINS);
+        coldBiomes.add(Biome.SNOWY_SLOPES);
+        coldBiomes.add(Biome.SNOWY_TAIGA);
+
+        if(coldBiomes.contains(player.getLocation().add(0, -1, 0).getBlock().getBiome())) {
+            player.damage(1);
+        }
+
         ArrayList<Material> dioriteBlocks = new ArrayList<>();
         dioriteBlocks.add(Material.DIORITE);
         dioriteBlocks.add(Material.DIORITE_SLAB);
@@ -67,6 +82,19 @@ public class PassiveElf extends PassiveAbility{
 
         if(woodBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * 10, 0, false, false, true));
+        }
+
+        ArrayList<Material> graniteBlocks = new ArrayList<>();
+        graniteBlocks.add(Material.GRANITE);
+        graniteBlocks.add(Material.GRANITE_SLAB);
+        graniteBlocks.add(Material.GRANITE_WALL);
+        graniteBlocks.add(Material.GRANITE_STAIRS);
+        graniteBlocks.add(Material.POLISHED_GRANITE);
+        graniteBlocks.add(Material.POLISHED_GRANITE_SLAB);
+        graniteBlocks.add(Material.POLISHED_GRANITE_STAIRS);
+
+        if(graniteBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 10, 0, false, false, true));
         }
 
     }
