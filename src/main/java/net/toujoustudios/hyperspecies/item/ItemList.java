@@ -97,8 +97,8 @@ public class ItemList {
                 "§7[§a+§7] Night vision",
                 "§7[§a+§7] Speed at night",
                 "",
-                "§7[§c-§7] Slowness underwater",
-                "§7[§c-§7] Hunger underwater",
+                "§7[§c-§7] Damage in water",
+                "§7[§c-§7] Damage in rain",
                 "§7[§c-§7] Weakness during the day"
         ));
         DEMON_PASSIVE_ABILITIES.setItemMeta(demonPassiveAbilitiesMeta);
@@ -178,7 +178,7 @@ public class ItemList {
                 "",
                 "§7[§c-§7] Weakness at night",
                 "§7[§c-§7] Slowness underwater",
-                "§7[§c-§7] Hunger underwater"
+                "§7[§c-§7] Damage underwater"
         ));
         ANGEL_PASSIVE_ABILITIES.setItemMeta(angelPassiveAbilitiesMeta);
 
@@ -222,7 +222,7 @@ public class ItemList {
                 "§7[§a+§7] Night vision underwater",
                 "§7[§a+§7] Strength and regeneration on corals",
                 "",
-                "§7[§c-§7] Need to drink water on land",
+                "§7[§c-§7] Damage on land",
                 "§7[§c-§7] Damage in nether",
                 "§7[§c-§7] Slowness on land"
         ));

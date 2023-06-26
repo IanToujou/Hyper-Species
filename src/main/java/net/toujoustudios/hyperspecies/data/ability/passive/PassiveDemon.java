@@ -1,6 +1,7 @@
 package net.toujoustudios.hyperspecies.data.ability.passive;
 
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -16,12 +17,23 @@ public class PassiveDemon extends PassiveAbility {
             player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 20, 0, false, false, true));
             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 20, 0, false, false, true));
         } else {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 20, 0, false, false, true));
+            Block block = player.getWorld().getHighestBlockAt(player.getLocation());
+            if(block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 20, 0, false, false, true));
+            }
         }
 
         if(player.getLocation().getBlock().getType() == Material.WATER) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 10, 0, false, false, true));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 20 * 10, 0, false, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 20, 0, false, false, true));
+            player.damage(1);
+        }
+
+        if(player.getWorld().hasStorm() || player.getWorld().isThundering()) {
+            Block block = player.getWorld().getHighestBlockAt(player.getLocation());
+            if(block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 20, 0, false, false, true));
+                player.damage(1);
+            }
         }
 
     }
