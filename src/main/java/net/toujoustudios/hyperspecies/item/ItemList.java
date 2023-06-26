@@ -151,7 +151,6 @@ public class ItemList {
                 "§7[§a+§7] No fall damage",
                 "",
                 "§7[§c-§7] Slowness in cold biomes",
-                "§7[§c-§7] More damage taken if no armor",
                 "§7[§c-§7] Cannot gain shields from other classes"
         ));
         REPTILE_PASSIVE_ABILITIES.setItemMeta(reptilePassiveAbilitiesMeta);

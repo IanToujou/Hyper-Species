@@ -2,6 +2,7 @@ package net.toujoustudios.hyperspecies.loader;
 
 import net.toujoustudios.hyperspecies.data.ability.passive.PassiveDemon;
 import net.toujoustudios.hyperspecies.data.ability.passive.PassiveElf;
+import net.toujoustudios.hyperspecies.data.ability.passive.PassiveReptile;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.data.species.SubSpecies;
@@ -74,7 +75,7 @@ public class SpeciesLoader {
                 "§3Reptile",
                 ItemList.REPTILE,
                 reptileSpecies,
-                null,
+                new PassiveReptile(),
                 List.of(Element.FAIRY, Element.PSYCHIC, Element.LIGHT)
         );
 

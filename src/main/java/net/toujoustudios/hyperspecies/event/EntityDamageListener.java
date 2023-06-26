@@ -24,6 +24,16 @@ public class EntityDamageListener implements Listener {
         if(event.getEntity() instanceof Player player) {
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
+
+            if(event.getCause() == EntityDamageEvent.DamageCause.FALL) {
+
+                if(playerManager.getSpecies().getName().equals("Reptile")) {
+                    event.setCancelled(true);
+                    return;
+                }
+
+            }
+
             playerManager.setRegenerationCoolingDown(true);
             playerManager.setHealthRegeneration(0);
 
