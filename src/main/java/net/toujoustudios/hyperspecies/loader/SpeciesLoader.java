@@ -1,8 +1,6 @@
 package net.toujoustudios.hyperspecies.loader;
 
-import net.toujoustudios.hyperspecies.data.ability.passive.PassiveDemon;
-import net.toujoustudios.hyperspecies.data.ability.passive.PassiveElf;
-import net.toujoustudios.hyperspecies.data.ability.passive.PassiveReptile;
+import net.toujoustudios.hyperspecies.data.ability.passive.*;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.data.species.SubSpecies;
@@ -84,7 +82,7 @@ public class SpeciesLoader {
                 "§eAngel",
                 ItemList.ANGEL,
                 angelSpecies,
-                null,
+                new PassiveAngel(),
                 List.of(Element.FIRE, Element.EARTH, Element.DARK)
         );
 
@@ -102,7 +100,7 @@ public class SpeciesLoader {
                 "§bAqua",
                 ItemList.AQUATILIA,
                 aquatiliaSpecies,
-                null,
+                new PassiveAquatilia(),
                 List.of(Element.EARTH, Element.ELECTRO, Element.AIR)
         );
 
