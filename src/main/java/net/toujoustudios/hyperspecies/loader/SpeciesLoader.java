@@ -109,7 +109,7 @@ public class SpeciesLoader {
                 "§aFeline",
                 ItemList.FELINE,
                 felineSpecies,
-                null,
+                new PassiveFeline(),
                 List.of(Element.WATER, Element.ELECTRO, Element.NORMAL)
         );
 

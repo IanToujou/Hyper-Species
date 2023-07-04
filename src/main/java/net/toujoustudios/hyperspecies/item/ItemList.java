@@ -94,12 +94,12 @@ public class ItemList {
         demonPassiveAbilitiesMeta.setDisplayName("§6Passive Abilities");
         demonPassiveAbilitiesMeta.setLore(List.of(
                 "§7[§a+§7] Fire resistance",
-                "§7[§a+§7] Night vision",
-                "§7[§a+§7] Speed at night",
+                "§7[§a+§7] Vision & speed at night",
+                "§7[§a+§7] WIP",
                 "",
-                "§7[§c-§7] Damage in water",
-                "§7[§c-§7] Damage in rain",
-                "§7[§c-§7] Weakness during the day"
+                "§7[§c-§7] Weakness & slowness in water",
+                "§7[§c-§7] Damage in sunlight",
+                "§7[§c-§7] WIP"
         ));
         DEMON_PASSIVE_ABILITIES.setItemMeta(demonPassiveAbilitiesMeta);
 
@@ -173,8 +173,8 @@ public class ItemList {
         angelPassiveAbilitiesMeta.setDisplayName("§6Passive Abilities");
         angelPassiveAbilitiesMeta.setLore(List.of(
                 "§7[§a+§7] Slow falling when pressing shift",
-                "§7[§a+§7] Resistance in sunlight",
                 "§7[§a+§7] Regeneration in sunlight",
+                "§7[§a+§7] WIP",
                 "",
                 "§7[§c-§7] Weakness at night",
                 "§7[§c-§7] Slowness underwater",
@@ -207,7 +207,7 @@ public class ItemList {
         ItemMeta aquatiliaMeta = AQUATILIA.getItemMeta();
         aquatiliaMeta.setDisplayName("§6Aquatilia");
         aquatiliaMeta.setLore(List.of(
-                "§7Sea creatures live under the sea, using",
+                "§7Aquatilia live under the sea, using",
                 "§7their environment to their advance. They",
                 "§7gain underwater vision, haste, speed.",
                 "§r",
@@ -241,6 +241,19 @@ public class ItemList {
                 "§b▶ Click to find out more!"
         ));
         FELINE.setItemMeta(felineMeta);
+
+        ItemMeta felinePassiveAbilitiesMeta = FELINE_PASSIVE_ABILITIES.getItemMeta();
+        felinePassiveAbilitiesMeta.setDisplayName("§6Feline Abilities");
+        felinePassiveAbilitiesMeta.setLore(List.of(
+                "§7[§a+§7] Permanent night vision",
+                "§7[§a+§7] Permanent speed",
+                "§7[§a+§7] No fall damage",
+                "",
+                "§7[§c-§7] Can't mine in water",
+                "§7[§c-§7] Cannot eat plants",
+                "§7[§c-§7] Slowness in tight places"
+        ));
+        FELINE_PASSIVE_ABILITIES.setItemMeta(felinePassiveAbilitiesMeta);
 
         // DWARF
 
