@@ -95,11 +95,11 @@ public class ItemList {
         demonPassiveAbilitiesMeta.setLore(List.of(
                 "§7[§a+§7] Fire resistance",
                 "§7[§a+§7] Vision & speed at night",
-                "§7[§a+§7] WIP",
+                "§7[§a+§7] Strength on netherrack",
                 "",
-                "§7[§c-§7] Weakness & slowness in water",
+                "§7[§c-§7] Weak & slow in water",
                 "§7[§c-§7] Damage in sunlight",
-                "§7[§c-§7] WIP"
+                "§7[§c-§7] Mana drain on soul sand"
         ));
         DEMON_PASSIVE_ABILITIES.setItemMeta(demonPassiveAbilitiesMeta);
 
@@ -120,13 +120,13 @@ public class ItemList {
         ItemMeta elfPassiveAbilitiesMeta = ELF_PASSIVE_ABILITIES.getItemMeta();
         elfPassiveAbilitiesMeta.setDisplayName("§6Passive Abilities");
         elfPassiveAbilitiesMeta.setLore(List.of(
-                "§7[§a+§7] Regeneration in green biomes",
+                "§7[§a+§7] Regeneration in forests",
                 "§7[§a+§7] Mana regeneration on diorite",
                 "§7[§a+§7] Strength on wood blocks",
                 "",
-                "§7[§c-§7] Weakness and slowness on granite",
+                "§7[§c-§7] Weak and slown on granite",
                 "§7[§c-§7] Cannot eat meat",
-                "§7[§c-§7] Freeze in snow biomes"
+                "§7[§c-§7] Freeze in cold biomes"
         ));
         ELF_PASSIVE_ABILITIES.setItemMeta(elfPassiveAbilitiesMeta);
 
@@ -151,7 +151,8 @@ public class ItemList {
                 "§7[§a+§7] No fall damage",
                 "",
                 "§7[§c-§7] Slowness in cold biomes",
-                "§7[§c-§7] Cannot gain shields from other classes"
+                "§7[§c-§7] Cannot gain shields from other classes",
+                "§7[§c-§7] Weakness at night"
         ));
         REPTILE_PASSIVE_ABILITIES.setItemMeta(reptilePassiveAbilitiesMeta);
 
@@ -174,11 +175,11 @@ public class ItemList {
         angelPassiveAbilitiesMeta.setLore(List.of(
                 "§7[§a+§7] Slow falling when pressing shift",
                 "§7[§a+§7] Regeneration in sunlight",
-                "§7[§a+§7] WIP",
+                "§7[§a+§7] Mana regeneration on gold",
                 "",
+                "§7[§c-§7] Slowness in water",
                 "§7[§c-§7] Weakness at night",
-                "§7[§c-§7] Slowness underwater",
-                "§7[§c-§7] Damage underwater"
+                "§7[§c-§7] Cannot survive in nether"
         ));
         ANGEL_PASSIVE_ABILITIES.setItemMeta(angelPassiveAbilitiesMeta);
 
@@ -219,12 +220,12 @@ public class ItemList {
         aquatiliaPassiveAbilitiesMeta.setDisplayName("§6Passive Abilities");
         aquatiliaPassiveAbilitiesMeta.setLore(List.of(
                 "§7[§a+§7] Haste, speed and breathing underwater",
-                "§7[§a+§7] Night vision underwater",
+                "§7[§a+§7] Night vision",
                 "§7[§a+§7] Strength and regeneration on corals",
                 "",
-                "§7[§c-§7] Damage on land",
-                "§7[§c-§7] Damage in nether",
-                "§7[§c-§7] Slowness on land"
+                "§7[§c-§7] Damage in sunlight",
+                "§7[§c-§7] Slowness on land",
+                "§7[§c-§7] Strong damage in dry biomes"
         ));
         AQUATILIA_PASSIVE_ABILITIES.setItemMeta(aquatiliaPassiveAbilitiesMeta);
 
@@ -268,6 +269,32 @@ public class ItemList {
                 "§b▶ Click to find out more!"
         ));
         DWARF.setItemMeta(dwarfMeta);
+
+        ItemMeta dwarfPassiveAbilitiesMeta = DWARF_PASSIVE_ABILITIES.getItemMeta();
+        dwarfPassiveAbilitiesMeta.setDisplayName("§6Dwarf Abilities");
+        dwarfPassiveAbilitiesMeta.setLore(List.of(
+                "§7[§a+§7] Permanent haste",
+                "§7[§a+§7] Permanent night vision",
+                "§7[§a+§7] Strength & fire resistance if drunk",
+                "",
+                "§7[§c-§7] Mining fatigue in water",
+                "§7[§c-§7] Weakness if sober",
+                "§7[§c-§7] Permanent slowness"
+        ));
+        DWARF_PASSIVE_ABILITIES.setItemMeta(dwarfPassiveAbilitiesMeta);
+
+        ItemMeta wolfPassiveAbilitiesMeta = WOLF_PASSIVE_ABILITIES.getItemMeta();
+        wolfPassiveAbilitiesMeta.setDisplayName("§6Wolf Abilities");
+        wolfPassiveAbilitiesMeta.setLore(List.of(
+                "§7[§a+§7] 2x damage on low health targets",
+                "§7[§a+§7] Vision and speed at night",
+                "§7[§a+§7] Detect nearby players",
+                "",
+                "§7[§c-§7] More incoming damage",
+                "§7[§c-§7] Nausea in sunlight",
+                "§7[§c-§7] Can only eat meat"
+        ));
+        WOLF_PASSIVE_ABILITIES.setItemMeta(wolfPassiveAbilitiesMeta);
 
         // WOLF
 
