@@ -47,16 +47,18 @@ public class PassiveElf extends PassiveAbility{
             player.damage(1);
         }
 
-        ArrayList<Material> dioriteBlocks = new ArrayList<>();
-        dioriteBlocks.add(Material.DIORITE);
-        dioriteBlocks.add(Material.DIORITE_SLAB);
-        dioriteBlocks.add(Material.DIORITE_WALL);
-        dioriteBlocks.add(Material.DIORITE_STAIRS);
-        dioriteBlocks.add(Material.POLISHED_DIORITE);
-        dioriteBlocks.add(Material.POLISHED_DIORITE_SLAB);
-        dioriteBlocks.add(Material.POLISHED_DIORITE_STAIRS);
+        ArrayList<Material> leafBlocks = new ArrayList<>();
+        leafBlocks.add(Material.OAK_LEAVES);
+        leafBlocks.add(Material.BIRCH_LEAVES);
+        leafBlocks.add(Material.ACACIA_LEAVES);
+        leafBlocks.add(Material.AZALEA_LEAVES);
+        leafBlocks.add(Material.JUNGLE_LEAVES);
+        leafBlocks.add(Material.MANGROVE_LEAVES);
+        leafBlocks.add(Material.DARK_OAK_LEAVES);
+        leafBlocks.add(Material.FLOWERING_AZALEA_LEAVES);
+        leafBlocks.add(Material.SPRUCE_LEAVES);
 
-        if(dioriteBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
+        if(leafBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
             playerManager.setManaRegeneration(0.3);
         } else playerManager.setManaRegeneration(0.1);
 
