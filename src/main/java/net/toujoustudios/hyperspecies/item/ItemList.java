@@ -121,7 +121,7 @@ public class ItemList {
         elfPassiveAbilitiesMeta.setDisplayName("§6Passive Abilities");
         elfPassiveAbilitiesMeta.setLore(List.of(
                 "§7[§a+§7] Regeneration in forests",
-                "§7[§a+§7] Mana regeneration on diorite",
+                "§7[§a+§7] Mana regeneration on leaves",
                 "§7[§a+§7] Strength on wood blocks",
                 "",
                 "§7[§c-§7] Weak and slown on granite",
@@ -252,7 +252,7 @@ public class ItemList {
                 "",
                 "§7[§c-§7] Can't mine in water",
                 "§7[§c-§7] Cannot eat plants",
-                "§7[§c-§7] Slowness in tight places"
+                "§7[§c-§7] Slow and weak in tight places"
         ));
         FELINE_PASSIVE_ABILITIES.setItemMeta(felinePassiveAbilitiesMeta);
 
@@ -286,11 +286,11 @@ public class ItemList {
         ItemMeta wolfPassiveAbilitiesMeta = WOLF_PASSIVE_ABILITIES.getItemMeta();
         wolfPassiveAbilitiesMeta.setDisplayName("§6Wolf Abilities");
         wolfPassiveAbilitiesMeta.setLore(List.of(
-                "§7[§a+§7] 2x damage on low health targets",
+                "§7[§a+§7] Double damage on low HP targets",
                 "§7[§a+§7] Vision and speed at night",
-                "§7[§a+§7] Detect nearby players",
+                "§7[§a+§7] Detect nearby players while sneaking",
                 "",
-                "§7[§c-§7] More incoming damage",
+                "§7[§c-§7] Take more damage if no wolf nearby",
                 "§7[§c-§7] Nausea in sunlight",
                 "§7[§c-§7] Can only eat meat"
         ));

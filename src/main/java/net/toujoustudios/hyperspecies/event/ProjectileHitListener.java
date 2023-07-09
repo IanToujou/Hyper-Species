@@ -9,7 +9,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -19,7 +18,6 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Objects;
 
 public class ProjectileHitListener implements Listener {
 
@@ -100,7 +98,6 @@ public class ProjectileHitListener implements Listener {
                     all.damage(damage, projectile);
                 }
             });
-
 
         }
 

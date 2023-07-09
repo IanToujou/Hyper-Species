@@ -43,7 +43,7 @@ public class SpeciesLoader {
         felineSpecies.add(new SubSpecies("Forest Cat", null));
 
         ArrayList<SubSpecies> dwarfSpecies = new ArrayList<>();
-        dwarfSpecies.add(new SubSpecies("Miner", null));
+        dwarfSpecies.add(new SubSpecies("Blacksmith", null));
         dwarfSpecies.add(new SubSpecies("Cartographer", null));
 
         ArrayList<SubSpecies> wolfSpecies = new ArrayList<>();
@@ -118,7 +118,7 @@ public class SpeciesLoader {
                 "§6Dwarf",
                 ItemList.DWARF,
                 dwarfSpecies,
-                null,
+                new PassiveDwarf(),
                 List.of(Element.FLORA, Element.FAIRY, Element.PSYCHIC)
         );
 
@@ -127,7 +127,7 @@ public class SpeciesLoader {
                 "§8Wolf",
                 ItemList.WOLF,
                 wolfSpecies,
-                null,
+                new PassiveWolf(),
                 List.of(Element.FIRE, Element.AIR, Element.PSYCHIC)
         );
 

@@ -36,7 +36,6 @@ public class PassiveDemon extends PassiveAbility {
             if(block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 20, 1, false, false, true));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 20, 1, false, false, true));
-                player.damage(1);
             }
         }
 
@@ -46,9 +45,9 @@ public class PassiveDemon extends PassiveAbility {
         }
 
         // Mana drain on soul sand
-        if(player.getLocation().add(0, -1, 0).getBlock().getType() == Material.SOUL_SAND) {
+        if(player.getLocation().add(0, -0.8, 0).getBlock().getType() == Material.SOUL_SAND) {
             PlayerManager playerManager = PlayerManager.getPlayer(player);
-            playerManager.setManaRegeneration(-0.5);
+            playerManager.setMana(playerManager.getMana() - 0.5);
         } else {
             PlayerManager playerManager = PlayerManager.getPlayer(player);
             playerManager.setManaRegeneration(0.1);

@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -21,6 +20,14 @@ public class PlayerItemConsumeListener implements Listener {
 
         Player player = event.getPlayer();
         PlayerManager playerManager = PlayerManager.getPlayer(player);
+
+        if(playerManager.getSpecies() == null) return;
+
+        List<Material> exceptions = List.of(
+                Material.GOLDEN_APPLE,
+                Material.ENCHANTED_GOLDEN_APPLE,
+                Material.POTION
+        );
 
         List<Material> meat = List.of(
                 Material.CHICKEN,
@@ -42,10 +49,13 @@ public class PlayerItemConsumeListener implements Listener {
                 Material.PUFFERFISH
         );
 
-        if(playerManager.getSpecies().getName().equals("Elf")) {
+        Material material = event.getItem().getType();
 
-            ItemStack item = event.getItem();
-            Material material = item.getType();
+        if(exceptions.contains(material)) {
+            return;
+        }
+
+        if(playerManager.getSpecies().getName().equals("Elf")) {
 
             if(meat.contains(material)) {
 
@@ -57,10 +67,7 @@ public class PlayerItemConsumeListener implements Listener {
 
             }
 
-        } else if(playerManager.getSpecies().getName().equals("Feline")) {
-
-            ItemStack item = event.getItem();
-            Material material = item.getType();
+        } else if(playerManager.getSpecies().getName().equals("Feline") || playerManager.getSpecies().getName().equals("Wolf")) {
 
             if(!meat.contains(material)) {
 

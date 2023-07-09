@@ -14,8 +14,10 @@ public class PassiveReptile extends PassiveAbility {
     @Override
     public void execute(Player player) {
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 10, 0, false, false, true));
+        // Resistance
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 20, 0, false, false, true));
 
+        // Speed in swamp, desert and water
         List<Biome> speedBiomes = List.of(
                 Biome.SWAMP,
                 Biome.MANGROVE_SWAMP,
@@ -26,6 +28,7 @@ public class PassiveReptile extends PassiveAbility {
             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 1, false, false, true));
         }
 
+        // Slowness in cold biomes
         ArrayList<Biome> coldBiomes = new ArrayList<>();
         coldBiomes.add(Biome.SNOWY_TAIGA);
         coldBiomes.add(Biome.FROZEN_OCEAN);
@@ -39,6 +42,11 @@ public class PassiveReptile extends PassiveAbility {
 
         if(coldBiomes.contains(player.getLocation().add(0, -1, 0).getBlock().getBiome())) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 10, 1, false, false, true));
+        }
+
+        // Weakness at night
+        if(player.getWorld().getTime() > 12500 && player.getWorld().getTime() < 23500) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 20, 1, false, false, true));
         }
 
     }

@@ -23,6 +23,10 @@ public class EntityDamageListener implements Listener {
 
         if(event.getEntity() instanceof Player player) {
 
+            if(event.getCause() == EntityDamageEvent.DamageCause.ENTITY_ATTACK) {
+                return;
+            }
+
             PlayerManager playerManager = PlayerManager.getPlayer(player);
 
             if(event.getCause() == EntityDamageEvent.DamageCause.FALL) {
@@ -77,6 +81,10 @@ public class EntityDamageListener implements Listener {
 
         }
 
+    }
+
+    public static HashMap<UUID, BukkitTask> getTasks() {
+        return tasks;
     }
 
 }

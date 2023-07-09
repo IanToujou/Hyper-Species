@@ -15,6 +15,7 @@ public class PassiveElf extends PassiveAbility{
 
         PlayerManager playerManager = PlayerManager.getPlayer(player);
 
+        // Regeneration in green biomes
         ArrayList<Biome> biomes = new ArrayList<>();
         biomes.add(Biome.FOREST);
         biomes.add(Biome.FLOWER_FOREST);
@@ -26,12 +27,13 @@ public class PassiveElf extends PassiveAbility{
         biomes.add(Biome.BAMBOO_JUNGLE);
         biomes.add(Biome.SPARSE_JUNGLE);
 
-        if(biomes.contains(player.getLocation().add(0, -1, 0).getBlock().getBiome())) {
+        if(biomes.contains(player.getLocation().getBlock().getBiome())) {
             playerManager.setHealthRegeneration(0.2);
         } else {
             if(!playerManager.isRegenerationCoolingDown()) playerManager.setHealthRegeneration(0.2);
         }
 
+        // Damage in cold biomes
         ArrayList<Biome> coldBiomes = new ArrayList<>();
         coldBiomes.add(Biome.SNOWY_TAIGA);
         coldBiomes.add(Biome.FROZEN_OCEAN);
@@ -47,6 +49,7 @@ public class PassiveElf extends PassiveAbility{
             player.damage(1);
         }
 
+        // Mana regeneration on leaf blocks
         ArrayList<Material> leafBlocks = new ArrayList<>();
         leafBlocks.add(Material.OAK_LEAVES);
         leafBlocks.add(Material.BIRCH_LEAVES);
@@ -62,6 +65,7 @@ public class PassiveElf extends PassiveAbility{
             playerManager.setManaRegeneration(0.3);
         } else playerManager.setManaRegeneration(0.1);
 
+        // Strength on wood blocks
         ArrayList<Material> woodBlocks = new ArrayList<>();
         woodBlocks.add(Material.OAK_WOOD);
         woodBlocks.add(Material.OAK_PLANKS);
@@ -86,6 +90,7 @@ public class PassiveElf extends PassiveAbility{
             player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * 10, 0, false, false, true));
         }
 
+        // Weakness on granite blocks
         ArrayList<Material> graniteBlocks = new ArrayList<>();
         graniteBlocks.add(Material.GRANITE);
         graniteBlocks.add(Material.GRANITE_SLAB);
