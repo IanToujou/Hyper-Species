@@ -5,7 +5,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -30,7 +29,7 @@ public class PassiveAquatilia extends PassiveAbility {
         }
 
         // Damage in sunlight and hot biomes
-        if(player.getWorld().getTime() < 12500 && player.getWorld().getTime() > 23500) {
+        if(player.getWorld().getTime() < 12500 || player.getWorld().getTime() > 23500) {
             Block block = player.getWorld().getHighestBlockAt(player.getLocation());
             if(block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
                 List<Biome> hotBiomes = List.of(Biome.DESERT, Biome.BADLANDS);
@@ -41,7 +40,7 @@ public class PassiveAquatilia extends PassiveAbility {
         }
 
         // Permanent night vision
-        player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 10, 0, false, false, true));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 20, 0, false, false, true));
 
         List<Material> coralBlocks = List.of(
                 Material.BRAIN_CORAL_BLOCK,

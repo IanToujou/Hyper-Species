@@ -10,8 +10,10 @@ public class PassiveFeline extends PassiveAbility {
     @Override
     public void execute(Player player) {
 
-        // Permanent night vision
-        player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 20, 0, false, false, true));
+        if(player.getWorld().getTime() > 12500 && player.getWorld().getTime() < 23500) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 20, 0, false, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 20 * 20, 1, false, false, true));
+        }
 
         if(player.getLocation().getBlock().getType() == Material.WATER) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 20 * 5, 99, false, false, true));
@@ -22,7 +24,7 @@ public class PassiveFeline extends PassiveAbility {
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 2, 2, false, false, true));
             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 2, 1, false, false, true));
         } else {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 1, false, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 1, false, false, true));
         }
 
     }
