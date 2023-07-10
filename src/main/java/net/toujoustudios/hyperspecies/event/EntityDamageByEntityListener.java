@@ -2,6 +2,7 @@ package net.toujoustudios.hyperspecies.event;
 
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
+import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -42,8 +43,8 @@ public class EntityDamageByEntityListener implements Listener {
                 if(dealerManager.getSpecies() != null && dealerManager.getSpecies().getName().equals("Wolf")) {
                     if(playerManager.getHealth() < playerManager.getMaxHealth() / 3) {
                         trueDamage *= 2;
-                        player.getWorld().spawnParticle(Particle.REDSTONE, player.getLocation(), 50, 0.3, 0.1, 0.3);
-                        dealer.playSound(dealer.getLocation(), Sound.ENTITY_SLIME_HURT, SoundCategory.MASTER, 100, 1.5f);
+                        player.getWorld().spawnParticle(Particle.BLOCK_CRACK, player.getLocation(), 100, Material.REDSTONE_BLOCK.createBlockData());
+                        dealer.getWorld().playSound(dealer.getLocation(), Sound.ENTITY_SLIME_DEATH, SoundCategory.MASTER, 1, 0.5f);
                     }
                 }
             }
@@ -99,6 +100,8 @@ public class EntityDamageByEntityListener implements Listener {
 
             event.setDamage(0);
             playerManager.setHealth(health-trueDamage);
+
+            player.getWorld().spawnParticle(Particle.BLOCK_CRACK, player.getLocation().add(0, 0.5, 0), 50, Material.REDSTONE_BLOCK.createBlockData());
 
         }
 

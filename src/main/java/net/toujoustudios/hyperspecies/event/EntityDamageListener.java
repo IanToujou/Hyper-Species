@@ -2,6 +2,8 @@ package net.toujoustudios.hyperspecies.event;
 
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
+import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
@@ -78,6 +80,8 @@ public class EntityDamageListener implements Listener {
 
             event.setDamage(0);
             playerManager.setHealth(health-trueDamage);
+
+            player.getWorld().spawnParticle(Particle.BLOCK_CRACK, player.getLocation().add(0, 0.5, 0), 50, Material.REDSTONE_BLOCK.createBlockData());
 
         }
 

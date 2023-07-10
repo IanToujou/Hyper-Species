@@ -38,6 +38,9 @@ commands:
   mana:
     description: Set the mana value for a player.
     permission: hyperspecies.command.mana
+  species:
+    description: Set the species for a player.
+    permission: hyperspecies.command.species
 
 permissions:
   hyperspecies.group.player:
@@ -52,6 +55,7 @@ permissions:
       hyperspecies.command.shield: false
       hyperspecies.command.health: false
       hyperspecies.command.mana: false
+      hyperspecies.command.species: false
   hyperspecies.group.admin:
     description: The administrator group. Grants all permissions.
     children:
@@ -64,6 +68,7 @@ permissions:
       hyperspecies:command.shield: true
       hyperspecies.command.health: true
       hyperspecies.command.mana: true
+      hyperspecies.command.species: true
   hyperspecies.group.moderator:
     description: The administrator group. Grants all permissions.
     children:
@@ -76,6 +81,7 @@ permissions:
       hyperspecies.command.shield: false
       hyperspecies.command.health: false
       hyperspecies.command.mana: false
+      hyperspecies.command.species: false
   hyperspecies.command.emote:
     description: Allows players to use the emote command.
     default: true
@@ -102,4 +108,7 @@ permissions:
     default: op
   hyperspecies.command.mana:
     description: Allows players to use the mana command.
+    default: op
+  hyperspecies.command.species:
+    description: Allows players to use the species command.
     default: op

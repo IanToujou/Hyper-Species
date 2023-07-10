@@ -22,7 +22,7 @@ public class PassiveWolf extends PassiveAbility {
             double radiusSquared = 25 * 25;
             players.forEach(all -> {
                 if(all.getLocation().distanceSquared(player.getLocation()) <= radiusSquared) {
-                    if(all != player) player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_SNARE, SoundCategory.MASTER, 100, 0.5f);
+                    if(all != player) player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, SoundCategory.MASTER, 100, 2f);
                 }
             });
 

@@ -123,6 +123,7 @@ public final class HyperSpecies extends JavaPlugin {
         getCommand("shield").setExecutor(new ShieldCommand());
         getCommand("health").setExecutor(new HealthCommand());
         getCommand("mana").setExecutor(new ManaCommand());
+        getCommand("species").setExecutor(new SpeciesCommand());
     }
 
     public void registerUI() {
