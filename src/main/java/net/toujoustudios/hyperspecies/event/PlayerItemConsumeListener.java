@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -23,10 +24,23 @@ public class PlayerItemConsumeListener implements Listener {
 
         if(playerManager.getSpecies() == null) return;
 
+        ItemMeta itemMeta = event.getItem().getItemMeta();
+        if(itemMeta != null) {
+            if(itemMeta.getDisplayName().equals("§c★ §2Heineken Original §c★")) {
+                playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.3);
+                int nauseaDuration = (int) Math.round(playerManager.getDrunkenness() * 10);
+                int blindDuration = (int) Math.round(playerManager.getDrunkenness() * 2);
+                if (nauseaDuration > 0) player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * nauseaDuration, 0, false, false, true));
+                if (playerManager.getDrunkenness() > 3) player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * blindDuration, 0, false, false, true));
+                return;
+            }
+        }
+
         List<Material> exceptions = List.of(
                 Material.GOLDEN_APPLE,
                 Material.ENCHANTED_GOLDEN_APPLE,
-                Material.POTION
+                Material.POTION,
+                Material.MILK_BUCKET
         );
 
         List<Material> meat = List.of(

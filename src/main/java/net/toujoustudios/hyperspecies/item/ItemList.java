@@ -1,9 +1,13 @@
 package net.toujoustudios.hyperspecies.item;
 
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.potion.PotionData;
+import org.bukkit.potion.PotionType;
 
 import java.util.List;
 
@@ -49,6 +53,7 @@ public class ItemList {
     public static ItemStack RESET_CHARACTER_CONFIRM = new ItemStack(Material.REDSTONE_BLOCK);
     public static ItemStack TREE_TRACK_LOCKED = new ItemStack(Material.GRAY_DYE);
     public static ItemStack TREE_TRACK_UNLOCKED = new ItemStack(Material.GREEN_DYE);
+    public static ItemStack ALCOHOL_HEINEKEN = new ItemStack(Material.POTION);
 
     @SuppressWarnings("all")
     public static void initialize() {
@@ -393,6 +398,13 @@ public class ItemList {
         ItemMeta treeTrackUnlockedMeta = TREE_TRACK_UNLOCKED.getItemMeta();
         treeTrackUnlockedMeta.setDisplayName(" ");
         TREE_TRACK_UNLOCKED.setItemMeta(treeTrackUnlockedMeta);
+
+        PotionMeta alcoholHeinekenMeta = (PotionMeta) ALCOHOL_HEINEKEN.getItemMeta();
+        alcoholHeinekenMeta.setColor(Color.GREEN);
+        alcoholHeinekenMeta.setDisplayName("§c★ §2Heineken Original §c★");
+        alcoholHeinekenMeta.setBasePotionData(new PotionData(PotionType.WATER));
+        alcoholHeinekenMeta.setLore(List.of("§7Heineken-Emblem und ich mach", "§7mich heut behindert digga."));
+        ALCOHOL_HEINEKEN.setItemMeta(alcoholHeinekenMeta);
 
     }
 

@@ -44,6 +44,7 @@ public class Loader {
         HyperSpecies.getInstance().registerUI();
         HyperSpecies.getInstance().registerEvents();
         HyperSpecies.getInstance().registerCommands();
+        HyperSpecies.getInstance().registerCrafting();
         AbilityLoader.initialize();
         SpeciesLoader.initialize();
         TeamLoader.initialize();

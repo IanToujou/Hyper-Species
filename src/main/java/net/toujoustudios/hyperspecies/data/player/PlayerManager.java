@@ -38,6 +38,7 @@ public class PlayerManager {
     private ArrayList<ItemStack> savedInventory;
     private ArrayList<Ability> abilityCooldowns;
     private final HashMap<String, Integer> abilityExperiences = new HashMap<>();
+    private double drunkenness;
 
     public PlayerManager(UUID uuid) {
 
@@ -86,6 +87,9 @@ public class PlayerManager {
 
         refreshScoreboard();
 
+        if(playerConfig.isSet("Data." + uuid + ".Points.Drunkenness")) drunkenness = playerConfig.getDouble("Data." + uuid + ".Points.Drunkenness");
+        else drunkenness = 0;
+
     }
 
     public static PlayerManager getPlayer(UUID uuid) {
@@ -106,6 +110,7 @@ public class PlayerManager {
         playerConfig.set("Data." + uuid + ".Points.Health", health);
         playerConfig.set("Data." + uuid + ".Points.Mana", mana);
         playerConfig.set("Data." + uuid + ".Points.Shield", shield);
+        playerConfig.set("Data." + uuid + ".Points.Drunkenness", drunkenness);
         playerConfig.set("Data." + uuid + ".Character.Experience.Main", experience);
         abilityExperiences.forEach((ability, integer) -> playerConfig.set("Data." + uuid + ".Character.Experience.Ability." + ability, integer));
         playerConfig.set("Data." + uuid + ".Character.Species", (species != null ? species.getName() : null));
@@ -370,6 +375,18 @@ public class PlayerManager {
         int oldExperience = abilityExperiences.getOrDefault(ability.getName(), 0);
         abilityExperiences.remove(ability.getName());
         abilityExperiences.put(ability.getName(), oldExperience + experience);
+    }
+
+    public double getDrunkenness() {
+        return drunkenness;
+    }
+
+    public void setDrunkenness(double drunkenness) {
+        this.drunkenness = drunkenness;
+    }
+
+    public boolean isDrunk() {
+        return drunkenness > 0;
     }
 
     // STATIC METHODS
