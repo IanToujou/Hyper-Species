@@ -5,6 +5,7 @@ import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.data.species.SubSpecies;
 import net.toujoustudios.hyperspecies.item.ItemList;
+import net.toujoustudios.hyperspecies.item.ItemListUI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +54,7 @@ public class SpeciesLoader {
         Species.createSpecies(
                 "Demon",
                 "§cDemon",
-                ItemList.DEMON,
+                ItemListUI.DEMON,
                 demonSpecies,
                 new PassiveDemon(),
                 List.of(Element.WATER, Element.FAIRY, Element.LIGHT)
@@ -62,7 +63,7 @@ public class SpeciesLoader {
         Species.createSpecies(
                 "Elf",
                 "§2Elf",
-                ItemList.ELF,
+                ItemListUI.ELF,
                 elfSpecies,
                 new PassiveElf(),
                 List.of(Element.FIRE, Element.ELECTRO, Element.DARK)
@@ -71,7 +72,7 @@ public class SpeciesLoader {
         Species.createSpecies(
                 "Reptile",
                 "§3Reptile",
-                ItemList.REPTILE,
+                ItemListUI.REPTILE,
                 reptileSpecies,
                 new PassiveReptile(),
                 List.of(Element.FAIRY, Element.PSYCHIC, Element.LIGHT)
@@ -80,7 +81,7 @@ public class SpeciesLoader {
         Species.createSpecies(
                 "Angel",
                 "§eAngel",
-                ItemList.ANGEL,
+                ItemListUI.ANGEL,
                 angelSpecies,
                 new PassiveAngel(),
                 List.of(Element.FIRE, Element.EARTH, Element.DARK)
@@ -89,7 +90,7 @@ public class SpeciesLoader {
         Species.createSpecies(
                 "Human",
                 "§dHuman",
-                ItemList.HUMAN,
+                ItemListUI.HUMAN,
                 humanSpecies,
                 null,
                 null
@@ -98,7 +99,7 @@ public class SpeciesLoader {
         Species.createSpecies(
                 "Aquatilia",
                 "§bAqua",
-                ItemList.AQUATILIA,
+                ItemListUI.AQUATILIA,
                 aquatiliaSpecies,
                 new PassiveAquatilia(),
                 List.of(Element.EARTH, Element.ELECTRO, Element.AIR)
@@ -107,7 +108,7 @@ public class SpeciesLoader {
         Species.createSpecies(
                 "Feline",
                 "§aFeline",
-                ItemList.FELINE,
+                ItemListUI.FELINE,
                 felineSpecies,
                 new PassiveFeline(),
                 List.of(Element.WATER, Element.ELECTRO, Element.NORMAL)
@@ -116,7 +117,7 @@ public class SpeciesLoader {
         Species.createSpecies(
                 "Dwarf",
                 "§6Dwarf",
-                ItemList.DWARF,
+                ItemListUI.DWARF,
                 dwarfSpecies,
                 new PassiveDwarf(),
                 List.of(Element.FLORA, Element.FAIRY, Element.PSYCHIC)
@@ -125,7 +126,7 @@ public class SpeciesLoader {
         Species.createSpecies(
                 "Wolf",
                 "§8Wolf",
-                ItemList.WOLF,
+                ItemListUI.WOLF,
                 wolfSpecies,
                 new PassiveWolf(),
                 List.of(Element.FIRE, Element.AIR, Element.PSYCHIC)

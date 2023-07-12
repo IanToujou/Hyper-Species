@@ -2,7 +2,7 @@ package net.toujoustudios.hyperspecies.event;
 
 import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
-import net.toujoustudios.hyperspecies.item.ItemList;
+import net.toujoustudios.hyperspecies.item.ItemListUI;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -96,9 +96,9 @@ public class PlayerInteractListener implements Listener {
         ArrayList<ItemStack> items = new ArrayList<>();
         for(int i = 0; i < 9; i++) items.add(player.getInventory().getItem(i));
         playerManager.setSavedInventory(items);
-        for(int i = 0; i < 9; i++) player.getInventory().setItem(i, ItemList.FILLER);
+        for(int i = 0; i < 9; i++) player.getInventory().setItem(i, ItemListUI.FILLER);
 
-        player.getInventory().setItem(0, ItemList.CANCEL);
+        player.getInventory().setItem(0, ItemListUI.CANCEL);
 
         for(int i = 0; i < playerManager.getAbilities().size(); i++) {
 

@@ -1,6 +1,7 @@
 package net.toujoustudios.hyperspecies.event;
 
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -22,15 +23,68 @@ public class PlayerItemConsumeListener implements Listener {
         Player player = event.getPlayer();
         PlayerManager playerManager = PlayerManager.getPlayer(player);
 
+        if(event.getItem().getType() == Material.MILK_BUCKET) playerManager.setKawaii(false);
+
         if(playerManager.getSpecies() == null) return;
 
         ItemMeta itemMeta = event.getItem().getItemMeta();
         if(itemMeta != null) {
-            if(itemMeta.getDisplayName().equals("§c★ §2Heineken Original §c★")) {
-                playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.3);
+            if(itemMeta.getDisplayName().equals("§6Beer")) {
+                playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.2);
                 int nauseaDuration = (int) Math.round(playerManager.getDrunkenness() * 10);
                 int blindDuration = (int) Math.round(playerManager.getDrunkenness() * 2);
-                if (nauseaDuration > 0) player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * nauseaDuration, 0, false, false, true));
+                if (nauseaDuration > 0) {
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * nauseaDuration, 0, false, false, true));
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 0.5f);
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 1.5f);
+                }
+                if (playerManager.getDrunkenness() > 3) player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * blindDuration, 0, false, false, true));
+                return;
+            } else if(itemMeta.getDisplayName().equals("§6Rum")) {
+                playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.6);
+                int nauseaDuration = (int) Math.round(playerManager.getDrunkenness() * 10);
+                int blindDuration = (int) Math.round(playerManager.getDrunkenness() * 2);
+                if (nauseaDuration > 0) {
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * nauseaDuration, 0, false, false, true));
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 0.5f);
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 1.5f);
+                }
+                if (playerManager.getDrunkenness() > 3) player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * blindDuration, 0, false, false, true));
+                return;
+            } else if(itemMeta.getDisplayName().equals("§6Red Wine")) {
+                playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.5);
+                int nauseaDuration = (int) Math.round(playerManager.getDrunkenness() * 10);
+                int blindDuration = (int) Math.round(playerManager.getDrunkenness() * 2);
+                if (nauseaDuration > 0) {
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * nauseaDuration, 0, false, false, true));
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 0.5f);
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 1.5f);
+                }
+                if (playerManager.getDrunkenness() > 3) player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * blindDuration, 0, false, false, true));
+                return;
+            } else if(itemMeta.getDisplayName().equals("§6White Wine")) {
+                playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.5);
+                int nauseaDuration = (int) Math.round(playerManager.getDrunkenness() * 10);
+                int blindDuration = (int) Math.round(playerManager.getDrunkenness() * 2);
+                if (nauseaDuration > 0) {
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * nauseaDuration, 0, false, false, true));
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 0.5f);
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 1.5f);
+                }
+                if (playerManager.getDrunkenness() > 3) player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * blindDuration, 0, false, false, true));
+                return;
+            } else if(itemMeta.getDisplayName().equals("§6Anime Girl Body Fluids")) {
+                playerManager.setDrunkenness(playerManager.getDrunkenness() + 1);
+                Bukkit.broadcastMessage("§e" + player.getName() + " §7is turning into an anime girl§8...");
+                player.sendMessage("§7Pssht§8... §7To revert this, drink milk§8.");
+                playerManager.setKawaii(true);
+                int nauseaDuration = (int) Math.round(playerManager.getDrunkenness() * 10);
+                int blindDuration = (int) Math.round(playerManager.getDrunkenness() * 2);
+                if (nauseaDuration > 0) {
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * nauseaDuration, 0, false, false, true));
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 0.5f);
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 1.5f);
+                }
                 if (playerManager.getDrunkenness() > 3) player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * blindDuration, 0, false, false, true));
                 return;
             }

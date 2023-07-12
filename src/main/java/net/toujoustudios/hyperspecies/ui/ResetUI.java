@@ -2,7 +2,7 @@ package net.toujoustudios.hyperspecies.ui;
 
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
-import net.toujoustudios.hyperspecies.item.ItemList;
+import net.toujoustudios.hyperspecies.item.ItemListUI;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -77,14 +77,14 @@ public class ResetUI implements Listener {
 
         // MAIN
         Inventory pageMain = Bukkit.createInventory(null, 9*3, "Reset Character");
-        for(int i = 0; i < pageMain.getSize(); i++) pageMain.setItem(i, ItemList.FILLER);
-        pageMain.setItem(13, ItemList.RESET_CHARACTER);
+        for(int i = 0; i < pageMain.getSize(); i++) pageMain.setItem(i, ItemListUI.FILLER);
+        pageMain.setItem(13, ItemListUI.RESET_CHARACTER);
 
         // CONFIRM
         Inventory pageConfirm = Bukkit.createInventory(null, 9*3, "Reset Character: Confirm");
-        for(int i = 0; i < pageConfirm.getSize(); i++) pageConfirm.setItem(i, ItemList.FILLER);
-        pageConfirm.setItem(11, ItemList.PREVIOUS);
-        pageConfirm.setItem(15, ItemList.RESET_CHARACTER_CONFIRM);
+        for(int i = 0; i < pageConfirm.getSize(); i++) pageConfirm.setItem(i, ItemListUI.FILLER);
+        pageConfirm.setItem(11, ItemListUI.PREVIOUS);
+        pageConfirm.setItem(15, ItemListUI.RESET_CHARACTER_CONFIRM);
 
         inventories.put(ResetPage.MAIN.getIndex(), pageMain);
         inventories.put(ResetPage.CONFIRM.getIndex(), pageConfirm);

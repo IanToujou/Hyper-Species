@@ -3,10 +3,9 @@ package net.toujoustudios.hyperspecies.command;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.data.team.Team;
-import net.toujoustudios.hyperspecies.item.ItemList;
+import net.toujoustudios.hyperspecies.item.ItemListUI;
 import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
-import net.toujoustudios.hyperspecies.ui.TeamPage;
 import net.toujoustudios.hyperspecies.ui.TeamUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -16,16 +15,16 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 public class TeamCommand implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
+    public boolean onCommand(@Nullable CommandSender commandSender, @Nullable Command command, @Nullable String label, @Nullable String[] args) {
 
         if(!(commandSender instanceof Player player)) {
             Logger.log(LogLevel.ERROR, "You cannot use this command in the console.");
@@ -97,11 +96,11 @@ public class TeamCommand implements CommandExecutor {
             Team team = playerManager.getTeam();
 
             Inventory inventory = Bukkit.createInventory(null, 9*6, "Team: " + team.getColor() + team.getName());
-            for(int i = 0; i < 9; i++) inventory.setItem(i, ItemList.FILLER);
-            for(int i = 45; i < inventory.getSize(); i++) inventory.setItem(i, ItemList.FILLER);
+            for(int i = 0; i < 9; i++) inventory.setItem(i, ItemListUI.FILLER);
+            for(int i = 45; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
 
-            inventory.setItem(49, ItemList.CANCEL);
-            inventory.setItem(4, ItemList.TEAM_SETTINGS);
+            inventory.setItem(49, ItemListUI.CANCEL);
+            inventory.setItem(4, ItemListUI.TEAM_SETTINGS);
 
             ItemStack owner = new ItemStack(Material.PLAYER_HEAD);
             SkullMeta ownerMeta = (SkullMeta) owner.getItemMeta();

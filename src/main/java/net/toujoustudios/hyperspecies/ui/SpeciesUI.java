@@ -4,6 +4,7 @@ import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.item.ItemList;
+import net.toujoustudios.hyperspecies.item.ItemListUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -92,97 +93,97 @@ public class SpeciesUI implements Listener {
         // MAIN
 
         Inventory pageMain = Bukkit.createInventory(null, 9*5, "Species Selection");
-        for(int i = 0; i < pageMain.getSize(); i++) pageMain.setItem(i, ItemList.FILLER);
-        pageMain.setItem(10, ItemList.DEMON);
-        pageMain.setItem(12, ItemList.ELF);
-        pageMain.setItem(14, ItemList.REPTILE);
-        pageMain.setItem(16, ItemList.ANGEL);
-        pageMain.setItem(19, ItemList.HUMAN);
-        pageMain.setItem(21, ItemList.AQUATILIA);
-        pageMain.setItem(23, ItemList.FELINE);
-        pageMain.setItem(25, ItemList.DWARF);
-        pageMain.setItem(28, ItemList.WOLF);
+        for(int i = 0; i < pageMain.getSize(); i++) pageMain.setItem(i, ItemListUI.FILLER);
+        pageMain.setItem(10, ItemListUI.DEMON);
+        pageMain.setItem(12, ItemListUI.ELF);
+        pageMain.setItem(14, ItemListUI.REPTILE);
+        pageMain.setItem(16, ItemListUI.ANGEL);
+        pageMain.setItem(19, ItemListUI.HUMAN);
+        pageMain.setItem(21, ItemListUI.AQUATILIA);
+        pageMain.setItem(23, ItemListUI.FELINE);
+        pageMain.setItem(25, ItemListUI.DWARF);
+        pageMain.setItem(28, ItemListUI.WOLF);
         inventories.put(SpeciesPage.MAIN.getIndex(), pageMain);
 
         // DEMON
 
         Inventory pageDemon = Bukkit.createInventory(null, 9*3, "Species: Demon");
-        for(int i = 0; i < pageDemon.getSize(); i++) pageDemon.setItem(i, ItemList.FILLER);
-        pageDemon.setItem(10, ItemList.PREVIOUS);
-        pageDemon.setItem(13, ItemList.DEMON_PASSIVE_ABILITIES);
-        pageDemon.setItem(16, ItemList.CONFIRM);
+        for(int i = 0; i < pageDemon.getSize(); i++) pageDemon.setItem(i, ItemListUI.FILLER);
+        pageDemon.setItem(10, ItemListUI.PREVIOUS);
+        pageDemon.setItem(13, ItemListUI.DEMON_PASSIVE_ABILITIES);
+        pageDemon.setItem(16, ItemListUI.CONFIRM);
         inventories.put(SpeciesPage.DEMON.getIndex(), pageDemon);
 
         // ELF
 
         Inventory pageElf = Bukkit.createInventory(null, 9*3, "Species: Elf");
-        for(int i = 0; i < pageElf.getSize(); i++) pageElf.setItem(i, ItemList.FILLER);
-        pageElf.setItem(10, ItemList.PREVIOUS);
-        pageElf.setItem(13, ItemList.ELF_PASSIVE_ABILITIES);
-        pageElf.setItem(16, ItemList.CONFIRM);
+        for(int i = 0; i < pageElf.getSize(); i++) pageElf.setItem(i, ItemListUI.FILLER);
+        pageElf.setItem(10, ItemListUI.PREVIOUS);
+        pageElf.setItem(13, ItemListUI.ELF_PASSIVE_ABILITIES);
+        pageElf.setItem(16, ItemListUI.CONFIRM);
         inventories.put(SpeciesPage.ELF.getIndex(), pageElf);
 
         // REPTILE
 
         Inventory pageReptile = Bukkit.createInventory(null, 9*3, "Species: Reptile");
-        for(int i = 0; i < pageReptile.getSize(); i++) pageReptile.setItem(i, ItemList.FILLER);
-        pageReptile.setItem(10, ItemList.PREVIOUS);
-        pageReptile.setItem(13, ItemList.REPTILE_PASSIVE_ABILITIES);
-        pageReptile.setItem(16, ItemList.CONFIRM);
+        for(int i = 0; i < pageReptile.getSize(); i++) pageReptile.setItem(i, ItemListUI.FILLER);
+        pageReptile.setItem(10, ItemListUI.PREVIOUS);
+        pageReptile.setItem(13, ItemListUI.REPTILE_PASSIVE_ABILITIES);
+        pageReptile.setItem(16, ItemListUI.CONFIRM);
         inventories.put(SpeciesPage.REPTILE.getIndex(), pageReptile);
 
         // ANGEL
 
         Inventory pageAngel = Bukkit.createInventory(null, 9*3, "Species: Angel");
-        for(int i = 0; i < pageAngel.getSize(); i++) pageAngel.setItem(i, ItemList.FILLER);
-        pageAngel.setItem(10, ItemList.PREVIOUS);
-        pageAngel.setItem(13, ItemList.ANGEL_PASSIVE_ABILITIES);
-        pageAngel.setItem(16, ItemList.CONFIRM);
+        for(int i = 0; i < pageAngel.getSize(); i++) pageAngel.setItem(i, ItemListUI.FILLER);
+        pageAngel.setItem(10, ItemListUI.PREVIOUS);
+        pageAngel.setItem(13, ItemListUI.ANGEL_PASSIVE_ABILITIES);
+        pageAngel.setItem(16, ItemListUI.CONFIRM);
         inventories.put(SpeciesPage.ANGEL.getIndex(), pageAngel);
 
         // HUMAN
 
         Inventory pageHuman = Bukkit.createInventory(null, 9*3, "Species: Human");
-        for(int i = 0; i < pageHuman.getSize(); i++) pageHuman.setItem(i, ItemList.FILLER);
-        pageHuman.setItem(10, ItemList.PREVIOUS);
-        pageHuman.setItem(13, ItemList.HUMAN_PASSIVE_ABILITIES);
-        pageHuman.setItem(16, ItemList.CONFIRM);
+        for(int i = 0; i < pageHuman.getSize(); i++) pageHuman.setItem(i, ItemListUI.FILLER);
+        pageHuman.setItem(10, ItemListUI.PREVIOUS);
+        pageHuman.setItem(13, ItemListUI.HUMAN_PASSIVE_ABILITIES);
+        pageHuman.setItem(16, ItemListUI.CONFIRM);
         inventories.put(SpeciesPage.HUMAN.getIndex(), pageHuman);
 
         // AQUATILIA
 
         Inventory pageAquatilia = Bukkit.createInventory(null, 9*3, "Species: Aquatilia");
-        for(int i = 0; i < pageAquatilia.getSize(); i++) pageAquatilia.setItem(i, ItemList.FILLER);
-        pageAquatilia.setItem(10, ItemList.PREVIOUS);
-        pageAquatilia.setItem(13, ItemList.AQUATILIA_PASSIVE_ABILITIES);
-        pageAquatilia.setItem(16, ItemList.CONFIRM);
+        for(int i = 0; i < pageAquatilia.getSize(); i++) pageAquatilia.setItem(i, ItemListUI.FILLER);
+        pageAquatilia.setItem(10, ItemListUI.PREVIOUS);
+        pageAquatilia.setItem(13, ItemListUI.AQUATILIA_PASSIVE_ABILITIES);
+        pageAquatilia.setItem(16, ItemListUI.CONFIRM);
         inventories.put(SpeciesPage.AQUATILIA.getIndex(), pageAquatilia);
 
         // FELINE
 
         Inventory pageFeline = Bukkit.createInventory(null, 9*3, "Species: Feline");
-        for(int i = 0; i < pageFeline.getSize(); i++) pageFeline.setItem(i, ItemList.FILLER);
-        pageFeline.setItem(10, ItemList.PREVIOUS);
-        pageFeline.setItem(13, ItemList.FELINE_PASSIVE_ABILITIES);
-        pageFeline.setItem(16, ItemList.CONFIRM);
+        for(int i = 0; i < pageFeline.getSize(); i++) pageFeline.setItem(i, ItemListUI.FILLER);
+        pageFeline.setItem(10, ItemListUI.PREVIOUS);
+        pageFeline.setItem(13, ItemListUI.FELINE_PASSIVE_ABILITIES);
+        pageFeline.setItem(16, ItemListUI.CONFIRM);
         inventories.put(SpeciesPage.FELINE.getIndex(), pageFeline);
 
         // DWARF
 
         Inventory pageDwarf = Bukkit.createInventory(null, 9*3, "Species: Dwarf");
-        for(int i = 0; i < pageDwarf.getSize(); i++) pageDwarf.setItem(i, ItemList.FILLER);
-        pageDwarf.setItem(10, ItemList.PREVIOUS);
-        pageDwarf.setItem(13, ItemList.DWARF_PASSIVE_ABILITIES);
-        pageDwarf.setItem(16, ItemList.CONFIRM);
+        for(int i = 0; i < pageDwarf.getSize(); i++) pageDwarf.setItem(i, ItemListUI.FILLER);
+        pageDwarf.setItem(10, ItemListUI.PREVIOUS);
+        pageDwarf.setItem(13, ItemListUI.DWARF_PASSIVE_ABILITIES);
+        pageDwarf.setItem(16, ItemListUI.CONFIRM);
         inventories.put(SpeciesPage.DWARF.getIndex(), pageDwarf);
 
         // WOLF
 
         Inventory pageWolf = Bukkit.createInventory(null, 9*3, "Species: Wolf");
-        for(int i = 0; i < pageWolf.getSize(); i++) pageWolf.setItem(i, ItemList.FILLER);
-        pageWolf.setItem(10, ItemList.PREVIOUS);
-        pageWolf.setItem(13, ItemList.WOLF_PASSIVE_ABILITIES);
-        pageWolf.setItem(16, ItemList.CONFIRM);
+        for(int i = 0; i < pageWolf.getSize(); i++) pageWolf.setItem(i, ItemListUI.FILLER);
+        pageWolf.setItem(10, ItemListUI.PREVIOUS);
+        pageWolf.setItem(13, ItemListUI.WOLF_PASSIVE_ABILITIES);
+        pageWolf.setItem(16, ItemListUI.CONFIRM);
         inventories.put(SpeciesPage.WOLF.getIndex(), pageWolf);
 
     }

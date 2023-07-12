@@ -39,6 +39,7 @@ public class PlayerManager {
     private ArrayList<Ability> abilityCooldowns;
     private final HashMap<String, Integer> abilityExperiences = new HashMap<>();
     private double drunkenness;
+    private boolean kawaii;
 
     public PlayerManager(UUID uuid) {
 
@@ -89,6 +90,8 @@ public class PlayerManager {
 
         if(playerConfig.isSet("Data." + uuid + ".Points.Drunkenness")) drunkenness = playerConfig.getDouble("Data." + uuid + ".Points.Drunkenness");
         else drunkenness = 0;
+
+        kawaii = false;
 
     }
 
@@ -387,6 +390,14 @@ public class PlayerManager {
 
     public boolean isDrunk() {
         return drunkenness > 0;
+    }
+
+    public boolean isKawaii() {
+        return kawaii;
+    }
+
+    public void setKawaii(boolean kawaii) {
+        this.kawaii = kawaii;
     }
 
     // STATIC METHODS

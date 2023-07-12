@@ -5,6 +5,7 @@ import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.data.team.Team;
 import net.toujoustudios.hyperspecies.data.team.TeamStatus;
 import net.toujoustudios.hyperspecies.item.ItemList;
+import net.toujoustudios.hyperspecies.item.ItemListUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -171,8 +172,8 @@ public class TeamUI implements Listener {
                 if(target.getUniqueId().equals(player.getUniqueId())) return;
 
                 Inventory inventory = Bukkit.createInventory(null, 3*9, "Team Player: " + target.getName());
-                for(int i = 0; i < inventory.getSize(); i++) inventory.setItem(i, ItemList.FILLER);
-                inventory.setItem(10, ItemList.PREVIOUS);
+                for(int i = 0; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
+                inventory.setItem(10, ItemListUI.PREVIOUS);
 
                 ItemStack skull = new ItemStack(Material.PLAYER_HEAD);
                 SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
@@ -182,8 +183,8 @@ public class TeamUI implements Listener {
                 skull.setItemMeta(skullMeta);
 
                 inventory.setItem(12, skull);
-                inventory.setItem(14, ItemList.TEAM_KICK_PLAYER);
-                inventory.setItem(16, ItemList.TEAM_PROMOTE_PLAYER);
+                inventory.setItem(14, ItemListUI.TEAM_KICK_PLAYER);
+                inventory.setItem(16, ItemListUI.TEAM_PROMOTE_PLAYER);
 
                 player.openInventory(inventory);
 
@@ -441,43 +442,43 @@ public class TeamUI implements Listener {
         // MAIN
 
         Inventory pageMain = Bukkit.createInventory(null, 9*3, "Team Management");
-        for(int i = 0; i < pageMain.getSize(); i++) pageMain.setItem(i, ItemList.FILLER);
-        pageMain.setItem(10, ItemList.CANCEL);
-        pageMain.setItem(13, ItemList.TEAM_BROWSE);
-        pageMain.setItem(16, ItemList.TEAM_CREATE);
+        for(int i = 0; i < pageMain.getSize(); i++) pageMain.setItem(i, ItemListUI.FILLER);
+        pageMain.setItem(10, ItemListUI.CANCEL);
+        pageMain.setItem(13, ItemListUI.TEAM_BROWSE);
+        pageMain.setItem(16, ItemListUI.TEAM_CREATE);
 
         // SETTINGS
 
         Inventory pageSettings = Bukkit.createInventory(null, 9*3, "Team Settings");
-        for(int i = 0; i < pageSettings.getSize(); i++) pageSettings.setItem(i, ItemList.FILLER);
-        pageSettings.setItem(10, ItemList.PREVIOUS);
-        pageSettings.setItem(16, ItemList.TEAM_LEAVE);
+        for(int i = 0; i < pageSettings.getSize(); i++) pageSettings.setItem(i, ItemListUI.FILLER);
+        pageSettings.setItem(10, ItemListUI.PREVIOUS);
+        pageSettings.setItem(16, ItemListUI.TEAM_LEAVE);
 
         // SETTINGS ADMIN
 
         Inventory pageAdmin = Bukkit.createInventory(null, 9*5, "Team Settings");
-        for(int i = 0; i < pageAdmin.getSize(); i++) pageAdmin.setItem(i, ItemList.FILLER);
-        pageAdmin.setItem(10, ItemList.TEAM_CHANGE_NAME);
-        pageAdmin.setItem(13, ItemList.TEAM_CHANGE_DESCRIPTION);
-        pageAdmin.setItem(16, ItemList.TEAM_CHANGE_STATUS);
-        pageAdmin.setItem(29, ItemList.PREVIOUS);
-        pageAdmin.setItem(33, ItemList.TEAM_LEAVE);
+        for(int i = 0; i < pageAdmin.getSize(); i++) pageAdmin.setItem(i, ItemListUI.FILLER);
+        pageAdmin.setItem(10, ItemListUI.TEAM_CHANGE_NAME);
+        pageAdmin.setItem(13, ItemListUI.TEAM_CHANGE_DESCRIPTION);
+        pageAdmin.setItem(16, ItemListUI.TEAM_CHANGE_STATUS);
+        pageAdmin.setItem(29, ItemListUI.PREVIOUS);
+        pageAdmin.setItem(33, ItemListUI.TEAM_LEAVE);
 
         // CHANGE STATUS
 
         Inventory pageStatus = Bukkit.createInventory(null, 9*3, "Change Status");
-        for(int i = 0; i < pageStatus.getSize(); i++) pageStatus.setItem(i, ItemList.FILLER);
-        pageStatus.setItem(10, ItemList.PREVIOUS);
-        pageStatus.setItem(12, ItemList.TEAM_CHANGE_STATUS_CLOSED);
-        pageStatus.setItem(14, ItemList.TEAM_CHANGE_STATUS_INVITE);
-        pageStatus.setItem(16, ItemList.TEAM_CHANGE_STATUS_OPEN);
+        for(int i = 0; i < pageStatus.getSize(); i++) pageStatus.setItem(i, ItemListUI.FILLER);
+        pageStatus.setItem(10, ItemListUI.PREVIOUS);
+        pageStatus.setItem(12, ItemListUI.TEAM_CHANGE_STATUS_CLOSED);
+        pageStatus.setItem(14, ItemListUI.TEAM_CHANGE_STATUS_INVITE);
+        pageStatus.setItem(16, ItemListUI.TEAM_CHANGE_STATUS_OPEN);
 
         // LEAVE CONFIRM
 
         Inventory pageLeaveConfirm = Bukkit.createInventory(null, 9*3, "Leave Team");
-        for(int i = 0; i < pageLeaveConfirm.getSize(); i++) pageLeaveConfirm.setItem(i, ItemList.FILLER);
-        pageLeaveConfirm.setItem(16, ItemList.CANCEL);
-        pageLeaveConfirm.setItem(10, ItemList.TEAM_LEAVE_CONFIRM);
+        for(int i = 0; i < pageLeaveConfirm.getSize(); i++) pageLeaveConfirm.setItem(i, ItemListUI.FILLER);
+        pageLeaveConfirm.setItem(16, ItemListUI.CANCEL);
+        pageLeaveConfirm.setItem(10, ItemListUI.TEAM_LEAVE_CONFIRM);
 
         inventories.put(TeamPage.MAIN.getIndex(), pageMain);
         inventories.put(TeamPage.SETTINGS.getIndex(), pageSettings);
@@ -495,11 +496,11 @@ public class TeamUI implements Listener {
             int currentPage = i+1;
 
             Inventory pageBrowse = Bukkit.createInventory(null, 9*5, "Browse Teams: Page " + currentPage);
-            for(int j = 0; j < 9; j++) pageBrowse.setItem(j, ItemList.FILLER);
-            for(int j = 36; j < pageBrowse.getSize(); j++) pageBrowse.setItem(j, ItemList.FILLER);
-            pageBrowse.setItem(40, ItemList.CANCEL);
-            if(currentPage != 1) pageBrowse.setItem(36, ItemList.PREVIOUS);
-            if(currentPage < pages) pageBrowse.setItem(44, ItemList.NEXT);
+            for(int j = 0; j < 9; j++) pageBrowse.setItem(j, ItemListUI.FILLER);
+            for(int j = 36; j < pageBrowse.getSize(); j++) pageBrowse.setItem(j, ItemListUI.FILLER);
+            pageBrowse.setItem(40, ItemListUI.CANCEL);
+            if(currentPage != 1) pageBrowse.setItem(36, ItemListUI.PREVIOUS);
+            if(currentPage < pages) pageBrowse.setItem(44, ItemListUI.NEXT);
 
             List<Team> teamsInPage;
 

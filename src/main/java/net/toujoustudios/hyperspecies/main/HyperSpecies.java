@@ -80,18 +80,24 @@ public final class HyperSpecies extends JavaPlugin {
 
             player.setScoreboard(scoreboard);
 
-            if(drunkenness >= 4) {
+            boolean isDwarf = playerManager.getSpecies().getName().equals("Dwarf");
+
+            if(drunkenness >= 4 && !isDwarf) {
                 player.damage(0.5);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 *5, 1, false, false, true));
-            } else if(drunkenness >= 3.5) {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 5, 2, false, false, true));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 5, 0, false, false, true));
+            } else if(drunkenness >= 3.5 && !isDwarf) {
                 player.damage(0.2);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 *5, 1, false, false, true));
-            } else if(drunkenness >= 3.0) {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 5, 2, false, false, true));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 5, 0, false, false, true));
+            } else if(drunkenness >= 3.0 && !isDwarf) {
                 player.damage(0.1);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 *5, 1, false, false, true));
-            } else if(drunkenness >= 2.5) {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 *5, 1, false, false, true));
-            } else if(drunkenness >= 1.8) {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 5, 1, false, false, true));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 5, 0, false, false, true));
+            } else if(drunkenness >= 2.5 && !isDwarf) {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 5, 1, false, false, true));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 5, 0, false, false, true));
+            } else if(drunkenness >= 1.8 && !isDwarf) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 5, 0, false, false, true));
             } else if(drunkenness >= 0.8) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 20 * 5, 0, false, false, true));
@@ -179,12 +185,20 @@ public final class HyperSpecies extends JavaPlugin {
 
     public void registerCrafting() {
 
-        ShapedRecipe alcoholRecipe = new ShapedRecipe(new NamespacedKey(this, "alcoholHeineken"), ItemList.ALCOHOL_HEINEKEN);
-        alcoholRecipe.shape("AAA", "ABA", "ACA");
-        alcoholRecipe.setIngredient('A', Material.WHEAT);
-        alcoholRecipe.setIngredient('B', Material.GLASS_BOTTLE);
-        alcoholRecipe.setIngredient('C', Material.WATER_BUCKET);
-        Bukkit.addRecipe(alcoholRecipe);
+        ShapedRecipe alcoholBeerRecipe = new ShapedRecipe(new NamespacedKey(this, "alcoholBeer"), ItemList.ALCOHOL_BEER);
+        alcoholBeerRecipe.shape("AAA", "ABA", "ACA");
+        alcoholBeerRecipe.setIngredient('A', Material.WHEAT);
+        alcoholBeerRecipe.setIngredient('B', Material.GLASS_BOTTLE);
+        alcoholBeerRecipe.setIngredient('C', Material.WATER_BUCKET);
+        Bukkit.addRecipe(alcoholBeerRecipe);
+
+        ShapedRecipe alcoholAnimeBodyFluidsRecipe = new ShapedRecipe(new NamespacedKey(this, "alcoholAnimeBodyFluids"), ItemList.ALCOHOL_ANIME_BODY_FLUIDS);
+        alcoholAnimeBodyFluidsRecipe.shape("AAA", "ABA", "DCD");
+        alcoholAnimeBodyFluidsRecipe.setIngredient('A', Material.DIAMOND);
+        alcoholAnimeBodyFluidsRecipe.setIngredient('B', Material.GLASS_BOTTLE);
+        alcoholAnimeBodyFluidsRecipe.setIngredient('C', Material.WATER_BUCKET);
+        alcoholAnimeBodyFluidsRecipe.setIngredient('D', Material.NETHERITE_INGOT);
+        Bukkit.addRecipe(alcoholAnimeBodyFluidsRecipe);
 
     }
 

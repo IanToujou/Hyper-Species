@@ -5,6 +5,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.item.ItemList;
+import net.toujoustudios.hyperspecies.item.ItemListUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -70,9 +71,9 @@ public class AbilityTree {
         assert elementMeta != null;
         elementMeta.setDisplayName(" ");
         element.setItemMeta(elementMeta);
-        for(int i = 0; i < inventory.getSize(); i++) inventory.setItem(i, ItemList.FILLER);
+        for(int i = 0; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
         for(int i = 45; i < inventory.getSize(); i++) inventory.setItem(i, element);
-        inventory.setItem(49, ItemList.CANCEL);
+        inventory.setItem(49, ItemListUI.CANCEL);
 
         abilities.forEach((slot, ability) -> {
 
@@ -120,23 +121,23 @@ public class AbilityTree {
                 item.setItemMeta(itemMeta);
 
                 // Fill first line
-                if(slot == 1) inventory.setItem(11, ItemList.TREE_TRACK_LOCKED);
-                if(slot == 1) inventory.setItem(12, ItemList.TREE_TRACK_LOCKED);
-                if(slot == 2) inventory.setItem(13, ItemList.TREE_TRACK_LOCKED);
-                if(slot == 2) inventory.setItem(14, ItemList.TREE_TRACK_LOCKED);
-                if(slot == 3) inventory.setItem(15, ItemList.TREE_TRACK_LOCKED);
+                if(slot == 1) inventory.setItem(11, ItemListUI.TREE_TRACK_LOCKED);
+                if(slot == 1) inventory.setItem(12, ItemListUI.TREE_TRACK_LOCKED);
+                if(slot == 2) inventory.setItem(13, ItemListUI.TREE_TRACK_LOCKED);
+                if(slot == 2) inventory.setItem(14, ItemListUI.TREE_TRACK_LOCKED);
+                if(slot == 3) inventory.setItem(15, ItemListUI.TREE_TRACK_LOCKED);
 
                 // Fill second line
-                if(slot == 11) inventory.setItem(29, ItemList.TREE_TRACK_LOCKED);
-                if(slot == 11) inventory.setItem(30, ItemList.TREE_TRACK_LOCKED);
-                if(slot == 12) inventory.setItem(31, ItemList.TREE_TRACK_LOCKED);
-                if(slot == 12) inventory.setItem(32, ItemList.TREE_TRACK_LOCKED);
-                if(slot == 13) inventory.setItem(33, ItemList.TREE_TRACK_LOCKED);
+                if(slot == 11) inventory.setItem(29, ItemListUI.TREE_TRACK_LOCKED);
+                if(slot == 11) inventory.setItem(30, ItemListUI.TREE_TRACK_LOCKED);
+                if(slot == 12) inventory.setItem(31, ItemListUI.TREE_TRACK_LOCKED);
+                if(slot == 12) inventory.setItem(32, ItemListUI.TREE_TRACK_LOCKED);
+                if(slot == 13) inventory.setItem(33, ItemListUI.TREE_TRACK_LOCKED);
 
-                if(links.contains(0) && slot == 10) inventory.setItem(19, ItemList.TREE_TRACK_LOCKED);
-                if(links.contains(1) && slot == 11) inventory.setItem(21, ItemList.TREE_TRACK_LOCKED);
-                if(links.contains(2) && slot == 12) inventory.setItem(23, ItemList.TREE_TRACK_LOCKED);
-                if(links.contains(3) && slot == 13) inventory.setItem(25, ItemList.TREE_TRACK_LOCKED);
+                if(links.contains(0) && slot == 10) inventory.setItem(19, ItemListUI.TREE_TRACK_LOCKED);
+                if(links.contains(1) && slot == 11) inventory.setItem(21, ItemListUI.TREE_TRACK_LOCKED);
+                if(links.contains(2) && slot == 12) inventory.setItem(23, ItemListUI.TREE_TRACK_LOCKED);
+                if(links.contains(3) && slot == 13) inventory.setItem(25, ItemListUI.TREE_TRACK_LOCKED);
 
                 // Set abilities
                 if(slot == 0) inventory.setItem(10, item);
@@ -165,9 +166,9 @@ public class AbilityTree {
         if(page == 0) {
 
             Inventory inventory = Bukkit.createInventory(null, 9*6, "Ability Trees: Page 1");
-            for(int i = inventory.getSize()-9; i < inventory.getSize(); i++) inventory.setItem(i, ItemList.FILLER);
-            inventory.setItem(49, ItemList.CANCEL);
-            inventory.setItem(53, ItemList.NEXT);
+            for(int i = inventory.getSize()-9; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
+            inventory.setItem(49, ItemListUI.CANCEL);
+            inventory.setItem(53, ItemListUI.NEXT);
             inventory.setItem(0, Element.FIRE.getItem(false));
             inventory.setItem(9, Element.EARTH.getItem(false));
             inventory.setItem(18, Element.WATER.getItem(false));
@@ -216,10 +217,10 @@ public class AbilityTree {
         } else if(page == 1) {
 
             Inventory inventory = Bukkit.createInventory(null, 9*6, "Ability Trees: Page 2");
-            for(int i = inventory.getSize()-9; i < inventory.getSize(); i++) inventory.setItem(i, ItemList.FILLER);
-            inventory.setItem(45, ItemList.PREVIOUS);
-            inventory.setItem(49, ItemList.CANCEL);
-            inventory.setItem(53, ItemList.NEXT);
+            for(int i = inventory.getSize()-9; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
+            inventory.setItem(45, ItemListUI.PREVIOUS);
+            inventory.setItem(49, ItemListUI.CANCEL);
+            inventory.setItem(53, ItemListUI.NEXT);
             inventory.setItem(0, Element.ELECTRO.getItem(false));
             inventory.setItem(9, Element.AIR.getItem(false));
             inventory.setItem(18, Element.PSYCHIC.getItem(false));
@@ -268,9 +269,9 @@ public class AbilityTree {
         } else {
 
             Inventory inventory = Bukkit.createInventory(null, 9*2, "Ability Trees: Page 3");
-            for(int i = inventory.getSize()-9; i < inventory.getSize(); i++) inventory.setItem(i, ItemList.FILLER);
-            inventory.setItem(9, ItemList.PREVIOUS);
-            inventory.setItem(13, ItemList.CANCEL);
+            for(int i = inventory.getSize()-9; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
+            inventory.setItem(9, ItemListUI.PREVIOUS);
+            inventory.setItem(13, ItemListUI.CANCEL);
             inventory.setItem(0, Element.DARK.getItem(false));
 
             int indexDark = 0;

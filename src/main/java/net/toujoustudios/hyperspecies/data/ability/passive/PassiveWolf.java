@@ -32,9 +32,12 @@ public class PassiveWolf extends PassiveAbility {
             player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 20, 0, false, false, true));
             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 20, 0, false, false, true));
         } else {
-            Block block = player.getWorld().getHighestBlockAt(player.getLocation());
+            Block block = player.getWorld().getHighestBlockAt(player.getLocation().add(0, 1, 0));
             if(block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 5, 0, false, false, true));
+            } else {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 20, 0, false, false, true));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 20, 0, false, false, true));
             }
         }
 
