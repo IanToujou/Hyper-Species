@@ -80,4 +80,8 @@ public class Loader {
         HyperSpecies.getInstance().getServer().getPluginManager().disablePlugin(HyperSpecies.getInstance());
     }
 
+    public static LoaderState getState() {
+        return state;
+    }
+
 }
