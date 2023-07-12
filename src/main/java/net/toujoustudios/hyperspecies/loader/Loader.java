@@ -3,6 +3,7 @@ package net.toujoustudios.hyperspecies.loader;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.item.ItemList;
+import net.toujoustudios.hyperspecies.item.ItemListUI;
 import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
@@ -29,6 +30,7 @@ public class Loader {
 
         state = LoaderState.PRE_INIT;
         Config.initialize();
+        ItemListUI.initialize();
         ItemList.initialize();
         EmoteLoader.initialize();
 
@@ -76,10 +78,6 @@ public class Loader {
     public static void cancel() {
         cancelled = true;
         HyperSpecies.getInstance().getServer().getPluginManager().disablePlugin(HyperSpecies.getInstance());
-    }
-
-    public static LoaderState getState() {
-        return state;
     }
 
 }
