@@ -20,11 +20,11 @@ public class PassiveAngel extends PassiveAbility {
         }
 
         // Regeneration in sunlight and weakness at night
-        if(player.getWorld().getTime() < 12500 && player.getWorld().getTime() > 23500 && !player.getWorld().isThundering() && !player.getWorld().hasStorm()) {
+        if(player.getWorld().getTime() < 12500 || player.getWorld().getTime() > 23500 && !player.getWorld().isThundering() && !player.getWorld().hasStorm()) {
             Block block = player.getWorld().getHighestBlockAt(player.getLocation());
             if(block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 20, 0, false, false, true));
-                playerManager.setHealthRegeneration(0.3);
+                playerManager.setHealthRegeneration(0.2);
             }
         } else {
             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 20, 1, false, false, true));

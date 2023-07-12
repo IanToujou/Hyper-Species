@@ -17,6 +17,7 @@ import org.bukkit.GameRule;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
@@ -193,13 +194,41 @@ public final class HyperSpecies extends JavaPlugin {
         alcoholBeerRecipe.setIngredient('C', Material.WATER_BUCKET);
         Bukkit.addRecipe(alcoholBeerRecipe);
 
-        ShapedRecipe alcoholAnimeBodyFluidsRecipe = new ShapedRecipe(new NamespacedKey(this, "alcoholAnimeBodyFluids"), ItemList.ALCOHOL_ANIME_BODY_FLUIDS);
-        alcoholAnimeBodyFluidsRecipe.shape("AAA", "ABA", "DCD");
-        alcoholAnimeBodyFluidsRecipe.setIngredient('A', Material.DIAMOND);
-        alcoholAnimeBodyFluidsRecipe.setIngredient('B', Material.GLASS_BOTTLE);
-        alcoholAnimeBodyFluidsRecipe.setIngredient('C', Material.WATER_BUCKET);
-        alcoholAnimeBodyFluidsRecipe.setIngredient('D', Material.NETHERITE_INGOT);
-        Bukkit.addRecipe(alcoholAnimeBodyFluidsRecipe);
+        ShapedRecipe alcoholRumRecipe = new ShapedRecipe(new NamespacedKey(this, "alcoholRum"), ItemList.ALCOHOL_RUM);
+        alcoholRumRecipe.shape("AAA", "ABA", "DCD");
+        alcoholRumRecipe.setIngredient('A', Material.SUGAR_CANE);
+        alcoholRumRecipe.setIngredient('B', Material.GLASS_BOTTLE);
+        alcoholRumRecipe.setIngredient('C', Material.WATER_BUCKET);
+        alcoholRumRecipe.setIngredient('D', Material.SUGAR);
+        Bukkit.addRecipe(alcoholRumRecipe);
+
+        ShapedRecipe alcoholRedWineRecipe = new ShapedRecipe(new NamespacedKey(this, "alcoholRedWine"), ItemList.ALCOHOL_RED_WINE);
+        alcoholRedWineRecipe.shape("AAA", "ABA", "ACA");
+        alcoholRedWineRecipe.setIngredient('A', Material.SWEET_BERRIES);
+        alcoholRedWineRecipe.setIngredient('B', Material.GLASS_BOTTLE);
+        alcoholRedWineRecipe.setIngredient('C', Material.WATER_BUCKET);
+        Bukkit.addRecipe(alcoholRedWineRecipe);
+
+        ShapedRecipe alcoholWhiteWineRecipe = new ShapedRecipe(new NamespacedKey(this, "alcoholWhiteWine"), ItemList.ALCOHOL_WHITE_WINE);
+        alcoholWhiteWineRecipe.shape("AAA", "ABA", "ACA");
+        alcoholWhiteWineRecipe.setIngredient('A', Material.GLOW_BERRIES);
+        alcoholWhiteWineRecipe.setIngredient('B', Material.GLASS_BOTTLE);
+        alcoholWhiteWineRecipe.setIngredient('C', Material.WATER_BUCKET);
+        Bukkit.addRecipe(alcoholWhiteWineRecipe);
+
+        ShapedRecipe alcoholAnimeGirlFluidsRecipe = new ShapedRecipe(new NamespacedKey(this, "alcoholAnimeGirlFluids"), ItemList.ALCOHOL_ANIME_GIRL_FLUIDS);
+        alcoholAnimeGirlFluidsRecipe.shape("AAA", "ABA", "DCD");
+        alcoholAnimeGirlFluidsRecipe.setIngredient('A', Material.DIAMOND);
+        alcoholAnimeGirlFluidsRecipe.setIngredient('B', Material.GLASS_BOTTLE);
+        alcoholAnimeGirlFluidsRecipe.setIngredient('C', Material.WATER_BUCKET);
+        alcoholAnimeGirlFluidsRecipe.setIngredient('D', Material.NETHERITE_INGOT);
+        Bukkit.addRecipe(alcoholAnimeGirlFluidsRecipe);
+
+        ShapelessRecipe molotovCocktailRecipe = new ShapelessRecipe(new NamespacedKey(this, "molotovCocktail"), ItemList.MOLOTOV_COCKTAIL);
+        molotovCocktailRecipe.addIngredient(Material.GLASS_BOTTLE);
+        molotovCocktailRecipe.addIngredient(Material.PAPER);
+        molotovCocktailRecipe.addIngredient(Material.LAVA_BUCKET);
+        Bukkit.addRecipe(molotovCocktailRecipe);
 
     }
 

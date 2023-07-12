@@ -2,6 +2,7 @@ package net.toujoustudios.hyperspecies.data.ability.active;
 
 import net.toujoustudios.hyperspecies.data.element.Element;
 import org.bukkit.Material;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -31,7 +32,13 @@ public class AbilityBurningRain extends Ability {
 
     @Override
     public boolean execute(Player player) {
-        return false;
+
+        Arrow arrow = player.launchProjectile(Arrow.class);
+
+
+
+        return true;
+
     }
 
 }

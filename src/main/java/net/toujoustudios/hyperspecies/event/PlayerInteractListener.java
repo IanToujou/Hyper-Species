@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -30,6 +31,18 @@ public class PlayerInteractListener implements Listener {
         Player player = event.getPlayer();
         PlayerManager playerManager = PlayerManager.getPlayer(player);
         Action action = event.getAction();
+
+        if(event.getItem() != null) {
+            if(event.getItem().getItemMeta() != null) {
+                if(event.getItem().getItemMeta().getDisplayName().equals("§fMolotov Cocktail")) {
+                    event.setCancelled(true);
+                    event.getPlayer().setItemInHand(new ItemStack(Material.AIR));
+                    ThrownPotion potion = player.launchProjectile(ThrownPotion.class);
+                    potion.setCustomName("Molotov Cocktail");
+                    potion.setCustomNameVisible(false);
+                }
+            }
+        }
 
         if(playerManager.getSpecies() == null) return;
 
