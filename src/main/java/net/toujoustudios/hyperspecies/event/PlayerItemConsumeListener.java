@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.event;
 
+import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -23,61 +24,35 @@ public class PlayerItemConsumeListener implements Listener {
         Player player = event.getPlayer();
         PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-        if(event.getItem().getType() == Material.MILK_BUCKET) playerManager.setKawaii(false);
+        if(event.getItem().getType() == Material.MILK_BUCKET) {
+            playerManager.setKawaii(false);
+            playerManager.setDrunkenness(playerManager.getDrunkenness() - 0.2);
+        }
 
         if(playerManager.getSpecies() == null) return;
 
+        List<String> alcoholNames = List.of("§6Beer", "§6Rum", "§6Red Wine", "§6White Wine", "§6Anime Body Fluids");
+
         ItemMeta itemMeta = event.getItem().getItemMeta();
         if(itemMeta != null) {
-            if(itemMeta.getDisplayName().equals("§6Beer")) {
-                playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.2);
-                int nauseaDuration = (int) Math.round(playerManager.getDrunkenness() * 10);
-                int blindDuration = (int) Math.round(playerManager.getDrunkenness() * 2);
-                if (nauseaDuration > 0) {
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * nauseaDuration, 0, false, false, true));
-                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 0.5f);
-                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 1.5f);
+            
+            String name = itemMeta.getDisplayName();
+
+            switch (name) {
+                case "§6Beer" -> playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.2);
+                case "§6Rum" -> playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.6);
+                case "§6Red Wine" -> playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.5);
+                case "§6White Wine" -> playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.4);
+                case "§6Anime Body Fluids" -> {
+                    playerManager.setDrunkenness(playerManager.getDrunkenness() + 1);
+                    Bukkit.broadcastMessage("§e" + player.getName() + "§d is turning into an anime girl§8...");
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_AMBIENT, SoundCategory.MASTER, 100, 2f);
+                    player.sendMessage(Config.MESSAGE_PREFIX + "§7 You can revert this by drinking milk§8.");
+                    playerManager.setKawaii(true);
                 }
-                if (playerManager.getDrunkenness() > 3) player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * blindDuration, 0, false, false, true));
-                return;
-            } else if(itemMeta.getDisplayName().equals("§6Rum")) {
-                playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.6);
-                int nauseaDuration = (int) Math.round(playerManager.getDrunkenness() * 10);
-                int blindDuration = (int) Math.round(playerManager.getDrunkenness() * 2);
-                if (nauseaDuration > 0) {
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * nauseaDuration, 0, false, false, true));
-                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 0.5f);
-                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 1.5f);
-                }
-                if (playerManager.getDrunkenness() > 3) player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * blindDuration, 0, false, false, true));
-                return;
-            } else if(itemMeta.getDisplayName().equals("§6Red Wine")) {
-                playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.5);
-                int nauseaDuration = (int) Math.round(playerManager.getDrunkenness() * 10);
-                int blindDuration = (int) Math.round(playerManager.getDrunkenness() * 2);
-                if (nauseaDuration > 0) {
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * nauseaDuration, 0, false, false, true));
-                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 0.5f);
-                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 1.5f);
-                }
-                if (playerManager.getDrunkenness() > 3) player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * blindDuration, 0, false, false, true));
-                return;
-            } else if(itemMeta.getDisplayName().equals("§6White Wine")) {
-                playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.5);
-                int nauseaDuration = (int) Math.round(playerManager.getDrunkenness() * 10);
-                int blindDuration = (int) Math.round(playerManager.getDrunkenness() * 2);
-                if (nauseaDuration > 0) {
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * nauseaDuration, 0, false, false, true));
-                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 0.5f);
-                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 1.5f);
-                }
-                if (playerManager.getDrunkenness() > 3) player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * blindDuration, 0, false, false, true));
-                return;
-            } else if(itemMeta.getDisplayName().equals("§6Anime Girl Body Fluids")) {
-                playerManager.setDrunkenness(playerManager.getDrunkenness() + 1);
-                Bukkit.broadcastMessage("§e" + player.getName() + " §7is turning into an anime girl§8...");
-                player.sendMessage("§7Pssht§8... §7To revert this, drink milk§8.");
-                playerManager.setKawaii(true);
+            }
+
+            if(alcoholNames.contains(name)) {
                 int nauseaDuration = (int) Math.round(playerManager.getDrunkenness() * 10);
                 int blindDuration = (int) Math.round(playerManager.getDrunkenness() * 2);
                 if (nauseaDuration > 0) {
@@ -88,6 +63,7 @@ public class PlayerItemConsumeListener implements Listener {
                 if (playerManager.getDrunkenness() > 3) player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * blindDuration, 0, false, false, true));
                 return;
             }
+            
         }
 
         List<Material> exceptions = List.of(

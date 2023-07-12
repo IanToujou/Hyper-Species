@@ -76,6 +76,7 @@ public final class HyperSpecies extends JavaPlugin {
                 playerManager.setShield(0);
                 playerManager.setMana(playerManager.getMaxMana());
                 playerManager.setDrunkenness(0);
+                playerManager.setKawaii(false);
             }
 
             player.setScoreboard(scoreboard);
