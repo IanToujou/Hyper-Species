@@ -4,7 +4,6 @@ import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.data.team.Team;
 import net.toujoustudios.hyperspecies.data.team.TeamStatus;
-import net.toujoustudios.hyperspecies.item.ItemList;
 import net.toujoustudios.hyperspecies.item.ItemListUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -21,7 +20,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

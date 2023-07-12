@@ -4,7 +4,6 @@ import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
-import net.toujoustudios.hyperspecies.item.ItemList;
 import net.toujoustudios.hyperspecies.item.ItemListUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -12,11 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.random.RandomGenerator;
 
 public class AbilityTree {
 
