@@ -28,6 +28,7 @@ public class PlayerChatListener implements Listener {
             message = message.replace("l", "w");
             message = message.replace("r", "w");
             message = message.replace("o", "owo");
+            message = message.replace("u", "uwu");
 
             String[] messageArray = message.split(" ");
             StringBuilder newMessage = new StringBuilder();

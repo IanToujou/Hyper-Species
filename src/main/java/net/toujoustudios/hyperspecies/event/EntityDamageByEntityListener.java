@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.event;
 
+import net.toujoustudios.hyperspecies.data.ability.active.AbilityEnhancingFlame;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Material;
@@ -20,6 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class EntityDamageByEntityListener implements Listener {
 
     @EventHandler
+    @SuppressWarnings("deprecation")
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
 
         if(event.getEntity() instanceof Player player) {
@@ -30,6 +32,8 @@ public class EntityDamageByEntityListener implements Listener {
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
 
+            if(playerManager.getSpecies() == null) return;
+
             playerManager.setRegenerationCoolingDown(true);
             playerManager.setHealthRegeneration(0);
 
@@ -39,6 +43,7 @@ public class EntityDamageByEntityListener implements Listener {
             double trueDamage = damage;
 
             if(event.getDamager() instanceof Player dealer) {
+
                 PlayerManager dealerManager = PlayerManager.getPlayer(dealer);
                 if(dealerManager.getSpecies() != null && dealerManager.getSpecies().getName().equals("Wolf")) {
                     if(playerManager.getHealth() < playerManager.getMaxHealth() / 3) {
@@ -47,6 +52,11 @@ public class EntityDamageByEntityListener implements Listener {
                         dealer.getWorld().playSound(dealer.getLocation(), Sound.ENTITY_SLIME_DEATH, SoundCategory.MASTER, 1, 0.5f);
                     }
                 }
+
+                if(AbilityEnhancingFlame.getPlayers().contains(dealer.getUniqueId())) {
+                    player.setFireTicks(20*5);
+                }
+
             }
 
             if(playerManager.getSpecies().getName().equals("Wolf")) {
@@ -86,7 +96,7 @@ public class EntityDamageByEntityListener implements Listener {
 
                 if(damage < shield) {
                     trueDamage = 0;
-                    player.sendTitle("", "§e⛨", 5, 5, 5);
+                    player.sendTitle("", "§e⛨", 5, 10, 5);
                     player.playSound(player.getLocation(), Sound.ENTITY_ARMOR_STAND_BREAK, SoundCategory.MASTER, 100, 1f);
                     playerManager.setShield(shield-damage);
                 } else {

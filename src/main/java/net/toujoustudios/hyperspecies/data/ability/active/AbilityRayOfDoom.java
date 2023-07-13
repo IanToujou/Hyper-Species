@@ -45,9 +45,7 @@ public class AbilityRayOfDoom extends Ability {
         Location impactLocation = block.getLocation();
 
         PlayerManager playerManager = PlayerManager.getPlayer(player);
-        int xp = playerManager.getAbilityExperience(this);
-        int level = playerManager.getLevelFromExperience(xp);
-        int damage = getFieldValue(AbilityField.DAMAGE, level);
+        int damage = getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(this));
 
         player.getWorld().spawnParticle(Particle.LAVA, impactLocation, 20, 0.1, 1, 0.1);
         player.getWorld().spawn(impactLocation, LightningStrike.class);

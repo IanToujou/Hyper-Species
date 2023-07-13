@@ -2,19 +2,19 @@ package net.toujoustudios.hyperspecies.data.ability.active;
 
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
+import net.toujoustudios.hyperspecies.main.HyperSpecies;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 public class AbilityEnhancingFlame extends Ability {
+
+    private static final ArrayList<UUID> players = new ArrayList<>();
 
     public AbilityEnhancingFlame() {
 
@@ -53,14 +53,20 @@ public class AbilityEnhancingFlame extends Ability {
         player.getWorld().spawnParticle(Particle.FLAME, location, 300, 0.3, 0, 0.3);
         player.getWorld().spawnParticle(Particle.LAVA, location, 50, 0, 2, 0);
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20*duration, 0, false, false, true));
-
         if(block.getType() == Material.AIR) {
             player.getWorld().getBlockAt(player.getLocation()).setType(Material.FIRE);
         }
 
+        players.add(player.getUniqueId());
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> players.remove(player.getUniqueId()), 20L *duration);
+
         return true;
 
+    }
+
+    public static ArrayList<UUID> getPlayers() {
+        return players;
     }
 
 }

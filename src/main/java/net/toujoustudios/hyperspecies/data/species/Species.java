@@ -1,7 +1,6 @@
 package net.toujoustudios.hyperspecies.data.species;
 
 import net.toujoustudios.hyperspecies.data.ability.passive.PassiveAbility;
-import net.toujoustudios.hyperspecies.data.element.Element;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -17,15 +16,13 @@ public class Species {
     private final ItemStack icon;
     private final List<SubSpecies> subSpecies;
     private final PassiveAbility passive;
-    private final List<Element> weaknesses;
 
-    public Species(String name, String prefix, ItemStack icon, List<SubSpecies> subSpecies, PassiveAbility passive, List<Element> weaknesses) {
+    public Species(String name, String prefix, ItemStack icon, List<SubSpecies> subSpecies, PassiveAbility passive) {
         this.name = name;
         this.prefix = prefix;
         this.icon = icon;
         this.subSpecies = subSpecies;
         this.passive = passive;
-        this.weaknesses = weaknesses;
     }
 
     public static Species getSpecies(String name) {
@@ -33,14 +30,13 @@ public class Species {
         return null;
     }
 
-    public static void createSpecies(String name, String prefix, ItemStack icon, List<SubSpecies> subSpecies, PassiveAbility passive, List<Element> weaknesses) {
+    public static void createSpecies(String name, String prefix, ItemStack icon, List<SubSpecies> subSpecies, PassiveAbility passive) {
         species.put(name, new Species(
                 name,
                 prefix,
                 icon,
                 (subSpecies==null ? new ArrayList<>() : subSpecies),
-                passive,
-                (weaknesses==null ? new ArrayList<>() : weaknesses)
+                passive
         ));
     }
 
@@ -71,10 +67,6 @@ public class Species {
 
     public PassiveAbility getPassive() {
         return passive;
-    }
-
-    public List<Element> getWeaknesses() {
-        return weaknesses;
     }
 
     // STATIC METHODS

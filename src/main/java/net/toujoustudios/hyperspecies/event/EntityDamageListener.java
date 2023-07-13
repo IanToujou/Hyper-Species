@@ -21,6 +21,7 @@ public class EntityDamageListener implements Listener {
     private static final HashMap<UUID, BukkitTask> tasks = new HashMap<>();
 
     @EventHandler
+    @SuppressWarnings("deprecation")
     public void onEntityDamage(EntityDamageEvent event) {
 
         if(event.getEntity() instanceof Player player) {
@@ -30,6 +31,8 @@ public class EntityDamageListener implements Listener {
             }
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
+
+            if(playerManager.getSpecies() == null) return;
 
             if(event.getCause() == EntityDamageEvent.DamageCause.FALL) {
 

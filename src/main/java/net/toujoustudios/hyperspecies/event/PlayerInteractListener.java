@@ -40,6 +40,7 @@ public class PlayerInteractListener implements Listener {
                     ThrownPotion potion = player.launchProjectile(ThrownPotion.class);
                     potion.setCustomName("Molotov Cocktail");
                     potion.setCustomNameVisible(false);
+                    potion.setVelocity(potion.getVelocity().normalize().multiply(1.2));
                 }
             }
         }
