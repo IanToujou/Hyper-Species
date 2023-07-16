@@ -3,6 +3,7 @@ package net.toujoustudios.hyperspecies.main;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.toujoustudios.hyperspecies.command.*;
+import net.toujoustudios.hyperspecies.data.ability.active.AbilityBurningRain;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.data.team.Team;
 import net.toujoustudios.hyperspecies.event.*;
@@ -40,7 +41,6 @@ public final class HyperSpecies extends JavaPlugin {
 
         this.pluginManager = Bukkit.getPluginManager();
         ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
-        assert scoreboardManager != null;
         scoreboard = scoreboardManager.getNewScoreboard();
         Loader.startLoading();
 
@@ -50,6 +50,8 @@ public final class HyperSpecies extends JavaPlugin {
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> Bukkit.getOnlinePlayers().forEach((player -> {
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
+
+            if(playerManager.getSpecies() == null) return;
 
             if(playerManager.getMana() < 0) playerManager.setMana(0);
             if(playerManager.getShield() < 0) playerManager.setShield(0);
@@ -174,6 +176,8 @@ public final class HyperSpecies extends JavaPlugin {
     }
 
     public void registerEvents() {
+
+        // Basic Events
         pluginManager.registerEvents(new PlayerJoinListener(), this);
         pluginManager.registerEvents(new PlayerInteractListener(), this);
         pluginManager.registerEvents(new ProjectileHitListener(), this);
@@ -183,6 +187,11 @@ public final class HyperSpecies extends JavaPlugin {
         pluginManager.registerEvents(new PlayerChatListener(), this);
         pluginManager.registerEvents(new PlayerItemConsumeListener(), this);
         pluginManager.registerEvents(new EntityDamageByEntityListener(), this);
+        pluginManager.registerEvents(new PlayerDropItemListener(), this);
+
+        // Ability Trials
+        pluginManager.registerEvents(new AbilityBurningRain(), this);
+
     }
 
     public void registerCrafting() {

@@ -26,7 +26,8 @@ public class AbilityMeteorStrike extends Ability {
                 180,
                 Material.MAGMA_CREAM,
                 8,
-                List.of("Demon", "Reptile", "Human")
+                List.of("Demon", "Reptile", "Human"),
+                List.of("")
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

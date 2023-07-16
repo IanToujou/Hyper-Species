@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.data.ability.tree;
 
+import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.element.Element;
@@ -20,6 +21,7 @@ public class AbilityTree {
 
     private final HashMap<Integer, Ability> abilities;
     private List<Integer> links = new ArrayList<>();
+    private final HashMap<Integer, AbilityTree> treeLinks = new HashMap<>();
 
     public AbilityTree(HashMap<Integer, Ability> abilities) {
         this.abilities = abilities;
@@ -57,11 +59,15 @@ public class AbilityTree {
         return links;
     }
 
+    public HashMap<Integer, AbilityTree> getTreeLinks() {
+        return treeLinks;
+    }
+
     public Inventory buildInventory(Player player) {
 
         PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-        Inventory inventory = Bukkit.createInventory(null, 9*6, "Tree: " + getBaseAbility().getName());
+        Inventory inventory = Bukkit.createInventory(null, 9*6, Component.text("Tree: " + getBaseAbility().getName()));
         ItemStack element = new ItemStack(getBaseAbility().getElement().getMaterial());
         ItemMeta elementMeta = element.getItemMeta();
         assert elementMeta != null;
@@ -81,6 +87,7 @@ public class AbilityTree {
                 double emptyBars = 50 - filledBars;
 
                 ItemStack item = ability.getItem();
+                if(!playerManager.hasAbility(ability)) item.setType(Material.RED_CONCRETE);
                 ItemMeta itemMeta = item.getItemMeta();
                 assert itemMeta != null;
                 itemMeta.setDisplayName(itemMeta.getDisplayName().replace("{level}", String.valueOf(level)));
@@ -100,6 +107,9 @@ public class AbilityTree {
 
                 barBuilder.append("§7]");
 
+                StringBuilder xpBuilder = new StringBuilder();
+                xpBuilder.append("§a").append(playerManager.getExperienceSinceLastLevel(xp)).append("§7/").append("§2").append(playerManager.getRelativeLevelThreshold(level));
+
                 assert oldLore != null;
                 oldLore.forEach(line -> {
                     line = line.replace("{damage}", String.valueOf(ability.getFieldValue(AbilityField.DAMAGE, level)));
@@ -109,9 +119,16 @@ public class AbilityTree {
                     line = line.replace("{lockStatus}", playerManager.hasAbility(ability) ? "§a§lUNLOCKED" : "§c§lLOCKED");
                     if(line.contains("{xpBar}")) {
                         line = line.replace("{xpBar}", barBuilder.toString());
+                        line = line.replace("{xpLeft}", xpBuilder.toString());
                         if(playerManager.hasAbility(ability)) newLore.add(line);
                     } else newLore.add(line);
                 });
+
+                if(!playerManager.hasAbility(ability)) {
+                    if(playerManager.hasTrial(ability)) {
+                        ability.getTrial().forEach(line -> newLore.add("§8" + line));
+                    } else newLore.add("§cThis trial is not yet unlocked.");
+                }
 
                 itemMeta.setLore(newLore);
                 item.setItemMeta(itemMeta);
@@ -124,12 +141,13 @@ public class AbilityTree {
                 if(slot == 3) inventory.setItem(15, ItemListUI.TREE_TRACK_LOCKED);
 
                 // Fill second line
-                if(slot == 11) inventory.setItem(29, ItemListUI.TREE_TRACK_LOCKED);
-                if(slot == 11) inventory.setItem(30, ItemListUI.TREE_TRACK_LOCKED);
-                if(slot == 12) inventory.setItem(31, ItemListUI.TREE_TRACK_LOCKED);
-                if(slot == 12) inventory.setItem(32, ItemListUI.TREE_TRACK_LOCKED);
-                if(slot == 13) inventory.setItem(33, ItemListUI.TREE_TRACK_LOCKED);
+                if(!links.contains(0) && slot == 11) inventory.setItem(29, ItemListUI.TREE_TRACK_LOCKED);
+                if(!links.contains(0) && slot == 11) inventory.setItem(30, ItemListUI.TREE_TRACK_LOCKED);
+                if(!links.contains(1) && slot == 12) inventory.setItem(31, ItemListUI.TREE_TRACK_LOCKED);
+                if(!links.contains(1) && slot == 12) inventory.setItem(32, ItemListUI.TREE_TRACK_LOCKED);
+                if(!links.contains(2) && slot == 13) inventory.setItem(33, ItemListUI.TREE_TRACK_LOCKED);
 
+                // Fill links
                 if(links.contains(0) && slot == 10) inventory.setItem(19, ItemListUI.TREE_TRACK_LOCKED);
                 if(links.contains(1) && slot == 11) inventory.setItem(21, ItemListUI.TREE_TRACK_LOCKED);
                 if(links.contains(2) && slot == 12) inventory.setItem(23, ItemListUI.TREE_TRACK_LOCKED);
@@ -145,6 +163,8 @@ public class AbilityTree {
                 if(slot == 12) inventory.setItem(32, item);
                 if(slot == 13) inventory.setItem(34, item);
 
+                // Fill tree links
+
             }
 
         });
@@ -158,6 +178,8 @@ public class AbilityTree {
     }
 
     public static Inventory buildMainInventory(Player player, int page) {
+
+        PlayerManager playerManager = PlayerManager.getPlayer(player);
 
         if(page == 0) {
 
@@ -180,30 +202,33 @@ public class AbilityTree {
             for(Map.Entry<String, AbilityTree> entry : trees.entrySet()) {
 
                 AbilityTree tree = trees.get(entry.getKey());
-                Element element = tree.getBaseAbility().getElement();
 
-                ItemStack item = new ItemStack(Material.NETHER_STAR);
-                ItemMeta itemMeta = item.getItemMeta();
-                assert itemMeta != null;
-                itemMeta.setDisplayName(tree.getBaseAbility().getFullName());
-                itemMeta.setLore(List.of("§7View this ability tree."));
-                item.setItemMeta(itemMeta);
+                if(playerManager.hasAbility(tree.getBaseAbility())) {
+                    Element element = tree.getBaseAbility().getElement();
 
-                if(element == Element.FIRE) {
-                    inventory.setItem(indexFire+1, item);
-                    indexFire++;
-                } else if(element == Element.EARTH) {
-                    inventory.setItem(9+indexEarth+1, item);
-                    indexEarth++;
-                } else if(element == Element.WATER) {
-                    inventory.setItem(18+indexWater+1, item);
-                    indexWater++;
-                } else if(element == Element.FLORA) {
-                    inventory.setItem(27+indexFlora+1, item);
-                    indexFlora++;
-                } else if(element == Element.FAIRY) {
-                    inventory.setItem(36+indexFairy+1, item);
-                    indexFairy++;
+                    ItemStack item = new ItemStack(Material.NETHER_STAR);
+                    ItemMeta itemMeta = item.getItemMeta();
+                    assert itemMeta != null;
+                    itemMeta.setDisplayName(tree.getBaseAbility().getFullName());
+                    itemMeta.setLore(List.of("§7View this ability tree."));
+                    item.setItemMeta(itemMeta);
+
+                    if(element == Element.FIRE) {
+                        inventory.setItem(indexFire+1, item);
+                        indexFire++;
+                    } else if(element == Element.EARTH) {
+                        inventory.setItem(9+indexEarth+1, item);
+                        indexEarth++;
+                    } else if(element == Element.WATER) {
+                        inventory.setItem(18+indexWater+1, item);
+                        indexWater++;
+                    } else if(element == Element.FLORA) {
+                        inventory.setItem(27+indexFlora+1, item);
+                        indexFlora++;
+                    } else if(element == Element.FAIRY) {
+                        inventory.setItem(36+indexFairy+1, item);
+                        indexFairy++;
+                    }
                 }
 
             }

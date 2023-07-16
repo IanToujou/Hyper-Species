@@ -12,9 +12,12 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Random;
 
 public class ProjectileHitListener implements Listener {
 
@@ -85,11 +88,9 @@ public class ProjectileHitListener implements Listener {
             if(ability == null) return;
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
-            int xp = playerManager.getAbilityExperience(ability);
-            int level = playerManager.getLevelFromExperience(xp);
 
-            int damage = ability.getFieldValue(AbilityField.DAMAGE, level);
-            int range = ability.getFieldValue(AbilityField.RANGE, level);
+            int damage = ability.getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(ability));
+            int range = ability.getFieldValue(AbilityField.RANGE, playerManager.getAbilityLevel(ability));
 
             Location location = projectile.getLocation();
             Block center = location.add(0, -2, 0).getBlock();
@@ -112,7 +113,7 @@ public class ProjectileHitListener implements Listener {
             });
 
             projectile.getWorld().spawnParticle(Particle.LAVA, location, 500, 2, 2, 2);
-            projectile.getWorld().spawnParticle(Particle.FLAME, location.add(0, -2, 0), 500, 4, 1, 4);
+            projectile.getWorld().spawnParticle(Particle.FLAME, location, 200, 4, 1, 4);
 
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
             double radiusSquared = range * range;
@@ -121,6 +122,92 @@ public class ProjectileHitListener implements Listener {
                     all.damage(damage, projectile);
                 }
             });
+
+            Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
+                blocks.forEach(block -> block.setType(Material.AIR));
+            }, 20 * 10);
+
+        }
+
+        if(projectile.getType() == EntityType.FIREBALL && projectile.getName().startsWith("Total Annihilation of ")) {
+
+            Player player = Bukkit.getPlayer(projectile.getName().split(" ")[3]);
+            Ability ability = Ability.getAbility("Total Annihilation");
+
+            if(player == null) return;
+            if(ability == null) return;
+
+            PlayerManager playerManager = PlayerManager.getPlayer(player);
+
+            int damage = ability.getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(ability));
+            int range = ability.getFieldValue(AbilityField.RANGE, playerManager.getAbilityLevel(ability));
+
+            Location location = projectile.getLocation();
+            Block center = location.add(0, -2, 0).getBlock();
+            ArrayList<Block> blocks = new ArrayList<>();
+            int radius = 4;
+
+            for(int x = -radius; x <= radius; x++) {
+                for(int y = -radius; y <= radius; y++) {
+                    for(int z = -radius; z <= radius; z++) {
+                        Block b = center.getRelative(x, y, z);
+                        if(center.getLocation().distance(b.getLocation()) <= radius) {
+                            blocks.add(b);
+                        }
+                    }
+                }
+            }
+
+            blocks.forEach(block -> {
+                if(block.getType() == Material.AIR) block.setType(Material.MAGMA_BLOCK);
+            });
+
+            ArrayList<Block> grassBlocks = new ArrayList<>();
+            int grassRadius = 10;
+
+            for(int x = -grassRadius; x <= grassRadius; x++) {
+                for(int y = -grassRadius; y <= grassRadius; y++) {
+                    for(int z = -grassRadius; z <= grassRadius; z++) {
+                        Block b = center.getRelative(x, y, z);
+                        if(center.getLocation().distance(b.getLocation()) <= grassRadius) {
+                            grassBlocks.add(b);
+                        }
+                    }
+                }
+            }
+
+            blocks.forEach(block -> {
+                if(block.getType() == Material.AIR) block.setType(Material.FIRE);
+            });
+
+            grassBlocks.forEach(block -> {
+                if(block.getType() == Material.GRASS_BLOCK) {
+                    int random = new Random().nextInt(3);
+                    if(random == 0) block.setType(Material.SOUL_SAND);
+                    else block.setType(Material.NETHERRACK);
+                }
+            });
+
+            projectile.getWorld().spawnParticle(Particle.LAVA, location, 500, 2, 2, 2);
+            projectile.getWorld().spawnParticle(Particle.SMOKE_LARGE, 500, 4, 1, 4);
+
+            Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
+            double radiusSquared = range * range;
+            players.forEach(all -> {
+                if(all.getLocation().distanceSquared(location) <= radiusSquared) {
+                    all.damage(damage, projectile);
+                }
+            });
+
+            Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
+               blocks.forEach(block -> {
+                   if(block.getType() == Material.MAGMA_BLOCK) block.setType(Material.AIR);
+               });
+               grassBlocks.forEach(block -> {
+                   if(block.getType() == Material.NETHERRACK || block.getType() == Material.SOUL_SAND) block.setType(Material.GRASS_BLOCK);
+                   if(block.getType() == Material.FIRE) block.setType(Material.AIR);
+               });
+            }, 20 * 10);
 
         }
 

@@ -15,20 +15,19 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-public class AbilityHellblight extends Ability {
+public class AbilityFlamingBlight extends Ability {
 
-    public AbilityHellblight() {
-
+    public AbilityFlamingBlight() {
         super(
-                "Hellblight",
-                List.of("§8Create a dark cloud that deals an", "§8AoE effect, slowing all enemies in", "§8a §d{range}m §8radius for §d{duration}s§8."),
+                "Flaming Blight",
+                List.of("§8Create a flaming cloud that deals", Element.FIRE.getEmoji() + " {damage}§8 to all enemies in a §d{range}m §8radius", "§8slowing them for §d{duration}s§8."),
                 Element.FIRE,
                 AbilityType.DEBUFF,
-                4,
+                6,
                 60,
-                Material.GUNPOWDER,
+                Material.GLOWSTONE,
                 8,
-                List.of("Demon"),
+                List.of("Demon", "Reptile", "Wolf"),
                 List.of("")
         );
 
@@ -36,9 +35,9 @@ public class AbilityHellblight extends Ability {
 
         fields.put(AbilityField.RANGE, List.of(8,10,12,15,18,20,24,28,30));
         fields.put(AbilityField.DURATION, List.of(5,6,7,8,10,12,15,18,20));
+        fields.put(AbilityField.DAMAGE, List.of(2,3,4,5,6,7,8,9,10));
 
         setFields(fields);
-
     }
 
     @Override
@@ -50,17 +49,22 @@ public class AbilityHellblight extends Ability {
 
         int duration = getFieldValue(AbilityField.DURATION, level);
         int range = getFieldValue(AbilityField.RANGE, level);
+        int damage = getFieldValue(AbilityField.DAMAGE, level);
 
         Location location = player.getLocation();
 
-        player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WITHER_AMBIENT, 3, 1.5f);
+        player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WITHER_AMBIENT, 3, 0.5f);
         player.getWorld().spawnParticle(Particle.SMOKE_LARGE, player.getLocation(), 500, 8, 0, 8);
+        player.getWorld().spawnParticle(Particle.SMALL_FLAME, player.getLocation(), 300, 8, 0, 8);
 
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
         double radiusSquared = range*range;
         players.forEach(all -> {
             if(all.getLocation().distanceSquared(location) <= radiusSquared) {
-                if(all != player) all.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20*duration, 0, false, false, true));
+                if(all != player) {
+                    all.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20*duration, 0, false, false, true));
+                    all.damage(damage);
+                }
             }
         });
 

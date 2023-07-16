@@ -28,7 +28,8 @@ public class AbilityRayOfDoom extends Ability {
                 240,
                 Material.ENDER_EYE,
                 8,
-                List.of("Demon", "Reptile", "Human")
+                List.of("Demon", "Reptile", "Human"),
+                List.of("")
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

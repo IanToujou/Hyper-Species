@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.data.player;
 
+import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.species.Species;
@@ -8,10 +9,13 @@ import net.toujoustudios.hyperspecies.data.team.Team;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.Scoreboard;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.*;
 
@@ -33,6 +37,7 @@ public class PlayerManager {
     private Species species;
     private SubSpecies subSpecies;
     private final List<Ability> abilities;
+    private final List<Ability> trials;
     private boolean selectingAbility;
     private boolean regenerationCoolingDown;
     private ArrayList<ItemStack> savedInventory;
@@ -72,10 +77,14 @@ public class PlayerManager {
         else subSpecies = null;
 
         abilities = new ArrayList<>();
-        abilities.add(Ability.getAbility("Meteor Strike"));
 
         playerConfig.getStringList("Data." + uuid + ".Character.Abilities").forEach(item -> {
             if(!abilities.contains(Ability.getAbility(item))) abilities.add(Ability.getAbility(item));
+        });
+
+        trials = new ArrayList<>();
+        playerConfig.getStringList("Data." + uuid + ".Character.Trials").forEach(item -> {
+            if(!trials.contains(Ability.getAbility(item))) trials.add(Ability.getAbility(item));
         });
 
         abilities.forEach(ability -> {
@@ -119,9 +128,12 @@ public class PlayerManager {
         playerConfig.set("Data." + uuid + ".Character.Species", (species != null ? species.getName() : null));
         playerConfig.set("Data." + uuid + ".Character.Team", team);
         playerConfig.set("Data." + uuid + ".Character.SubSpecies", (subSpecies != null ? subSpecies.getName() : null));
-        ArrayList<String> names = new ArrayList<>();
-        abilities.forEach(ability -> names.add(ability.getName()));
-        playerConfig.set("Data." + uuid + ".Character.Abilities", names);
+        ArrayList<String> abilityNames = new ArrayList<>();
+        abilities.forEach(ability -> abilityNames.add(ability.getName()));
+        playerConfig.set("Data." + uuid + ".Character.Abilities", abilityNames);
+        ArrayList<String> trialNames = new ArrayList<>();
+        trials.forEach(trial -> trialNames.add(trial.getName()));
+        playerConfig.set("Data." + uuid + ".Character.Trials", trialNames);
 
         Config.saveToFile(playerConfig, "players.yml");
 
@@ -330,6 +342,22 @@ public class PlayerManager {
         abilities.remove(ability);
     }
 
+    public List<Ability> getTrials() {
+        return trials;
+    }
+
+    public void addTrial(Ability ability) {
+        if(!trials.contains(ability)) trials.add(ability);
+    }
+
+    public void removeTrial(Ability ability) {
+        trials.remove(ability);
+    }
+
+    public boolean hasTrial(Ability ability) {
+        return trials.contains(ability);
+    }
+
     public boolean isSelectingAbility() {
         return selectingAbility;
     }
@@ -398,6 +426,17 @@ public class PlayerManager {
 
     public void setKawaii(boolean kawaii) {
         this.kawaii = kawaii;
+    }
+
+    public void unlockAbility(Ability ability) {
+        if(!hasAbility(ability) && hasTrial(ability)) {
+            addAbility(ability);
+            Player player = Bukkit.getPlayer(uuid);
+            if(player != null) {
+                player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You unlocked the ability§8: §b" + ability.getName()));
+                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
+            }
+        }
     }
 
     // STATIC METHODS

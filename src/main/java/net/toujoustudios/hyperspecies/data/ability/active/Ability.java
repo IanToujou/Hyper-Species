@@ -25,24 +25,27 @@ public abstract class Ability {
     private final int manaCost;
     private final int delay;
     private final Material material;
-    private int maxLevel;
+    private final int maxLevel;
     private final List<String> species;
+    private final List<String> trial;
 
     private HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
 
-    public Ability(String name, List<String> description, Element element, AbilityType type, int manaCost, int delay, Material material, int maxLevel, List<String> species) {
+    public Ability(String name, List<String> description, Element element, AbilityType type, int manaCost, int delay, Material material, int maxLevel, List<String> species, List<String> trial) {
         this.name = name;
         this.description = description;
         this.element = element;
+        this.secondaryElement = null;
         this.type = type;
         this.manaCost = manaCost;
         this.delay = delay;
         this.material = material;
-        this.secondaryElement = null;
+        this.maxLevel = maxLevel;
         this.species = species;
+        this.trial = trial;
     }
 
-    public Ability(String name, List<String> description, Element element, Element secondaryElement, AbilityType type, int manaCost, int delay, Material material, int maxLevel, List<String> species) {
+    public Ability(String name, List<String> description, Element element, Element secondaryElement, AbilityType type, int manaCost, int delay, Material material, int maxLevel, List<String> species, List<String> trial) {
         this.name = name;
         this.description = description;
         this.element = element;
@@ -53,6 +56,7 @@ public abstract class Ability {
         this.material = material;
         this.maxLevel = maxLevel;
         this.species = species;
+        this.trial = trial;
     }
 
     public static void createAbility(Ability ability) {
@@ -114,6 +118,7 @@ public abstract class Ability {
         return maxLevel;
     }
 
+    @SuppressWarnings("deprecation")
     public ItemStack getItem() {
 
         ItemStack item = new ItemStack(material);
@@ -127,7 +132,7 @@ public abstract class Ability {
         lore.add("§r");
         List<String> list = new ArrayList<>(Stream.concat(lore.stream(), description.stream()).toList());
         list.add("§r");
-        list.add("{xpBar}");
+        list.add("{xpBar} {xpLeft}");
         list.add("{lockStatus}");
         itemMeta.setLore(list);
         item.setItemMeta(itemMeta);
@@ -163,6 +168,10 @@ public abstract class Ability {
 
     public boolean isAvailableForSpecies(Species species) {
         return this.species.contains(species.getName());
+    }
+
+    public List<String> getTrial() {
+        return trial;
     }
 
     public static HashMap<String, Ability> getAbilities() {

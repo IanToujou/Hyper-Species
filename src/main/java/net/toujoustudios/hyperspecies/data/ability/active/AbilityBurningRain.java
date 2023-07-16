@@ -5,13 +5,16 @@ import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
 import org.bukkit.entity.*;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import java.util.*;
 
-public class AbilityBurningRain extends Ability {
+public class AbilityBurningRain extends Ability implements Listener {
 
     public AbilityBurningRain() {
 
@@ -22,9 +25,10 @@ public class AbilityBurningRain extends Ability {
                 AbilityType.DAMAGE,
                 6,
                 80,
-                Material.MAGMA_CREAM,
+                Material.BLAZE_POWDER,
                 5,
-                List.of("Demon", "Reptile", "Human", "Feline", "Dwarf", "Wolf")
+                List.of("Demon", "Reptile", "Human", "Feline", "Dwarf", "Wolf"),
+                List.of("Try to place a water bucket in the", "nether.")
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
@@ -74,6 +78,19 @@ public class AbilityBurningRain extends Ability {
         }, 20 * 10);
 
         return true;
+
+    }
+
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent event) {
+
+        if(event.getBlock().getType() == Material.WATER) {
+            if(event.getBlock().getWorld().isUltraWarm()) {
+                Player player = event.getPlayer();
+                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                playerManager.unlockAbility(this);
+            }
+        }
 
     }
 

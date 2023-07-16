@@ -26,7 +26,8 @@ public class AbilityFireball extends Ability {
                 30,
                 Material.FIRE_CHARGE,
                 5,
-                List.of("Demon", "Human", "Reptile", "Feline", "Dwarf", "Wolf")
+                List.of("Demon", "Human", "Reptile", "Feline", "Dwarf", "Wolf"),
+                List.of("")
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

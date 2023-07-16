@@ -21,7 +21,7 @@ public class PassiveAquatilia extends PassiveAbility {
         if(player.getLocation().getBlock().getType() == Material.WATER) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 20 * 10, 0, false, false, true));
             player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 20 * 10, 2, false, false, true));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 3, false, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 20 * 10, 3, false, false, true));
         } else {
             if(!player.getWorld().isThundering() && !player.getWorld().hasStorm()) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 10, 2, false, false, true));
@@ -33,10 +33,14 @@ public class PassiveAquatilia extends PassiveAbility {
             Block block = player.getWorld().getHighestBlockAt(player.getLocation());
             if(block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
                 List<Biome> hotBiomes = List.of(Biome.DESERT, Biome.BADLANDS);
-                if(hotBiomes.contains(player.getLocation().getBlock().getBiome()) || player.getWorld().isUltraWarm()) {
-                    player.damage(3);
+                if(hotBiomes.contains(player.getLocation().getBlock().getBiome())) {
+                    player.damage(2);
                 } else player.damage(1);
             }
+        }
+
+        if(player.getWorld().isUltraWarm()) {
+            player.damage(3);
         }
 
         // Permanent night vision
