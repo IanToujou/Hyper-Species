@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.data.ability.active;
 
+import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.data.element.Element;
 
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
@@ -7,7 +8,6 @@ import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -24,7 +24,7 @@ public class AbilityFlameShot extends Ability {
                 Element.FIRE,
                 AbilityType.DAMAGE,
                 2,
-                3,
+                5,
                 Material.SPECTRAL_ARROW,
                 5,
                 List.of("Demon", "Human", "Reptile", "Feline", "Dwarf", "Wolf"),
@@ -50,7 +50,7 @@ public class AbilityFlameShot extends Ability {
 
         Arrow projectile = player.launchProjectile(Arrow.class);
         player.getWorld().playSound(player.getLocation(), Sound.ITEM_FIRECHARGE_USE, SoundCategory.MASTER, 2, 0.8f);
-        projectile.setCustomName("Flame Shot of " + player.getName());
+        projectile.customName(Component.text("Flame Shot of " + player.getName()));
         projectile.setCustomNameVisible(false);
         projectile.setDamage(damage);
         projectile.setVisualFire(true);

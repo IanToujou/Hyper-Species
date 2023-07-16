@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.List;
+
 public class PassiveDemon extends PassiveAbility {
 
     @Override
@@ -39,8 +41,10 @@ public class PassiveDemon extends PassiveAbility {
             }
         }
 
+        List<Material> demonBlocks = List.of(Material.NETHERRACK, Material.NETHER_BRICKS);
+
         // Strength on nether rack
-        if(player.getLocation().add(0, -1, 0).getBlock().getType() == Material.NETHERRACK) {
+        if(demonBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * 5, 1, false, false, true));
         }
 

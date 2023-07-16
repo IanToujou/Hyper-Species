@@ -27,7 +27,7 @@ public class AbilityDemonicRage extends Ability {
                 120,
                 Material.POPPED_CHORUS_FRUIT,
                 8,
-                List.of("Demon"),
+                List.of("Demon", "Reptile", "Wolf"),
                 List.of("")
         );
 

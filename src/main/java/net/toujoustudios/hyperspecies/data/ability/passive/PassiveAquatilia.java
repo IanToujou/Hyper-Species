@@ -34,8 +34,8 @@ public class PassiveAquatilia extends PassiveAbility {
             if(block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
                 List<Biome> hotBiomes = List.of(Biome.DESERT, Biome.BADLANDS);
                 if(hotBiomes.contains(player.getLocation().getBlock().getBiome())) {
-                    player.damage(2);
-                } else player.damage(1);
+                    player.damage(3);
+                } else if(!player.getWorld().isThundering() && !player.getWorld().hasStorm()) player.damage(2);
             }
         }
 

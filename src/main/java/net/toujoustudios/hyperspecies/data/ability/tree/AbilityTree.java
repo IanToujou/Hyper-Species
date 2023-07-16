@@ -203,13 +203,13 @@ public class AbilityTree {
 
                 AbilityTree tree = trees.get(entry.getKey());
 
-                if(playerManager.hasAbility(tree.getBaseAbility())) {
+                if(tree.getBaseAbility().getSpecies().contains(playerManager.getSpecies().getName())) {
                     Element element = tree.getBaseAbility().getElement();
 
                     ItemStack item = new ItemStack(Material.NETHER_STAR);
                     ItemMeta itemMeta = item.getItemMeta();
                     assert itemMeta != null;
-                    itemMeta.setDisplayName(tree.getBaseAbility().getFullName());
+                    itemMeta.setDisplayName(tree.getBaseAbility().getElement().getEmoji() + " " + tree.getBaseAbility().getName());
                     itemMeta.setLore(List.of("§7View this ability tree."));
                     item.setItemMeta(itemMeta);
 
@@ -262,7 +262,7 @@ public class AbilityTree {
                 ItemStack item = new ItemStack(Material.NETHER_STAR);
                 ItemMeta itemMeta = item.getItemMeta();
                 assert itemMeta != null;
-                itemMeta.setDisplayName(tree.getBaseAbility().getFullName());
+                itemMeta.setDisplayName(tree.getBaseAbility().getElement().getEmoji() + " " + tree.getBaseAbility().getName());
                 itemMeta.setLore(List.of("§7View this ability tree."));
                 item.setItemMeta(itemMeta);
 
@@ -305,7 +305,7 @@ public class AbilityTree {
                 ItemStack item = new ItemStack(Material.NETHER_STAR);
                 ItemMeta itemMeta = item.getItemMeta();
                 assert itemMeta != null;
-                itemMeta.setDisplayName(tree.getBaseAbility().getFullName());
+                itemMeta.setDisplayName(tree.getBaseAbility().getElement().getEmoji() + " " + tree.getBaseAbility().getName());
                 itemMeta.setLore(List.of("§7View this ability tree."));
                 item.setItemMeta(itemMeta);
 

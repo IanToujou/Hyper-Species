@@ -1,17 +1,15 @@
 package net.toujoustudios.hyperspecies.data.ability.active;
 
+import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.block.data.type.Fire;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,7 +19,7 @@ public class AbilityTotalAnnihilation extends Ability {
 
         super(
                 "Total Annihilation",
-                List.of("§8Summon multiple meteors that destroy", "§8the environment in a radius of §d{radius}m" + "§8and deal " + Element.FIRE.getEmoji() + " {damage} §8damage."),
+                List.of("§8Summons multiple meteors that destroy", "§8the environment in a radius of §d{radius}m" + "§8and deal " + Element.FIRE.getEmoji() + " {damage} §8damage."),
                 Element.DARK,
                 Element.FIRE,
                 AbilityType.TERRAIN,
@@ -34,7 +32,8 @@ public class AbilityTotalAnnihilation extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(5,6,7,8,9,10));
+        fields.put(AbilityField.RANGE, List.of(10,13,15,17,18,20));
+        fields.put(AbilityField.DAMAGE, List.of(15,17,19,21,23,25));
         setFields(fields);
 
     }
@@ -56,19 +55,19 @@ public class AbilityTotalAnnihilation extends Ability {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
 
             List<Fireball> entities = List.of(
+                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(-15, 0, 15), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(0, 0, 15), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(15, 0, 15), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(-15, 0, 0), EntityType.FIREBALL),
                     (Fireball) player.getWorld().spawnEntity(spawnLocation.add(0, 0, 0), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(10, 0, 0), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(10, 0, 10), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(0, 0, 10), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(-10, 0, 0), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(-10, 0, -10), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(0, 0, -10), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(10, 0, -10), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(-10, 0, 10), EntityType.FIREBALL)
+                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(15, 0, 0), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(15, 0, -15), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(0, 0, -15), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(-15, 0, -15), EntityType.FIREBALL)
             );
 
             entities.forEach(entity -> {
-                entity.setCustomName("Total Annihilation of " + player.getName());
+                entity.customName(Component.text("Total Annihilation of " + player.getName()));
                 entity.setCustomNameVisible(false);
                 entity.setDirection(new Vector(0, -3, 0));
                 entity.setIsIncendiary(false);

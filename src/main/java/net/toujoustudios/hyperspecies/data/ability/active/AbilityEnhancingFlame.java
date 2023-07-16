@@ -27,7 +27,7 @@ public class AbilityEnhancingFlame extends Ability {
                 90,
                 Material.BLAZE_POWDER,
                 8,
-                List.of("Demon"),
+                List.of("Demon", "Reptile", "Human", "Feline", "Dwarf", "Wolf"),
                 List.of("")
         );
 

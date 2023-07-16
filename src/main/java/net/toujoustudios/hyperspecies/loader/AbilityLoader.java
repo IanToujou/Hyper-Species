@@ -14,13 +14,18 @@ public class AbilityLoader {
         // Hellblight
         Ability.createAbility(new AbilityHellblight());
         Ability.createAbility(new AbilityFlamingBlight());
-        // TODO: End Blight
-        // TODO: Engulfing Darkness
+        Ability.createAbility(new AbilityEndblight());
+        Ability.createAbility(new AbilityEngulfingDarkness());
 
         HashMap<Integer, Ability> hellblightAbilities = new HashMap<>();
         hellblightAbilities.put(0, Ability.getAbility("Hellblight"));
         hellblightAbilities.put(1, Ability.getAbility("Flaming Blight"));
         AbilityTree.createTree("Hellblight", new AbilityTree(hellblightAbilities));
+
+        HashMap<Integer, Ability> endblightAbilities = new HashMap<>();
+        endblightAbilities.put(0, Ability.getAbility("Endblight"));
+        endblightAbilities.put(1, Ability.getAbility("Engulfing Darkness"));
+        AbilityTree.createTree("Endblight", new AbilityTree(endblightAbilities));
 
         // Flame Shot
         Ability.createAbility(new AbilityFlameShot());

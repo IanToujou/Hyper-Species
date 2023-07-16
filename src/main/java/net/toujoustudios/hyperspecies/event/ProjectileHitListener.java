@@ -12,8 +12,6 @@ import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -123,9 +121,9 @@ public class ProjectileHitListener implements Listener {
                 }
             });
 
-            Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
-                blocks.forEach(block -> block.setType(Material.AIR));
-            }, 20 * 10);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> blocks.forEach(block -> {
+                if(block.getType() == Material.MAGMA_BLOCK) block.setType(Material.AIR);
+            }), 20 * 10);
 
         }
 
@@ -140,7 +138,7 @@ public class ProjectileHitListener implements Listener {
             PlayerManager playerManager = PlayerManager.getPlayer(player);
 
             int damage = ability.getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(ability));
-            int range = ability.getFieldValue(AbilityField.RANGE, playerManager.getAbilityLevel(ability));
+            int grassRadius = ability.getFieldValue(AbilityField.RANGE, playerManager.getAbilityLevel(ability));
 
             Location location = projectile.getLocation();
             Block center = location.add(0, -2, 0).getBlock();
@@ -163,7 +161,6 @@ public class ProjectileHitListener implements Listener {
             });
 
             ArrayList<Block> grassBlocks = new ArrayList<>();
-            int grassRadius = 10;
 
             for(int x = -grassRadius; x <= grassRadius; x++) {
                 for(int y = -grassRadius; y <= grassRadius; y++) {
@@ -192,7 +189,7 @@ public class ProjectileHitListener implements Listener {
             projectile.getWorld().spawnParticle(Particle.SMOKE_LARGE, 500, 4, 1, 4);
 
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
-            double radiusSquared = range * range;
+            double radiusSquared = grassRadius * grassRadius;
             players.forEach(all -> {
                 if(all.getLocation().distanceSquared(location) <= radiusSquared) {
                     all.damage(damage, projectile);
