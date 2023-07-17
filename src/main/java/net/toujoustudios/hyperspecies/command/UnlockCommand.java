@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.command;
 
+import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
@@ -40,14 +41,14 @@ public class UnlockCommand implements CommandExecutor {
         Ability ability = Ability.getAbility(nameBuilder.toString());
 
         if(ability == null) {
-            player.sendMessage(Config.MESSAGE_ERROR_ABILITY_INVALID);
+            player.sendMessage(Component.text(Config.MESSAGE_ERROR_ABILITY_INVALID));
             return false;
         }
 
         PlayerManager playerManager = PlayerManager.getPlayer(player);
 
         playerManager.addAbility(ability);
-        player.sendMessage(Config.MESSAGE_PREFIX + " §7You unlocked the ability §e" + ability.getName() + "§8.");
+        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + " §7You unlocked the ability §e" + ability.getName() + "§8."));
 
         return false;
 

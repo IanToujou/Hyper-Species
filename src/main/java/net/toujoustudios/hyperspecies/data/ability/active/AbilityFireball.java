@@ -4,7 +4,6 @@ import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
-import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -27,7 +26,8 @@ public class AbilityFireball extends Ability {
                 Material.FIRE_CHARGE,
                 5,
                 List.of("Demon", "Human", "Reptile", "Feline", "Dwarf", "Wolf"),
-                List.of("")
+                4,
+                2
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

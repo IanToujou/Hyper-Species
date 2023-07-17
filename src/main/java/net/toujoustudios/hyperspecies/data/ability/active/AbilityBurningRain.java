@@ -25,7 +25,8 @@ public class AbilityBurningRain extends Ability {
                 Material.BLAZE_POWDER,
                 5,
                 List.of("Demon", "Reptile", "Human", "Feline", "Dwarf", "Wolf"),
-                List.of("Try to place a water bucket in the", "nether.")
+                4,
+                3
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

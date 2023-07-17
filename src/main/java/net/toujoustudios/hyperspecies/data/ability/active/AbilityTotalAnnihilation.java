@@ -28,7 +28,8 @@ public class AbilityTotalAnnihilation extends Ability {
                 Material.ENDER_PEARL,
                 5,
                 List.of("Demon"),
-                List.of("Kill 3 players with §bRay of Doom§8.")
+                8,
+                5
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

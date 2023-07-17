@@ -29,7 +29,8 @@ public class AbilityHellblight extends Ability {
                 Material.GUNPOWDER,
                 8,
                 List.of("Demon", "Reptile", "Human", "Feline", "Dwarf", "Wolf"),
-                List.of("")
+                2,
+                1
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

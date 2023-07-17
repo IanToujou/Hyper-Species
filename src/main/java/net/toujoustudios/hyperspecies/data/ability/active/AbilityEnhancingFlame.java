@@ -28,7 +28,8 @@ public class AbilityEnhancingFlame extends Ability {
                 Material.BLAZE_POWDER,
                 8,
                 List.of("Demon", "Reptile", "Human", "Feline", "Dwarf", "Wolf"),
-                List.of("")
+                5,
+                2
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

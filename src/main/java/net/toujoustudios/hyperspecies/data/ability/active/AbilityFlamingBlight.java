@@ -28,7 +28,8 @@ public class AbilityFlamingBlight extends Ability {
                 Material.GLOWSTONE,
                 8,
                 List.of("Demon", "Reptile", "Wolf"),
-                List.of("")
+                3,
+                2
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

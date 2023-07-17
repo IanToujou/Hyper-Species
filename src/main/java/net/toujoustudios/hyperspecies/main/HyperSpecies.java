@@ -1,8 +1,10 @@
 package net.toujoustudios.hyperspecies.main;
 
+import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.toujoustudios.hyperspecies.command.*;
+import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.data.team.Team;
 import net.toujoustudios.hyperspecies.event.*;
@@ -16,6 +18,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.plugin.PluginManager;
@@ -51,7 +54,10 @@ public final class HyperSpecies extends JavaPlugin {
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-            if(playerManager.getSpecies() == null) return;
+            if(playerManager.getSpecies() == null) {
+                if(player.getOpenInventory().getType() == InventoryType.PLAYER) player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c Please rejoin and select a species§8."));
+                return;
+            }
 
             if(playerManager.getMana() < 0) playerManager.setMana(0);
             if(playerManager.getShield() < 0) playerManager.setShield(0);

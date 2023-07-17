@@ -84,7 +84,7 @@ public class TeamCommand implements CommandExecutor {
         }
 
         if(args.length != 0) {
-            player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", this.getUsage()));
+            player.sendMessage(Component.text(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", this.getUsage())));
             return false;
         }
 

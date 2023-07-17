@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.command;
 
+import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
@@ -22,12 +23,12 @@ public class ResetCommand implements CommandExecutor {
         }
 
         if(!player.hasPermission("hyperspecies.command.reset")) {
-            player.sendMessage(Config.MESSAGE_ERROR_PERMISSION);
+            player.sendMessage(Component.text(Config.MESSAGE_ERROR_PERMISSION));
             return false;
         }
 
         if(args.length != 0) {
-            player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", this.getUsage()));
+            player.sendMessage(Component.text(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", this.getUsage())));
             return false;
         }
 

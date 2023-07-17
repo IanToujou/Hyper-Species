@@ -29,7 +29,8 @@ public class AbilityStrikingTrail extends Ability {
                 Material.RED_DYE,
                 5,
                 List.of("Demon", "Reptile", "Human"),
-                List.of("")
+                5,
+                3
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

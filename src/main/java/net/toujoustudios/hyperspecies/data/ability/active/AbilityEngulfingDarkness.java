@@ -29,7 +29,8 @@ public class AbilityEngulfingDarkness extends Ability {
                 Material.HOPPER,
                 8,
                 List.of("Demon"),
-                List.of("")
+                8,
+                4
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

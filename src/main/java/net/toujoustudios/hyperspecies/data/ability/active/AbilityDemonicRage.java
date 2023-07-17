@@ -28,7 +28,8 @@ public class AbilityDemonicRage extends Ability {
                 Material.POPPED_CHORUS_FRUIT,
                 8,
                 List.of("Demon", "Reptile", "Wolf"),
-                List.of("")
+                6,
+                4
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

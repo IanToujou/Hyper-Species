@@ -15,7 +15,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scoreboard.Scoreboard;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.*;
 
@@ -25,6 +24,7 @@ public class PlayerManager {
     private static final YamlConfiguration playerConfig = Config.getConfigFile("players.yml");
     private final UUID uuid;
     private int experience;
+    private int skill;
     private double health;
     private double maxHealth;
     private double healthRegeneration;
@@ -37,7 +37,7 @@ public class PlayerManager {
     private Species species;
     private SubSpecies subSpecies;
     private final List<Ability> abilities;
-    private final List<Ability> trials;
+    private final List<Ability> activeAbilities;
     private boolean selectingAbility;
     private boolean regenerationCoolingDown;
     private ArrayList<ItemStack> savedInventory;
@@ -52,6 +52,9 @@ public class PlayerManager {
 
         if(playerConfig.isSet("Data." + uuid + ".Character.Experience.Main")) experience = playerConfig.getInt("Data." + uuid + ".Character.Experience.Main");
         else experience = 0;
+
+        if(playerConfig.isSet("Data." + uuid + ".Character.Skill")) skill = playerConfig.getInt("Data." + uuid + ".Character.Skill");
+        else skill = 0;
 
         maxHealth = 50;
         maxMana = 20;
@@ -77,14 +80,13 @@ public class PlayerManager {
         else subSpecies = null;
 
         abilities = new ArrayList<>();
-
         playerConfig.getStringList("Data." + uuid + ".Character.Abilities").forEach(item -> {
             if(!abilities.contains(Ability.getAbility(item))) abilities.add(Ability.getAbility(item));
         });
 
-        trials = new ArrayList<>();
-        playerConfig.getStringList("Data." + uuid + ".Character.Trials").forEach(item -> {
-            if(!trials.contains(Ability.getAbility(item))) trials.add(Ability.getAbility(item));
+        activeAbilities = new ArrayList<>();
+        playerConfig.getStringList("Data." + uuid + ".Character.ActiveAbilities").forEach(item -> {
+            if(!activeAbilities.contains(Ability.getAbility(item))) activeAbilities.add(Ability.getAbility(item));
         });
 
         abilities.forEach(ability -> {
@@ -124,6 +126,7 @@ public class PlayerManager {
         playerConfig.set("Data." + uuid + ".Points.Shield", shield);
         playerConfig.set("Data." + uuid + ".Points.Drunkenness", drunkenness);
         playerConfig.set("Data." + uuid + ".Character.Experience.Main", experience);
+        playerConfig.set("Data." + uuid + ".Character.Skill", skill);
         abilityExperiences.forEach((ability, integer) -> playerConfig.set("Data." + uuid + ".Character.Experience.Ability." + ability, integer));
         playerConfig.set("Data." + uuid + ".Character.Species", (species != null ? species.getName() : null));
         playerConfig.set("Data." + uuid + ".Character.Team", team);
@@ -131,9 +134,9 @@ public class PlayerManager {
         ArrayList<String> abilityNames = new ArrayList<>();
         abilities.forEach(ability -> abilityNames.add(ability.getName()));
         playerConfig.set("Data." + uuid + ".Character.Abilities", abilityNames);
-        ArrayList<String> trialNames = new ArrayList<>();
-        trials.forEach(trial -> trialNames.add(trial.getName()));
-        playerConfig.set("Data." + uuid + ".Character.Trials", trialNames);
+        ArrayList<String> activeAbilityNames = new ArrayList<>();
+        activeAbilities.forEach(ability -> activeAbilityNames.add(ability.getName()));
+        playerConfig.set("Data." + uuid + ".Character.ActiveAbilities", activeAbilityNames);
 
         Config.saveToFile(playerConfig, "players.yml");
 
@@ -232,6 +235,18 @@ public class PlayerManager {
 
     public void setExperience(int experience) {
         this.experience = experience;
+    }
+
+    public int getLevel() {
+        return getLevelFromExperience(experience);
+    }
+
+    public int getSkill() {
+        return skill;
+    }
+
+    public void setSkill(int skill) {
+        this.skill = skill;
     }
 
     public double getHealth() {
@@ -342,20 +357,16 @@ public class PlayerManager {
         abilities.remove(ability);
     }
 
-    public List<Ability> getTrials() {
-        return trials;
+    public List<Ability> getActiveAbilities() {
+        return activeAbilities;
     }
 
-    public void addTrial(Ability ability) {
-        if(!trials.contains(ability)) trials.add(ability);
+    public void addActiveAbility(Ability ability) {
+        if(!activeAbilities.contains(ability)) activeAbilities.add(ability);
     }
 
-    public void removeTrial(Ability ability) {
-        trials.remove(ability);
-    }
-
-    public boolean hasTrial(Ability ability) {
-        return trials.contains(ability);
+    public void removeActiveAbility(Ability ability) {
+        activeAbilities.remove(ability);
     }
 
     public boolean isSelectingAbility() {
@@ -366,6 +377,7 @@ public class PlayerManager {
         this.selectingAbility = selectingAbility;
     }
 
+    @SuppressWarnings("all")
     public boolean isRegenerationCoolingDown() {
         return regenerationCoolingDown;
     }
@@ -429,7 +441,7 @@ public class PlayerManager {
     }
 
     public void unlockAbility(Ability ability) {
-        if(!hasAbility(ability) && hasTrial(ability)) {
+        if(!hasAbility(ability)) {
             addAbility(ability);
             Player player = Bukkit.getPlayer(uuid);
             if(player != null) {
@@ -437,6 +449,18 @@ public class PlayerManager {
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
             }
         }
+    }
+
+    public int getMaxAbilityWeight() {
+        return getLevel() * 2;
+    }
+
+    public int getAbilityWeight() {
+        int weight = 0;
+        for(Ability ability : activeAbilities) {
+            weight += ability.getWeight();
+        }
+        return weight;
     }
 
     // STATIC METHODS

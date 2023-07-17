@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.ui;
 
+import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.ability.tree.AbilityTree;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -7,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.meta.ItemMeta;
 
 public class AbilityTreeUI implements Listener {
 
@@ -59,11 +61,38 @@ public class AbilityTreeUI implements Listener {
             event.setCancelled(true);
 
             Material material = event.getCurrentItem().getType();
+            ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
+
+            if(itemMeta == null) return;
 
             if(material == Material.BARRIER) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.openInventory(AbilityTree.buildMainInventory(player, 0));
+
+            } else if(itemMeta.getDisplayName().startsWith("§") && material != Material.GRAY_WOOL) {
+
+                String abilityName = itemMeta.getDisplayName().split(" ", 2)[1];
+                String[] abilityNameArray = abilityName.split(" ");
+                StringBuilder nameBuilder = new StringBuilder();
+                for (String s : abilityNameArray) {
+                    if (!s.contains("§")) nameBuilder.append(" ").append(s);
+                }
+                abilityName = nameBuilder.substring(1);
+
+                if(Ability.getAbility(abilityName) == null) {
+                    abilityName = itemMeta.getDisplayName().split(" ", 3)[2];
+                    abilityNameArray = abilityName.split(" ");
+                    nameBuilder = new StringBuilder();
+                    for (String s : abilityNameArray) {
+                        if (!s.contains("§")) nameBuilder.append(" ").append(s);
+                    }
+                    abilityName = nameBuilder.substring(1);
+                }
+
+                Ability ability = Ability.getAbility(abilityName);
+                if(ability == null) return;
+                player.sendMessage("Success");
 
             }
 

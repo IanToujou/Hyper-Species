@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.command;
 
+import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.log.LogLevel;
@@ -23,7 +24,7 @@ public class ShieldCommand implements CommandExecutor {
         }
 
         if(!player.hasPermission("hyperspecies.command.shield")) {
-            player.sendMessage(Config.MESSAGE_ERROR_PERMISSION);
+            player.sendMessage(Component.text(Config.MESSAGE_ERROR_PERMISSION));
             return false;
         }
 

@@ -30,7 +30,8 @@ public class AbilityEndblight extends Ability {
                 Material.CHARCOAL,
                 8,
                 List.of("Demon"),
-                List.of("")
+                3,
+                1
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

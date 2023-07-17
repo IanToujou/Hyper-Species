@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.data.ability.active;
 
+import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.species.Species;
 import org.bukkit.Material;
@@ -27,11 +28,12 @@ public abstract class Ability {
     private final Material material;
     private final int maxLevel;
     private final List<String> species;
-    private final List<String> trial;
+    private final int cost;
+    private final int weight;
 
     private HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
 
-    public Ability(String name, List<String> description, Element element, AbilityType type, int manaCost, int delay, Material material, int maxLevel, List<String> species, List<String> trial) {
+    public Ability(String name, List<String> description, Element element, AbilityType type, int manaCost, int delay, Material material, int maxLevel, List<String> species, int cost, int weight) {
         this.name = name;
         this.description = description;
         this.element = element;
@@ -42,10 +44,11 @@ public abstract class Ability {
         this.material = material;
         this.maxLevel = maxLevel;
         this.species = species;
-        this.trial = trial;
+        this.cost = cost;
+        this.weight = weight;
     }
 
-    public Ability(String name, List<String> description, Element element, Element secondaryElement, AbilityType type, int manaCost, int delay, Material material, int maxLevel, List<String> species, List<String> trial) {
+    public Ability(String name, List<String> description, Element element, Element secondaryElement, AbilityType type, int manaCost, int delay, Material material, int maxLevel, List<String> species, int cost, int weight) {
         this.name = name;
         this.description = description;
         this.element = element;
@@ -56,13 +59,20 @@ public abstract class Ability {
         this.material = material;
         this.maxLevel = maxLevel;
         this.species = species;
-        this.trial = trial;
+        this.cost = cost;
+        this.weight = weight;
     }
 
     public static void createAbility(Ability ability) {
         abilities.put(ability.getName(), ability);
     }
 
+    /**
+     * Returns the ability by using its name, if present. If the ability does not exist, it will return null.
+     *
+     * @param name The name of the ability.
+     * @return The ability if it is present.
+     */
     public static Ability getAbility(String name) {
         if(abilities.containsKey(name)) return abilities.get(name);
         return null;
@@ -118,14 +128,13 @@ public abstract class Ability {
         return maxLevel;
     }
 
-    @SuppressWarnings("deprecation")
     public ItemStack getItem() {
 
         ItemStack item = new ItemStack(material);
         ItemMeta itemMeta = item.getItemMeta();
         assert itemMeta != null;
 
-        itemMeta.setDisplayName(getFullName() + " §7(§aLVL {level}§7)");
+        itemMeta.displayName(Component.text(getFullName() + " §7(§aLVL {level}§7)"));
         List<String> lore = new ArrayList<>();
         lore.add("§8" + type.getName() + " Spell");
         lore.add("§b" + manaCost + " Mana §8/ §6" + delay + "s");
@@ -170,8 +179,12 @@ public abstract class Ability {
         return this.species.contains(species.getName());
     }
 
-    public List<String> getTrial() {
-        return trial;
+    public int getCost() {
+        return cost;
+    }
+
+    public int getWeight() {
+        return weight;
     }
 
     public static HashMap<String, Ability> getAbilities() {

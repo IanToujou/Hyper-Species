@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.command;
 
+import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.data.species.Species;
@@ -24,7 +25,7 @@ public class SpeciesCommand implements CommandExecutor {
         }
 
         if(!player.hasPermission("hyperspecies.command.species")) {
-            player.sendMessage(Config.MESSAGE_ERROR_PERMISSION);
+            player.sendMessage(Component.text(Config.MESSAGE_ERROR_PERMISSION));
             return false;
         }
 
@@ -33,11 +34,11 @@ public class SpeciesCommand implements CommandExecutor {
             Species species = Species.getSpecies(args[0]);
 
             if(species == null) {
-                player.sendMessage(Config.MESSAGE_PREFIX + " §cThe specified species does not exist§8.");
+                player.sendMessage(Component.text(Config.MESSAGE_PREFIX + " §cThe specified species does not exist§8."));
                 return false;
             }
 
-            player.sendMessage(Config.MESSAGE_PREFIX + " §7You set your species to §b" + species.getName() + "§8.");
+            player.sendMessage(Component.text(Config.MESSAGE_PREFIX + " §7You set your species to §b" + species.getName() + "§8."));
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
@@ -56,11 +57,11 @@ public class SpeciesCommand implements CommandExecutor {
             Species species = Species.getSpecies(args[0]);
 
             if(species == null) {
-                player.sendMessage(Config.MESSAGE_PREFIX + " §cThe specified species does not exist§8.");
+                player.sendMessage(Component.text(Config.MESSAGE_PREFIX + " §cThe specified species does not exist§8."));
                 return false;
             }
 
-            player.sendMessage(Config.MESSAGE_PREFIX + " §7You set the species of §e" + target.getName() + "§7 to §b" + species.getName() + "§8.");
+            player.sendMessage(Component.text(Config.MESSAGE_PREFIX + " §7You set the species of §e" + target.getName() + "§7 to §b" + species.getName() + "§8."));
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
 
             PlayerManager playerManager = PlayerManager.getPlayer(target);
@@ -68,7 +69,7 @@ public class SpeciesCommand implements CommandExecutor {
             playerManager.refreshScoreboard();
 
         } else {
-            player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", this.getUsage()));
+            player.sendMessage(Component.text(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", this.getUsage())));
             return false;
         }
 

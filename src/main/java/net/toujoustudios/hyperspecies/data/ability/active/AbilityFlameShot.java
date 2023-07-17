@@ -28,7 +28,8 @@ public class AbilityFlameShot extends Ability {
                 Material.SPECTRAL_ARROW,
                 5,
                 List.of("Demon", "Human", "Reptile", "Feline", "Dwarf", "Wolf"),
-                List.of("Launch an arrow into lava.")
+                2,
+                1
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
