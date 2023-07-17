@@ -29,21 +29,27 @@ commands:
   abilitytree:
     description: Open up the ability tree.
     permission: hyperspecies.command.abilitytree
-  shield:
+  setshield:
     description: Set the shield value for a player.
-    permission: hyperspecies.command.shield
-  health:
+    permission: hyperspecies.command.setshield
+  sethealth:
     description: Set the health value for a player.
-    permission: hyperspecies.command.health
-  mana:
+    permission: hyperspecies.command.sethealth
+  setmana:
     description: Set the mana value for a player.
-    permission: hyperspecies.command.mana
-  species:
+    permission: hyperspecies.command.setmana
+  setspecies:
     description: Set the species for a player.
-    permission: hyperspecies.command.species
+    permission: hyperspecies.command.setspecies
   unlock:
     description: Unlock the ability for a player.
     permission: hyperspecies.command.unlock
+  setskill:
+    description: Set the skill points for a player.
+    permission: hyperspecies.command.setskill
+  setexperience:
+    description: Set the experience for a player.
+    permission: hyperspecies.command.setexperience
 
 permissions:
   hyperspecies.group.player:
@@ -55,11 +61,13 @@ permissions:
       hyperspecies.command.ability: false
       hyperspecies.command.reset: true
       hyperspecies.command.abilitytree: true
-      hyperspecies.command.shield: false
-      hyperspecies.command.health: false
-      hyperspecies.command.mana: false
-      hyperspecies.command.species: false
+      hyperspecies.command.setshield: false
+      hyperspecies.command.sethealth: false
+      hyperspecies.command.setmana: false
+      hyperspecies.command.setspecies: false
       hyperspecies.command.unlock: false
+      hyperspecies.command.setskill: false
+      hyperspecies.command.setexperience: false
   hyperspecies.group.admin:
     description: The administrator group. Grants all permissions.
     children:
@@ -69,11 +77,13 @@ permissions:
       hyperspecies.command.ability: true
       hyperspecies.command.reset: true
       hyperspecies.command.abilitytree: true
-      hyperspecies:command.shield: true
-      hyperspecies.command.health: true
-      hyperspecies.command.mana: true
-      hyperspecies.command.species: true
+      hyperspecies:command.setshield: true
+      hyperspecies.command.sethealth: true
+      hyperspecies.command.setmana: true
+      hyperspecies.command.setspecies: true
       hyperspecies.command.unlock: true
+      hyperspecies.command.setskill: true
+      hyperspecies.command.setexperience: true
   hyperspecies.group.moderator:
     description: The administrator group. Grants all permissions.
     children:
@@ -83,11 +93,13 @@ permissions:
       hyperspecies.command.ability: false
       hyperspecies.command.reset: true
       hyperspecies.command.abilitytree: true
-      hyperspecies.command.shield: false
-      hyperspecies.command.health: false
-      hyperspecies.command.mana: false
-      hyperspecies.command.species: false
+      hyperspecies.command.setshield: false
+      hyperspecies.command.sethealth: false
+      hyperspecies.command.setmana: false
+      hyperspecies.command.setspecies: false
       hyperspecies.command.unlock: false
+      hyperspecies.command.setskill: false
+      hyperspecies.command.setexperience: false
   hyperspecies.command.emote:
     description: Allows players to use the emote command.
     default: true
@@ -104,20 +116,26 @@ permissions:
     description: Allows players to use the reset command.
     default: true
   hyperspecies.command.abilitytree:
-    description: Allows players to use the abilitytree command.
+    description: Allows players to use the ability tree command.
     default: true
-  hyperspecies.command.shield:
-    description: Allows players to use the shield command.
+  hyperspecies.command.setshield:
+    description: Allows players to use the set shield command.
     default: op
-  hyperspecies.command.health:
-    description: Allows players to use the health command.
+  hyperspecies.command.sethealth:
+    description: Allows players to use the set health command.
     default: op
-  hyperspecies.command.mana:
-    description: Allows players to use the mana command.
+  hyperspecies.command.setmana:
+    description: Allows players to use the set mana command.
     default: op
-  hyperspecies.command.species:
-    description: Allows players to use the species command.
+  hyperspecies.command.setspecies:
+    description: Allows players to use the set species command.
     default: op
   hyperspecies.command.unlock:
     description: Allows players to use the unlock command.
+    default: op
+  hyperspecies.command.setskill:
+    description: Allows players to use the set skill command.
+    default: op
+  hyperspecies.command.setexperience:
+    description: Allows players to use the set experience command.
     default: op

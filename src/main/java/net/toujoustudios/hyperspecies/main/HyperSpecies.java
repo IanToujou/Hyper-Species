@@ -168,11 +168,13 @@ public final class HyperSpecies extends JavaPlugin {
         getCommand("ability").setExecutor(new AbilityCommand());
         getCommand("reset").setExecutor(new ResetCommand());
         getCommand("abilitytree").setExecutor(new AbilityTreeCommand());
-        getCommand("shield").setExecutor(new ShieldCommand());
-        getCommand("health").setExecutor(new HealthCommand());
-        getCommand("mana").setExecutor(new ManaCommand());
-        getCommand("species").setExecutor(new SpeciesCommand());
+        getCommand("setshield").setExecutor(new SetShieldCommand());
+        getCommand("sethealth").setExecutor(new SetHealthCommand());
+        getCommand("setmana").setExecutor(new SetManaCommand());
+        getCommand("setspecies").setExecutor(new SetSpeciesCommand());
         getCommand("unlock").setExecutor(new UnlockCommand());
+        getCommand("setskill").setExecutor(new SetSkillCommand());
+        getCommand("setexperience").setExecutor(new SetExperienceCommand());
     }
 
     public void registerUI() {

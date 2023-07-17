@@ -137,7 +137,7 @@ public abstract class Ability {
         itemMeta.displayName(Component.text(getFullName() + " §7(§aLVL {level}§7)"));
         List<String> lore = new ArrayList<>();
         lore.add("§8" + type.getName() + " Spell");
-        lore.add("§b" + manaCost + " Mana §8/ §6" + delay + "s");
+        lore.add("§b" + manaCost + " Mana §8/ §6" + delay + "s §8/ §5" + weight + " Weight");
         lore.add("§r");
         List<String> list = new ArrayList<>(Stream.concat(lore.stream(), description.stream()).toList());
         list.add("§r");

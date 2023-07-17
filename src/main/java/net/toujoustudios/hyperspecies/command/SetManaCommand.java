@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class HealthCommand implements CommandExecutor {
+public class SetManaCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -22,7 +22,7 @@ public class HealthCommand implements CommandExecutor {
             return false;
         }
 
-        if(!player.hasPermission("hyperspecies.command.health")) {
+        if(!player.hasPermission("hyperspecies.command.setmana")) {
             player.sendMessage(Config.MESSAGE_ERROR_PERMISSION);
             return false;
         }
@@ -31,12 +31,12 @@ public class HealthCommand implements CommandExecutor {
 
             try {
 
-                int health = Integer.parseInt(args[0]);
-                player.sendMessage(Config.MESSAGE_PREFIX + " §7You set your health to §c❤ " + health + "§8.");
+                int mana = Integer.parseInt(args[0]);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7You set your mana to §b\uD83D\uDD25 " + mana + "§8.");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
 
                 PlayerManager playerManager = PlayerManager.getPlayer(player);
-                playerManager.setHealth(health);
+                playerManager.setMana(mana);
 
             } catch(Exception exception) {
                 player.sendMessage(Config.MESSAGE_ERROR_INTEGER_INVALID);
@@ -53,11 +53,11 @@ public class HealthCommand implements CommandExecutor {
 
             try {
 
-                int health = Integer.parseInt(args[0]);
+                int mana = Integer.parseInt(args[0]);
                 PlayerManager playerManager = PlayerManager.getPlayer(target);
-                playerManager.setHealth(health);
+                playerManager.setMana(mana);
 
-                player.sendMessage(Config.MESSAGE_PREFIX + " §7You set the health of §e" + target.getName() + " §7to §c❤ " + health + "§8.");
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7You set the mana of §e" + target.getName() + " §7to §b\uD83D\uDD25 " + mana + "§8.");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
 
             } catch(Exception exception) {
@@ -74,7 +74,7 @@ public class HealthCommand implements CommandExecutor {
     }
 
     public String getUsage() {
-        return "/health <amount> [<player>]";
+        return "/setmana <amount> [<player>]";
     }
 
 }

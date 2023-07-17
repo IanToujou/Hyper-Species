@@ -14,7 +14,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class SpeciesCommand implements CommandExecutor {
+public class SetSpeciesCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -24,7 +24,7 @@ public class SpeciesCommand implements CommandExecutor {
             return false;
         }
 
-        if(!player.hasPermission("hyperspecies.command.species")) {
+        if(!player.hasPermission("hyperspecies.command.setspecies")) {
             player.sendMessage(Component.text(Config.MESSAGE_ERROR_PERMISSION));
             return false;
         }
@@ -78,7 +78,7 @@ public class SpeciesCommand implements CommandExecutor {
     }
 
     public String getUsage() {
-        return "/species <species> [<player>]";
+        return "/setspecies <species> [<player>]";
     }
 
 }

@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.command;
 
-import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.log.LogLevel;
@@ -13,7 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class ShieldCommand implements CommandExecutor {
+public class SetExperienceCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -23,8 +22,8 @@ public class ShieldCommand implements CommandExecutor {
             return false;
         }
 
-        if(!player.hasPermission("hyperspecies.command.shield")) {
-            player.sendMessage(Component.text(Config.MESSAGE_ERROR_PERMISSION));
+        if(!player.hasPermission("hyperspecies.command.setexperience")) {
+            player.sendMessage(Config.MESSAGE_ERROR_PERMISSION);
             return false;
         }
 
@@ -32,12 +31,13 @@ public class ShieldCommand implements CommandExecutor {
 
             try {
 
-                int shield = Integer.parseInt(args[0]);
-                player.sendMessage(Config.MESSAGE_PREFIX + " §7You set your shield to §e⛨ " + shield + "§8.");
+                int experience = Integer.parseInt(args[0]);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7You set your experience to §b" + experience + " XP§8.");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
 
                 PlayerManager playerManager = PlayerManager.getPlayer(player);
-                playerManager.setShield(shield);
+                playerManager.setExperience(experience);
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7You are now level §b" + playerManager.getLevel() + "§8.");
 
             } catch(Exception exception) {
                 player.sendMessage(Config.MESSAGE_ERROR_INTEGER_INVALID);
@@ -54,11 +54,12 @@ public class ShieldCommand implements CommandExecutor {
 
             try {
 
-                int shield = Integer.parseInt(args[0]);
+                int experience = Integer.parseInt(args[0]);
                 PlayerManager playerManager = PlayerManager.getPlayer(target);
-                playerManager.setShield(shield);
+                playerManager.setExperience(experience);
 
-                player.sendMessage(Config.MESSAGE_PREFIX + " §7You set the shield of §e" + target.getName() + " §7to §e⛨ " + shield + "§8.");
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7You set the experience of §e" + target.getName() + " §7to §b" + experience + " XP§8.");
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7They are now level §b" + playerManager.getLevel() + "§8.");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
 
             } catch(Exception exception) {
@@ -75,7 +76,7 @@ public class ShieldCommand implements CommandExecutor {
     }
 
     public String getUsage() {
-        return "/shield <amount> [<player>]";
+        return "/setexperience <amount> [<player>]";
     }
 
 }

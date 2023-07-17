@@ -88,6 +88,36 @@ public class AbilityTree {
 
                 ItemStack item = ability.getItem();
                 if(!playerManager.hasAbility(ability)) item.setType(Material.GRAY_WOOL);
+                if(slot == 0) item.setType(Material.RED_WOOL);
+                if(slot < 10) {
+                    if(abilities.get(slot-1) != null && playerManager.hasAbility(abilities.get(slot-1))) {
+                        item.setType(Material.RED_WOOL);
+                    }
+                } else {
+
+                    if(links.contains(0) && slot == 10) {
+                        if(abilities.get(0) != null && playerManager.hasAbility(abilities.get(0))) {
+                            item.setType(Material.RED_WOOL);
+                        }
+                    } else if(links.contains(1) && slot == 11) {
+                        if(abilities.get(1) != null && playerManager.hasAbility(abilities.get(1))) {
+                            item.setType(Material.RED_WOOL);
+                        }
+                    } else if(links.contains(2) && slot == 12) {
+                        if(abilities.get(2) != null && playerManager.hasAbility(abilities.get(2))) {
+                            item.setType(Material.RED_WOOL);
+                        }
+                    } else if(links.contains(3) && slot == 13) {
+                        if(abilities.get(3) != null && playerManager.hasAbility(abilities.get(3))) {
+                            item.setType(Material.RED_WOOL);
+                        }
+                    } else {
+                        if(abilities.get(slot-1) != null && playerManager.hasAbility(abilities.get(slot-1))) {
+                            item.setType(Material.RED_WOOL);
+                        }
+                    }
+
+                }
                 ItemMeta itemMeta = item.getItemMeta();
                 assert itemMeta != null;
                 itemMeta.displayName(Component.text(itemMeta.getDisplayName().replace("{level}", String.valueOf(level))));
@@ -123,6 +153,12 @@ public class AbilityTree {
                         if(playerManager.hasAbility(ability)) newLore.add(line);
                     } else newLore.add(line);
                 });
+
+                if(!playerManager.hasAbility(ability)) {
+                    newLore.add(" ");
+                    newLore.add("§7Click to unlock this ability.");
+                    newLore.add("§7Cost: §eⓄ " + ability.getCost());
+                } else item.setType(ability.getItem().getType());
 
                 itemMeta.setLore(newLore);
                 item.setItemMeta(itemMeta);
