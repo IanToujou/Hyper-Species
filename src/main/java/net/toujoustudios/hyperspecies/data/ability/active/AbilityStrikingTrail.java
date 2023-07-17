@@ -25,7 +25,7 @@ public class AbilityStrikingTrail extends Ability {
                 Element.FIRE,
                 AbilityType.TERRAIN,
                 6,
-                80,
+                100,
                 Material.RED_DYE,
                 5,
                 List.of("Demon", "Reptile", "Human"),

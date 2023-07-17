@@ -2,6 +2,7 @@ package net.toujoustudios.hyperspecies.command;
 
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.ability.active.Ability;
+import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
 import org.bukkit.command.Command;
@@ -10,7 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class AbilityCommand implements CommandExecutor {
+public class UnlockCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -43,15 +44,17 @@ public class AbilityCommand implements CommandExecutor {
             return false;
         }
 
-        ability.execute(player);
-        player.sendMessage(Config.MESSAGE_PREFIX + " §7You used the ability §e" + ability.getName() + "§8.");
+        PlayerManager playerManager = PlayerManager.getPlayer(player);
+
+        playerManager.addAbility(ability);
+        player.sendMessage(Config.MESSAGE_PREFIX + " §7You unlocked the ability §e" + ability.getName() + "§8.");
 
         return false;
 
     }
 
     public String getUsage() {
-        return "/ability <name>";
+        return "/unlock <ability>";
     }
 
 }

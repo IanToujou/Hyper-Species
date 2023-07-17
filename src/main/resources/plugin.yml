@@ -26,9 +26,9 @@ commands:
   reset:
     description: Reset your character, losing all of your progress.
     permission: hyperspecies.command.reset
-  tree:
+  abilitytree:
     description: Open up the ability tree.
-    permission: hyperspecies.command.tree
+    permission: hyperspecies.command.abilitytree
   shield:
     description: Set the shield value for a player.
     permission: hyperspecies.command.shield
@@ -41,6 +41,9 @@ commands:
   species:
     description: Set the species for a player.
     permission: hyperspecies.command.species
+  unlock:
+    description: Unlock the ability for a player.
+    permission: hyperspecies.command.unlock
 
 permissions:
   hyperspecies.group.player:
@@ -51,11 +54,12 @@ permissions:
       hyperspecies.command.team: true
       hyperspecies.command.ability: false
       hyperspecies.command.reset: true
-      hyperspecies.command.tree: true
+      hyperspecies.command.abilitytree: true
       hyperspecies.command.shield: false
       hyperspecies.command.health: false
       hyperspecies.command.mana: false
       hyperspecies.command.species: false
+      hyperspecies.command.unlock: false
   hyperspecies.group.admin:
     description: The administrator group. Grants all permissions.
     children:
@@ -64,11 +68,12 @@ permissions:
       hyperspecies.command.team: true
       hyperspecies.command.ability: true
       hyperspecies.command.reset: true
-      hyperspecies.command.tree: true
+      hyperspecies.command.abilitytree: true
       hyperspecies:command.shield: true
       hyperspecies.command.health: true
       hyperspecies.command.mana: true
       hyperspecies.command.species: true
+      hyperspecies.command.unlock: true
   hyperspecies.group.moderator:
     description: The administrator group. Grants all permissions.
     children:
@@ -77,11 +82,12 @@ permissions:
       hyperspecies.command.team: true
       hyperspecies.command.ability: false
       hyperspecies.command.reset: true
-      hyperspecies.command.tree: true
+      hyperspecies.command.abilitytree: true
       hyperspecies.command.shield: false
       hyperspecies.command.health: false
       hyperspecies.command.mana: false
       hyperspecies.command.species: false
+      hyperspecies.command.unlock: false
   hyperspecies.command.emote:
     description: Allows players to use the emote command.
     default: true
@@ -97,8 +103,8 @@ permissions:
   hyperspecies.command.reset:
     description: Allows players to use the reset command.
     default: true
-  hyperspecies.command.tree:
-    description: Allows players to use the tree command.
+  hyperspecies.command.abilitytree:
+    description: Allows players to use the abilitytree command.
     default: true
   hyperspecies.command.shield:
     description: Allows players to use the shield command.
@@ -111,4 +117,7 @@ permissions:
     default: op
   hyperspecies.command.species:
     description: Allows players to use the species command.
+    default: op
+  hyperspecies.command.unlock:
+    description: Allows players to use the unlock command.
     default: op

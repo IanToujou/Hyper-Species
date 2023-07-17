@@ -23,7 +23,7 @@ public class AbilityEnhancingFlame extends Ability {
                 List.of("§8Enhances the users weapons, allowing", "§8them to deal " + Element.FIRE.getFullName() + " §8damage and ", "§8setting enemies on fire for §d{duration}s§8."),
                 Element.FIRE,
                 AbilityType.BUFF,
-                5,
+                6,
                 90,
                 Material.BLAZE_POWDER,
                 8,

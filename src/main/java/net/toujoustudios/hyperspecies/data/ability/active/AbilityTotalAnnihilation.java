@@ -24,7 +24,7 @@ public class AbilityTotalAnnihilation extends Ability {
                 Element.FIRE,
                 AbilityType.TERRAIN,
                 12,
-                180,
+                210,
                 Material.ENDER_PEARL,
                 5,
                 List.of("Demon"),

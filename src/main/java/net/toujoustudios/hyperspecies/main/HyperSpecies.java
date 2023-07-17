@@ -3,7 +3,6 @@ package net.toujoustudios.hyperspecies.main;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.toujoustudios.hyperspecies.command.*;
-import net.toujoustudios.hyperspecies.data.ability.active.AbilityBurningRain;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.data.team.Team;
 import net.toujoustudios.hyperspecies.event.*;
@@ -35,6 +34,7 @@ public final class HyperSpecies extends JavaPlugin {
     private Scoreboard scoreboard;
 
     @Override
+    @SuppressWarnings("deprecation")
     public void onEnable() {
 
         instance = this;
@@ -161,11 +161,12 @@ public final class HyperSpecies extends JavaPlugin {
         getCommand("team").setExecutor(new TeamCommand());
         getCommand("ability").setExecutor(new AbilityCommand());
         getCommand("reset").setExecutor(new ResetCommand());
-        getCommand("tree").setExecutor(new TreeCommand());
+        getCommand("abilitytree").setExecutor(new AbilityTreeCommand());
         getCommand("shield").setExecutor(new ShieldCommand());
         getCommand("health").setExecutor(new HealthCommand());
         getCommand("mana").setExecutor(new ManaCommand());
         getCommand("species").setExecutor(new SpeciesCommand());
+        getCommand("unlock").setExecutor(new UnlockCommand());
     }
 
     public void registerUI() {
@@ -176,8 +177,6 @@ public final class HyperSpecies extends JavaPlugin {
     }
 
     public void registerEvents() {
-
-        // Basic Events
         pluginManager.registerEvents(new PlayerJoinListener(), this);
         pluginManager.registerEvents(new PlayerInteractListener(), this);
         pluginManager.registerEvents(new ProjectileHitListener(), this);
@@ -188,10 +187,6 @@ public final class HyperSpecies extends JavaPlugin {
         pluginManager.registerEvents(new PlayerItemConsumeListener(), this);
         pluginManager.registerEvents(new EntityDamageByEntityListener(), this);
         pluginManager.registerEvents(new PlayerDropItemListener(), this);
-
-        // Ability Trials
-        pluginManager.registerEvents(new AbilityBurningRain(), this);
-
     }
 
     public void registerCrafting() {

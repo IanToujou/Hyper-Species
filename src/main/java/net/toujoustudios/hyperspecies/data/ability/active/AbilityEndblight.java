@@ -26,8 +26,8 @@ public class AbilityEndblight extends Ability {
                 Element.FIRE,
                 AbilityType.DEBUFF,
                 5,
-                90,
-                Material.BLAZE_POWDER,
+                60,
+                Material.CHARCOAL,
                 8,
                 List.of("Demon"),
                 List.of("")

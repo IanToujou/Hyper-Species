@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.data.ability.active;
 
+import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
@@ -22,8 +23,8 @@ public class AbilityMeteorStrike extends Ability {
                 List.of("§8Summons a meteor that strikes from", "§8the sky, dealing " + Element.FIRE.getEmoji() + " {damage} §8in a range", "§8of §d{range}m§8."),
                 Element.FIRE,
                 AbilityType.DAMAGE,
-                8,
-                180,
+                6,
+                120,
                 Material.MAGMA_CREAM,
                 8,
                 List.of("Demon", "Reptile", "Human"),
@@ -67,7 +68,7 @@ public class AbilityMeteorStrike extends Ability {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
 
             Fireball entity = (Fireball) player.getWorld().spawnEntity(spawnLocation, EntityType.FIREBALL);
-            entity.setCustomName("Meteor Strike of " + player.getName());
+            entity.customName(Component.text("Meteor Strike of " + player.getName()));
             entity.setCustomNameVisible(false);
             entity.setDirection(new Vector(0, -3, 0));
             entity.setIsIncendiary(false);

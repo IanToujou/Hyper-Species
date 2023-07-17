@@ -24,9 +24,9 @@ public class AbilityEngulfingDarkness extends Ability {
                 Element.DARK,
                 Element.FIRE,
                 AbilityType.DEBUFF,
-                5,
+                8,
                 90,
-                Material.BLAZE_POWDER,
+                Material.HOPPER,
                 8,
                 List.of("Demon"),
                 List.of("")

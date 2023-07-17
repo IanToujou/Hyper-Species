@@ -5,16 +5,13 @@ import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
 import org.bukkit.entity.*;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
 import java.util.*;
 
-public class AbilityBurningRain extends Ability implements Listener {
+public class AbilityBurningRain extends Ability {
 
     public AbilityBurningRain() {
 
@@ -24,7 +21,7 @@ public class AbilityBurningRain extends Ability implements Listener {
                 Element.FIRE,
                 AbilityType.DAMAGE,
                 6,
-                80,
+                60,
                 Material.BLAZE_POWDER,
                 5,
                 List.of("Demon", "Reptile", "Human", "Feline", "Dwarf", "Wolf"),
@@ -78,19 +75,6 @@ public class AbilityBurningRain extends Ability implements Listener {
         }, 20 * 10);
 
         return true;
-
-    }
-
-    @EventHandler
-    public void onBlockPlace(BlockPlaceEvent event) {
-
-        if(event.getBlock().getType() == Material.WATER) {
-            if(event.getBlock().getWorld().isUltraWarm()) {
-                Player player = event.getPlayer();
-                PlayerManager playerManager = PlayerManager.getPlayer(player);
-                playerManager.unlockAbility(this);
-            }
-        }
 
     }
 
