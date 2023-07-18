@@ -135,19 +135,19 @@ public class AbilityTreeUI implements Listener {
 
                 if(playerManager.getActiveAbilities().contains(ability)) {
                     playerManager.removeActiveAbility(ability);
-                    player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You removed §b" + ability.getName() + "§7 to your loadout§8."));
+                    player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You removed §b" + ability.getName() + "§7 from your loadout§8."));
                     player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 New weight§8: §d" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight()));
                 } else {
                     if(playerManager.getAbilityWeight() + ability.getWeight() > playerManager.getMaxAbilityWeight()) {
                         player.closeInventory();
                         player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, SoundCategory.MASTER, 100, 1f);
                         player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c You cannot carry a loadout this powerful§8."));
-                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 Current weight§8: §d" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight()));
+                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 Current weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight()));
                         return;
                     }
                     playerManager.addActiveAbility(ability);
                     player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You added §b" + ability.getName() + "§7 to your loadout§8."));
-                    player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 New weight§8: §d" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight()));
+                    player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 New weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight()));
                 }
 
                 player.closeInventory();

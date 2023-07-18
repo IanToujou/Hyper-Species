@@ -1,9 +1,9 @@
 package net.toujoustudios.hyperspecies.event;
 
-import net.toujoustudios.hyperspecies.data.ability.active.AbilityDemonicRage;
-import net.toujoustudios.hyperspecies.data.ability.active.AbilityEndblaze;
-import net.toujoustudios.hyperspecies.data.ability.active.AbilityEnhancingFlame;
-import net.toujoustudios.hyperspecies.data.ability.active.AbilityHellblaze;
+import net.toujoustudios.hyperspecies.data.ability.active.fire.AbilityDemonicRage;
+import net.toujoustudios.hyperspecies.data.ability.active.fire.AbilityEndblaze;
+import net.toujoustudios.hyperspecies.data.ability.active.fire.AbilityEnhancingFlame;
+import net.toujoustudios.hyperspecies.data.ability.active.fire.AbilityHellblaze;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;

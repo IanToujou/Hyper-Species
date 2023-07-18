@@ -1,6 +1,13 @@
 package net.toujoustudios.hyperspecies.loader;
 
 import net.toujoustudios.hyperspecies.data.ability.active.*;
+import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEndblight;
+import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEngulfingDarkness;
+import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityStrikeOfCorruption;
+import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityTotalAnnihilation;
+import net.toujoustudios.hyperspecies.data.ability.active.fairy.AbilityLightDiffraction;
+import net.toujoustudios.hyperspecies.data.ability.active.fairy.AbilityManaPool;
+import net.toujoustudios.hyperspecies.data.ability.active.fire.*;
 import net.toujoustudios.hyperspecies.data.ability.tree.AbilityTree;
 
 import java.util.HashMap;
@@ -9,7 +16,6 @@ import java.util.List;
 public class AbilityLoader {
 
     public static void initialize() {
-
 
         // Hellblight
         Ability.createAbility(new AbilityHellblight());
@@ -70,6 +76,15 @@ public class AbilityLoader {
         enhancingFlameAbilities.put(10, Ability.getAbility("Hellblaze"));
         enhancingFlameAbilities.put(11, Ability.getAbility("Endblaze"));
         AbilityTree.createTree("Enhancing Flame", new AbilityTree(enhancingFlameAbilities, List.of(0)));
+
+        // Light Diffraction
+        Ability.createAbility(new AbilityLightDiffraction());
+        Ability.createAbility(new AbilityManaPool());
+
+        HashMap<Integer, Ability> lightDiffractionAbilities = new HashMap<>();
+        lightDiffractionAbilities.put(0, Ability.getAbility("Light Diffraction"));
+        lightDiffractionAbilities.put(1, Ability.getAbility("Mana Pool"));
+        AbilityTree.createTree("Light Diffraction", new AbilityTree(lightDiffractionAbilities));
 
     }
 

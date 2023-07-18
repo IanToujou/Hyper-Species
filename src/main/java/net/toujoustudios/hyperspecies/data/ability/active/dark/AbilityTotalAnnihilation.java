@@ -1,6 +1,9 @@
-package net.toujoustudios.hyperspecies.data.ability.active;
+package net.toujoustudios.hyperspecies.data.ability.active.dark;
 
 import net.kyori.adventure.text.Component;
+import net.toujoustudios.hyperspecies.data.ability.active.Ability;
+import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
+import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
@@ -53,15 +56,15 @@ public class AbilityTotalAnnihilation extends Ability {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
 
             List<Fireball> entities = List.of(
-                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(-15, 0, 15), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(0, 0, 15), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(15, 0, 15), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(-15, 0, 0), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(0, 0, 0), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(15, 0, 0), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(15, 0, -15), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(0, 0, -15), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(spawnLocation.add(-15, 0, -15), EntityType.FIREBALL)
+                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX()-15, spawnLocation.getY(), spawnLocation.getZ()+15), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX(), spawnLocation.getY(), spawnLocation.getZ()+15), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX()+15, spawnLocation.getY(), spawnLocation.getZ()+15), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX()-15, spawnLocation.getY(), spawnLocation.getZ()), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX(), spawnLocation.getY(), spawnLocation.getZ()), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX()+15, spawnLocation.getY(), spawnLocation.getZ()), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX()-15, spawnLocation.getY(), spawnLocation.getZ()-15), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX(), spawnLocation.getY(), spawnLocation.getZ()-15), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX()+15, spawnLocation.getY(), spawnLocation.getZ()-15), EntityType.FIREBALL)
             );
 
             entities.forEach(entity -> {

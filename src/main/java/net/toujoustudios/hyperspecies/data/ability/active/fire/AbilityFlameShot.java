@@ -1,6 +1,9 @@
-package net.toujoustudios.hyperspecies.data.ability.active;
+package net.toujoustudios.hyperspecies.data.ability.active.fire;
 
 import net.kyori.adventure.text.Component;
+import net.toujoustudios.hyperspecies.data.ability.active.Ability;
+import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
+import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
