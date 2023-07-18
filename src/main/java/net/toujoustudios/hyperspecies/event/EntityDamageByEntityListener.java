@@ -1,21 +1,24 @@
 package net.toujoustudios.hyperspecies.event;
 
+import net.toujoustudios.hyperspecies.data.ability.active.AbilityDemonicRage;
+import net.toujoustudios.hyperspecies.data.ability.active.AbilityEndblaze;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityEnhancingFlame;
+import net.toujoustudios.hyperspecies.data.ability.active.AbilityHellblaze;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
-import org.bukkit.Material;
-import org.bukkit.Particle;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
 import java.util.Collection;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EntityDamageByEntityListener implements Listener {
@@ -54,7 +57,23 @@ public class EntityDamageByEntityListener implements Listener {
                 }
 
                 if(AbilityEnhancingFlame.getPlayers().contains(dealer.getUniqueId())) {
+                    int random = new Random().nextInt(3);
+                    if(random == 0) player.setFireTicks(20*2);
+                }
+
+                if(AbilityHellblaze.getPlayers().contains(dealer.getUniqueId())) {
                     player.setFireTicks(20*5);
+                    player.getWorld().playSound(player.getLocation(), Sound.ITEM_FIRECHARGE_USE, SoundCategory.MASTER, 1, 2f);
+                }
+
+                if(AbilityEndblaze.getPlayers().contains(dealer.getUniqueId())) {
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 5*20, 0, false, false, true));
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WITHER_AMBIENT, SoundCategory.MASTER, 1, 1.5f);
+                }
+
+                if(AbilityDemonicRage.getUsingPlayers().contains(dealer.getUniqueId())) {
+                    if(!AbilityDemonicRage.getDamagePlayers().contains(dealer.getUniqueId())) AbilityDemonicRage.getDamagePlayers().add(dealer.getUniqueId());
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> AbilityDemonicRage.getDamagePlayers().remove(dealer.getUniqueId()), 20 * 10);
                 }
 
             }

@@ -40,11 +40,6 @@ public class AbilityLoader {
         // TODO: Black Hole
         // TODO: Collapsing Universe
 
-
-        // Enhancing Flame
-        Ability.createAbility(new AbilityEnhancingFlame());
-        Ability.createAbility(new AbilityDemonicRage());
-
         HashMap<Integer, Ability> flameShotAbilities = new HashMap<>();
         flameShotAbilities.put(0, Ability.getAbility("Flame Shot"));
         flameShotAbilities.put(1, Ability.getAbility("Fireball"));
@@ -53,6 +48,23 @@ public class AbilityLoader {
         flameShotAbilities.put(10, Ability.getAbility("Burning Rain"));
         flameShotAbilities.put(11, Ability.getAbility("Striking Trail"));
         AbilityTree.createTree("Flame Shot", new AbilityTree(flameShotAbilities, List.of(0,1)));
+
+        // Enhancing Flame
+        Ability.createAbility(new AbilityEnhancingFlame());
+        Ability.createAbility(new AbilityDemonicRage());
+        Ability.createAbility(new AbilityRagingBurst());
+        Ability.createAbility(new AbilityMagmaticDetonation());
+        Ability.createAbility(new AbilityHellblaze());
+        Ability.createAbility(new AbilityEndblaze());
+
+        HashMap<Integer, Ability> enhancingFlameAbilities = new HashMap<>();
+        enhancingFlameAbilities.put(0, Ability.getAbility("Enhancing Flame"));
+        enhancingFlameAbilities.put(1, Ability.getAbility("Demonic Rage"));
+        enhancingFlameAbilities.put(2, Ability.getAbility("Raging Burst"));
+        enhancingFlameAbilities.put(3, Ability.getAbility("Magmatic Detonation"));
+        enhancingFlameAbilities.put(10, Ability.getAbility("Hellblaze"));
+        enhancingFlameAbilities.put(11, Ability.getAbility("Endblaze"));
+        AbilityTree.createTree("Enhancing Flame", new AbilityTree(enhancingFlameAbilities, List.of(0)));
 
     }
 

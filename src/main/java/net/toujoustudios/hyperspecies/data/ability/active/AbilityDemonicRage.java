@@ -11,11 +11,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 public class AbilityDemonicRage extends Ability {
 
+    private static final ArrayList<UUID> usingPlayers = new ArrayList<>();
+    private static final ArrayList<UUID> damagePlayers = new ArrayList<>();
 
     public AbilityDemonicRage() {
         super(
@@ -56,11 +60,23 @@ public class AbilityDemonicRage extends Ability {
         player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, player.getLocation(), 10, 0, 2, 0);
         player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20*duration, 1, false, false, true));
         playerManager.setManaRegeneration(rate);
+        if(!usingPlayers.contains(player.getUniqueId())) usingPlayers.add(player.getUniqueId());
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> playerManager.setManaRegeneration(0.1), 20L * duration);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
+            playerManager.setManaRegeneration(0.1);
+            usingPlayers.remove(player.getUniqueId());
+        }, 20L * duration);
 
         return true;
 
+    }
+
+    public static ArrayList<UUID> getUsingPlayers() {
+        return usingPlayers;
+    }
+
+    public static ArrayList<UUID> getDamagePlayers() {
+        return damagePlayers;
     }
 
 }

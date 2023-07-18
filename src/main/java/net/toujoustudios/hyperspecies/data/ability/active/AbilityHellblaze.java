@@ -4,7 +4,6 @@ import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -12,24 +11,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
-public class AbilityEnhancingFlame extends Ability {
+public class AbilityHellblaze extends Ability {
 
     private static final ArrayList<UUID> players = new ArrayList<>();
 
-    public AbilityEnhancingFlame() {
+    public AbilityHellblaze() {
 
         super(
-                "Enhancing Flame",
-                List.of("§8Enhances the users weapons, allowing", "§8them to deal " + Element.FIRE.getFullName() + " §8damage and ", "§8setting enemies on fire for §d{duration}s§8."),
+                "Hellblaze",
+                List.of("§8Enter a state that lasts §d{duration}§8 where", "§8you ignite the enemy on hit."),
                 Element.FIRE,
                 AbilityType.BUFF,
-                4,
-                60,
-                Material.BLAZE_POWDER,
+                6,
+                90,
+                Material.HONEYCOMB,
                 8,
-                List.of("Demon", "Reptile", "Human", "Feline", "Dwarf", "Wolf"),
-                2,
-                2
+                List.of("Demon", "Human", "Dwarf"),
+                4,
+                3
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
@@ -46,18 +45,13 @@ public class AbilityEnhancingFlame extends Ability {
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
 
         Location location = player.getLocation();
-        Block block = location.getBlock();
 
-        player.getWorld().playSound(location, Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 3, 0.8f);
+        player.getWorld().playSound(location, Sound.ITEM_FIRECHARGE_USE, 3, 1f);
         player.getWorld().spawnParticle(Particle.FLAME, location, 300, 0.3, 0, 0.3);
-        player.getWorld().spawnParticle(Particle.LAVA, location, 50, 0, 2, 0);
-
-        if(block.getType() == Material.AIR) {
-            player.getWorld().getBlockAt(player.getLocation()).setType(Material.FIRE);
-        }
 
         if(!players.contains(player.getUniqueId())) players.add(player.getUniqueId());
-        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> players.remove(player.getUniqueId()), 20L *duration);
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> players.remove(player.getUniqueId()), 20L * duration);
 
         return true;
 

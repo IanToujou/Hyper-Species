@@ -62,7 +62,7 @@ public class AbilityStrikingTrail extends Ability {
                 double radiusSquared = 6 * 6;
                 players.forEach(all -> {
                     if(all.getLocation().distanceSquared(fireball.getLocation()) <= radiusSquared) {
-                        all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, duration, 0, false, false, true));
+                        if(all != player) all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, duration*20, 0, false, false, true));
                     }
                 });
 
