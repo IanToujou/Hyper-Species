@@ -19,7 +19,7 @@ public class AbilityTotalAnnihilation extends Ability {
 
         super(
                 "Total Annihilation",
-                List.of("§8Summons multiple meteors that destroy", "§8the environment in a radius of §d{radius}m" + "§8and deal " + Element.FIRE.getEmoji() + " {damage} §8damage."),
+                List.of("§8Summons multiple meteors that destroy", "§8the environment in a radius of §d{range}m", "§8and deal " + Element.FIRE.getEmoji() + " {damage} §8damage."),
                 Element.DARK,
                 Element.FIRE,
                 AbilityType.TERRAIN,
@@ -47,10 +47,7 @@ public class AbilityTotalAnnihilation extends Ability {
 
         Location impactLocation = block.getLocation();
         Location spawnLocation = impactLocation.add(0, 150, 0);
-
-        player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 3, 1f);
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 5, 1f);
-
         player.getWorld().spawnParticle(Particle.SMOKE_LARGE, player.getLocation().add(0, 2, 0), 100, 0, 3, 0);
 
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {

@@ -208,6 +208,31 @@ public class ProjectileHitListener implements Listener {
 
         }
 
+        if(projectile.getType() == EntityType.ARROW && projectile.getName().startsWith("Strike Of Corruption of ")) {
+
+            Location location = event.getEntity().getLocation();
+            Player player = Bukkit.getPlayer(projectile.getName().split(" ")[4]);
+            Ability ability = Ability.getAbility("Strike Of Corruption");
+
+            if(player == null) return;
+            if(ability == null) return;
+
+            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            projectile.getWorld().spawnEntity(location, EntityType.LIGHTNING);
+            projectile.getWorld().spawnParticle(Particle.FLASH, location, 100, 0.1, 0.1, 0.1);
+
+            int damage = ability.getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(ability));
+
+            Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
+            double radiusSquared = 5 * 5;
+            players.forEach(all -> {
+                if(all.getLocation().distanceSquared(location) <= radiusSquared) {
+                    all.damage(damage, player);
+                }
+            });
+
+        }
+
     }
 
 }

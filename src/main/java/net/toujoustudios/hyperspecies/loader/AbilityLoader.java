@@ -33,7 +33,7 @@ public class AbilityLoader {
         Ability.createAbility(new AbilityMeteorStrike());
         Ability.createAbility(new AbilityRayOfDoom());
         Ability.createAbility(new AbilityTotalAnnihilation());
-        // TODO: Strike of Corruption
+        Ability.createAbility(new AbilityStrikeOfCorruption());
         Ability.createAbility(new AbilityBurningRain());
         Ability.createAbility(new AbilityStrikingTrail());
         // TODO: Dark Matter
@@ -48,6 +48,11 @@ public class AbilityLoader {
         flameShotAbilities.put(10, Ability.getAbility("Burning Rain"));
         flameShotAbilities.put(11, Ability.getAbility("Striking Trail"));
         AbilityTree.createTree("Flame Shot", new AbilityTree(flameShotAbilities, List.of(0,1)));
+
+        HashMap<Integer, Ability> totalAnnihilationAbilities = new HashMap<>();
+        totalAnnihilationAbilities.put(0, Ability.getAbility("Total Annihilation"));
+        totalAnnihilationAbilities.put(1, Ability.getAbility("Strike Of Corruption"));
+        AbilityTree.createTree("Total Annihilation", new AbilityTree(totalAnnihilationAbilities));
 
         // Enhancing Flame
         Ability.createAbility(new AbilityEnhancingFlame());

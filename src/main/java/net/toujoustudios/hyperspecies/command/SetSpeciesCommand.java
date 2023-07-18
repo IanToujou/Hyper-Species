@@ -31,7 +31,7 @@ public class SetSpeciesCommand implements CommandExecutor {
 
         if(args.length == 1) {
 
-            Species species = Species.getSpecies(args[0]);
+            Species species = Species.getSpecies(args[0].substring(0, 1).toUpperCase() + args[0].substring(1));
 
             if(species == null) {
                 player.sendMessage(Component.text(Config.MESSAGE_PREFIX + " §cThe specified species does not exist§8."));

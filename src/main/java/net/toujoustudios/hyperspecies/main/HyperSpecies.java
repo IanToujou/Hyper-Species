@@ -47,7 +47,10 @@ public final class HyperSpecies extends JavaPlugin {
         scoreboard = scoreboardManager.getNewScoreboard();
         Loader.startLoading();
 
-        Bukkit.getServer().getWorlds().forEach(world -> world.setGameRule(GameRule.NATURAL_REGENERATION, false));
+        Bukkit.getServer().getWorlds().forEach(world -> {
+            world.setGameRule(GameRule.NATURAL_REGENERATION, false);
+            world.setGameRule(GameRule.SHOW_DEATH_MESSAGES, false);
+        });
 
         // Main Thread
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> Bukkit.getOnlinePlayers().forEach((player -> {
