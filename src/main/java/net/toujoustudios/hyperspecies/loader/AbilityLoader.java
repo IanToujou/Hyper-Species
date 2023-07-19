@@ -7,6 +7,8 @@ import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityStrikeOfCo
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityTotalAnnihilation;
 import net.toujoustudios.hyperspecies.data.ability.active.fairy.*;
 import net.toujoustudios.hyperspecies.data.ability.active.fire.*;
+import net.toujoustudios.hyperspecies.data.ability.active.flora.AbilityHealingNature;
+import net.toujoustudios.hyperspecies.data.ability.active.flora.AbilityWoodlandsBlessing;
 import net.toujoustudios.hyperspecies.data.ability.tree.AbilityTree;
 
 import java.util.HashMap;
@@ -92,6 +94,15 @@ public class AbilityLoader {
         lightDiffractionAbilities.put(10, Ability.getAbility("Starwhisper"));
         lightDiffractionAbilities.put(11, Ability.getAbility("Celestial Shot"));
         AbilityTree.createTree("Light Diffraction", new AbilityTree(lightDiffractionAbilities, List.of(0)));
+
+        // Healing Nature
+        Ability.createAbility(new AbilityHealingNature());
+        Ability.createAbility(new AbilityWoodlandsBlessing());
+
+        HashMap<Integer, Ability> healingNatureAbilities = new HashMap<>();
+        healingNatureAbilities.put(0, Ability.getAbility("Healing Nature"));
+        healingNatureAbilities.put(1, Ability.getAbility("Woodlands Blessing"));
+        AbilityTree.createTree("Healing Nature", new AbilityTree(healingNatureAbilities));
 
     }
 
