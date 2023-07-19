@@ -45,6 +45,7 @@ public class PlayerManager {
     private final HashMap<String, Integer> abilityExperiences = new HashMap<>();
     private double drunkenness;
     private boolean kawaii;
+    private boolean stunned;
 
     public PlayerManager(UUID uuid) {
 
@@ -103,6 +104,7 @@ public class PlayerManager {
         else drunkenness = 0;
 
         kawaii = false;
+        stunned = false;
 
     }
 
@@ -438,6 +440,19 @@ public class PlayerManager {
 
     public void setKawaii(boolean kawaii) {
         this.kawaii = kawaii;
+    }
+
+    public boolean isStunned() {
+        return stunned;
+    }
+
+    public void setStunned(boolean stunned) {
+        this.stunned = stunned;
+    }
+
+    public void stun(int duration) {
+        setStunned(true);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> setStunned(false), duration);
     }
 
     public void unlockAbility(Ability ability) {

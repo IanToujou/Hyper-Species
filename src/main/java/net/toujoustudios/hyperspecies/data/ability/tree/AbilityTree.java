@@ -149,6 +149,8 @@ public class AbilityTree {
                     line = line.replace("{duration}", String.valueOf(ability.getFieldValue(AbilityField.DURATION, level)));
                     line = line.replace("{rate}", String.valueOf(ability.getFieldValue(AbilityField.RATE, level)));
                     line = line.replace("{range}", String.valueOf(ability.getFieldValue(AbilityField.RANGE, level)));
+                    line = line.replace("{heal}", String.valueOf(ability.getFieldValue(AbilityField.HEAL, level)));
+                    line = line.replace("{shield}", String.valueOf(ability.getFieldValue(AbilityField.SHIELD, level)));
                     line = line.replace("{lockStatus}", playerManager.hasAbility(ability) ? "§a§lUNLOCKED" : "§c§lLOCKED");
                     if(line.contains("{xpBar}")) {
                         line = line.replace("{xpBar}", barBuilder.toString());

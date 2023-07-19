@@ -5,8 +5,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEndblight;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEngulfingDarkness;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityStrikeOfCorruption;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityTotalAnnihilation;
-import net.toujoustudios.hyperspecies.data.ability.active.fairy.AbilityLightDiffraction;
-import net.toujoustudios.hyperspecies.data.ability.active.fairy.AbilityManaPool;
+import net.toujoustudios.hyperspecies.data.ability.active.fairy.*;
 import net.toujoustudios.hyperspecies.data.ability.active.fire.*;
 import net.toujoustudios.hyperspecies.data.ability.tree.AbilityTree;
 
@@ -80,11 +79,19 @@ public class AbilityLoader {
         // Light Diffraction
         Ability.createAbility(new AbilityLightDiffraction());
         Ability.createAbility(new AbilityManaPool());
+        Ability.createAbility(new AbilityProtectTheHomeland());
+        Ability.createAbility(new AbilityTimeDilation());
+        Ability.createAbility(new AbilityStarwhisper());
+        Ability.createAbility(new AbilityCelestialShot());
 
         HashMap<Integer, Ability> lightDiffractionAbilities = new HashMap<>();
         lightDiffractionAbilities.put(0, Ability.getAbility("Light Diffraction"));
         lightDiffractionAbilities.put(1, Ability.getAbility("Mana Pool"));
-        AbilityTree.createTree("Light Diffraction", new AbilityTree(lightDiffractionAbilities));
+        lightDiffractionAbilities.put(2, Ability.getAbility("Protect The Homeland"));
+        lightDiffractionAbilities.put(3, Ability.getAbility("Time Dilation"));
+        lightDiffractionAbilities.put(10, Ability.getAbility("Starwhisper"));
+        lightDiffractionAbilities.put(11, Ability.getAbility("Celestial Shot"));
+        AbilityTree.createTree("Light Diffraction", new AbilityTree(lightDiffractionAbilities, List.of(0)));
 
     }
 
