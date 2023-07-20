@@ -6,7 +6,8 @@ public enum AbilityType {
     DEBUFF("Debuff"),
     TERRAIN("Terrain"),
     HEAL("Heal"),
-    DAMAGE("Damage");
+    DAMAGE("Damage"),
+    UTILITY("Utility");
 
 
     private final String name;

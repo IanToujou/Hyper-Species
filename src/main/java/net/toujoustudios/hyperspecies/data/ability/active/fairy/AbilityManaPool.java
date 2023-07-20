@@ -59,7 +59,7 @@ public class AbilityManaPool extends Ability {
                 Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                 double radiusSquared = 6 * 6;
                 players.forEach(all -> {
-                    if(all.getLocation().distanceSquared(location) <= radiusSquared) {
+                    if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                         PlayerManager manager = PlayerManager.getPlayer(all);
                         if(manager.getMana() < manager.getMaxMana()) manager.setMana(manager.getMana() + rate);
                         location.getWorld().spawnParticle(Particle.DRIP_WATER, location, 100, 5, 0.1, 5);

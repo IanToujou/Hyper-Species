@@ -58,7 +58,7 @@ public class AbilityProtectTheHomeland extends Ability {
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
         double radiusSquared = 8*8;
         players.forEach(all -> {
-            if(all.getLocation().distanceSquared(location) <= radiusSquared) {
+            if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                 all.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20*3, 5, false, false, true));
                 PlayerManager manager = PlayerManager.getPlayer(all);
                 manager.setShield(manager.getShield() + shield);

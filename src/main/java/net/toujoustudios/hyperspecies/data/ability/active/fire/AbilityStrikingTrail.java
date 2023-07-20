@@ -64,7 +64,7 @@ public class AbilityStrikingTrail extends Ability {
                 Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                 double radiusSquared = 6 * 6;
                 players.forEach(all -> {
-                    if(all.getLocation().distanceSquared(fireball.getLocation()) <= radiusSquared) {
+                    if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(fireball.getLocation()) <= radiusSquared) {
                         if(all != player) all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, duration*20, 0, false, false, true));
                     }
                 });

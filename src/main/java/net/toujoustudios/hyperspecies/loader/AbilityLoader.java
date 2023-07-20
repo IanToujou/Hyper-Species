@@ -1,15 +1,18 @@
 package net.toujoustudios.hyperspecies.loader;
 
 import net.toujoustudios.hyperspecies.data.ability.active.*;
+import net.toujoustudios.hyperspecies.data.ability.active.air.AbilityICBM;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEndblight;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEngulfingDarkness;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityStrikeOfCorruption;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityTotalAnnihilation;
+import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilityFlash;
+import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilityLightspeed;
+import net.toujoustudios.hyperspecies.data.ability.active.air.AbilitySupersonicSpeed;
 import net.toujoustudios.hyperspecies.data.ability.active.fairy.*;
 import net.toujoustudios.hyperspecies.data.ability.active.fire.*;
 import net.toujoustudios.hyperspecies.data.ability.active.flora.*;
 import net.toujoustudios.hyperspecies.data.ability.tree.AbilityTree;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.HashMap;
 import java.util.List;
@@ -114,6 +117,33 @@ public class AbilityLoader {
         thornSeedlingAbilities.put(1, Ability.getAbility("Raging Flora"));
         thornSeedlingAbilities.put(2, Ability.getAbility("Green Hell"));
         AbilityTree.createTree("Thorn Seedling", new AbilityTree(thornSeedlingAbilities));
+
+        // Quick Growth
+        Ability.createAbility(new AbilityQuickGrowth());
+        Ability.createAbility(new AbilityFertilizingRain());
+
+        HashMap<Integer, Ability> quickGrowthAbilities = new HashMap<>();
+        quickGrowthAbilities.put(0, Ability.getAbility("Quick Growth"));
+        quickGrowthAbilities.put(1, Ability.getAbility("Fertilizing Rain"));
+        AbilityTree.createTree("Quick Growth", new AbilityTree(quickGrowthAbilities));
+
+        // Flash
+        Ability.createAbility(new AbilityFlash());
+        Ability.createAbility(new AbilityLightspeed());
+
+        HashMap<Integer, Ability> flashAbilities = new HashMap<>();
+        flashAbilities.put(0, Ability.getAbility("Flash"));
+        flashAbilities.put(1, Ability.getAbility("Lightspeed"));
+        AbilityTree.createTree("Flash", new AbilityTree(flashAbilities));
+
+        // Supersonic Speed
+        Ability.createAbility(new AbilitySupersonicSpeed());
+        Ability.createAbility(new AbilityICBM());
+
+        HashMap<Integer, Ability> supersonicSpeedAbilities = new HashMap<>();
+        supersonicSpeedAbilities.put(0, Ability.getAbility("Supersonic Speed"));
+        supersonicSpeedAbilities.put(1, Ability.getAbility("ICBM"));
+        AbilityTree.createTree("Supersonic Speed", new AbilityTree(supersonicSpeedAbilities));
 
     }
 

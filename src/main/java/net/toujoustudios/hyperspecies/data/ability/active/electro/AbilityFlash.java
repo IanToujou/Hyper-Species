@@ -1,4 +1,4 @@
-package net.toujoustudios.hyperspecies.data.ability.active.fairy;
+package net.toujoustudios.hyperspecies.data.ability.active.electro;
 
 import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
@@ -8,6 +8,7 @@ import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -15,26 +16,28 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.HashMap;
 import java.util.List;
 
-public class AbilityTimeDilation extends Ability {
+public class AbilityFlash extends Ability {
 
-    public AbilityTimeDilation() {
+    public AbilityFlash() {
 
         super(
-                "Time Dilation",
-                List.of("§8Gain a huge speed boost during", "§d{duration}s§8 ", "§8allies within §d{range}m§8."),
-                Element.FAIRY,
+                "Flash",
+                List.of("§8Gain a small speed boost for §d{duration}s§8."),
+                Element.ELECTRO,
                 AbilityType.BUFF,
-                8,
-                360,
-                Material.CLOCK,
-                8,
-                List.of("Elf"),
-                7,
-                5
+                3,
+                60,
+                Material.DIAMOND,
+                5,
+                List.of("Demon", "Angel", "Human", "Feline"),
+                2,
+                1
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(10,11,12,13,14,15,16,17,18));
+
+        fields.put(AbilityField.DURATION, List.of(5,6,7,8,9,10));
+
         setFields(fields);
 
     }
@@ -45,11 +48,9 @@ public class AbilityTimeDilation extends Ability {
         PlayerManager playerManager = PlayerManager.getPlayer(player);
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
 
-        player.getWorld().spawnParticle(Particle.CLOUD, player.getLocation(), 100, 0.1, 0.1, 0.1);
-        player.getWorld().playSound(player.getLocation(), Sound.BLOCK_PISTON_CONTRACT, 2, 2f);
-        player.getWorld().playSound(player.getLocation(), Sound.BLOCK_FIRE_EXTINGUISH, 2, 2f);
-
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * duration, 4, false, false, true));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * duration, 1, false, false, true));
+        player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GUARDIAN_ATTACK, SoundCategory.MASTER, 2, 1.5f);
+        player.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, player.getLocation(), 100, 0.5, 0.5, 0.5);
 
         return true;
 

@@ -72,7 +72,7 @@ public class ProjectileHitListener implements Listener {
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
             double radiusSquared = 3 * 3;
             players.forEach(all -> {
-                if(all.getLocation().distanceSquared(location) <= radiusSquared) {
+                if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                     all.damage(damage, projectile);
                 }
             });
@@ -118,7 +118,7 @@ public class ProjectileHitListener implements Listener {
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
             double radiusSquared = range * range;
             players.forEach(all -> {
-                if(all.getLocation().distanceSquared(location) <= radiusSquared) {
+                if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                     all.damage(damage, projectile);
                 }
             });
@@ -193,7 +193,7 @@ public class ProjectileHitListener implements Listener {
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
             double radiusSquared = grassRadius * grassRadius;
             players.forEach(all -> {
-                if(all.getLocation().distanceSquared(location) <= radiusSquared) {
+                if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                     all.damage(damage, projectile);
                 }
             });
@@ -228,7 +228,7 @@ public class ProjectileHitListener implements Listener {
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
             double radiusSquared = 8 * 8;
             players.forEach(all -> {
-                if(all.getLocation().distanceSquared(location) <= radiusSquared) {
+                if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                     all.damage(damage, player);
                 }
             });
@@ -254,7 +254,7 @@ public class ProjectileHitListener implements Listener {
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
             double radiusSquared = 8 * 8;
             players.forEach(all -> {
-                if(all.getLocation().distanceSquared(location) <= radiusSquared) {
+                if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                     all.damage(damage, player);
                     all.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * duration, 200, false, false, true));
                     PlayerManager manager = PlayerManager.getPlayer(all);

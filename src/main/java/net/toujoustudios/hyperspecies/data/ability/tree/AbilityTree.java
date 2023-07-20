@@ -141,7 +141,7 @@ public class AbilityTree {
                 barBuilder.append("§7]");
 
                 StringBuilder xpBuilder = new StringBuilder();
-                xpBuilder.append("§a").append(playerManager.getExperienceSinceLastLevel(xp)).append("§7/").append("§2").append(playerManager.getRelativeLevelThreshold(level));
+                xpBuilder.append("§a").append(playerManager.getExperienceSinceLastLevel(xp)).append("§7/").append("§2").append(playerManager.getRelativeLevelThreshold(level)).append(" XP");
 
                 assert oldLore != null;
                 oldLore.forEach(line -> {

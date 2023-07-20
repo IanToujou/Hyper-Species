@@ -49,7 +49,7 @@ public class AbilityWoodlandsBlessing extends Ability {
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
         double radiusSquared = 5 * 5;
         for(Player all : players) {
-            if(all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared) target = all;
+            if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared) target = all;
         }
         if(target == null) return false;
 

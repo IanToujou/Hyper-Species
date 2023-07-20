@@ -38,6 +38,8 @@ public class AbilityCommand implements CommandExecutor {
 
         Ability ability = Ability.getAbility(nameBuilder.toString());
 
+        if(args[0].equalsIgnoreCase("ICBM")) ability = Ability.getAbility("ICBM");
+
         if(ability == null) {
             player.sendMessage(Config.MESSAGE_ERROR_ABILITY_INVALID);
             return false;

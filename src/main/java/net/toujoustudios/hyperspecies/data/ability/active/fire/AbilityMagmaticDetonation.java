@@ -74,7 +74,7 @@ public class AbilityMagmaticDetonation extends Ability {
                         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                         double radiusSquared = 8 * 8;
                         players.forEach(all -> {
-                            if(all.getLocation().distanceSquared(b.getLocation()) <= radiusSquared) {
+                            if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(b.getLocation()) <= radiusSquared) {
                                 if(all != player) all.damage(damage, player);
                             }
                         });

@@ -53,7 +53,7 @@ public class AbilityGreenHell extends Ability {
         if((block.getType() == Material.GRASS_BLOCK || block.getType() == Material.MOSS_BLOCK || block.getType() == Material.PODZOL) && block.getLocation().add(0,1,0).getBlock().getType() == Material.AIR) {
 
             Location location = block.getLocation().add(0,1,0);
-            location.getBlock().setType(Material.PITCHER_CROP);
+            location.getBlock().setType(Material.PITCHER_PLANT);
 
             ArrayList<Player> stunnedPlayers = new ArrayList<>();
 
@@ -65,7 +65,7 @@ public class AbilityGreenHell extends Ability {
                     Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                     double radiusSquared = 6 * 6;
                     for(Player all : players) {
-                        if (all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared) {
+                        if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared) {
                             if(all != player) {
                                 PlayerManager allManager = PlayerManager.getPlayer(all);
                                 if(!allManager.isStunned()) {

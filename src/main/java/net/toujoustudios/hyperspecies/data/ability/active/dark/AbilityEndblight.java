@@ -61,7 +61,7 @@ public class AbilityEndblight extends Ability {
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
         double radiusSquared = range*range;
         players.forEach(all -> {
-            if(all.getLocation().distanceSquared(location) <= radiusSquared) {
+            if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                 if(all != player) all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20*duration, 0, false, false, true));
             }
         });

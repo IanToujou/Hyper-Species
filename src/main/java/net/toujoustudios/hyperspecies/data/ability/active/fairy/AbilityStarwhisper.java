@@ -64,7 +64,7 @@ public class AbilityStarwhisper extends Ability {
                 Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                 double radiusSquared = 5*5;
                 players.forEach(all -> {
-                    if(all.getLocation().distanceSquared(location) <= radiusSquared) {
+                    if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                         PlayerManager manager = PlayerManager.getPlayer(all);
                         location.getWorld().spawnParticle(Particle.CHERRY_LEAVES, location, 100, 3, 3, 3);
                         if(manager.hasTeam() && playerManager.hasTeam() && manager.getTeam() == playerManager.getTeam()) {

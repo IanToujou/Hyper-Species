@@ -72,7 +72,7 @@ public class AbilityRayOfDoom extends Ability {
                 Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                 double radiusSquared = 6 * 6;
                 players.forEach(all -> {
-                    if(all.getLocation().distanceSquared(damageLocation) <= radiusSquared) {
+                    if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(damageLocation) <= radiusSquared) {
                         all.damage(damage, player);
                     }
                 });
