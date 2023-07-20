@@ -56,7 +56,7 @@ public class AbilityHealingNature extends Ability {
         if(target == null) return false;
 
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 100, 1f);
-        target.getWorld().spawnParticle(Particle.HEART, target.getLocation().add(0, 1, 0), 50, 0.3, 0.3, 0.3);
+        target.getWorld().spawnParticle(Particle.HEART, target.getLocation().add(0, 3, 0), 50, 0.3, 0.1, 0.3);
 
         Player finalTarget = target;
         BukkitTask task = new BukkitRunnable() {

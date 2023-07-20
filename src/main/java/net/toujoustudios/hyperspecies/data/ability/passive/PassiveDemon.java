@@ -25,7 +25,7 @@ public class PassiveDemon extends PassiveAbility {
         } else {
             Block block = player.getWorld().getHighestBlockAt(player.getLocation());
             if(block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
-                player.damage(2);
+                player.damage(1);
             }
         }
 

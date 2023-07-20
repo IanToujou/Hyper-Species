@@ -7,9 +7,9 @@ import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityStrikeOfCo
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityTotalAnnihilation;
 import net.toujoustudios.hyperspecies.data.ability.active.fairy.*;
 import net.toujoustudios.hyperspecies.data.ability.active.fire.*;
-import net.toujoustudios.hyperspecies.data.ability.active.flora.AbilityHealingNature;
-import net.toujoustudios.hyperspecies.data.ability.active.flora.AbilityWoodlandsBlessing;
+import net.toujoustudios.hyperspecies.data.ability.active.flora.*;
 import net.toujoustudios.hyperspecies.data.ability.tree.AbilityTree;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.HashMap;
 import java.util.List;
@@ -103,6 +103,17 @@ public class AbilityLoader {
         healingNatureAbilities.put(0, Ability.getAbility("Healing Nature"));
         healingNatureAbilities.put(1, Ability.getAbility("Woodlands Blessing"));
         AbilityTree.createTree("Healing Nature", new AbilityTree(healingNatureAbilities));
+
+        // Thorn Seedling
+        Ability.createAbility(new AbilityThornSeedling());
+        Ability.createAbility(new AbilityRagingFlora());
+        Ability.createAbility(new AbilityGreenHell());
+
+        HashMap<Integer, Ability> thornSeedlingAbilities = new HashMap<>();
+        thornSeedlingAbilities.put(0, Ability.getAbility("Thorn Seedling"));
+        thornSeedlingAbilities.put(1, Ability.getAbility("Raging Flora"));
+        thornSeedlingAbilities.put(2, Ability.getAbility("Green Hell"));
+        AbilityTree.createTree("Thorn Seedling", new AbilityTree(thornSeedlingAbilities));
 
     }
 

@@ -54,7 +54,7 @@ public class AbilityWoodlandsBlessing extends Ability {
         if(target == null) return false;
 
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 100, 2f);
-        target.getWorld().spawnParticle(Particle.HEART, target.getLocation().add(0, 1, 0), 50, 0.3, 0.3, 0.3);
+        target.getWorld().spawnParticle(Particle.HEART, target.getLocation().add(0, 3, 0), 50, 0.3, 0.1, 0.3);
 
         PlayerManager targetManager = PlayerManager.getPlayer(target);
         targetManager.setHealth(targetManager.getHealth() + heal);
