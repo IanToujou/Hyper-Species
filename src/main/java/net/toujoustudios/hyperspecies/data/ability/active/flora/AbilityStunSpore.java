@@ -15,16 +15,15 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-public class AbilityGreenHell extends Ability {
+public class AbilityStunSpore extends Ability {
 
-    public AbilityGreenHell() {
+    public AbilityStunSpore() {
         super(
-                "Green Hell",
+                "Stun Spore",
                 List.of("§8Create a dangerous plant that stuns", "§8enemies if they are in range during§8.", "§d{duration}s§8."),
                 Element.FLORA,
                 AbilityType.DAMAGE,
@@ -55,22 +54,19 @@ public class AbilityGreenHell extends Ability {
             Location location = block.getLocation().add(0,1,0);
             location.getBlock().setType(Material.PITCHER_PLANT);
 
-            ArrayList<Player> stunnedPlayers = new ArrayList<>();
-
             BukkitTask task = new BukkitRunnable() {
 
                 @Override
                 public void run() {
-                    location.getWorld().spawnParticle(Particle.DRIPPING_OBSIDIAN_TEAR, location, 500, 3, 0.1, 3);
+                    location.getWorld().spawnParticle(Particle.FALLING_OBSIDIAN_TEAR, new Location(location.getWorld(), location.getX(), location.getY()+2, location.getZ()), 100, 2, 0.1, 2);
                     Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
-                    double radiusSquared = 6 * 6;
+                    double radiusSquared = 7 * 7;
                     for(Player all : players) {
                         if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared) {
                             if(all != player) {
                                 PlayerManager allManager = PlayerManager.getPlayer(all);
                                 if(!allManager.isStunned()) {
                                     allManager.stun(duration);
-                                    stunnedPlayers.add(all);
                                 }
                             }
                         }
@@ -82,10 +78,6 @@ public class AbilityGreenHell extends Ability {
             Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
                 task.cancel();
                 location.getBlock().setType(Material.AIR);
-                stunnedPlayers.forEach(all -> {
-                    PlayerManager allManager = PlayerManager.getPlayer(all);
-                    allManager.setStunned(false);
-                });
             }, 20L * duration);
             return true;
 

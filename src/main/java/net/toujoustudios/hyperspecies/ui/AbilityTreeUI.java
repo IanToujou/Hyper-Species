@@ -99,15 +99,15 @@ public class AbilityTreeUI implements Listener {
                 PlayerManager playerManager = PlayerManager.getPlayer(player);
 
                 if(playerManager.getSkill() < ability.getCost()) {
-                    player.closeInventory();
-                    player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, SoundCategory.MASTER, 100, 1f);
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 0f);
                     player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c You don't have enough skill points§8."));
+                    player.openInventory(AbilityTree.buildMainInventory(player, 0));
                     return;
                 }
 
                 playerManager.unlockAbility(ability);
                 playerManager.setSkill(playerManager.getSkill() - ability.getCost());
-                player.closeInventory();
+                player.openInventory(AbilityTree.buildMainInventory(player, 0));
 
             } else if(itemMeta.getDisplayName().startsWith("§") && material != Material.GRAY_WOOL) {
 
@@ -136,11 +136,11 @@ public class AbilityTreeUI implements Listener {
                 if(playerManager.getActiveAbilities().contains(ability)) {
                     playerManager.removeActiveAbility(ability);
                     player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You removed §b" + ability.getName() + "§7 from your loadout§8."));
-                    player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 New weight§8: §d" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight()));
+                    player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 New weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight()));
                 } else {
                     if(playerManager.getAbilityWeight() + ability.getWeight() > playerManager.getMaxAbilityWeight()) {
-                        player.closeInventory();
-                        player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, SoundCategory.MASTER, 100, 1f);
+                        player.openInventory(AbilityTree.buildMainInventory(player, 0));
+                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 0f);
                         player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c You cannot carry a loadout this powerful§8."));
                         player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 Current weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight()));
                         return;
@@ -150,8 +150,8 @@ public class AbilityTreeUI implements Listener {
                     player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 New weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight()));
                 }
 
-                player.closeInventory();
-                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, SoundCategory.MASTER, 100, 0.5f);
+                player.openInventory(AbilityTree.buildMainInventory(player, 0));
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, SoundCategory.MASTER, 100, 2f);
 
             }
 

@@ -30,14 +30,14 @@ public class AbilityRayOfDoom extends Ability {
                 12,
                 240,
                 Material.ENDER_EYE,
-                8,
+                5,
                 List.of("Demon", "Reptile", "Human"),
                 7,
                 4
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DAMAGE, List.of(1,2,3,4,5,6,7,8,10));
+        fields.put(AbilityField.DAMAGE, List.of(5,6,7,8,9,10));
         setFields(fields);
 
     }

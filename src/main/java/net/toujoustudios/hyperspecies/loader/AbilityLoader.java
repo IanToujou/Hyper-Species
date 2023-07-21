@@ -6,6 +6,9 @@ import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEndblight;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEngulfingDarkness;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityStrikeOfCorruption;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityTotalAnnihilation;
+import net.toujoustudios.hyperspecies.data.ability.active.earth.AbilityBornIntoStone;
+import net.toujoustudios.hyperspecies.data.ability.active.earth.AbilitySharpStone;
+import net.toujoustudios.hyperspecies.data.ability.active.earth.AbilityStoneBorn;
 import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilityFlash;
 import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilityLightspeed;
 import net.toujoustudios.hyperspecies.data.ability.active.air.AbilitySupersonicSpeed;
@@ -110,12 +113,12 @@ public class AbilityLoader {
         // Thorn Seedling
         Ability.createAbility(new AbilityThornSeedling());
         Ability.createAbility(new AbilityRagingFlora());
-        Ability.createAbility(new AbilityGreenHell());
+        Ability.createAbility(new AbilityStunSpore());
 
         HashMap<Integer, Ability> thornSeedlingAbilities = new HashMap<>();
         thornSeedlingAbilities.put(0, Ability.getAbility("Thorn Seedling"));
         thornSeedlingAbilities.put(1, Ability.getAbility("Raging Flora"));
-        thornSeedlingAbilities.put(2, Ability.getAbility("Green Hell"));
+        thornSeedlingAbilities.put(2, Ability.getAbility("Stun Spore"));
         AbilityTree.createTree("Thorn Seedling", new AbilityTree(thornSeedlingAbilities));
 
         // Quick Growth
@@ -144,6 +147,22 @@ public class AbilityLoader {
         supersonicSpeedAbilities.put(0, Ability.getAbility("Supersonic Speed"));
         supersonicSpeedAbilities.put(1, Ability.getAbility("ICBM"));
         AbilityTree.createTree("Supersonic Speed", new AbilityTree(supersonicSpeedAbilities));
+
+        // Sharp Stone
+        Ability.createAbility(new AbilitySharpStone());
+
+        HashMap<Integer, Ability> sharpStoneAbilities = new HashMap<>();
+        sharpStoneAbilities.put(0, Ability.getAbility("Sharp Stone"));
+        AbilityTree.createTree("Sharp Stone", new AbilityTree(sharpStoneAbilities));
+
+        // Stone Born
+        Ability.createAbility(new AbilityStoneBorn());
+        Ability.createAbility(new AbilityBornIntoStone());
+
+        HashMap<Integer, Ability> stoneBornAbilities = new HashMap<>();
+        stoneBornAbilities.put(0, Ability.getAbility("Stone Born"));
+        stoneBornAbilities.put(1, Ability.getAbility("Born Into Stone"));
+        AbilityTree.createTree("Stone Born", new AbilityTree(stoneBornAbilities));
 
     }
 

@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.event;
 
+import net.toujoustudios.hyperspecies.data.ability.active.earth.AbilityBornIntoStone;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Material;
@@ -33,6 +34,11 @@ public class EntityDamageListener implements Listener {
             PlayerManager playerManager = PlayerManager.getPlayer(player);
 
             if(playerManager.getSpecies() == null) return;
+
+            if(AbilityBornIntoStone.getPlayers().contains(player.getUniqueId())) {
+                event.setCancelled(true);
+                return;
+            }
 
             if(event.getCause() == EntityDamageEvent.DamageCause.FALL) {
 
