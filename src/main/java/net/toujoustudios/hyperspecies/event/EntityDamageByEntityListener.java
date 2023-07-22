@@ -1,7 +1,5 @@
 package net.toujoustudios.hyperspecies.event;
 
-import net.toujoustudios.hyperspecies.data.ability.active.Ability;
-import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.ability.active.earth.AbilityBornIntoStone;
 import net.toujoustudios.hyperspecies.data.ability.active.fire.AbilityDemonicRage;
 import net.toujoustudios.hyperspecies.data.ability.active.fire.AbilityEndblaze;
@@ -10,7 +8,6 @@ import net.toujoustudios.hyperspecies.data.ability.active.fire.AbilityHellblaze;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -53,19 +50,6 @@ public class EntityDamageByEntityListener implements Listener {
             double health = playerManager.getHealth();
             double shield = playerManager.getShield();
             double trueDamage = damage;
-
-            if(event.getDamager().getType() == EntityType.ARROW && event.getDamager().getName().startsWith("Sharp Stone of ")) {
-
-                Player dealer = Bukkit.getPlayer(event.getDamager().getName().split(" ")[3]);
-
-                if(dealer == null) return;
-
-                PlayerManager dealerManager = PlayerManager.getPlayer(dealer);
-                Ability ability = Ability.getAbility("Sharp Stone");
-                if(ability == null) return;
-                trueDamage = ability.getFieldValue(AbilityField.DAMAGE, dealerManager.getAbilityLevel(ability));
-
-            }
 
             if(event.getDamager() instanceof Player dealer) {
 

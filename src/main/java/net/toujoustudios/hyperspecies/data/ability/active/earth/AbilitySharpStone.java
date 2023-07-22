@@ -5,7 +5,6 @@ import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
-import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -21,7 +20,7 @@ public class AbilitySharpStone extends Ability {
 
         super(
                 "Sharp Stone",
-                List.of("§8Shoot a projectile that penetrates", "§8armor, dealing " + Element.EARTH + " {damage}§8 true damage."),
+                List.of("§8Shoot a projectile that penetrates", "§8armor, dealing " + Element.EARTH.getEmoji() + " {damage}§8 true damage."),
                 Element.EARTH,
                 AbilityType.DAMAGE,
                 4,
@@ -34,7 +33,7 @@ public class AbilitySharpStone extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(5,6,7,8,9,10,11,12,13));
+        fields.put(AbilityField.DAMAGE, List.of(5,6,7,8,9,10,11,12,13));
         setFields(fields);
 
     }
@@ -43,7 +42,7 @@ public class AbilitySharpStone extends Ability {
     public boolean execute(Player player) {
         player.getWorld().playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_SNARE, SoundCategory.MASTER, 1, 0.5f);
         Arrow arrow = player.launchProjectile(Arrow.class);
-        arrow.setDamage(0);
+        arrow.setDamage(2);
         arrow.customName(Component.text("Sharp Stone of " + player.getName()));
         arrow.setCustomNameVisible(false);
         return true;

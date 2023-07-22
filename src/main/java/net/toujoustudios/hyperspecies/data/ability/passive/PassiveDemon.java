@@ -37,7 +37,6 @@ public class PassiveDemon extends PassiveAbility {
             Block block = player.getWorld().getHighestBlockAt(player.getLocation());
             if(block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 20, 1, false, false, true));
-                player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 20, 1, false, false, true));
             }
         }
 

@@ -96,12 +96,14 @@ public class PassiveElf extends PassiveAbility{
         graniteBlocks.add(Material.GRANITE_SLAB);
         graniteBlocks.add(Material.GRANITE_WALL);
         graniteBlocks.add(Material.GRANITE_STAIRS);
-        graniteBlocks.add(Material.POLISHED_GRANITE);
-        graniteBlocks.add(Material.POLISHED_GRANITE_SLAB);
-        graniteBlocks.add(Material.POLISHED_GRANITE_STAIRS);
+        graniteBlocks.add(Material.BLACKSTONE);
+        graniteBlocks.add(Material.BLACKSTONE_SLAB);
+        graniteBlocks.add(Material.BLACKSTONE_WALL);
+        graniteBlocks.add(Material.BLACKSTONE_STAIRS);
 
         if(graniteBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 10, 0, false, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 10, 0, false, false, true));
         }
 
     }

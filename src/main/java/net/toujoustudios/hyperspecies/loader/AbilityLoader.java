@@ -7,6 +7,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEngulfingD
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityStrikeOfCorruption;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityTotalAnnihilation;
 import net.toujoustudios.hyperspecies.data.ability.active.earth.AbilityBornIntoStone;
+import net.toujoustudios.hyperspecies.data.ability.active.earth.AbilityRoarOfTheStone;
 import net.toujoustudios.hyperspecies.data.ability.active.earth.AbilitySharpStone;
 import net.toujoustudios.hyperspecies.data.ability.active.earth.AbilityStoneBorn;
 import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilityFlash;
@@ -150,9 +151,11 @@ public class AbilityLoader {
 
         // Sharp Stone
         Ability.createAbility(new AbilitySharpStone());
+        Ability.createAbility(new AbilityRoarOfTheStone());
 
         HashMap<Integer, Ability> sharpStoneAbilities = new HashMap<>();
         sharpStoneAbilities.put(0, Ability.getAbility("Sharp Stone"));
+        sharpStoneAbilities.put(1, Ability.getAbility("Roar Of The Stone"));
         AbilityTree.createTree("Sharp Stone", new AbilityTree(sharpStoneAbilities));
 
         // Stone Born

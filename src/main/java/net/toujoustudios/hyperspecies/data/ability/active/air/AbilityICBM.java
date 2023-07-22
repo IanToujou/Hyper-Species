@@ -7,7 +7,6 @@ import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -83,11 +82,11 @@ public class AbilityICBM extends Ability {
                 }
             }
 
-        }.runTaskTimer(HyperSpecies.getInstance(), 1, 1);
+        }.runTaskTimer(HyperSpecies.getInstance(), 20, 1);
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
             if(!task.isCancelled()) task.cancel();
-        }, 10 * 5);
+        }, 20 * 10);
 
         return true;
 
