@@ -6,10 +6,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEndblight;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEngulfingDarkness;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityStrikeOfCorruption;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityTotalAnnihilation;
-import net.toujoustudios.hyperspecies.data.ability.active.earth.AbilityBornIntoStone;
-import net.toujoustudios.hyperspecies.data.ability.active.earth.AbilityRoarOfTheStone;
-import net.toujoustudios.hyperspecies.data.ability.active.earth.AbilitySharpStone;
-import net.toujoustudios.hyperspecies.data.ability.active.earth.AbilityStoneBorn;
+import net.toujoustudios.hyperspecies.data.ability.active.earth.*;
 import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilityFlash;
 import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilityLightspeed;
 import net.toujoustudios.hyperspecies.data.ability.active.air.AbilitySupersonicSpeed;
@@ -152,10 +149,12 @@ public class AbilityLoader {
         // Sharp Stone
         Ability.createAbility(new AbilitySharpStone());
         Ability.createAbility(new AbilityRoarOfTheStone());
+        Ability.createAbility(new AbilitySpikingEarth());
 
         HashMap<Integer, Ability> sharpStoneAbilities = new HashMap<>();
         sharpStoneAbilities.put(0, Ability.getAbility("Sharp Stone"));
         sharpStoneAbilities.put(1, Ability.getAbility("Roar Of The Stone"));
+        sharpStoneAbilities.put(2, Ability.getAbility("Spiking Earth"));
         AbilityTree.createTree("Sharp Stone", new AbilityTree(sharpStoneAbilities));
 
         // Stone Born
