@@ -150,11 +150,13 @@ public class AbilityLoader {
         Ability.createAbility(new AbilitySharpStone());
         Ability.createAbility(new AbilityRoarOfTheStone());
         Ability.createAbility(new AbilitySpikingEarth());
+        Ability.createAbility(new AbilityEarthboundThorns());
 
         HashMap<Integer, Ability> sharpStoneAbilities = new HashMap<>();
         sharpStoneAbilities.put(0, Ability.getAbility("Sharp Stone"));
         sharpStoneAbilities.put(1, Ability.getAbility("Roar Of The Stone"));
         sharpStoneAbilities.put(2, Ability.getAbility("Spiking Earth"));
+        sharpStoneAbilities.put(3, Ability.getAbility("Earthbound Thorns"));
         AbilityTree.createTree("Sharp Stone", new AbilityTree(sharpStoneAbilities));
 
         // Stone Born

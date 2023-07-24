@@ -11,8 +11,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -26,7 +24,7 @@ public class AbilitySpikingEarth extends Ability {
 
         super(
                 "Spiking Earth",
-                List.of("§8Creates a field during §d{duration}s§8 where sharp", "§8stones are on the ground. Passing", "§8enemies will receive " + Element.EARTH.getEmoji() + " {damage}§8 if they", "§8in this field."),
+                List.of("§8Creates a field during §d{duration}s§8 where sharp", "§8stones are on the ground. Passing", "§8enemies will receive " + Element.EARTH.getEmoji() + " {damage}§8 if they are in", "§8that field."),
                 Element.EARTH,
                 AbilityType.DAMAGE,
                 8,
@@ -34,13 +32,13 @@ public class AbilitySpikingEarth extends Ability {
                 Material.MELON_SEEDS,
                 5,
                 List.of("Dwarf"),
-                6,
+                4,
                 4
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
         fields.put(AbilityField.DAMAGE, List.of(2,3,4,5,6,7));
-        fields.put(AbilityField.DURATION, List.of(10,12,14,16,17,18));
+        fields.put(AbilityField.DURATION, List.of(5,6,7,8,9,10));
         setFields(fields);
 
     }

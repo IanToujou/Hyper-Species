@@ -49,7 +49,7 @@ public class AbilityRoarOfTheStone extends Ability {
         int range = getFieldValue(AbilityField.RANGE, playerManager.getAbilityLevel(this));
         Location location = player.getLocation();
 
-        player.getWorld().playSound(player.getLocation(), Sound.BLOCK_CHERRY_SAPLING_PLACE, SoundCategory.MASTER, 3, 0f);
+        player.getWorld().playSound(player.getLocation(), Sound.BLOCK_GRASS_PLACE, SoundCategory.MASTER, 3, 0f);
         player.getWorld().spawnParticle(Particle.BLOCK_CRACK, player.getLocation(), 100, 1, 0, 1, Material.DIRT.createBlockData());
 
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
