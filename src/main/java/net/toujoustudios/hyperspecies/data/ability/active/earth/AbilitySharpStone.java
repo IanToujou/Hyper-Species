@@ -29,7 +29,7 @@ public class AbilitySharpStone extends Ability {
                 8,
                 List.of("Reptile", "Dwarf"),
                 2,
-                2
+                1
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
@@ -40,7 +40,7 @@ public class AbilitySharpStone extends Ability {
 
     @Override
     public boolean execute(Player player) {
-        player.getWorld().playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_SNARE, SoundCategory.MASTER, 1, 0.5f);
+        player.getWorld().playSound(player.getLocation(), Sound.BLOCK_STONE_BREAK, SoundCategory.MASTER, 1, 1f);
         Arrow arrow = player.launchProjectile(Arrow.class);
         arrow.setDamage(2);
         arrow.customName(Component.text("Sharp Stone of " + player.getName()));

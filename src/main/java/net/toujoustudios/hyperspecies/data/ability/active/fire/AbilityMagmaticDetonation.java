@@ -56,7 +56,7 @@ public class AbilityMagmaticDetonation extends Ability {
             int z = new Random().nextInt(40)-20;
             FallingBlock block = player.getWorld().spawnFallingBlock(player.getLocation().add(0, 3, 0), Material.MAGMA_BLOCK.createBlockData());
             block.setVelocity(new Vector((double) x/10, 1, (double)z/10));
-            block.setDropItem(false);
+            block.setDropItem(true);
             block.setInvulnerable(true);
             block.setCancelDrop(true);
             blocks.add(block);

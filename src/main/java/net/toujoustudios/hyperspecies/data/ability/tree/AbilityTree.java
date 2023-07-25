@@ -32,11 +32,6 @@ public class AbilityTree {
         links.add(-1);
     }
 
-    public AbilityTree(HashMap<Integer, Ability> abilities, int link) {
-        this.abilities = abilities;
-        links.add(link);
-    }
-
     public AbilityTree(HashMap<Integer, Ability> abilities, List<Integer> links) {
         this.abilities = abilities;
         this.links = links;

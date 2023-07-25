@@ -7,6 +7,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEngulfingD
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityStrikeOfCorruption;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityTotalAnnihilation;
 import net.toujoustudios.hyperspecies.data.ability.active.earth.*;
+import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilityDash;
 import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilityFlash;
 import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilityLightspeed;
 import net.toujoustudios.hyperspecies.data.ability.active.air.AbilitySupersonicSpeed;
@@ -80,7 +81,7 @@ public class AbilityLoader {
         enhancingFlameAbilities.put(3, Ability.getAbility("Magmatic Detonation"));
         enhancingFlameAbilities.put(10, Ability.getAbility("Hellblaze"));
         enhancingFlameAbilities.put(11, Ability.getAbility("Endblaze"));
-        AbilityTree.createTree("Enhancing Flame", new AbilityTree(enhancingFlameAbilities, List.of(0)));
+        AbilityTree.createTree("Enhancing Flame", new AbilityTree(enhancingFlameAbilities, List.of(0, 1)));
 
         // Light Diffraction
         Ability.createAbility(new AbilityLightDiffraction());
@@ -97,7 +98,7 @@ public class AbilityLoader {
         lightDiffractionAbilities.put(3, Ability.getAbility("Time Dilation"));
         lightDiffractionAbilities.put(10, Ability.getAbility("Starwhisper"));
         lightDiffractionAbilities.put(11, Ability.getAbility("Celestial Shot"));
-        AbilityTree.createTree("Light Diffraction", new AbilityTree(lightDiffractionAbilities, List.of(0)));
+        AbilityTree.createTree("Light Diffraction", new AbilityTree(lightDiffractionAbilities, List.of(0, 1)));
 
         // Healing Nature
         Ability.createAbility(new AbilityHealingNature());
@@ -159,6 +160,19 @@ public class AbilityLoader {
         sharpStoneAbilities.put(3, Ability.getAbility("Earthbound Thorns"));
         AbilityTree.createTree("Sharp Stone", new AbilityTree(sharpStoneAbilities));
 
+        // Mine Sight
+        Ability.createAbility(new AbilityMineSight());
+        Ability.createAbility(new AbilityWayOfTheDwarf());
+        Ability.createAbility(new AbilityLuckyTooth());
+        Ability.createAbility(new AbilityRevengeOfTheGround());
+
+        HashMap<Integer, Ability> mineSightAbilities = new HashMap<>();
+        mineSightAbilities.put(0, Ability.getAbility("Mine Sight"));
+        mineSightAbilities.put(1, Ability.getAbility("Way Of The Dwarf"));
+        mineSightAbilities.put(2, Ability.getAbility("Lucky Tooth"));
+        mineSightAbilities.put(10, Ability.getAbility("Revenge Of The Ground"));
+        AbilityTree.createTree("Mine Sight", new AbilityTree(mineSightAbilities, List.of(0)));
+
         // Stone Born
         Ability.createAbility(new AbilityStoneBorn());
         Ability.createAbility(new AbilityBornIntoStone());
@@ -167,6 +181,12 @@ public class AbilityLoader {
         stoneBornAbilities.put(0, Ability.getAbility("Stone Born"));
         stoneBornAbilities.put(1, Ability.getAbility("Born Into Stone"));
         AbilityTree.createTree("Stone Born", new AbilityTree(stoneBornAbilities));
+
+        // Dash
+        Ability.createAbility(new AbilityDash());
+        HashMap<Integer, Ability> dashAbilities = new HashMap<>();
+        dashAbilities.put(0, Ability.getAbility("Dash"));
+        AbilityTree.createTree("Dash", new AbilityTree(dashAbilities));
 
     }
 

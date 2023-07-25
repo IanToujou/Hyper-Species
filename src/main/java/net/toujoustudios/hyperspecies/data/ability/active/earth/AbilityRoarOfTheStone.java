@@ -27,7 +27,7 @@ public class AbilityRoarOfTheStone extends Ability {
                 AbilityType.DEBUFF,
                 6,
                 140,
-                Material.STONE_SHOVEL,
+                Material.GUNPOWDER,
                 8,
                 List.of("Reptile", "Dwarf", "Wolf"),
                 3,

@@ -54,12 +54,14 @@ public class AbilitySupersonicSpeed extends Ability {
 
         if(location.getBlock().getType() != Material.AIR || block.getType() != Material.AIR) return false;
 
-        player.setVelocity(new Vector(0,10,0));
         player.teleport(new Location(location.getWorld(), location.getX(), player.getLocation().getY(), location.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch()));
 
         player.getWorld().playSound(player.getLocation(), Sound.BLOCK_PISTON_EXTEND, SoundCategory.MASTER, 2, 1.5f);
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 3, 0.8f);
         player.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, player.getLocation(), 100, 0.5, 0.5, 0.5);
+
+        player.setVelocity(player.getLocation().getDirection());
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * duration, 2, false, false, true));
 
         return true;
 

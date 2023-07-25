@@ -6,9 +6,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Particle;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 
 import java.util.Collection;
@@ -30,7 +28,7 @@ public class AbilityEarthboundThorns extends Ability {
                 8,
                 List.of("Dwarf"),
                 4,
-                4
+                3
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
@@ -44,14 +42,15 @@ public class AbilityEarthboundThorns extends Ability {
 
         PlayerManager playerManager = PlayerManager.getPlayer(player);
         int damage = getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(this));
+        player.getWorld().playSound(player.getLocation(), Sound.BLOCK_GRASS_BREAK, SoundCategory.MASTER, 2, 0.5f);
 
         Location loc1 = player.getLocation().add(player.getLocation().getDirection().setY(0).multiply(3));
         Location loc2 = player.getLocation().add(player.getLocation().getDirection().setY(0).multiply(6));
 
-        loc1.getWorld().spawnParticle(Particle.CRIT, loc1, 300, 2, 0.1, 2);
-        loc2.getWorld().spawnParticle(Particle.CRIT, loc2, 300, 2, 0.1, 2);
+        loc1.getWorld().spawnParticle(Particle.CRIT, loc1, 300, 1, 0.1, 1);
+        loc2.getWorld().spawnParticle(Particle.CRIT, loc2, 300, 1, 0.1, 1);
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
-        double radiusSquared = 6 * 6;
+        double radiusSquared = 5 * 5;
         for(Player all : players) {
             if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(loc1) <= radiusSquared) {
                 if(all != player) all.damage(damage, player);
