@@ -23,7 +23,7 @@ public class AbilitySupersonicSpeed extends Ability {
                 "Supersonic Speed",
                 List.of("§8Gain a huge speed boost and go", "§8supersonic during §d{duration}s§8."),
                 Element.AIR,
-                AbilityType.BUFF,
+                AbilityType.UTILITY,
                 8,
                 60,
                 Material.COBWEB,

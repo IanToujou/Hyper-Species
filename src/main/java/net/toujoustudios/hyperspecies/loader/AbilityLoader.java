@@ -11,6 +11,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilityDash;
 import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilityFlash;
 import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilityLightspeed;
 import net.toujoustudios.hyperspecies.data.ability.active.air.AbilitySupersonicSpeed;
+import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilitySilentDash;
 import net.toujoustudios.hyperspecies.data.ability.active.fairy.*;
 import net.toujoustudios.hyperspecies.data.ability.active.fire.*;
 import net.toujoustudios.hyperspecies.data.ability.active.flora.*;
@@ -184,8 +185,11 @@ public class AbilityLoader {
 
         // Dash
         Ability.createAbility(new AbilityDash());
+        Ability.createAbility(new AbilitySilentDash());
+
         HashMap<Integer, Ability> dashAbilities = new HashMap<>();
         dashAbilities.put(0, Ability.getAbility("Dash"));
+        dashAbilities.put(1, Ability.getAbility("Silent Dash"));
         AbilityTree.createTree("Dash", new AbilityTree(dashAbilities));
 
     }

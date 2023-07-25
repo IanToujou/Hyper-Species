@@ -19,11 +19,11 @@ public class AbilityDash extends Ability {
                 Element.ELECTRO,
                 AbilityType.UTILITY,
                 4,
-                240,
+                120,
                 Material.STONE,
                 8,
                 List.of("Dwarf"),
-                2,
+                4,
                 3
         );
 
