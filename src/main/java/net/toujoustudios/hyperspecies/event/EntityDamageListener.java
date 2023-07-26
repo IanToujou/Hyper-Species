@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.event;
 
+import net.toujoustudios.hyperspecies.data.ability.active.air.AbilityICBM;
 import net.toujoustudios.hyperspecies.data.ability.active.earth.AbilityBornIntoStone;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
@@ -43,6 +44,11 @@ public class EntityDamageListener implements Listener {
             if(event.getCause() == EntityDamageEvent.DamageCause.FALL) {
 
                 if(playerManager.getSpecies().getName().equals("Reptile") || playerManager.getSpecies().getName().equals("Feline")) {
+                    event.setCancelled(true);
+                    return;
+                }
+
+                if(AbilityICBM.getActivePlayers().contains(player.getUniqueId())) {
                     event.setCancelled(true);
                     return;
                 }

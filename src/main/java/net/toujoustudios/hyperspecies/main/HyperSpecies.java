@@ -170,7 +170,8 @@ public final class HyperSpecies extends JavaPlugin {
         getCommand("team").setExecutor(new TeamCommand());
         getCommand("ability").setExecutor(new AbilityCommand());
         getCommand("reset").setExecutor(new ResetCommand());
-        getCommand("abilitytree").setExecutor(new AbilityTreeCommand());
+        getCommand("loadout").setExecutor(new LoadoutCommand());
+        getCommand("lo").setExecutor(new LoadoutCommand());
         getCommand("setshield").setExecutor(new SetShieldCommand());
         getCommand("sethealth").setExecutor(new SetHealthCommand());
         getCommand("setmana").setExecutor(new SetManaCommand());

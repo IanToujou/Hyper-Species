@@ -216,7 +216,9 @@ public class AbilityTree {
 
             Inventory inventory = Bukkit.createInventory(null, 9*6, Component.text("Ability Trees: Page 1"));
             for(int i = inventory.getSize()-9; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
+            inventory.setItem(47, ItemListUI.TREE_RESET);
             inventory.setItem(49, ItemListUI.CANCEL);
+            inventory.setItem(51, ItemListUI.TREE_HELP);
             inventory.setItem(53, ItemListUI.NEXT);
             inventory.setItem(0, Element.FIRE.getItem(false));
             inventory.setItem(9, Element.EARTH.getItem(false));
@@ -270,7 +272,9 @@ public class AbilityTree {
             Inventory inventory = Bukkit.createInventory(null, 9*6, Component.text("Ability Trees: Page 2"));
             for(int i = inventory.getSize()-9; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
             inventory.setItem(45, ItemListUI.PREVIOUS);
+            inventory.setItem(47, ItemListUI.TREE_RESET);
             inventory.setItem(49, ItemListUI.CANCEL);
+            inventory.setItem(51, ItemListUI.TREE_HELP);
             inventory.setItem(53, ItemListUI.NEXT);
             inventory.setItem(0, Element.ELECTRO.getItem(false));
             inventory.setItem(9, Element.AIR.getItem(false));
@@ -326,7 +330,9 @@ public class AbilityTree {
             Inventory inventory = Bukkit.createInventory(null, 9*2, Component.text("Ability Trees: Page 3"));
             for(int i = inventory.getSize()-9; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
             inventory.setItem(9, ItemListUI.PREVIOUS);
+            inventory.setItem(11, ItemListUI.TREE_RESET);
             inventory.setItem(13, ItemListUI.CANCEL);
+            inventory.setItem(15, ItemListUI.TREE_HELP);
             inventory.setItem(0, Element.DARK.getItem(false));
 
             int indexDark = 0;

@@ -15,6 +15,9 @@ import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilitySilentD
 import net.toujoustudios.hyperspecies.data.ability.active.fairy.*;
 import net.toujoustudios.hyperspecies.data.ability.active.fire.*;
 import net.toujoustudios.hyperspecies.data.ability.active.flora.*;
+import net.toujoustudios.hyperspecies.data.ability.active.water.AbilityAquaticSurge;
+import net.toujoustudios.hyperspecies.data.ability.active.water.AbilityTidalWave;
+import net.toujoustudios.hyperspecies.data.ability.active.water.AbilityTyphoon;
 import net.toujoustudios.hyperspecies.data.ability.tree.AbilityTree;
 
 import java.util.HashMap;
@@ -191,6 +194,17 @@ public class AbilityLoader {
         dashAbilities.put(0, Ability.getAbility("Dash"));
         dashAbilities.put(1, Ability.getAbility("Silent Dash"));
         AbilityTree.createTree("Dash", new AbilityTree(dashAbilities));
+
+        // Aquatic Surge
+        Ability.createAbility(new AbilityAquaticSurge());
+        Ability.createAbility(new AbilityTidalWave());
+        Ability.createAbility(new AbilityTyphoon());
+
+        HashMap<Integer, Ability> aquaticSurgeAbilities = new HashMap<>();
+        aquaticSurgeAbilities.put(0, Ability.getAbility("Aquatic Surge"));
+        aquaticSurgeAbilities.put(1, Ability.getAbility("Tidal Wave"));
+        aquaticSurgeAbilities.put(2, Ability.getAbility("Typhoon"));
+        AbilityTree.createTree("Aquatic Surge", new AbilityTree(aquaticSurgeAbilities));
 
     }
 

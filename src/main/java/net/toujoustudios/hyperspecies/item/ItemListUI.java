@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.item;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -49,6 +50,8 @@ public class ItemListUI {
     public static ItemStack RESET_CHARACTER_CONFIRM = new ItemStack(Material.REDSTONE_BLOCK);
     public static ItemStack TREE_TRACK_LOCKED = new ItemStack(Material.GRAY_DYE);
     public static ItemStack TREE_TRACK_UNLOCKED = new ItemStack(Material.GREEN_DYE);
+    public static ItemStack TREE_RESET = new ItemStack(Material.TNT);
+    public static ItemStack TREE_HELP = new ItemStack(Material.NAME_TAG);
 
     @SuppressWarnings("all")
     public static void initialize() {
@@ -393,6 +396,33 @@ public class ItemListUI {
         ItemMeta treeTrackUnlockedMeta = TREE_TRACK_UNLOCKED.getItemMeta();
         treeTrackUnlockedMeta.setDisplayName(" ");
         TREE_TRACK_UNLOCKED.setItemMeta(treeTrackUnlockedMeta);
+
+        ItemMeta treeResetMeta = TREE_RESET.getItemMeta();
+        treeResetMeta.displayName(Component.text("§cReset Loadout"));
+        treeResetMeta.setLore(List.of(
+                "§7Remove all items from your loadout."
+        ));
+        TREE_RESET.setItemMeta(treeResetMeta);
+
+        ItemMeta treeHelpMeta = TREE_HELP.getItemMeta();
+        treeHelpMeta.displayName(Component.text("§aHow To Use"));
+        treeHelpMeta.setLore(List.of(
+                "§7First, you need to gain §eⓄ Skill Points",
+                "§7by leveling your character. This can be",
+                "§7done by killing other players or doing",
+                "§7species-specific activities.",
+                "§r",
+                "§7Then, you can unlock abilities with these",
+                "§7points. After you bought them, click them",
+                "§7again to equip them.",
+                "§r",
+                "§7You can only equip up to §b8§7 abilities and",
+                "§7cannot carry more than your maximum §5weight§7.",
+                "§7The max weight is determined by your level.",
+                "§r",
+                "§eCheck the wiki for more information."
+        ));
+        TREE_HELP.setItemMeta(treeHelpMeta);
 
     }
 

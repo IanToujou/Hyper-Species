@@ -64,7 +64,7 @@ public class AbilityRevengeOfTheGround extends Ability {
             @Override
             public void run() {
 
-                center.getWorld().spawnParticle(Particle.BLOCK_CRACK, new Location(center.getWorld(), center.getX(), center.getY()+1, center.getZ()), 300, 3, 0.1, 3, Material.DEEPSLATE.createBlockData());
+                center.getWorld().spawnParticle(Particle.BLOCK_CRACK, new Location(center.getWorld(), center.getX(), center.getY()+1, center.getZ()), 300, (radius/2f)-1, 0.1, (radius/2f)-1, Material.DEEPSLATE.createBlockData());
                 center.getWorld().playSound(center.getLocation(), Sound.BLOCK_GRASS_BREAK, SoundCategory.MASTER, 3, 0.5f);
 
                 for(int x = -radius; x <= radius; x++) {
@@ -72,14 +72,15 @@ public class AbilityRevengeOfTheGround extends Ability {
                         for(int z = -radius; z <= radius; z++) {
                             Block b = center.getRelative(x, y, z);
                             if(center.getLocation().distance(b.getLocation()) <= radius) {
-                                if(b.getType() == Material.STONE) {
+                                if(materials.contains(b.getType())) {
                                     Bukkit.getOnlinePlayers().forEach(all -> {
-                                        if(materials.contains(all.getLocation().getBlock().getRelative(BlockFace.DOWN).getType()) && player != all) {
-                                            FallingBlock block = all.getWorld().spawnFallingBlock(all.getLocation(), Material.STONE.createBlockData());
+                                        Block playerBlock = all.getLocation().getBlock().getRelative(BlockFace.DOWN);
+                                        if(materials.contains(playerBlock.getType()) && player != all) {
+                                            FallingBlock block = all.getWorld().spawnFallingBlock(all.getLocation(), playerBlock.getType().createBlockData());
                                             block.setDropItem(true);
                                             block.setCancelDrop(true);
                                             block.setInvulnerable(true);
-                                            block.setVelocity(new Vector(0,1,0));
+                                            block.setVelocity(new Vector(0,0.6f,0));
                                             all.damage(damage, player);
                                         }
                                     });

@@ -23,7 +23,7 @@ public class AbilityStarwhisper extends Ability {
 
         super(
                 "Starwhisper",
-                List.of("§8Creates a cloud, dealing " + Element.FAIRY.getEmoji() + " {damage} §8 to", "§8enemies. If allies pass the cloud,", "§8they will gain strength for §d{duration}s§8."),
+                List.of("§8Creates a cloud, dealing " + Element.FAIRY.getEmoji() + " {damage}§8 to", "§8enemies. If allies pass the cloud,", "§8they will gain strength for §d{duration}s§8."),
                 Element.FAIRY,
                 Element.LIGHT,
                 AbilityType.BUFF,

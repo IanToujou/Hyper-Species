@@ -12,11 +12,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class AbilityICBM extends Ability {
+
+    private static final ArrayList<UUID> activePlayers = new ArrayList<>();
 
     public AbilityICBM() {
         super(
@@ -59,6 +59,8 @@ public class AbilityICBM extends Ability {
             player.getWorld().spawnParticle(Particle.CLOUD, player.getLocation(), 300, 1, 1, 1);
         }, 25);
 
+        activePlayers.add(player.getUniqueId());
+
         BukkitTask task = new BukkitRunnable() {
 
             @Override
@@ -76,7 +78,9 @@ public class AbilityICBM extends Ability {
                         }
                     });
 
+                    activePlayers.remove(player.getUniqueId());
                     cancel();
+
                 } else {
                     player.spawnParticle(Particle.SMOKE_LARGE, player.getLocation(), 100, 0.1, 0.1, 0.1);
                 }
@@ -85,11 +89,18 @@ public class AbilityICBM extends Ability {
         }.runTaskTimer(HyperSpecies.getInstance(), 20, 1);
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
-            if(!task.isCancelled()) task.cancel();
+            if(!task.isCancelled()) {
+                task.cancel();
+                activePlayers.remove(player.getUniqueId());
+            }
         }, 20 * 10);
 
         return true;
 
+    }
+
+    public static ArrayList<UUID> getActivePlayers() {
+        return activePlayers;
     }
 
 }

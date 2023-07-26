@@ -57,6 +57,14 @@ public class AbilityTreeUI implements Listener {
                     player.openInventory(AbilityTree.buildMainInventory(player, page));
                 }
 
+            } else if(material == Material.TNT) {
+
+                player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 Your loadout has been reset§8."));
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 10, 2f);
+                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                playerManager.getActiveAbilities().clear();
+                player.closeInventory();
+
             }
 
         } else if(event.getView().getTitle().startsWith("Tree: ")) {

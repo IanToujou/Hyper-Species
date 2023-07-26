@@ -7,8 +7,11 @@ import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -19,12 +22,12 @@ public class AbilityEarthboundThorns extends Ability {
 
         super(
                 "Earthbound Thorns",
-                List.of("§8"),
+                List.of("§8Grows sharp stones out of the ground", "§8in front of the user, which deals", Element.EARTH.getEmoji() + " {damage} §8to enemies."),
                 Element.EARTH,
                 AbilityType.DAMAGE,
                 8,
                 180,
-                Material.GOLDEN_SHOVEL,
+                Material.GOLD_NUGGET,
                 8,
                 List.of("Dwarf"),
                 4,
@@ -46,11 +49,30 @@ public class AbilityEarthboundThorns extends Ability {
 
         Location loc1 = player.getLocation().add(player.getLocation().getDirection().setY(0).multiply(3));
         Location loc2 = player.getLocation().add(player.getLocation().getDirection().setY(0).multiply(6));
+        Block center1 = loc1.getBlock();
+        Block center2 = loc2.getBlock();
 
-        loc1.getWorld().spawnParticle(Particle.CRIT, loc1, 300, 1, 0.1, 1);
-        loc2.getWorld().spawnParticle(Particle.CRIT, loc2, 300, 1, 0.1, 1);
+        int radius = 2;
+        ArrayList<Block> thorns = new ArrayList<>();
+        for(int x = -radius; x <= radius; x++) {
+            for(int y = -radius; y <= radius; y++) {
+                for(int z = -radius; z <= radius; z++) {
+                    Block b1 = center1.getRelative(x, y, z);
+                    if(center1.getLocation().distance(b1.getLocation()) <= radius) {
+                        if(b1.getType() == Material.AIR && b1.getRelative(BlockFace.DOWN).getType() != Material.AIR && b1.getRelative(BlockFace.DOWN).getType() != Material.POINTED_DRIPSTONE) thorns.add(b1);
+                    }
+                    Block b2 = center2.getRelative(x, y, z);
+                    if(center2.getLocation().distance(b2.getLocation()) <= radius) {
+                        if(b2.getType() == Material.AIR && b1.getRelative(BlockFace.DOWN).getType() != Material.AIR && b1.getRelative(BlockFace.DOWN).getType() != Material.POINTED_DRIPSTONE) thorns.add(b2);
+                    }
+                }
+            }
+        }
+
+        thorns.forEach(block -> block.setType(Material.POINTED_DRIPSTONE));
+
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
-        double radiusSquared = 5 * 5;
+        double radiusSquared = 3 * 3;
         for(Player all : players) {
             if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(loc1) <= radiusSquared) {
                 if(all != player) all.damage(damage, player);
@@ -59,7 +81,10 @@ public class AbilityEarthboundThorns extends Ability {
             }
         }
 
+        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> thorns.forEach(block -> block.setType(Material.AIR)), 20 * 5);
+
         return true;
+
     }
 
 }

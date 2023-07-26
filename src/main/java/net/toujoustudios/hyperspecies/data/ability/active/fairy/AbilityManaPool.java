@@ -21,7 +21,7 @@ public class AbilityManaPool extends Ability {
 
         super(
                 "Mana Pool",
-                List.of("§8Summons a mana pool that regenerates", "§8everyone's mana during §d{duration}s§8 at a.", "§8rate of §d{rate}/s§8."),
+                List.of("§8Summons a mana pool that regenerates", "§8everyone's mana during §d{duration}s§8 at a rate", "§8of §d{rate}/s§8."),
                 Element.FAIRY,
                 AbilityType.BUFF,
                 6,

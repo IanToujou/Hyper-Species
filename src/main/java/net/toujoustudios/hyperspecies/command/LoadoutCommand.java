@@ -11,7 +11,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class AbilityTreeCommand implements CommandExecutor {
+public class LoadoutCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -21,7 +21,7 @@ public class AbilityTreeCommand implements CommandExecutor {
             return false;
         }
 
-        if(!player.hasPermission("hyperspecies.command.abilitytree")) {
+        if(!player.hasPermission("hyperspecies.command.loadout")) {
             player.sendMessage(Config.MESSAGE_ERROR_PERMISSION);
             return false;
         }
@@ -39,7 +39,7 @@ public class AbilityTreeCommand implements CommandExecutor {
     }
 
     public String getUsage() {
-        return "/abilitytree";
+        return "/loadout";
     }
 
 }

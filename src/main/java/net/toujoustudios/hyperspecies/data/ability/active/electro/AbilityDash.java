@@ -37,9 +37,9 @@ public class AbilityDash extends Ability {
         direction.multiply(8);
         location.add(direction);
         if(location.getBlock().getType() != Material.AIR) return false;
-        player.teleport(new Location(location.getWorld(), location.getX(), player.getLocation().getY(), location.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch()));
         player.getWorld().playSound(player.getLocation(), Sound.BLOCK_PISTON_EXTEND, SoundCategory.MASTER, 2, 1.5f);
         player.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, player.getLocation(), 100, 0.5, 0.5, 0.5);
+        player.teleport(new Location(location.getWorld(), location.getX(), player.getLocation().getY()+0.5, location.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch()));
         player.setVelocity(player.getLocation().getDirection());
         return true;
     }

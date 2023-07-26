@@ -6,6 +6,9 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -22,13 +25,13 @@ public class AbilityLuckyTooth extends Ability {
                 List.of("§8Grants luck for §d{duration}s§8."),
                 Element.EARTH,
                 AbilityType.UTILITY,
-                14,
-                900,
+                10,
+                300,
                 Material.RAW_GOLD,
                 8,
                 List.of("Dwarf"),
-                5,
-                5
+                4,
+                3
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
@@ -42,6 +45,8 @@ public class AbilityLuckyTooth extends Ability {
         PlayerManager playerManager = PlayerManager.getPlayer(player);
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
         player.addPotionEffect(new PotionEffect(PotionEffectType.LUCK, 20 * duration, 1, false, false, true));
+        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
+        player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, player.getLocation(), 100, 0.2, 0.2, 0.2);
         return true;
     }
 

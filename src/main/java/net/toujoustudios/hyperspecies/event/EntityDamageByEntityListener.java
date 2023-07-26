@@ -99,7 +99,7 @@ public class EntityDamageByEntityListener implements Listener {
                     }
                 });
                 if(!isWolfNearby.get()) {
-                    trueDamage *= 1.3f;
+                    trueDamage *= 1.2f;
                 }
             }
 

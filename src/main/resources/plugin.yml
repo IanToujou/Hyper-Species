@@ -26,9 +26,11 @@ commands:
   reset:
     description: Reset your character, losing all of your progress.
     permission: hyperspecies.command.reset
-  abilitytree:
+  loadout:
     description: Open up the ability tree.
-    permission: hyperspecies.command.abilitytree
+    permission: hyperspecies.command.loadout
+    aliases:
+      - lo
   setshield:
     description: Set the shield value for a player.
     permission: hyperspecies.command.setshield
@@ -60,7 +62,7 @@ permissions:
       hyperspecies.command.team: true
       hyperspecies.command.ability: false
       hyperspecies.command.reset: true
-      hyperspecies.command.abilitytree: true
+      hyperspecies.command.loadout: true
       hyperspecies.command.setshield: false
       hyperspecies.command.sethealth: false
       hyperspecies.command.setmana: false
@@ -76,7 +78,7 @@ permissions:
       hyperspecies.command.team: true
       hyperspecies.command.ability: true
       hyperspecies.command.reset: true
-      hyperspecies.command.abilitytree: true
+      hyperspecies.command.loadout: true
       hyperspecies:command.setshield: true
       hyperspecies.command.sethealth: true
       hyperspecies.command.setmana: true
@@ -92,7 +94,7 @@ permissions:
       hyperspecies.command.team: true
       hyperspecies.command.ability: false
       hyperspecies.command.reset: true
-      hyperspecies.command.abilitytree: true
+      hyperspecies.command.loadout: true
       hyperspecies.command.setshield: false
       hyperspecies.command.sethealth: false
       hyperspecies.command.setmana: false
@@ -115,7 +117,7 @@ permissions:
   hyperspecies.command.reset:
     description: Allows players to use the reset command.
     default: true
-  hyperspecies.command.abilitytree:
+  hyperspecies.command.loadout:
     description: Allows players to use the ability tree command.
     default: true
   hyperspecies.command.setshield:

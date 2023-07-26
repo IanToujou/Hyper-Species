@@ -21,7 +21,7 @@ public class AbilityTimeDilation extends Ability {
 
         super(
                 "Time Dilation",
-                List.of("§8Gain a huge speed boost during", "§d{duration}s§8 ", "§8allies within §d{range}m§8."),
+                List.of("§8Gain a huge speed boost during", "§d{duration}s§8."),
                 Element.FAIRY,
                 AbilityType.BUFF,
                 8,
