@@ -22,7 +22,7 @@ public class AbilityHealingNature extends Ability {
 
         super(
                 "Healing Nature",
-                List.of("§8Slowly regenerates an ally until the", "§8total regenerated amount reaches §d{heal}§8."),
+                List.of("§8Slowly regenerates an ally until the", "§8total regenerated amount reaches §c❤ {heal}§8."),
                 Element.FLORA,
                 AbilityType.HEAL,
                 4,
@@ -55,7 +55,7 @@ public class AbilityHealingNature extends Ability {
         }
         if(target == null) return false;
 
-        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 100, 1f);
+        player.getWorld().playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 2, 1f);
         target.getWorld().spawnParticle(Particle.HEART, target.getLocation().add(0, 3, 0), 50, 0.3, 0.1, 0.3);
 
         Player finalTarget = target;

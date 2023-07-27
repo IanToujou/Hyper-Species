@@ -46,33 +46,42 @@ public class AbilitySilentDash extends Ability {
     public boolean execute(Player player) {
         PlayerManager playerManager = PlayerManager.getPlayer(player);
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
+        final int[] remaining = {3};
 
         BukkitTask task = new BukkitRunnable() {
 
             @Override
             public void run() {
 
+                if(remaining[0] <= 0) {
+                    this.cancel();
+                    return;
+                }
+
                 if(player.isSneaking()) {
 
                     Location location = player.getLocation();
                     Vector direction = location.getDirection();
                     direction.normalize();
-                    direction.multiply(8);
+                    direction.multiply(5);
                     location.add(direction);
                     if(location.getBlock().getType() == Material.AIR) {
                         player.teleport(new Location(location.getWorld(), location.getX(), player.getLocation().getY(), location.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch()));
                         player.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, player.getLocation(), 100, 0.5, 0.5, 0.5);
                         player.setVelocity(player.getLocation().getDirection());
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20 * 5, 0, false, false, true));
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20 * 10, 0, false, false, true));
+                        remaining[0]--;
                     }
 
                 }
 
             }
 
-        }.runTaskTimer(HyperSpecies.getInstance(), 5, 5);
+        }.runTaskTimer(HyperSpecies.getInstance(), 10, 10);
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), task::cancel, 20L * duration);
+        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
+            if(!task.isCancelled()) task.cancel();
+        }, 20L * duration);
 
         return true;
     }

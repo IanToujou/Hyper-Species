@@ -34,7 +34,7 @@ public class AbilityDash extends Ability {
         Location location = player.getLocation();
         Vector direction = location.getDirection();
         direction.normalize();
-        direction.multiply(8);
+        direction.multiply(4);
         location.add(direction);
         if(location.getBlock().getType() != Material.AIR) return false;
         player.getWorld().playSound(player.getLocation(), Sound.BLOCK_PISTON_EXTEND, SoundCategory.MASTER, 2, 1.5f);

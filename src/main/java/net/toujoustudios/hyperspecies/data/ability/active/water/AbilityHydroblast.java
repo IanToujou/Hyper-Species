@@ -14,26 +14,26 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-public class AbilityAquaticSurge extends Ability {
+public class AbilityHydroblast extends Ability {
 
-    public AbilityAquaticSurge() {
+    public AbilityHydroblast() {
 
         super(
-                "Aquatic Surge",
-                List.of("§8Summons a surge of water that knocks", "§8enemies away, dealing " + Element.WATER.getEmoji() + " {damage}§8 damage."),
+                "Hydroblast",
+                List.of("§8Shoots a concentrated jet of water", "§8at high velocity, dealing " + Element.WATER.getEmoji() + " {damage}§8 damage."),
                 Element.WATER,
                 AbilityType.DAMAGE,
-                3,
-                60,
-                Material.PRISMARINE_CRYSTALS,
+                6,
+                120,
+                Material.ECHO_SHARD,
                 5,
                 List.of("Reptile", "Human", "Aquatilia"),
-                2,
-                1
+                4,
+                3
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DAMAGE, List.of(3,4,5,6,7,8));
+        fields.put(AbilityField.DAMAGE, List.of(10,12,14,16,18,20));
         setFields(fields);
 
     }
@@ -47,7 +47,7 @@ public class AbilityAquaticSurge extends Ability {
 
         double space = 0.1;
         Location point1 = player.getLocation().add(0,1,0);
-        Location point2 = player.getLocation().add(0,1,0).add(direction.multiply(8));
+        Location point2 = player.getLocation().add(0,1,0).add(direction.multiply(12));
         World world = point1.getWorld();
 
         if(point1.getWorld() != point2.getWorld()) return false;
@@ -60,18 +60,19 @@ public class AbilityAquaticSurge extends Ability {
         double length = 0;
         for (; length < distance; p1.add(vector)) {
             world.spawnParticle(Particle.FALLING_WATER, p1.getX(), p1.getY(), p1.getZ(), 50, 0.1, 0.1, 0.1);
+            world.spawnParticle(Particle.WATER_SPLASH, p1.getX(), p1.getY(), p1.getZ(), 100, 0.1, 0.1, 0.1);
             length += space;
             for(Player all : players) {
                 if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(p1.toLocation(player.getWorld())) <= 1) {
                     if(all != player) {
                         all.damage(damage, player);
-                        all.setVelocity(direction.setY(0.1).multiply(0.6f));
+                        all.setVelocity(direction.setY(0.1).multiply(0.8f));
                     }
                 }
             }
         }
 
-        player.getWorld().playSound(player.getLocation(), Sound.ITEM_BUCKET_EMPTY, SoundCategory.MASTER, 2, 0.8f);
+        player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 2, 1.5f);
         player.getWorld().spawnParticle(Particle.WATER_WAKE, player.getLocation(), 100, 0.4, 0.4, 0.4);
 
         return true;

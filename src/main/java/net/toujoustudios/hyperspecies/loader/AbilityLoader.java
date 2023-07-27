@@ -15,9 +15,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilitySilentD
 import net.toujoustudios.hyperspecies.data.ability.active.fairy.*;
 import net.toujoustudios.hyperspecies.data.ability.active.fire.*;
 import net.toujoustudios.hyperspecies.data.ability.active.flora.*;
-import net.toujoustudios.hyperspecies.data.ability.active.water.AbilityAquaticSurge;
-import net.toujoustudios.hyperspecies.data.ability.active.water.AbilityTidalWave;
-import net.toujoustudios.hyperspecies.data.ability.active.water.AbilityTyphoon;
+import net.toujoustudios.hyperspecies.data.ability.active.water.*;
 import net.toujoustudios.hyperspecies.data.ability.tree.AbilityTree;
 
 import java.util.HashMap;
@@ -199,12 +197,25 @@ public class AbilityLoader {
         Ability.createAbility(new AbilityAquaticSurge());
         Ability.createAbility(new AbilityTidalWave());
         Ability.createAbility(new AbilityTyphoon());
+        Ability.createAbility(new AbilityHydroblast());
 
         HashMap<Integer, Ability> aquaticSurgeAbilities = new HashMap<>();
         aquaticSurgeAbilities.put(0, Ability.getAbility("Aquatic Surge"));
         aquaticSurgeAbilities.put(1, Ability.getAbility("Tidal Wave"));
         aquaticSurgeAbilities.put(2, Ability.getAbility("Typhoon"));
-        AbilityTree.createTree("Aquatic Surge", new AbilityTree(aquaticSurgeAbilities));
+        aquaticSurgeAbilities.put(10, Ability.getAbility("Hydroblast"));
+        AbilityTree.createTree("Aquatic Surge", new AbilityTree(aquaticSurgeAbilities, List.of(0)));
+
+        // Healing Waters
+        Ability.createAbility(new AbilityHealingWaters());
+        Ability.createAbility(new AbilityHydrokinesis());
+        Ability.createAbility(new AbilityAquaShield());
+
+        HashMap<Integer, Ability> healingWatersAbilities = new HashMap<>();
+        healingWatersAbilities.put(0, Ability.getAbility("Healing Waters"));
+        healingWatersAbilities.put(1, Ability.getAbility("Hydrokinesis"));
+        healingWatersAbilities.put(2, Ability.getAbility("Aqua Shield"));
+        AbilityTree.createTree("Healing Waters", new AbilityTree(healingWatersAbilities, List.of(0)));
 
     }
 

@@ -1,4 +1,4 @@
-package net.toujoustudios.hyperspecies.data.ability.active.flora;
+package net.toujoustudios.hyperspecies.data.ability.active.water;
 
 import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
@@ -6,7 +6,10 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
-import org.bukkit.*;
+import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -14,26 +17,26 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-public class AbilityWoodlandsBlessing extends Ability {
+public class AbilityHealingWaters extends Ability {
 
-    public AbilityWoodlandsBlessing() {
+    public AbilityHealingWaters() {
 
         super(
-                "Woodlands Blessing",
-                List.of("§8Instantly regenerate §c❤ {heal}§8 HP for", "§8an ally."),
-                Element.FLORA,
+                "Healing Waters",
+                List.of("§8Channels pure water energy to heal", "§8a player by §c❤ {heal}§8."),
+                Element.WATER,
                 AbilityType.HEAL,
                 4,
-                120,
-                Material.LILAC,
+                50,
+                Material.CLAY_BALL,
                 5,
-                List.of("Elf", "Feline"),
-                4,
-                3
+                List.of("Reptile", "Human", "Aquatilia"),
+                1,
+                2
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.HEAL, List.of(10,12,14,16,18,20));
+        fields.put(AbilityField.HEAL, List.of(8,9,10,12,14,15));
         setFields(fields);
 
     }
@@ -53,8 +56,9 @@ public class AbilityWoodlandsBlessing extends Ability {
         }
         if(target == null) return false;
 
-        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 100, 2f);
-        target.getWorld().spawnParticle(Particle.HEART, target.getLocation().add(0, 3, 0), 50, 0.3, 0.1, 0.3);
+        player.getWorld().playSound(player.getLocation(), Sound.ITEM_BUCKET_EMPTY, SoundCategory.MASTER, 2, 2f);
+        player.getWorld().playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 2, 2f);
+        target.getWorld().spawnParticle(Particle.WATER_SPLASH, target.getLocation().add(0, 2, 0), 50, 0.3, 0.1, 0.3);
 
         PlayerManager targetManager = PlayerManager.getPlayer(target);
         targetManager.setHealth(targetManager.getHealth() + heal);

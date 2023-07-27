@@ -5,6 +5,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.fire.AbilityDemonicRag
 import net.toujoustudios.hyperspecies.data.ability.active.fire.AbilityEndblaze;
 import net.toujoustudios.hyperspecies.data.ability.active.fire.AbilityEnhancingFlame;
 import net.toujoustudios.hyperspecies.data.ability.active.fire.AbilityHellblaze;
+import net.toujoustudios.hyperspecies.data.ability.active.water.AbilityAquaShield;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
@@ -37,6 +38,11 @@ public class EntityDamageByEntityListener implements Listener {
             PlayerManager playerManager = PlayerManager.getPlayer(player);
 
             if(playerManager.getSpecies() == null) return;
+
+            if(AbilityAquaShield.getActivePlayers().contains(player.getUniqueId())) {
+                event.setCancelled(true);
+                return;
+            }
 
             if(AbilityBornIntoStone.getPlayers().contains(player.getUniqueId())) {
                 event.setCancelled(true);
