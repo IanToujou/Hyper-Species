@@ -225,6 +225,20 @@ public class AbilityLoader {
         healingWatersAbilities.put(12, Ability.getAbility("Drowning Grasp"));
         AbilityTree.createTree("Healing Waters", new AbilityTree(healingWatersAbilities, List.of(0)));
 
+        // Torrential Rain
+        Ability.createAbility(new AbilityTorrentialRain());
+        Ability.createAbility(new AbilityHailstormBarrage());
+        Ability.createAbility(new AbilityFrostbite());
+
+        HashMap<Integer, Ability> torrentialRainAbilities = new HashMap<>();
+        torrentialRainAbilities.put(0, Ability.getAbility("Torrential Rain"));
+        torrentialRainAbilities.put(1, Ability.getAbility("Hailstorm Barrage"));
+        torrentialRainAbilities.put(10, Ability.getAbility("Frostbite"));
+        AbilityTree.createTree("Torrential Rain", new AbilityTree(torrentialRainAbilities, List.of(0)));
+
+        // Raigeki
+
+
     }
 
 }
