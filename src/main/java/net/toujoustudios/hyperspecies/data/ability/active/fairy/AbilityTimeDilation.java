@@ -34,7 +34,7 @@ public class AbilityTimeDilation extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(10,11,12,13,14,15,16,17,18));
+        fields.put(AbilityField.DURATION, List.of(10, 11, 12, 13, 14, 15, 16, 17, 18));
         setFields(fields);
 
     }

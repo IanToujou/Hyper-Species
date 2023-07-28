@@ -26,18 +26,18 @@ public class ProjectileHitListener implements Listener {
 
         Projectile projectile = event.getEntity();
 
-        if(projectile.getType() == EntityType.SPLASH_POTION && projectile.getName().startsWith("Molotov Cocktail")) {
+        if (projectile.getType() == EntityType.SPLASH_POTION && projectile.getName().startsWith("Molotov Cocktail")) {
 
             Location location = projectile.getLocation();
             Block center = location.add(0, -2, 0).getBlock();
             ArrayList<Block> blocks = new ArrayList<>();
             int radius = 4;
 
-            for(int x = -radius; x <= radius; x++) {
-                for(int y = -radius; y <= radius; y++) {
-                    for(int z = -radius; z <= radius; z++) {
+            for (int x = -radius; x <= radius; x++) {
+                for (int y = -radius; y <= radius; y++) {
+                    for (int z = -radius; z <= radius; z++) {
                         Block b = center.getRelative(x, y, z);
-                        if(center.getLocation().distance(b.getLocation()) <= radius) {
+                        if (center.getLocation().distance(b.getLocation()) <= radius) {
                             blocks.add(b);
                         }
                     }
@@ -45,20 +45,20 @@ public class ProjectileHitListener implements Listener {
             }
 
             blocks.forEach(block -> {
-                if(block.getType() == Material.AIR) block.setType(Material.FIRE);
+                if (block.getType() == Material.AIR) block.setType(Material.FIRE);
             });
 
             projectile.getWorld().playSound(location, Sound.ITEM_FIRECHARGE_USE, SoundCategory.MASTER, 2, 0.5f);
 
         }
 
-        if(projectile.getType() == EntityType.FIREBALL && projectile.getName().startsWith("Fireball of ")) {
+        if (projectile.getType() == EntityType.FIREBALL && projectile.getName().startsWith("Fireball of ")) {
 
             Player player = Bukkit.getPlayer(projectile.getName().split(" ")[2]);
             Ability ability = Ability.getAbility("Fireball");
 
-            if(player == null) return;
-            if(ability == null) return;
+            if (player == null) return;
+            if (ability == null) return;
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
 
@@ -72,20 +72,20 @@ public class ProjectileHitListener implements Listener {
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
             double radiusSquared = 3 * 3;
             players.forEach(all -> {
-                if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
+                if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                     all.damage(damage, projectile);
                 }
             });
 
         }
 
-        if(projectile.getType() == EntityType.FIREBALL && projectile.getName().startsWith("Meteor Strike of ")) {
+        if (projectile.getType() == EntityType.FIREBALL && projectile.getName().startsWith("Meteor Strike of ")) {
 
             Player player = Bukkit.getPlayer(projectile.getName().split(" ")[3]);
             Ability ability = Ability.getAbility("Meteor Strike");
 
-            if(player == null) return;
-            if(ability == null) return;
+            if (player == null) return;
+            if (ability == null) return;
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
 
@@ -97,11 +97,11 @@ public class ProjectileHitListener implements Listener {
             ArrayList<Block> blocks = new ArrayList<>();
             int radius = 4;
 
-            for(int x = -radius; x <= radius; x++) {
-                for(int y = -radius; y <= radius; y++) {
-                    for(int z = -radius; z <= radius; z++) {
+            for (int x = -radius; x <= radius; x++) {
+                for (int y = -radius; y <= radius; y++) {
+                    for (int z = -radius; z <= radius; z++) {
                         Block b = center.getRelative(x, y, z);
-                        if(center.getLocation().distance(b.getLocation()) <= radius) {
+                        if (center.getLocation().distance(b.getLocation()) <= radius) {
                             blocks.add(b);
                         }
                     }
@@ -109,7 +109,7 @@ public class ProjectileHitListener implements Listener {
             }
 
             blocks.forEach(block -> {
-                if(block.getType() == Material.AIR) block.setType(Material.MAGMA_BLOCK);
+                if (block.getType() == Material.AIR) block.setType(Material.MAGMA_BLOCK);
             });
 
             projectile.getWorld().spawnParticle(Particle.LAVA, location, 500, 2, 2, 2);
@@ -118,24 +118,24 @@ public class ProjectileHitListener implements Listener {
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
             double radiusSquared = range * range;
             players.forEach(all -> {
-                if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
+                if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                     all.damage(damage, projectile);
                 }
             });
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> blocks.forEach(block -> {
-                if(block.getType() == Material.MAGMA_BLOCK) block.setType(Material.AIR);
+                if (block.getType() == Material.MAGMA_BLOCK) block.setType(Material.AIR);
             }), 20 * 10);
 
         }
 
-        if(projectile.getType() == EntityType.FIREBALL && projectile.getName().startsWith("Total Annihilation of ")) {
+        if (projectile.getType() == EntityType.FIREBALL && projectile.getName().startsWith("Total Annihilation of ")) {
 
             Player player = Bukkit.getPlayer(projectile.getName().split(" ")[3]);
             Ability ability = Ability.getAbility("Total Annihilation");
 
-            if(player == null) return;
-            if(ability == null) return;
+            if (player == null) return;
+            if (ability == null) return;
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
 
@@ -147,11 +147,11 @@ public class ProjectileHitListener implements Listener {
             ArrayList<Block> blocks = new ArrayList<>();
             int radius = 4;
 
-            for(int x = -radius; x <= radius; x++) {
-                for(int y = -radius; y <= radius; y++) {
-                    for(int z = -radius; z <= radius; z++) {
+            for (int x = -radius; x <= radius; x++) {
+                for (int y = -radius; y <= radius; y++) {
+                    for (int z = -radius; z <= radius; z++) {
                         Block b = center.getRelative(x, y, z);
-                        if(center.getLocation().distance(b.getLocation()) <= radius) {
+                        if (center.getLocation().distance(b.getLocation()) <= radius) {
                             blocks.add(b);
                         }
                     }
@@ -159,16 +159,16 @@ public class ProjectileHitListener implements Listener {
             }
 
             blocks.forEach(block -> {
-                if(block.getType() == Material.AIR) block.setType(Material.MAGMA_BLOCK);
+                if (block.getType() == Material.AIR) block.setType(Material.MAGMA_BLOCK);
             });
 
             ArrayList<Block> grassBlocks = new ArrayList<>();
 
-            for(int x = -grassRadius; x <= grassRadius; x++) {
-                for(int y = -grassRadius; y <= grassRadius; y++) {
-                    for(int z = -grassRadius; z <= grassRadius; z++) {
+            for (int x = -grassRadius; x <= grassRadius; x++) {
+                for (int y = -grassRadius; y <= grassRadius; y++) {
+                    for (int z = -grassRadius; z <= grassRadius; z++) {
                         Block b = center.getRelative(x, y, z);
-                        if(center.getLocation().distance(b.getLocation()) <= grassRadius) {
+                        if (center.getLocation().distance(b.getLocation()) <= grassRadius) {
                             grassBlocks.add(b);
                         }
                     }
@@ -176,13 +176,13 @@ public class ProjectileHitListener implements Listener {
             }
 
             blocks.forEach(block -> {
-                if(block.getType() == Material.AIR) block.setType(Material.FIRE);
+                if (block.getType() == Material.AIR) block.setType(Material.FIRE);
             });
 
             grassBlocks.forEach(block -> {
-                if(block.getType() == Material.GRASS_BLOCK) {
+                if (block.getType() == Material.GRASS_BLOCK) {
                     int random = new Random().nextInt(3);
-                    if(random == 0) block.setType(Material.SOUL_SAND);
+                    if (random == 0) block.setType(Material.SOUL_SAND);
                     else block.setType(Material.NETHERRACK);
                 }
             });
@@ -193,31 +193,32 @@ public class ProjectileHitListener implements Listener {
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
             double radiusSquared = grassRadius * grassRadius;
             players.forEach(all -> {
-                if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
+                if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                     all.damage(damage, projectile);
                 }
             });
 
             Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
-               blocks.forEach(block -> {
-                   if(block.getType() == Material.MAGMA_BLOCK) block.setType(Material.AIR);
-               });
-               grassBlocks.forEach(block -> {
-                   if(block.getType() == Material.NETHERRACK || block.getType() == Material.SOUL_SAND) block.setType(Material.GRASS_BLOCK);
-                   if(block.getType() == Material.FIRE) block.setType(Material.AIR);
-               });
+                blocks.forEach(block -> {
+                    if (block.getType() == Material.MAGMA_BLOCK) block.setType(Material.AIR);
+                });
+                grassBlocks.forEach(block -> {
+                    if (block.getType() == Material.NETHERRACK || block.getType() == Material.SOUL_SAND)
+                        block.setType(Material.GRASS_BLOCK);
+                    if (block.getType() == Material.FIRE) block.setType(Material.AIR);
+                });
             }, 20 * 10);
 
         }
 
-        if(projectile.getType() == EntityType.ARROW && projectile.getName().startsWith("Strike Of Corruption of ")) {
+        if (projectile.getType() == EntityType.ARROW && projectile.getName().startsWith("Strike Of Corruption of ")) {
 
             Location location = event.getEntity().getLocation();
             Player player = Bukkit.getPlayer(projectile.getName().split(" ")[4]);
             Ability ability = Ability.getAbility("Strike Of Corruption");
 
-            if(player == null) return;
-            if(ability == null) return;
+            if (player == null) return;
+            if (ability == null) return;
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
             projectile.getWorld().spawnEntity(location, EntityType.LIGHTNING);
@@ -228,21 +229,21 @@ public class ProjectileHitListener implements Listener {
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
             double radiusSquared = 8 * 8;
             players.forEach(all -> {
-                if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
+                if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                     all.damage(damage, player);
                 }
             });
 
         }
 
-        if(projectile.getType() == EntityType.ARROW && projectile.getName().startsWith("Celestial Shot of ")) {
+        if (projectile.getType() == EntityType.ARROW && projectile.getName().startsWith("Celestial Shot of ")) {
 
             Location location = event.getEntity().getLocation();
             Player player = Bukkit.getPlayer(projectile.getName().split(" ")[3]);
             Ability ability = Ability.getAbility("Celestial Shot");
 
-            if(player == null) return;
-            if(ability == null) return;
+            if (player == null) return;
+            if (ability == null) return;
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
             projectile.getWorld().spawnEntity(location, EntityType.LIGHTNING);
@@ -254,7 +255,7 @@ public class ProjectileHitListener implements Listener {
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
             double radiusSquared = 8 * 8;
             players.forEach(all -> {
-                if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
+                if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                     all.damage(damage, player);
                     all.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * duration, 200, false, false, true));
                     PlayerManager manager = PlayerManager.getPlayer(all);

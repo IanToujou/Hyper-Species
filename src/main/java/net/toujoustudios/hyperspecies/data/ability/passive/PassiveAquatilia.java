@@ -18,28 +18,28 @@ public class PassiveAquatilia extends PassiveAbility {
         PlayerManager playerManager = PlayerManager.getPlayer(player);
 
         // Buffs underwater, debuffs on land
-        if(player.getLocation().getBlock().getType() == Material.WATER) {
+        if (player.getLocation().getBlock().getType() == Material.WATER) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 20 * 10, 0, false, false, true));
             player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 20 * 10, 2, false, false, true));
             player.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 20 * 10, 3, false, false, true));
         } else {
-            if(!player.getWorld().isThundering() && !player.getWorld().hasStorm()) {
+            if (!player.getWorld().isThundering() && !player.getWorld().hasStorm()) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 10, 2, false, false, true));
             }
         }
 
         // Damage in sunlight and hot biomes
-        if(player.getWorld().getTime() < 12500 || player.getWorld().getTime() > 23500) {
+        if (player.getWorld().getTime() < 12500 || player.getWorld().getTime() > 23500) {
             Block block = player.getWorld().getHighestBlockAt(player.getLocation());
-            if(block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
+            if (block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
                 List<Biome> hotBiomes = List.of(Biome.DESERT, Biome.BADLANDS);
-                if(hotBiomes.contains(player.getLocation().getBlock().getBiome())) {
+                if (hotBiomes.contains(player.getLocation().getBlock().getBiome())) {
                     player.damage(3);
-                } else if(!player.getWorld().isThundering() && !player.getWorld().hasStorm()) player.damage(2);
+                } else if (!player.getWorld().isThundering() && !player.getWorld().hasStorm()) player.damage(2);
             }
         }
 
-        if(player.getWorld().isUltraWarm()) {
+        if (player.getWorld().isUltraWarm()) {
             player.damage(3);
         }
 
@@ -54,10 +54,10 @@ public class PassiveAquatilia extends PassiveAbility {
                 Material.TUBE_CORAL_BLOCK
         );
 
-        if(coralBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
+        if (coralBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
             playerManager.setHealthRegeneration(0.4);
         } else {
-            if(!playerManager.isRegenerationCoolingDown()) playerManager.setHealthRegeneration(0.4);
+            if (!playerManager.isRegenerationCoolingDown()) playerManager.setHealthRegeneration(0.4);
         }
 
     }

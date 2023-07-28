@@ -32,9 +32,9 @@ public class PlayerInteractListener implements Listener {
         PlayerManager playerManager = PlayerManager.getPlayer(player);
         Action action = event.getAction();
 
-        if(event.getItem() != null) {
-            if(event.getItem().getItemMeta() != null) {
-                if(event.getItem().getItemMeta().getDisplayName().equals("§fMolotov Cocktail")) {
+        if (event.getItem() != null) {
+            if (event.getItem().getItemMeta() != null) {
+                if (event.getItem().getItemMeta().getDisplayName().equals("§fMolotov Cocktail")) {
                     event.setCancelled(true);
                     event.getPlayer().setItemInHand(new ItemStack(Material.AIR));
                     ThrownPotion potion = player.launchProjectile(ThrownPotion.class);
@@ -45,43 +45,43 @@ public class PlayerInteractListener implements Listener {
             }
         }
 
-        if(playerManager.getSpecies() == null) return;
+        if (playerManager.getSpecies() == null) return;
 
-        if(playerManager.isSelectingAbility()) {
+        if (playerManager.isSelectingAbility()) {
 
             event.setCancelled(true);
-            if(cooldownPlayers.contains(player.getUniqueId())) return;
-            if(player.getItemInHand().getItemMeta() != null) {
+            if (cooldownPlayers.contains(player.getUniqueId())) return;
+            if (player.getItemInHand().getItemMeta() != null) {
                 ItemStack item = player.getItemInHand();
-                if(item.getItemMeta().getDisplayName().contains("§cCancel")) {
+                if (item.getItemMeta().getDisplayName().contains("§cCancel")) {
                     player.sendTitle("", "§cCancelled", 5, 10, 5);
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.6f);
-                } else if(item.getItemMeta().getDisplayName().contains("§a") || item.getItemMeta().getDisplayName().contains("§c")) {
+                } else if (item.getItemMeta().getDisplayName().contains("§a") || item.getItemMeta().getDisplayName().contains("§c")) {
 
-                    if(item.getItemMeta().getLore() == null) return;
-                    if(item.getItemMeta().getLore().size() < 1) return;
+                    if (item.getItemMeta().getLore() == null) return;
+                    if (item.getItemMeta().getLore().size() < 1) return;
                     String abilityName = item.getItemMeta().getLore().get(0).substring(2);
                     Ability ability = Ability.getAbility(abilityName);
 
-                    if(ability == null) {
+                    if (ability == null) {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.4f);
                         player.sendTitle("", "§cFailed", 5, 10, 5);
                         return;
                     }
 
-                    if(playerManager.getCooldownAbilities().contains(ability)) {
+                    if (playerManager.getCooldownAbilities().contains(ability)) {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.4f);
                         player.sendTitle("", "§cCooling Down", 5, 10, 5);
                         return;
                     }
 
-                    if(playerManager.getMana() < ability.getManaCost()) {
+                    if (playerManager.getMana() < ability.getManaCost()) {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.4f);
                         player.sendTitle("", "§cNo Mana", 5, 10, 5);
                         return;
                     }
 
-                    if(playerManager.useAbility(ability)) {
+                    if (playerManager.useAbility(ability)) {
                         player.sendTitle("", "§a" + ability.getName(), 5, 10, 5);
                     } else {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.4f);
@@ -90,16 +90,16 @@ public class PlayerInteractListener implements Listener {
                     }
 
                 } else return;
-                for(int i = 0; i < 9; i++) player.getInventory().setItem(i, playerManager.getSavedInventory().get(i));
+                for (int i = 0; i < 9; i++) player.getInventory().setItem(i, playerManager.getSavedInventory().get(i));
                 playerManager.setSelectingAbility(false);
             }
             return;
 
         }
 
-        if(!player.isSneaking()) return;
-        if(action != Action.LEFT_CLICK_AIR && action != Action.LEFT_CLICK_BLOCK) return;
-        if(cooldownPlayers.contains(player.getUniqueId())) return;
+        if (!player.isSneaking()) return;
+        if (action != Action.LEFT_CLICK_AIR && action != Action.LEFT_CLICK_BLOCK) return;
+        if (cooldownPlayers.contains(player.getUniqueId())) return;
         cooldownPlayers.add(player.getUniqueId());
         event.setCancelled(true);
 
@@ -108,26 +108,28 @@ public class PlayerInteractListener implements Listener {
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 1.5f);
 
         ArrayList<ItemStack> items = new ArrayList<>();
-        for(int i = 0; i < 9; i++) items.add(player.getInventory().getItem(i));
+        for (int i = 0; i < 9; i++) items.add(player.getInventory().getItem(i));
         playerManager.setSavedInventory(items);
-        for(int i = 0; i < 9; i++) player.getInventory().setItem(i, ItemListUI.FILLER);
+        for (int i = 0; i < 9; i++) player.getInventory().setItem(i, ItemListUI.FILLER);
 
         player.getInventory().setItem(0, ItemListUI.CANCEL);
 
-        for(int i = 0; i < playerManager.getActiveAbilities().size(); i++) {
+        for (int i = 0; i < playerManager.getActiveAbilities().size(); i++) {
 
             Ability ability = playerManager.getActiveAbilities().get(i);
             ItemStack item = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
-            if(playerManager.getMana() < ability.getManaCost()) item.setType(Material.ORANGE_STAINED_GLASS_PANE);
-            if(playerManager.getCooldownAbilities().contains(ability)) item.setType(Material.RED_STAINED_GLASS_PANE);
+            if (playerManager.getMana() < ability.getManaCost()) item.setType(Material.ORANGE_STAINED_GLASS_PANE);
+            if (playerManager.getCooldownAbilities().contains(ability)) item.setType(Material.RED_STAINED_GLASS_PANE);
             ItemMeta itemMeta = item.getItemMeta();
             assert itemMeta != null;
             itemMeta.setDisplayName(ability.getFullName() + " §7(§aLVL " + playerManager.getAbilityLevel(ability) + "§7) §8- §b" + ability.getManaCost() + " Mana");
-            if(playerManager.getMana() < ability.getManaCost()) itemMeta.setDisplayName(ability.getFullName() + " §7(§aLVL " + playerManager.getAbilityLevel(ability) + "§7) §8- §b" + ability.getManaCost() + " Mana");
-            if(playerManager.getCooldownAbilities().contains(ability)) itemMeta.setDisplayName(ability.getFullName() + " §7(§aLVL " + playerManager.getAbilityLevel(ability) + "§7) §8- §6Cooldown");
+            if (playerManager.getMana() < ability.getManaCost())
+                itemMeta.setDisplayName(ability.getFullName() + " §7(§aLVL " + playerManager.getAbilityLevel(ability) + "§7) §8- §b" + ability.getManaCost() + " Mana");
+            if (playerManager.getCooldownAbilities().contains(ability))
+                itemMeta.setDisplayName(ability.getFullName() + " §7(§aLVL " + playerManager.getAbilityLevel(ability) + "§7) §8- §6Cooldown");
             itemMeta.setLore(List.of("§7" + ability.getName()));
             item.setItemMeta(itemMeta);
-            player.getInventory().setItem(1+i, item);
+            player.getInventory().setItem(1 + i, item);
 
         }
 

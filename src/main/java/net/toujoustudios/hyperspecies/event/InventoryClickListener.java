@@ -14,7 +14,7 @@ public class InventoryClickListener implements Listener {
         Player player = (Player) event.getWhoClicked();
         PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-        if(playerManager.isSelectingAbility()) event.setCancelled(true);
+        if (playerManager.isSelectingAbility()) event.setCancelled(true);
 
     }
 

@@ -1,20 +1,19 @@
 package net.toujoustudios.hyperspecies.loader;
 
-import net.toujoustudios.hyperspecies.data.ability.active.*;
+import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.ability.active.air.AbilityICBM;
+import net.toujoustudios.hyperspecies.data.ability.active.air.AbilitySupersonicSpeed;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEndblight;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEngulfingDarkness;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityStrikeOfCorruption;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityTotalAnnihilation;
 import net.toujoustudios.hyperspecies.data.ability.active.earth.*;
-import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilityDash;
-import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilityFlash;
-import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilityLightspeed;
-import net.toujoustudios.hyperspecies.data.ability.active.air.AbilitySupersonicSpeed;
-import net.toujoustudios.hyperspecies.data.ability.active.electro.AbilitySilentDash;
+import net.toujoustudios.hyperspecies.data.ability.active.electro.*;
 import net.toujoustudios.hyperspecies.data.ability.active.fairy.*;
 import net.toujoustudios.hyperspecies.data.ability.active.fire.*;
 import net.toujoustudios.hyperspecies.data.ability.active.flora.*;
+import net.toujoustudios.hyperspecies.data.ability.active.psychic.AbilityPsychicWard;
+import net.toujoustudios.hyperspecies.data.ability.active.psychic.AbilityTimothy;
 import net.toujoustudios.hyperspecies.data.ability.active.water.*;
 import net.toujoustudios.hyperspecies.data.ability.tree.AbilityTree;
 
@@ -61,7 +60,7 @@ public class AbilityLoader {
         flameShotAbilities.put(3, Ability.getAbility("Ray Of Doom"));
         flameShotAbilities.put(10, Ability.getAbility("Burning Rain"));
         flameShotAbilities.put(11, Ability.getAbility("Striking Trail"));
-        AbilityTree.createTree("Flame Shot", new AbilityTree(flameShotAbilities, List.of(0,1)));
+        AbilityTree.createTree("Flame Shot", new AbilityTree(flameShotAbilities, List.of(0, 1)));
 
         HashMap<Integer, Ability> totalAnnihilationAbilities = new HashMap<>();
         totalAnnihilationAbilities.put(0, Ability.getAbility("Total Annihilation"));
@@ -83,7 +82,7 @@ public class AbilityLoader {
         enhancingFlameAbilities.put(3, Ability.getAbility("Magmatic Detonation"));
         enhancingFlameAbilities.put(10, Ability.getAbility("Hellblaze"));
         enhancingFlameAbilities.put(11, Ability.getAbility("Endblaze"));
-        AbilityTree.createTree("Enhancing Flame", new AbilityTree(enhancingFlameAbilities, List.of(0, 1)));
+        AbilityTree.createTree("Enhancing Flame", new AbilityTree(enhancingFlameAbilities, List.of(0)));
 
         // Light Diffraction
         Ability.createAbility(new AbilityLightDiffraction());
@@ -121,6 +120,15 @@ public class AbilityLoader {
         thornSeedlingAbilities.put(1, Ability.getAbility("Raging Flora"));
         thornSeedlingAbilities.put(2, Ability.getAbility("Stun Spore"));
         AbilityTree.createTree("Thorn Seedling", new AbilityTree(thornSeedlingAbilities));
+
+        // Psychic Ward
+        Ability.createAbility(new AbilityPsychicWard());
+        Ability.createAbility(new AbilityTimothy());
+
+        HashMap<Integer, Ability> psychicWardAbilities = new HashMap<>();
+        psychicWardAbilities.put(0, Ability.getAbility("Psychic Ward"));
+        psychicWardAbilities.put(1, Ability.getAbility("Timothy"));
+        AbilityTree.createTree("Psychic Ward", new AbilityTree(psychicWardAbilities));
 
         // Quick Growth
         Ability.createAbility(new AbilityQuickGrowth());
@@ -237,7 +245,11 @@ public class AbilityLoader {
         AbilityTree.createTree("Torrential Rain", new AbilityTree(torrentialRainAbilities, List.of(0)));
 
         // Raigeki
+        Ability.createAbility(new AbilityRaigeki());
 
+        HashMap<Integer, Ability> raigekiAbilities = new HashMap<>();
+        raigekiAbilities.put(0, Ability.getAbility("Raigeki"));
+        AbilityTree.createTree("Raigeki", new AbilityTree(raigekiAbilities));
 
     }
 

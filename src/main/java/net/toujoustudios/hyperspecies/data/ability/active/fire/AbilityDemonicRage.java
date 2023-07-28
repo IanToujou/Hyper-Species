@@ -40,8 +40,8 @@ public class AbilityDemonicRage extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(10,12,14,18,20,24,26,28,30));
-        fields.put(AbilityField.RATE, List.of(1,1,2,2,3,3,4,4,5));
+        fields.put(AbilityField.DURATION, List.of(10, 12, 14, 18, 20, 24, 26, 28, 30));
+        fields.put(AbilityField.RATE, List.of(1, 1, 2, 2, 3, 3, 4, 4, 5));
 
         setFields(fields);
 
@@ -61,9 +61,9 @@ public class AbilityDemonicRage extends Ability {
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 4, 1.5f);
         player.getWorld().spawnParticle(Particle.LAVA, player.getLocation(), 100, 0, 2, 0);
         player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, player.getLocation(), 10, 0, 2, 0);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20*duration, 1, false, false, true));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * duration, 1, false, false, true));
         playerManager.setManaRegeneration(rate);
-        if(!usingPlayers.contains(player.getUniqueId())) usingPlayers.add(player.getUniqueId());
+        if (!usingPlayers.contains(player.getUniqueId())) usingPlayers.add(player.getUniqueId());
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
             playerManager.setManaRegeneration(0.1);

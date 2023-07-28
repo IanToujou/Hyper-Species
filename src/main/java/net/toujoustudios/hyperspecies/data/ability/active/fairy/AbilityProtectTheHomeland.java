@@ -38,8 +38,8 @@ public class AbilityProtectTheHomeland extends Ability {
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
 
-        fields.put(AbilityField.SHIELD, List.of(10,12,14,16,18,20,22,24,25));
-        fields.put(AbilityField.RANGE, List.of(6,6,7,7,8,8,9,9,10));
+        fields.put(AbilityField.SHIELD, List.of(10, 12, 14, 16, 18, 20, 22, 24, 25));
+        fields.put(AbilityField.RANGE, List.of(6, 6, 7, 7, 8, 8, 9, 9, 10));
 
         setFields(fields);
 
@@ -56,10 +56,10 @@ public class AbilityProtectTheHomeland extends Ability {
         player.getWorld().spawnParticle(Particle.CRIT_MAGIC, player.getLocation(), 100, 3, 0, 3);
 
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
-        double radiusSquared = 8*8;
+        double radiusSquared = 8 * 8;
         players.forEach(all -> {
-            if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
-                all.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20*3, 5, false, false, true));
+            if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
+                all.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 3, 5, false, false, true));
                 PlayerManager manager = PlayerManager.getPlayer(all);
                 manager.setShield(manager.getShield() + shield);
             }

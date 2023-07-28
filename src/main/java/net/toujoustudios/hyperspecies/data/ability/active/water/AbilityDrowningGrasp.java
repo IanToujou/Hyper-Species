@@ -34,7 +34,7 @@ public class AbilityDrowningGrasp extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(3,4,5,6,7,8));
+        fields.put(AbilityField.DURATION, List.of(3, 4, 5, 6, 7, 8));
         setFields(fields);
 
     }
@@ -52,8 +52,8 @@ public class AbilityDrowningGrasp extends Ability {
                 location.getWorld().playSound(location, Sound.ITEM_BUCKET_EMPTY, SoundCategory.MASTER, 3, 1f);
                 Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                 double radiusSquared = 5 * 5;
-                for(Player all : players) {
-                    if(all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
+                for (Player all : players) {
+                    if (all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                         PlayerManager manager = PlayerManager.getPlayer(all);
                         manager.stun(duration * 20);
                     }

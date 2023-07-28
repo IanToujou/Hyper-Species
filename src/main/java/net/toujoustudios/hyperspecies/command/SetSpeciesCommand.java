@@ -19,21 +19,21 @@ public class SetSpeciesCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-        if(!(commandSender instanceof Player player)) {
+        if (!(commandSender instanceof Player player)) {
             Logger.log(LogLevel.ERROR, "You cannot use this command in the console.");
             return false;
         }
 
-        if(!player.hasPermission("hyperspecies.command.setspecies")) {
+        if (!player.hasPermission("hyperspecies.command.setspecies")) {
             player.sendMessage(Component.text(Config.MESSAGE_ERROR_PERMISSION));
             return false;
         }
 
-        if(args.length == 1) {
+        if (args.length == 1) {
 
             Species species = Species.getSpecies(args[0].substring(0, 1).toUpperCase() + args[0].substring(1));
 
-            if(species == null) {
+            if (species == null) {
                 player.sendMessage(Component.text(Config.MESSAGE_PREFIX + " §cThe specified species does not exist§8."));
                 return false;
             }
@@ -45,18 +45,18 @@ public class SetSpeciesCommand implements CommandExecutor {
             playerManager.setSpecies(species);
             playerManager.refreshScoreboard();
 
-        } else if(args.length == 2) {
+        } else if (args.length == 2) {
 
             Player target = Bukkit.getPlayer(args[1]);
 
-            if(target == null) {
+            if (target == null) {
                 player.sendMessage(Config.MESSAGE_ERROR_PLAYER_INVALID);
                 return false;
             }
 
             Species species = Species.getSpecies(args[0]);
 
-            if(species == null) {
+            if (species == null) {
                 player.sendMessage(Component.text(Config.MESSAGE_PREFIX + " §cThe specified species does not exist§8."));
                 return false;
             }

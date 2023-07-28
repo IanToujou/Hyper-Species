@@ -34,7 +34,7 @@ public class AbilityStoneBorn extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(10,12,14,16,18,20,22,24,26));
+        fields.put(AbilityField.DURATION, List.of(10, 12, 14, 16, 18, 20, 22, 24, 26));
         setFields(fields);
 
     }

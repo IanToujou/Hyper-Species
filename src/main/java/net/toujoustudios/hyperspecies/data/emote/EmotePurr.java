@@ -21,10 +21,11 @@ public class EmotePurr extends Emote {
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, SoundCategory.MASTER, 100, 1.8f);
 
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
-        double radiusSquared = 15*15;
+        double radiusSquared = 15 * 15;
         players.forEach(all -> {
-            if(all.getLocation().distanceSquared(player.getLocation()) <= radiusSquared) {
-                if(all != player) all.sendMessage(Config.MESSAGE_PREFIX_ROLEPLAY + " §e" + player.getName() + "§7 is purring§8. §d:3");
+            if (all.getLocation().distanceSquared(player.getLocation()) <= radiusSquared) {
+                if (all != player)
+                    all.sendMessage(Config.MESSAGE_PREFIX_ROLEPLAY + " §e" + player.getName() + "§7 is purring§8. §d:3");
                 all.playSound(all.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, SoundCategory.MASTER, 100, 1.8f);
             }
         });

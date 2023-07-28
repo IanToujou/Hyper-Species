@@ -15,7 +15,7 @@ public class PlayerJoinListener implements Listener {
         Player player = event.getPlayer();
         PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-        if(playerManager.getSpecies() == null) {
+        if (playerManager.getSpecies() == null) {
             SpeciesUI.openInventory(player);
         }
 

@@ -39,7 +39,7 @@ public class AbilityRagingFlora extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(10,11,12,13,14,15,16,17,18));
+        fields.put(AbilityField.DURATION, List.of(10, 11, 12, 13, 14, 15, 16, 17, 18));
         setFields(fields);
 
     }
@@ -51,9 +51,9 @@ public class AbilityRagingFlora extends Ability {
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
 
         Block block = player.getTargetBlock(null, 30);
-        if((block.getType() == Material.GRASS_BLOCK || block.getType() == Material.MOSS_BLOCK || block.getType() == Material.PODZOL) && block.getLocation().add(0,1,0).getBlock().getType() == Material.AIR) {
+        if ((block.getType() == Material.GRASS_BLOCK || block.getType() == Material.MOSS_BLOCK || block.getType() == Material.PODZOL) && block.getLocation().add(0, 1, 0).getBlock().getType() == Material.AIR) {
 
-            Location location = block.getLocation().add(0,1,0);
+            Location location = block.getLocation().add(0, 1, 0);
             location.getBlock().setType(Material.TORCHFLOWER);
 
             BukkitTask task = new BukkitRunnable() {
@@ -63,7 +63,7 @@ public class AbilityRagingFlora extends Ability {
                     location.getWorld().spawnParticle(Particle.CRIMSON_SPORE, location, 500, 3, 0.1, 3);
                     Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                     double radiusSquared = 8 * 8;
-                    for(Player all : players) {
+                    for (Player all : players) {
                         if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared) {
                             all.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * duration, 1, false, false, true));
                         }

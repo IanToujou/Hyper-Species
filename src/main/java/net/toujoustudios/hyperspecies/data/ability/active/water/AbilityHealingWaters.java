@@ -36,7 +36,7 @@ public class AbilityHealingWaters extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.HEAL, List.of(8,9,10,12,14,15));
+        fields.put(AbilityField.HEAL, List.of(8, 9, 10, 12, 14, 15));
         setFields(fields);
 
     }
@@ -51,10 +51,11 @@ public class AbilityHealingWaters extends Ability {
         Player target = null;
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
         double radiusSquared = 5 * 5;
-        for(Player all : players) {
-            if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared) target = all;
+        for (Player all : players) {
+            if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared)
+                target = all;
         }
-        if(target == null) return false;
+        if (target == null) return false;
 
         player.getWorld().playSound(player.getLocation(), Sound.ITEM_BUCKET_EMPTY, SoundCategory.MASTER, 2, 2f);
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 2, 2f);

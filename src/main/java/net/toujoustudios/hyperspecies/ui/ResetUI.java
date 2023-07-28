@@ -27,26 +27,26 @@ public class ResetUI implements Listener {
 
         Player player = (Player) event.getWhoClicked();
 
-        if(event.getView().getTitle().equals("Reset Character")) {
+        if (event.getView().getTitle().equals("Reset Character")) {
 
-            if(event.getCurrentItem() == null) return;
+            if (event.getCurrentItem() == null) return;
             event.setCancelled(true);
 
             Material material = event.getCurrentItem().getType();
 
-            if(material == Material.RED_CONCRETE) {
+            if (material == Material.RED_CONCRETE) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 openInventory(player, ResetPage.CONFIRM.getIndex());
             }
 
-        } else if(event.getView().getTitle().equals("Reset Character: Confirm")) {
+        } else if (event.getView().getTitle().equals("Reset Character: Confirm")) {
 
-            if(event.getCurrentItem() == null) return;
+            if (event.getCurrentItem() == null) return;
             event.setCancelled(true);
 
             Material material = event.getCurrentItem().getType();
 
-            if(material == Material.REDSTONE_BLOCK) {
+            if (material == Material.REDSTONE_BLOCK) {
 
                 PlayerManager playerManager = PlayerManager.getPlayer(player);
                 playerConfig.set("Data." + player.getUniqueId(), null);
@@ -62,7 +62,7 @@ public class ResetUI implements Listener {
                     playerManager.destroy();
                 }, 20);
 
-            } else if(material == Material.PLAYER_HEAD) {
+            } else if (material == Material.PLAYER_HEAD) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 openInventory(player);
@@ -76,13 +76,13 @@ public class ResetUI implements Listener {
     public static void initialize() {
 
         // MAIN
-        Inventory pageMain = Bukkit.createInventory(null, 9*3, "Reset Character");
-        for(int i = 0; i < pageMain.getSize(); i++) pageMain.setItem(i, ItemListUI.FILLER);
+        Inventory pageMain = Bukkit.createInventory(null, 9 * 3, "Reset Character");
+        for (int i = 0; i < pageMain.getSize(); i++) pageMain.setItem(i, ItemListUI.FILLER);
         pageMain.setItem(13, ItemListUI.RESET_CHARACTER);
 
         // CONFIRM
-        Inventory pageConfirm = Bukkit.createInventory(null, 9*3, "Reset Character: Confirm");
-        for(int i = 0; i < pageConfirm.getSize(); i++) pageConfirm.setItem(i, ItemListUI.FILLER);
+        Inventory pageConfirm = Bukkit.createInventory(null, 9 * 3, "Reset Character: Confirm");
+        for (int i = 0; i < pageConfirm.getSize(); i++) pageConfirm.setItem(i, ItemListUI.FILLER);
         pageConfirm.setItem(11, ItemListUI.PREVIOUS);
         pageConfirm.setItem(15, ItemListUI.RESET_CHARACTER_CONFIRM);
 
@@ -97,7 +97,7 @@ public class ResetUI implements Listener {
     }
 
     public static void openInventory(Player player, int page) {
-        if(inventories.get(page) == null) return;
+        if (inventories.get(page) == null) return;
         player.openInventory(inventories.get(page));
     }
 

@@ -35,7 +35,7 @@ public class AbilityHealingNature extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.HEAL, List.of(5,6,7,8,9,10));
+        fields.put(AbilityField.HEAL, List.of(5, 6, 7, 8, 9, 10));
         setFields(fields);
 
     }
@@ -50,10 +50,11 @@ public class AbilityHealingNature extends Ability {
         Player target = null;
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
         double radiusSquared = 5 * 5;
-        for(Player all : players) {
-            if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared) target = all;
+        for (Player all : players) {
+            if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared)
+                target = all;
         }
-        if(target == null) return false;
+        if (target == null) return false;
 
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 2, 1f);
         target.getWorld().spawnParticle(Particle.HEART, target.getLocation().add(0, 3, 0), 50, 0.3, 0.1, 0.3);
@@ -63,7 +64,7 @@ public class AbilityHealingNature extends Ability {
             @Override
             public void run() {
                 PlayerManager manager = PlayerManager.getPlayer(finalTarget);
-                manager.setHealth(manager.getHealth() + heal/10f);
+                manager.setHealth(manager.getHealth() + heal / 10f);
             }
         }.runTaskTimer(HyperSpecies.getInstance(), 0, 20);
 

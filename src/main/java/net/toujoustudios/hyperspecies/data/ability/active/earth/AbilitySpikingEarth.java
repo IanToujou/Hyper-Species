@@ -37,8 +37,8 @@ public class AbilitySpikingEarth extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DAMAGE, List.of(2,3,4,5,6,7));
-        fields.put(AbilityField.DURATION, List.of(5,6,7,8,9,10));
+        fields.put(AbilityField.DAMAGE, List.of(2, 3, 4, 5, 6, 7));
+        fields.put(AbilityField.DURATION, List.of(5, 6, 7, 8, 9, 10));
         setFields(fields);
 
     }
@@ -58,9 +58,9 @@ public class AbilitySpikingEarth extends Ability {
                 location.getWorld().spawnParticle(Particle.CRIT, location, 300, 2, 0.1, 2);
                 Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                 double radiusSquared = 6 * 6;
-                for(Player all : players) {
+                for (Player all : players) {
                     if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
-                        if(all != player) all.damage(damage, player);
+                        if (all != player) all.damage(damage, player);
                     }
                 }
             }

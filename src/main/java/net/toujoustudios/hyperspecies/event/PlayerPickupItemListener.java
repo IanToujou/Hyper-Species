@@ -10,7 +10,7 @@ public class PlayerPickupItemListener implements Listener {
     @EventHandler
     public void onItemPickup(PlayerAttemptPickupItemEvent event) {
         PlayerManager playerManager = PlayerManager.getPlayer(event.getPlayer());
-        if(playerManager.isSelectingAbility()) event.setCancelled(true);
+        if (playerManager.isSelectingAbility()) event.setCancelled(true);
     }
 
 }

@@ -38,8 +38,8 @@ public class AbilityFrostbite extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DAMAGE, List.of(5,7,9,11,13,15));
-        fields.put(AbilityField.DURATION, List.of(5,6,7,8,9,10));
+        fields.put(AbilityField.DAMAGE, List.of(5, 7, 9, 11, 13, 15));
+        fields.put(AbilityField.DURATION, List.of(5, 6, 7, 8, 9, 10));
         setFields(fields);
 
     }
@@ -55,10 +55,11 @@ public class AbilityFrostbite extends Ability {
         Player target = null;
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
         double radiusSquared = 5 * 5;
-        for(Player all : players) {
-            if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared) target = all;
+        for (Player all : players) {
+            if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared)
+                target = all;
         }
-        if(target == null) return false;
+        if (target == null) return false;
 
         player.getWorld().playSound(player.getLocation(), Sound.ITEM_BUCKET_EMPTY, SoundCategory.MASTER, 2, 0f);
         player.getWorld().playSound(player.getLocation(), Sound.BLOCK_GLASS_BREAK, SoundCategory.MASTER, 2, 0f);

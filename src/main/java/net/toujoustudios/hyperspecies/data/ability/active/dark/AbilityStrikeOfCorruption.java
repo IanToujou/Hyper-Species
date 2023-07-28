@@ -27,7 +27,7 @@ public class AbilityStrikeOfCorruption extends Ability {
                 Element.DARK,
                 Element.ELECTRO,
                 AbilityType.DAMAGE,
-                18,
+                14,
                 600,
                 Material.NETHER_STAR,
                 8,
@@ -37,7 +37,7 @@ public class AbilityStrikeOfCorruption extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DAMAGE, List.of(20,25,30,35,40,45,50,55,60));
+        fields.put(AbilityField.DAMAGE, List.of(20, 25, 30, 35, 40, 45, 50, 55, 60));
         setFields(fields);
 
     }

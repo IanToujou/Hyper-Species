@@ -5,7 +5,6 @@ import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
-
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
@@ -37,7 +36,7 @@ public class AbilityFlameShot extends Ability {
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
 
-        fields.put(AbilityField.DAMAGE, List.of(2,4,5,6,8,10));
+        fields.put(AbilityField.DAMAGE, List.of(2, 4, 5, 6, 8, 10));
 
         setFields(fields);
 

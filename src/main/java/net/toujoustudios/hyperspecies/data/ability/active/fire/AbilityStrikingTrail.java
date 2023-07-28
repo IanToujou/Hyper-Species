@@ -7,7 +7,8 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
@@ -37,7 +38,7 @@ public class AbilityStrikingTrail extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(5,6,7,8,9,10));
+        fields.put(AbilityField.DURATION, List.of(5, 6, 7, 8, 9, 10));
         setFields(fields);
 
     }
@@ -64,24 +65,25 @@ public class AbilityStrikingTrail extends Ability {
                 Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                 double radiusSquared = 6 * 6;
                 players.forEach(all -> {
-                    if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(fireball.getLocation()) <= radiusSquared) {
-                        if(all != player) all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, duration*20, 0, false, false, true));
+                    if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(fireball.getLocation()) <= radiusSquared) {
+                        if (all != player)
+                            all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, duration * 20, 0, false, false, true));
                     }
                 });
 
                 Block center = fireball.getLocation().add(0, -1, 0).getBlock();
                 ArrayList<Block> blocks = new ArrayList<>();
                 int radius = 4;
-                for(int x = -radius; x <= radius; x++) {
-                    for(int y = -radius; y <= radius; y++) {
-                        for(int z = -radius; z <= radius; z++) {
+                for (int x = -radius; x <= radius; x++) {
+                    for (int y = -radius; y <= radius; y++) {
+                        for (int z = -radius; z <= radius; z++) {
                             Block b = center.getRelative(x, y, z);
-                            if(center.getLocation().distance(b.getLocation()) <= radius) {
+                            if (center.getLocation().distance(b.getLocation()) <= radius) {
                                 int random = new Random().nextInt(6);
                                 blocks.add(b);
-                                if(random == 0) {
+                                if (random == 0) {
                                     Block fire = b.getLocation().getBlock();
-                                    if(fire.getType() == Material.AIR) {
+                                    if (fire.getType() == Material.AIR) {
                                         fire.setType(Material.FIRE);
                                         airBlocks.add(fire);
                                     }
@@ -92,7 +94,7 @@ public class AbilityStrikingTrail extends Ability {
                 }
 
                 blocks.forEach(block -> {
-                    if(block.getType() == Material.GRASS_BLOCK) {
+                    if (block.getType() == Material.GRASS_BLOCK) {
                         block.setType(Material.NETHERRACK);
                         grassBlocks.add(block);
                     }

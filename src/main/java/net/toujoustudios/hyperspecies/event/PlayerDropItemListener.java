@@ -12,7 +12,7 @@ public class PlayerDropItemListener implements Listener {
     public void onItemDrop(PlayerDropItemEvent event) {
         Player player = event.getPlayer();
         PlayerManager playerManager = PlayerManager.getPlayer(player);
-        if(playerManager.isSelectingAbility()) event.setCancelled(true);
+        if (playerManager.isSelectingAbility()) event.setCancelled(true);
     }
 
 }

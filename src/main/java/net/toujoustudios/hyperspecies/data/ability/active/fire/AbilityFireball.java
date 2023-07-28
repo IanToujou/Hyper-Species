@@ -35,7 +35,7 @@ public class AbilityFireball extends Ability {
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
 
-        fields.put(AbilityField.DAMAGE, List.of(5,6,8,10,15,18));
+        fields.put(AbilityField.DAMAGE, List.of(5, 6, 8, 10, 15, 18));
 
         setFields(fields);
 

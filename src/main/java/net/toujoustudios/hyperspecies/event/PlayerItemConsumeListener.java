@@ -24,18 +24,18 @@ public class PlayerItemConsumeListener implements Listener {
         Player player = event.getPlayer();
         PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-        if(event.getItem().getType() == Material.MILK_BUCKET) {
+        if (event.getItem().getType() == Material.MILK_BUCKET) {
             playerManager.setKawaii(false);
             playerManager.setDrunkenness(playerManager.getDrunkenness() - 0.2);
         }
 
-        if(playerManager.getSpecies() == null) return;
+        if (playerManager.getSpecies() == null) return;
 
         List<String> alcoholNames = List.of("§eBeer", "§6Rum", "§cRed Wine", "§fWhite Wine", "§5Anime Girl Fluids");
 
         ItemMeta itemMeta = event.getItem().getItemMeta();
-        if(itemMeta != null) {
-            
+        if (itemMeta != null) {
+
             String name = itemMeta.getDisplayName();
 
             switch (name) {
@@ -52,7 +52,7 @@ public class PlayerItemConsumeListener implements Listener {
                 }
             }
 
-            if(alcoholNames.contains(name)) {
+            if (alcoholNames.contains(name)) {
                 int nauseaDuration = (int) Math.round(playerManager.getDrunkenness() * 10);
                 int blindDuration = (int) Math.round(playerManager.getDrunkenness() * 2);
                 if (nauseaDuration > 0) {
@@ -60,10 +60,11 @@ public class PlayerItemConsumeListener implements Listener {
                     player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 0.5f);
                     player.getWorld().playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, SoundCategory.MASTER, 1, 1.5f);
                 }
-                if (playerManager.getDrunkenness() > 3) player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * blindDuration, 0, false, false, true));
+                if (playerManager.getDrunkenness() > 3)
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * blindDuration, 0, false, false, true));
                 return;
             }
-            
+
         }
 
         List<Material> exceptions = List.of(
@@ -95,13 +96,13 @@ public class PlayerItemConsumeListener implements Listener {
 
         Material material = event.getItem().getType();
 
-        if(exceptions.contains(material)) {
+        if (exceptions.contains(material)) {
             return;
         }
 
-        if(playerManager.getSpecies().getName().equals("Elf")) {
+        if (playerManager.getSpecies().getName().equals("Elf")) {
 
-            if(meat.contains(material)) {
+            if (meat.contains(material)) {
 
                 player.damage(5);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 20, 0, false, false, true));
@@ -111,9 +112,9 @@ public class PlayerItemConsumeListener implements Listener {
 
             }
 
-        } else if(playerManager.getSpecies().getName().equals("Feline") || playerManager.getSpecies().getName().equals("Wolf")) {
+        } else if (playerManager.getSpecies().getName().equals("Feline") || playerManager.getSpecies().getName().equals("Wolf")) {
 
-            if(!meat.contains(material)) {
+            if (!meat.contains(material)) {
 
                 player.damage(5);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 20, 0, false, false, true));

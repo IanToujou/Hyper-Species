@@ -15,32 +15,32 @@ public class AbilityCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-        if(!(commandSender instanceof Player player)) {
+        if (!(commandSender instanceof Player player)) {
             Logger.log(LogLevel.ERROR, "You cannot use this command in the console.");
             return false;
         }
 
-        if(!player.hasPermission("hyperspecies.command.ability")) {
+        if (!player.hasPermission("hyperspecies.command.ability")) {
             player.sendMessage(Config.MESSAGE_ERROR_PERMISSION);
             return false;
         }
 
-        if(args.length == 0) {
+        if (args.length == 0) {
             player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", this.getUsage()));
             return false;
         }
 
         StringBuilder nameBuilder = new StringBuilder();
-        for(int i = 0; i < args.length; i++) {
+        for (int i = 0; i < args.length; i++) {
             nameBuilder.append(args[i].substring(0, 1).toUpperCase()).append(args[i].substring(1).toLowerCase());
-            if(i != (args.length - 1)) nameBuilder.append(" ");
+            if (i != (args.length - 1)) nameBuilder.append(" ");
         }
 
         Ability ability = Ability.getAbility(nameBuilder.toString());
 
-        if(args[0].equalsIgnoreCase("ICBM")) ability = Ability.getAbility("ICBM");
+        if (args[0].equalsIgnoreCase("ICBM")) ability = Ability.getAbility("ICBM");
 
-        if(ability == null) {
+        if (ability == null) {
             player.sendMessage(Config.MESSAGE_ERROR_ABILITY_INVALID);
             return false;
         }

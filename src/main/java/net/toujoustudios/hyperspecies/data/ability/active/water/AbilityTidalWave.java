@@ -37,7 +37,7 @@ public class AbilityTidalWave extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DAMAGE, List.of(5,6,7,8,9,10));
+        fields.put(AbilityField.DAMAGE, List.of(5, 6, 7, 8, 9, 10));
         setFields(fields);
 
     }
@@ -49,48 +49,49 @@ public class AbilityTidalWave extends Ability {
         int damage = getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(this));
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
 
-        new BukkitRunnable(){
-            double t = Math.PI/4;
+        new BukkitRunnable() {
+            double t = Math.PI / 4;
             final Location loc = player.getLocation();
-            public void run(){
-                t = t + 0.1*Math.PI;
-                for (double theta = 0; theta <= 2*Math.PI; theta = theta + Math.PI/32){
-                    double x = t*cos(theta);
-                    double y = 2*Math.exp(-0.1*t) * sin(t) + 1.5;
-                    double z = t*sin(theta);
-                    loc.add(x,y,z);
+
+            public void run() {
+                t = t + 0.1 * Math.PI;
+                for (double theta = 0; theta <= 2 * Math.PI; theta = theta + Math.PI / 32) {
+                    double x = t * cos(theta);
+                    double y = 2 * Math.exp(-0.1 * t) * sin(t) + 1.5;
+                    double z = t * sin(theta);
+                    loc.add(x, y, z);
                     player.getWorld().spawnParticle(Particle.FALLING_WATER, loc, 5, 0.1, 0.1, 0.1);
-                    for(Player all : players) {
+                    for (Player all : players) {
                         if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(loc) <= 1) {
-                            if(all != player) {
+                            if (all != player) {
                                 all.damage(damage, player);
-                                all.setVelocity(new Vector(0,0.5,0));
+                                all.setVelocity(new Vector(0, 0.5, 0));
                             }
                         }
                     }
-                    loc.subtract(x,y,z);
+                    loc.subtract(x, y, z);
 
-                    theta = theta + Math.PI/64;
+                    theta = theta + Math.PI / 64;
 
-                    x = t*cos(theta);
-                    y = 2*Math.exp(-0.1*t) * sin(t) + 1.5;
-                    z = t*sin(theta);
-                    loc.add(x,y,z);
+                    x = t * cos(theta);
+                    y = 2 * Math.exp(-0.1 * t) * sin(t) + 1.5;
+                    z = t * sin(theta);
+                    loc.add(x, y, z);
                     player.getWorld().spawnParticle(Particle.FALLING_WATER, loc, 5, 0.1, 0.1, 0.1);
-                    for(Player all : players) {
+                    for (Player all : players) {
                         if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(loc) <= 1) {
-                            if(all != player) {
+                            if (all != player) {
                                 all.damage(damage, player);
-                                all.setVelocity(new Vector(0,0.5,0));
+                                all.setVelocity(new Vector(0, 0.5, 0));
                             }
                         }
                     }
-                    loc.subtract(x,y,z);
+                    loc.subtract(x, y, z);
                 }
 
                 player.getWorld().playSound(player.getLocation(), Sound.ITEM_BUCKET_EMPTY, SoundCategory.MASTER, 3, 1.5f);
 
-                if (t > 10){
+                if (t > 10) {
                     this.cancel();
                 }
             }

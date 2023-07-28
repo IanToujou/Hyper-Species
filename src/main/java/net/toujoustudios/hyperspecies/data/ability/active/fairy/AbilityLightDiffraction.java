@@ -33,7 +33,7 @@ public class AbilityLightDiffraction extends Ability {
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
 
-        fields.put(AbilityField.DURATION, List.of(5,6,7,8,9,10,11,12,14));
+        fields.put(AbilityField.DURATION, List.of(5, 6, 7, 8, 9, 10, 11, 12, 14));
 
         setFields(fields);
 

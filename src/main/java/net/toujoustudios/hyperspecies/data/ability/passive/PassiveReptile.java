@@ -24,7 +24,7 @@ public class PassiveReptile extends PassiveAbility {
                 Biome.DESERT
         );
 
-        if(player.getLocation().getBlock().getType() == Material.WATER || speedBiomes.contains(player.getLocation().getBlock().getBiome())) {
+        if (player.getLocation().getBlock().getType() == Material.WATER || speedBiomes.contains(player.getLocation().getBlock().getBiome())) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 1, false, false, true));
             player.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 20 * 10, 1, false, false, true));
         }
@@ -41,12 +41,12 @@ public class PassiveReptile extends PassiveAbility {
         coldBiomes.add(Biome.SNOWY_SLOPES);
         coldBiomes.add(Biome.SNOWY_TAIGA);
 
-        if(coldBiomes.contains(player.getLocation().add(0, -1, 0).getBlock().getBiome())) {
+        if (coldBiomes.contains(player.getLocation().add(0, -1, 0).getBlock().getBiome())) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 10, 1, false, false, true));
         }
 
         // Weakness at night
-        if(player.getWorld().getTime() > 12500 && player.getWorld().getTime() < 23500) {
+        if (player.getWorld().getTime() > 12500 && player.getWorld().getTime() < 23500) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 20, 1, false, false, true));
         }
 

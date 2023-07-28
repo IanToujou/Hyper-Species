@@ -51,10 +51,12 @@ public class PlayerManager {
 
         this.uuid = uuid;
 
-        if(playerConfig.isSet("Data." + uuid + ".Character.Experience.Main")) experience = playerConfig.getInt("Data." + uuid + ".Character.Experience.Main");
+        if (playerConfig.isSet("Data." + uuid + ".Character.Experience.Main"))
+            experience = playerConfig.getInt("Data." + uuid + ".Character.Experience.Main");
         else experience = 0;
 
-        if(playerConfig.isSet("Data." + uuid + ".Character.Skill")) skill = playerConfig.getInt("Data." + uuid + ".Character.Skill");
+        if (playerConfig.isSet("Data." + uuid + ".Character.Skill"))
+            skill = playerConfig.getInt("Data." + uuid + ".Character.Skill");
         else skill = 0;
 
         maxHealth = 50;
@@ -62,11 +64,14 @@ public class PlayerManager {
         manaRegeneration = 0.1;
         maxShield = maxHealth / 2;
 
-        if(playerConfig.isSet("Data." + uuid + ".Points.Health")) health = playerConfig.getDouble("Data." + uuid + ".Points.Health");
+        if (playerConfig.isSet("Data." + uuid + ".Points.Health"))
+            health = playerConfig.getDouble("Data." + uuid + ".Points.Health");
         else health = maxHealth;
-        if(playerConfig.isSet("Data." + uuid + ".Points.Mana")) mana = playerConfig.getDouble("Data." + uuid + ".Points.Mana");
+        if (playerConfig.isSet("Data." + uuid + ".Points.Mana"))
+            mana = playerConfig.getDouble("Data." + uuid + ".Points.Mana");
         else mana = maxMana;
-        if(playerConfig.isSet("Data." + uuid + ".Points.Shield")) shield = playerConfig.getDouble("Data." + uuid + ".Points.Shield");
+        if (playerConfig.isSet("Data." + uuid + ".Points.Shield"))
+            shield = playerConfig.getDouble("Data." + uuid + ".Points.Shield");
         else shield = 0;
 
         selectingAbility = false;
@@ -77,21 +82,22 @@ public class PlayerManager {
         team = playerConfig.getString("Data." + uuid + ".Character.Team");
 
         species = Species.getSpecies(playerConfig.getString("Data." + uuid + ".Character.Species"));
-        if(species != null) subSpecies = species.getSubSpecies(playerConfig.getString("Data." + uuid + ".Character.SubSpecies"));
+        if (species != null)
+            subSpecies = species.getSubSpecies(playerConfig.getString("Data." + uuid + ".Character.SubSpecies"));
         else subSpecies = null;
 
         abilities = new ArrayList<>();
         playerConfig.getStringList("Data." + uuid + ".Character.Abilities").forEach(item -> {
-            if(!abilities.contains(Ability.getAbility(item))) abilities.add(Ability.getAbility(item));
+            if (!abilities.contains(Ability.getAbility(item))) abilities.add(Ability.getAbility(item));
         });
 
         activeAbilities = new ArrayList<>();
         playerConfig.getStringList("Data." + uuid + ".Character.ActiveAbilities").forEach(item -> {
-            if(!activeAbilities.contains(Ability.getAbility(item))) activeAbilities.add(Ability.getAbility(item));
+            if (!activeAbilities.contains(Ability.getAbility(item))) activeAbilities.add(Ability.getAbility(item));
         });
 
         abilities.forEach(ability -> {
-            if(playerConfig.contains("Data." + uuid + ".Character.Experience.Ability." + ability.getName())) {
+            if (playerConfig.contains("Data." + uuid + ".Character.Experience.Ability." + ability.getName())) {
                 abilityExperiences.put(ability.getName(), playerConfig.getInt("Data." + uuid + ".Character.Experience.Ability." + ability.getName()));
             } else {
                 abilityExperiences.put(ability.getName(), 0);
@@ -100,7 +106,8 @@ public class PlayerManager {
 
         refreshScoreboard();
 
-        if(playerConfig.isSet("Data." + uuid + ".Points.Drunkenness")) drunkenness = playerConfig.getDouble("Data." + uuid + ".Points.Drunkenness");
+        if (playerConfig.isSet("Data." + uuid + ".Points.Drunkenness"))
+            drunkenness = playerConfig.getDouble("Data." + uuid + ".Points.Drunkenness");
         else drunkenness = 0;
 
         kawaii = false;
@@ -109,7 +116,7 @@ public class PlayerManager {
     }
 
     public static PlayerManager getPlayer(UUID uuid) {
-        if(players.containsKey(uuid)) return players.get(uuid);
+        if (players.containsKey(uuid)) return players.get(uuid);
         PlayerManager playerManager = new PlayerManager(uuid);
         players.put(uuid, playerManager);
         return playerManager;
@@ -149,8 +156,8 @@ public class PlayerManager {
     }
 
     public static void unloadAll() {
-        if(players == null || players.size() == 0) return;
-        for(Map.Entry<UUID, PlayerManager> entry : players.entrySet()) {
+        if (players == null || players.size() == 0) return;
+        for (Map.Entry<UUID, PlayerManager> entry : players.entrySet()) {
             players.get(entry.getKey()).save();
         }
         players.clear();
@@ -159,10 +166,10 @@ public class PlayerManager {
     // CUSTOM METHODS
 
     public boolean useAbility(Ability ability) {
-        if(Bukkit.getPlayer(uuid) == null) return false;
-        if(getCooldownAbilities().contains(ability)) return false;
-        if(getMana() < ability.getManaCost()) return false;
-        if(ability.execute(Bukkit.getPlayer(uuid))) {
+        if (Bukkit.getPlayer(uuid) == null) return false;
+        if (getCooldownAbilities().contains(ability)) return false;
+        if (getMana() < ability.getManaCost()) return false;
+        if (ability.execute(Bukkit.getPlayer(uuid))) {
             setMana(getMana() - ability.getManaCost());
             addAbilityCooldown(ability);
             return true;
@@ -180,9 +187,9 @@ public class PlayerManager {
 
     public int getLevelFromExperience(int experience) {
         int level = 0;
-        while(true) {
+        while (true) {
             int threshold = getLevelThreshold(level);
-            if(experience >= threshold) level++;
+            if (experience >= threshold) level++;
             else break;
         }
         return level;
@@ -190,41 +197,41 @@ public class PlayerManager {
 
     public int getExperienceSinceLastLevel(int experience) {
         int level = 0;
-        while(true) {
+        while (true) {
             int threshold = getLevelThreshold(level);
-            if(experience >= threshold) level++;
+            if (experience >= threshold) level++;
             else {
-                if(level == 0) return experience;
-                else return (experience - getLevelThreshold(level-1));
+                if (level == 0) return experience;
+                else return (experience - getLevelThreshold(level - 1));
             }
         }
     }
 
     public int getLevelThreshold(int level) {
-        if(level == 0) return 20;
+        if (level == 0) return 20;
         return (20 + 10 * level) * level;
     }
 
     public int getRelativeLevelThreshold(int level) {
         int threshold = getLevelThreshold(level);
-        if(level == 0) return threshold;
-        return threshold - getLevelThreshold(level-1);
+        if (level == 0) return threshold;
+        return threshold - getLevelThreshold(level - 1);
     }
 
     @SuppressWarnings("all")
     public void refreshScoreboard() {
 
-        if(Bukkit.getPlayer(uuid) == null) return;
+        if (Bukkit.getPlayer(uuid) == null) return;
 
         Scoreboard board = HyperSpecies.getInstance().getScoreboard();
 
-        if(board.getTeam(uuid.toString()) != null && board.getTeams().size() > 0) {
+        if (board.getTeam(uuid.toString()) != null && board.getTeams().size() > 0) {
             board.getTeam(uuid.toString()).unregister();
         }
 
         final org.bukkit.scoreboard.Team scoreboardTeam = HyperSpecies.getInstance().getScoreboard().registerNewTeam(uuid.toString());
         scoreboardTeam.setColor(ChatColor.GRAY);
-        scoreboardTeam.setPrefix((species!=null ? species.getPrefix() : "§7None") + " §7| ");
+        scoreboardTeam.setPrefix((species != null ? species.getPrefix() : "§7None") + " §7| ");
         scoreboardTeam.addEntry(Bukkit.getPlayer(uuid).getName());
 
     }
@@ -352,7 +359,7 @@ public class PlayerManager {
     }
 
     public void addAbility(Ability ability) {
-        if(!abilities.contains(ability)) abilities.add(ability);
+        if (!abilities.contains(ability)) abilities.add(ability);
     }
 
     public void removeAbility(Ability ability) {
@@ -364,7 +371,7 @@ public class PlayerManager {
     }
 
     public void addActiveAbility(Ability ability) {
-        if(!activeAbilities.contains(ability)) activeAbilities.add(ability);
+        if (!activeAbilities.contains(ability)) activeAbilities.add(ability);
     }
 
     public void removeActiveAbility(Ability ability) {
@@ -456,10 +463,10 @@ public class PlayerManager {
     }
 
     public void unlockAbility(Ability ability) {
-        if(!hasAbility(ability)) {
+        if (!hasAbility(ability)) {
             addAbility(ability);
             Player player = Bukkit.getPlayer(uuid);
-            if(player != null) {
+            if (player != null) {
                 player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You unlocked the ability§8: §b" + ability.getName()));
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
             }
@@ -472,7 +479,7 @@ public class PlayerManager {
 
     public int getAbilityWeight() {
         int weight = 0;
-        for(Ability ability : activeAbilities) {
+        for (Ability ability : activeAbilities) {
             weight += ability.getWeight();
         }
         return weight;

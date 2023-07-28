@@ -27,40 +27,40 @@ public class TeamCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-        if(!(commandSender instanceof Player player)) {
+        if (!(commandSender instanceof Player player)) {
             Logger.log(LogLevel.ERROR, "You cannot use this command in the console.");
             return false;
         }
 
-        if(!player.hasPermission("hyperspecies.command.team")) {
+        if (!player.hasPermission("hyperspecies.command.team")) {
             player.sendMessage(Config.MESSAGE_ERROR_PERMISSION);
             return false;
         }
 
         PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-        if(args.length == 2 && (args[0].equalsIgnoreCase("accept") || args[0].equalsIgnoreCase("deny"))) {
+        if (args.length == 2 && (args[0].equalsIgnoreCase("accept") || args[0].equalsIgnoreCase("deny"))) {
 
-            if(playerManager.getTeam() == null) {
+            if (playerManager.getTeam() == null) {
                 player.sendMessage(Component.text(Config.MESSAGE_PREFIX + " §cYou are currently not in a team§8."));
                 return false;
             }
 
             Player target = Bukkit.getPlayer(args[1]);
-            if(target == null) {
+            if (target == null) {
                 player.sendMessage(Component.text(Config.MESSAGE_ERROR_PLAYER_INVALID));
                 return false;
             }
-            if(!TeamUI.getTeamJoinRequests().containsKey(target.getUniqueId())) {
+            if (!TeamUI.getTeamJoinRequests().containsKey(target.getUniqueId())) {
                 player.sendMessage(Component.text(Config.MESSAGE_PREFIX + " §cThe player did not send a join request§8."));
                 return false;
             }
-            if(!TeamUI.getTeamJoinRequests().get(target.getUniqueId()).equals(playerManager.getTeam().getName())) {
+            if (!TeamUI.getTeamJoinRequests().get(target.getUniqueId()).equals(playerManager.getTeam().getName())) {
                 player.sendMessage(Component.text(Config.MESSAGE_PREFIX + " §cThe player did not send a join request§8."));
                 return false;
             }
 
-            if(args[0].equalsIgnoreCase("accept")) {
+            if (args[0].equalsIgnoreCase("accept")) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
                 target.playSound(target.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
@@ -83,22 +83,22 @@ public class TeamCommand implements CommandExecutor {
 
         }
 
-        if(args.length != 0) {
+        if (args.length != 0) {
             player.sendMessage(Component.text(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", this.getUsage())));
             return false;
         }
 
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
 
-        if(playerManager.getTeam() == null) {
+        if (playerManager.getTeam() == null) {
             TeamUI.openInventory(player);
         } else {
 
             Team team = playerManager.getTeam();
 
-            Inventory inventory = Bukkit.createInventory(null, 9*6, Component.text("Team: " + team.getColor() + team.getName()));
-            for(int i = 0; i < 9; i++) inventory.setItem(i, ItemListUI.FILLER);
-            for(int i = 45; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
+            Inventory inventory = Bukkit.createInventory(null, 9 * 6, Component.text("Team: " + team.getColor() + team.getName()));
+            for (int i = 0; i < 9; i++) inventory.setItem(i, ItemListUI.FILLER);
+            for (int i = 45; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
 
             inventory.setItem(49, ItemListUI.CANCEL);
             inventory.setItem(4, ItemListUI.TEAM_SETTINGS);
@@ -112,7 +112,7 @@ public class TeamCommand implements CommandExecutor {
             owner.setItemMeta(ownerMeta);
             inventory.setItem(9, owner);
 
-            for(int i = 0; i < team.getMembers().size(); i++) {
+            for (int i = 0; i < team.getMembers().size(); i++) {
                 ItemStack skull = new ItemStack(Material.PLAYER_HEAD);
                 SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
                 assert skullMeta != null;
@@ -120,7 +120,7 @@ public class TeamCommand implements CommandExecutor {
                 skullMeta.displayName(Component.text("§b" + Bukkit.getOfflinePlayer(team.getMembers().get(i)).getName()));
                 skullMeta.lore(List.of(Component.text("§7Rank: §eMember")));
                 skull.setItemMeta(skullMeta);
-                inventory.setItem(10+i, skull);
+                inventory.setItem(10 + i, skull);
             }
 
             player.openInventory(inventory);

@@ -38,8 +38,8 @@ public class AbilityHellblight extends Ability {
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
 
-        fields.put(AbilityField.RANGE, List.of(8,10,12,15,18,20,24,28,30));
-        fields.put(AbilityField.DURATION, List.of(5,6,7,8,10,12,15,18,20));
+        fields.put(AbilityField.RANGE, List.of(8, 10, 12, 15, 18, 20, 24, 28, 30));
+        fields.put(AbilityField.DURATION, List.of(5, 6, 7, 8, 10, 12, 15, 18, 20));
 
         setFields(fields);
 
@@ -59,10 +59,11 @@ public class AbilityHellblight extends Ability {
         player.getWorld().spawnParticle(Particle.SMOKE_LARGE, player.getLocation(), 500, 8, 0, 8);
 
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
-        double radiusSquared = range*range;
+        double radiusSquared = range * range;
         players.forEach(all -> {
-            if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
-                if(all != player) all.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20*duration, 0, false, false, true));
+            if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
+                if (all != player)
+                    all.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * duration, 0, false, false, true));
             }
         });
 

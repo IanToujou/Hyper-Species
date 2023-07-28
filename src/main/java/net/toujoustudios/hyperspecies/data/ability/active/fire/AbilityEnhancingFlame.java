@@ -36,7 +36,7 @@ public class AbilityEnhancingFlame extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(10,12,14,16,18,20,22,25,30));
+        fields.put(AbilityField.DURATION, List.of(10, 12, 14, 16, 18, 20, 22, 25, 30));
 
         setFields(fields);
 
@@ -55,12 +55,12 @@ public class AbilityEnhancingFlame extends Ability {
         player.getWorld().spawnParticle(Particle.FLAME, location, 300, 0.3, 0, 0.3);
         player.getWorld().spawnParticle(Particle.LAVA, location, 50, 0, 2, 0);
 
-        if(block.getType() == Material.AIR) {
+        if (block.getType() == Material.AIR) {
             player.getWorld().getBlockAt(player.getLocation()).setType(Material.FIRE);
         }
 
-        if(!players.contains(player.getUniqueId())) players.add(player.getUniqueId());
-        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> players.remove(player.getUniqueId()), 20L *duration);
+        if (!players.contains(player.getUniqueId())) players.add(player.getUniqueId());
+        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> players.remove(player.getUniqueId()), 20L * duration);
 
         return true;
 

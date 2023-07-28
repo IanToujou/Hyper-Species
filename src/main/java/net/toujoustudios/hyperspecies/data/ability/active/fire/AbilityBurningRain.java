@@ -7,12 +7,18 @@ import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.util.Vector;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 public class AbilityBurningRain extends Ability {
 
@@ -33,7 +39,7 @@ public class AbilityBurningRain extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DAMAGE, List.of(5,7,9,11,13,15));
+        fields.put(AbilityField.DAMAGE, List.of(5, 7, 9, 11, 13, 15));
         setFields(fields);
 
     }
@@ -62,9 +68,9 @@ public class AbilityBurningRain extends Ability {
 
                 Location location = arrow.getLocation();
                 Arrow flameArrow = location.getWorld().spawn(location, Arrow.class);
-                int randomX = new Random().nextInt(100)-50;
-                int randomZ = new Random().nextInt(100)-50;
-                flameArrow.setVelocity(new Vector((float)randomX/100, -1, (float)randomZ/100));
+                int randomX = new Random().nextInt(100) - 50;
+                int randomZ = new Random().nextInt(100) - 50;
+                flameArrow.setVelocity(new Vector((float) randomX / 100, -1, (float) randomZ / 100));
                 flameArrow.setVisualFire(true);
                 flameArrow.setDamage(damage);
                 arrowList.add(flameArrow);

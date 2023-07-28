@@ -35,7 +35,7 @@ public class AbilityMagmaticDetonation extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DAMAGE, List.of(10,12,14,16,18,20,22,24,26));
+        fields.put(AbilityField.DAMAGE, List.of(10, 12, 14, 16, 18, 20, 22, 24, 26));
         setFields(fields);
     }
 
@@ -51,11 +51,11 @@ public class AbilityMagmaticDetonation extends Ability {
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 3, 0.2f);
         ArrayList<FallingBlock> blocks = new ArrayList<>();
 
-        for(int i = 0; i < 20; i++) {
-            int x = new Random().nextInt(40)-20;
-            int z = new Random().nextInt(40)-20;
+        for (int i = 0; i < 20; i++) {
+            int x = new Random().nextInt(40) - 20;
+            int z = new Random().nextInt(40) - 20;
             FallingBlock block = player.getWorld().spawnFallingBlock(player.getLocation().add(0, 3, 0), Material.MAGMA_BLOCK.createBlockData());
-            block.setVelocity(new Vector((double) x/10, 1, (double)z/10));
+            block.setVelocity(new Vector((double) x / 10, 1, (double) z / 10));
             block.setDropItem(true);
             block.setInvulnerable(true);
             block.setCancelDrop(true);
@@ -67,15 +67,15 @@ public class AbilityMagmaticDetonation extends Ability {
             @Override
             public void run() {
                 blocks.forEach(b -> {
-                    if(b.getLocation().add(0, -2, 0).getBlock().getType() != Material.AIR) {
+                    if (b.getLocation().add(0, -2, 0).getBlock().getType() != Material.AIR) {
                         b.remove();
                         b.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, b.getLocation(), 5, 0, 0.1, 0);
                         b.getWorld().playSound(b.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 3, 1f);
                         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                         double radiusSquared = 8 * 8;
                         players.forEach(all -> {
-                            if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(b.getLocation()) <= radiusSquared) {
-                                if(all != player) all.damage(damage, player);
+                            if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(b.getLocation()) <= radiusSquared) {
+                                if (all != player) all.damage(damage, player);
                             }
                         });
                     }

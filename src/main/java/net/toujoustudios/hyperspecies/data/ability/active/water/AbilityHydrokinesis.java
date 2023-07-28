@@ -33,7 +33,7 @@ public class AbilityHydrokinesis extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(5,7,9,11,13,15));
+        fields.put(AbilityField.DURATION, List.of(5, 7, 9, 11, 13, 15));
         setFields(fields);
 
     }
@@ -49,58 +49,58 @@ public class AbilityHydrokinesis extends Ability {
         Block block = new Location(location.getWorld(), location.getX(), player.getLocation().getY(), location.getZ()).getBlock();
 
         float y = player.getLocation().getYaw();
-        if( y < 0 ) y += 360;
+        if (y < 0) y += 360;
         y %= 360;
-        int i = (int) ((y+8) / 22.5);
+        int i = (int) ((y + 8) / 22.5);
 
         ArrayList<Block> blocks = new ArrayList<>();
-        if(i >= 10 && i < 15) {
+        if (i >= 10 && i < 15) {
             // East
             for (int j = 0; j < 6; j++) {
-                blocks.add(new Location(block.getWorld(), block.getX(), block.getY()+j, block.getZ()-2).getBlock());
-                blocks.add(new Location(block.getWorld(), block.getX(), block.getY()+j, block.getZ()-1).getBlock());
-                blocks.add(new Location(block.getWorld(), block.getX(), block.getY()+j, block.getZ()).getBlock());
-                blocks.add(new Location(block.getWorld(), block.getX(), block.getY()+j, block.getZ()+1).getBlock());
-                blocks.add(new Location(block.getWorld(), block.getX(), block.getY()+j, block.getZ()+2).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX(), block.getY() + j, block.getZ() - 2).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX(), block.getY() + j, block.getZ() - 1).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX(), block.getY() + j, block.getZ()).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX(), block.getY() + j, block.getZ() + 1).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX(), block.getY() + j, block.getZ() + 2).getBlock());
             }
-        } else if(i >= 7 && i < 10) {
+        } else if (i >= 7 && i < 10) {
             // North
             for (int j = 0; j < 6; j++) {
-                blocks.add(new Location(block.getWorld(), block.getX()-2, block.getY()+j, block.getZ()).getBlock());
-                blocks.add(new Location(block.getWorld(), block.getX()-1, block.getY()+j, block.getZ()).getBlock());
-                blocks.add(new Location(block.getWorld(), block.getX(), block.getY()+j, block.getZ()).getBlock());
-                blocks.add(new Location(block.getWorld(), block.getX()+1, block.getY()+j, block.getZ()).getBlock());
-                blocks.add(new Location(block.getWorld(), block.getX()+2, block.getY()+j, block.getZ()).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX() - 2, block.getY() + j, block.getZ()).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX() - 1, block.getY() + j, block.getZ()).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX(), block.getY() + j, block.getZ()).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX() + 1, block.getY() + j, block.getZ()).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX() + 2, block.getY() + j, block.getZ()).getBlock());
             }
-        } else if(i >= 3 && i < 7) {
+        } else if (i >= 3 && i < 7) {
             // West
             for (int j = 0; j < 6; j++) {
-                blocks.add(new Location(block.getWorld(), block.getX(), block.getY()+j, block.getZ()-2).getBlock());
-                blocks.add(new Location(block.getWorld(), block.getX(), block.getY()+j, block.getZ()-1).getBlock());
-                blocks.add(new Location(block.getWorld(), block.getX(), block.getY()+j, block.getZ()).getBlock());
-                blocks.add(new Location(block.getWorld(), block.getX(), block.getY()+j, block.getZ()+1).getBlock());
-                blocks.add(new Location(block.getWorld(), block.getX(), block.getY()+j, block.getZ()+2).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX(), block.getY() + j, block.getZ() - 2).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX(), block.getY() + j, block.getZ() - 1).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX(), block.getY() + j, block.getZ()).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX(), block.getY() + j, block.getZ() + 1).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX(), block.getY() + j, block.getZ() + 2).getBlock());
             }
         } else {
             // South
             for (int j = 0; j < 6; j++) {
-                blocks.add(new Location(block.getWorld(), block.getX()-2, block.getY()+j, block.getZ()).getBlock());
-                blocks.add(new Location(block.getWorld(), block.getX()-1, block.getY()+j, block.getZ()).getBlock());
-                blocks.add(new Location(block.getWorld(), block.getX(), block.getY()+j, block.getZ()).getBlock());
-                blocks.add(new Location(block.getWorld(), block.getX()+1, block.getY()+j, block.getZ()).getBlock());
-                blocks.add(new Location(block.getWorld(), block.getX()+2, block.getY()+j, block.getZ()).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX() - 2, block.getY() + j, block.getZ()).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX() - 1, block.getY() + j, block.getZ()).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX(), block.getY() + j, block.getZ()).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX() + 1, block.getY() + j, block.getZ()).getBlock());
+                blocks.add(new Location(block.getWorld(), block.getX() + 2, block.getY() + j, block.getZ()).getBlock());
             }
         }
 
         blocks.forEach(b -> {
-            if(b.getType() == Material.AIR) b.setType(Material.BLUE_STAINED_GLASS);
+            if (b.getType() == Material.AIR) b.setType(Material.BLUE_STAINED_GLASS);
         });
 
         player.getWorld().playSound(player.getLocation(), Sound.BLOCK_GLASS_BREAK, SoundCategory.MASTER, 2, 1.5f);
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
             blocks.forEach(b -> {
-                if(b.getType() == Material.BLUE_STAINED_GLASS) b.setType(Material.AIR);
+                if (b.getType() == Material.BLUE_STAINED_GLASS) b.setType(Material.AIR);
             });
             player.getWorld().playSound(player.getLocation(), Sound.BLOCK_GLASS_BREAK, SoundCategory.MASTER, 2, 0.5f);
         }, 20L * duration);

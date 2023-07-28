@@ -35,7 +35,7 @@ public class AbilityHellblaze extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(10,12,14,16,18,20,22,25,30));
+        fields.put(AbilityField.DURATION, List.of(10, 12, 14, 16, 18, 20, 22, 25, 30));
 
         setFields(fields);
 
@@ -52,7 +52,7 @@ public class AbilityHellblaze extends Ability {
         player.getWorld().playSound(location, Sound.ITEM_FIRECHARGE_USE, 3, 1f);
         player.getWorld().spawnParticle(Particle.FLAME, location, 300, 0.3, 0, 0.3);
 
-        if(!players.contains(player.getUniqueId())) players.add(player.getUniqueId());
+        if (!players.contains(player.getUniqueId())) players.add(player.getUniqueId());
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> players.remove(player.getUniqueId()), 20L * duration);
 

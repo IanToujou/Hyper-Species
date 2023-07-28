@@ -17,17 +17,17 @@ public class SetExperienceCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-        if(!(commandSender instanceof Player player)) {
+        if (!(commandSender instanceof Player player)) {
             Logger.log(LogLevel.ERROR, "You cannot use this command in the console.");
             return false;
         }
 
-        if(!player.hasPermission("hyperspecies.command.setexperience")) {
+        if (!player.hasPermission("hyperspecies.command.setexperience")) {
             player.sendMessage(Config.MESSAGE_ERROR_PERMISSION);
             return false;
         }
 
-        if(args.length == 1) {
+        if (args.length == 1) {
 
             try {
 
@@ -39,15 +39,15 @@ public class SetExperienceCommand implements CommandExecutor {
                 playerManager.setExperience(experience);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You are now level §b" + playerManager.getLevel() + "§8.");
 
-            } catch(Exception exception) {
+            } catch (Exception exception) {
                 player.sendMessage(Config.MESSAGE_ERROR_INTEGER_INVALID);
             }
 
-        } else if(args.length == 2) {
+        } else if (args.length == 2) {
 
             Player target = Bukkit.getPlayer(args[1]);
 
-            if(target == null) {
+            if (target == null) {
                 player.sendMessage(Config.MESSAGE_ERROR_PLAYER_INVALID);
                 return false;
             }
@@ -62,7 +62,7 @@ public class SetExperienceCommand implements CommandExecutor {
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7They are now level §b" + playerManager.getLevel() + "§8.");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
 
-            } catch(Exception exception) {
+            } catch (Exception exception) {
                 player.sendMessage(Config.MESSAGE_ERROR_INTEGER_INVALID);
             }
 

@@ -18,49 +18,49 @@ public class EmoteCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-        if(!(commandSender instanceof Player player)) {
+        if (!(commandSender instanceof Player player)) {
             Logger.log(LogLevel.ERROR, "You cannot use this command in the console.");
             return false;
         }
 
-        if(!player.hasPermission("hyperspecies.command.emote")) {
+        if (!player.hasPermission("hyperspecies.command.emote")) {
             player.sendMessage(Config.MESSAGE_ERROR_PERMISSION);
             return false;
         }
 
-        if(args.length == 0 || args.length > 2) {
+        if (args.length == 0 || args.length > 2) {
             player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", this.getUsage()));
             return false;
         }
 
         Emote emote = Emote.getEmoteByName(args[0].toLowerCase(Locale.ROOT));
-        if(emote == null) {
+        if (emote == null) {
             player.sendMessage(Config.MESSAGE_ERROR_EMOTE_INVALID);
             return false;
         }
 
-        if(emote.isTargeting() && args.length != 2) {
+        if (emote.isTargeting() && args.length != 2) {
             player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", this.getUsage()));
             return false;
         }
 
-        if(emote.isTargeting()) {
+        if (emote.isTargeting()) {
 
             Player target = Bukkit.getPlayer(args[1]);
-            if(target == null) {
+            if (target == null) {
                 player.sendMessage(Config.MESSAGE_ERROR_PLAYER_INVALID);
                 return false;
             }
-            if(target == player) {
+            if (target == player) {
                 player.sendMessage(Config.MESSAGE_ERROR_PLAYER_SELF);
                 return false;
             }
 
-            if(!emote.execute(player, target)) player.sendMessage(Config.MESSAGE_ERROR_EMOTE_PERFORM);
+            if (!emote.execute(player, target)) player.sendMessage(Config.MESSAGE_ERROR_EMOTE_PERFORM);
             return false;
 
         } else {
-            if(!emote.execute(player, null)) player.sendMessage(Config.MESSAGE_ERROR_EMOTE_PERFORM);
+            if (!emote.execute(player, null)) player.sendMessage(Config.MESSAGE_ERROR_EMOTE_PERFORM);
         }
 
         return false;

@@ -6,7 +6,10 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
-import org.bukkit.*;
+import org.bukkit.Material;
+import org.bukkit.Particle;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -33,7 +36,7 @@ public class AbilityWoodlandsBlessing extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.HEAL, List.of(10,12,14,16,18,20));
+        fields.put(AbilityField.HEAL, List.of(10, 12, 14, 16, 18, 20));
         setFields(fields);
 
     }
@@ -48,10 +51,11 @@ public class AbilityWoodlandsBlessing extends Ability {
         Player target = null;
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
         double radiusSquared = 5 * 5;
-        for(Player all : players) {
-            if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared) target = all;
+        for (Player all : players) {
+            if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared)
+                target = all;
         }
-        if(target == null) return false;
+        if (target == null) return false;
 
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 100, 2f);
         target.getWorld().spawnParticle(Particle.HEART, target.getLocation().add(0, 3, 0), 50, 0.3, 0.1, 0.3);

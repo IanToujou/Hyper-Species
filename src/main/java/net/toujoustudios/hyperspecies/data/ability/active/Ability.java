@@ -74,7 +74,7 @@ public abstract class Ability {
      * @return The ability if it is present.
      */
     public static Ability getAbility(String name) {
-        if(abilities.containsKey(name)) return abilities.get(name);
+        if (abilities.containsKey(name)) return abilities.get(name);
         return null;
     }
 
@@ -91,8 +91,8 @@ public abstract class Ability {
     }
 
     public String getFullName() {
-        if(secondaryElement != null)
-        return element.getEmoji() + " " + secondaryElement.getEmoji() + element.getColor() + " " + name;
+        if (secondaryElement != null)
+            return element.getEmoji() + " " + secondaryElement.getEmoji() + element.getColor() + " " + name;
         else return element.getEmoji() + " " + name;
     }
 
@@ -166,8 +166,8 @@ public abstract class Ability {
     }
 
     public int getFieldValue(AbilityField field, int level) {
-        if(fields.get(field) == null || fields.get(field).size() == 0) return 0;
-        if(fields.get(field).size() < level) return fields.get(field).get(fields.get(field).size()-1);
+        if (fields.get(field) == null || fields.get(field).size() == 0) return 0;
+        if (fields.get(field).size() < level) return fields.get(field).get(fields.get(field).size() - 1);
         return fields.get(field).get(level);
     }
 

@@ -17,14 +17,14 @@ public class PassiveDwarf extends PassiveAbility {
         player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 20, 0, false, false, true));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 10, 0, false, false, true));
 
-        if(playerManager.isDrunk()) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20 * 5, 0,false, false, true));
+        if (playerManager.isDrunk()) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20 * 5, 0, false, false, true));
             player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * 5, 1, false, false, true));
         } else {
             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 5, 0, false, false, true));
         }
 
-        if(player.getLocation().getBlock().getType() == Material.WATER) {
+        if (player.getLocation().getBlock().getType() == Material.WATER) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 20 * 5, 2, false, false, true));
         }
 

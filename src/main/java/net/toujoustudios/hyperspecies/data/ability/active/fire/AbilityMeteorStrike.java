@@ -37,8 +37,8 @@ public class AbilityMeteorStrike extends Ability {
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
 
-        fields.put(AbilityField.RANGE, List.of(8,9,10,12,14,16,18,20,24));
-        fields.put(AbilityField.DAMAGE, List.of(10,12,14,16,18,20,24,28,30));
+        fields.put(AbilityField.RANGE, List.of(8, 9, 10, 12, 14, 16, 18, 20, 24));
+        fields.put(AbilityField.DAMAGE, List.of(10, 12, 14, 16, 18, 20, 24, 28, 30));
 
         setFields(fields);
 
@@ -48,7 +48,7 @@ public class AbilityMeteorStrike extends Ability {
     public boolean execute(Player player) {
 
         Block block = player.getTargetBlock(null, 50);
-        if(block.getType() == Material.AIR) return false;
+        if (block.getType() == Material.AIR) return false;
 
         Location impactLocation = block.getLocation();
         Location spawnLocation = impactLocation.add(0, 150, 0);
@@ -62,8 +62,8 @@ public class AbilityMeteorStrike extends Ability {
 
             @Override
             public void run() {
-                player.getWorld().spawnParticle(Particle.CRIT, player.getLocation().add(0, 3*times[0], 0), 50, 0, 3, 0);
-                if(times[0] >= 5) this.cancel();
+                player.getWorld().spawnParticle(Particle.CRIT, player.getLocation().add(0, 3 * times[0], 0), 50, 0, 3, 0);
+                if (times[0] >= 5) this.cancel();
                 times[0]++;
             }
 

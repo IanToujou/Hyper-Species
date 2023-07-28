@@ -36,7 +36,7 @@ public class AbilityLightspeed extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(5,6,7,8,9,10,12,14,15));
+        fields.put(AbilityField.DURATION, List.of(5, 6, 7, 8, 9, 10, 12, 14, 15));
         setFields(fields);
 
     }
@@ -52,7 +52,7 @@ public class AbilityLightspeed extends Ability {
         player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20 * duration, 0, false, false, true));
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GUARDIAN_ATTACK, SoundCategory.MASTER, 2, 2f);
         player.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, player.getLocation(), 100, 0.5, 0.5, 0.5);
-        player.getWorld().spawnEntity(player.getLocation().add(0,2,0), EntityType.LIGHTNING);
+        player.getWorld().spawnEntity(player.getLocation().add(0, 2, 0), EntityType.LIGHTNING);
 
         return true;
 

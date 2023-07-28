@@ -34,8 +34,8 @@ public class AbilityHailstormBarrage extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DAMAGE, List.of(5,7,9,11,13,15));
-        fields.put(AbilityField.DURATION, List.of(1,2,3,4,5,6));
+        fields.put(AbilityField.DAMAGE, List.of(5, 7, 9, 11, 13, 15));
+        fields.put(AbilityField.DURATION, List.of(1, 2, 3, 4, 5, 6));
         setFields(fields);
 
     }
@@ -54,16 +54,16 @@ public class AbilityHailstormBarrage extends Ability {
             @Override
             public void run() {
 
-                int x = new Random().nextInt(11)-5;
-                int z = new Random().nextInt(11)-5;
+                int x = new Random().nextInt(11) - 5;
+                int z = new Random().nextInt(11) - 5;
 
-                Location blockLocation = new Location(location.getWorld(), location.getX()+x, location.getY()+6, location.getZ()+z);
+                Location blockLocation = new Location(location.getWorld(), location.getX() + x, location.getY() + 6, location.getZ() + z);
 
                 FallingBlock block = location.getWorld().spawnFallingBlock(blockLocation, Material.BLUE_ICE.createBlockData());
                 block.setDropItem(true);
                 block.setCancelDrop(true);
                 block.setInvulnerable(true);
-                block.setVelocity(new Vector(0,-0.3f,0));
+                block.setVelocity(new Vector(0, -0.3f, 0));
 
                 blocks.add(block);
                 block.getWorld().playSound(blockLocation, Sound.BLOCK_GLASS_BREAK, SoundCategory.MASTER, 3, 2f);
@@ -77,18 +77,19 @@ public class AbilityHailstormBarrage extends Ability {
             @Override
             public void run() {
                 blocks.forEach(b -> {
-                    if(b.getLocation().add(0, -1, 0).getBlock().getType() != Material.AIR) {
+                    if (b.getLocation().add(0, -1, 0).getBlock().getType() != Material.AIR) {
                         b.remove();
                         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                         players.forEach(all -> {
-                            if(all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(b.getLocation()) <= 1) {
+                            if (all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(b.getLocation()) <= 1) {
                                 all.damage(damage, player);
                                 int random = new Random().nextInt(4);
-                                if(random == 0) {
+                                if (random == 0) {
                                     PlayerManager manager = PlayerManager.getPlayer(all);
                                     manager.stun(20 * duration);
                                     b.getWorld().playSound(b.getLocation(), Sound.BLOCK_GLASS_BREAK, SoundCategory.MASTER, 3, 0f);
-                                } else b.getWorld().playSound(b.getLocation(), Sound.BLOCK_GLASS_BREAK, SoundCategory.MASTER, 3, 1.3f);
+                                } else
+                                    b.getWorld().playSound(b.getLocation(), Sound.BLOCK_GLASS_BREAK, SoundCategory.MASTER, 3, 1.3f);
                             }
                         });
                     }

@@ -57,31 +57,32 @@ public final class HyperSpecies extends JavaPlugin {
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-            if(playerManager.getSpecies() == null) {
-                if(player.getOpenInventory().getType() == InventoryType.PLAYER) player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c Please rejoin and select a species§8."));
+            if (playerManager.getSpecies() == null) {
+                if (player.getOpenInventory().getType() == InventoryType.PLAYER)
+                    player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c Please rejoin and select a species§8."));
                 return;
             }
 
-            if(playerManager.getMana() < 0) playerManager.setMana(0);
-            if(playerManager.getShield() < 0) playerManager.setShield(0);
+            if (playerManager.getMana() < 0) playerManager.setMana(0);
+            if (playerManager.getShield() < 0) playerManager.setShield(0);
 
             int scale = (int) Math.pow(10, 1);
             int alcoholScale = (int) Math.pow(10, 2);
 
             double health = (double) Math.round(playerManager.getHealth() * scale) / scale;
-            if(health >= playerManager.getMaxHealth()) health = playerManager.getMaxHealth();
+            if (health >= playerManager.getMaxHealth()) health = playerManager.getMaxHealth();
             double realHealth = (playerManager.getHealth() / playerManager.getMaxHealth()) * 20;
             double mana = (double) Math.round(playerManager.getMana() * scale) / scale;
             double shield = (double) Math.round(playerManager.getShield() * scale) / scale;
             double drunkenness = (double) Math.round((playerManager.getDrunkenness()) * alcoholScale) / alcoholScale;
             String text = "§c❤ " + health + "/" + playerManager.getMaxHealth() + " §7- §b\uD83D\uDD25 " + mana + "/" + playerManager.getMaxMana() + " §7- §e⛨ " + shield;
-            if(playerManager.isDrunk()) text += " §7- §6\uD83E\uDDEA " + drunkenness + "‰";
+            if (playerManager.isDrunk()) text += " §7- §6\uD83E\uDDEA " + drunkenness + "‰";
 
-            if(realHealth >= 20) realHealth = 20;
+            if (realHealth >= 20) realHealth = 20;
 
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(text));
-            if(!player.isDead()) {
-                if(realHealth > 0) player.setHealth(realHealth);
+            if (!player.isDead()) {
+                if (realHealth > 0) player.setHealth(realHealth);
                 else player.setHealth(0);
             } else {
                 playerManager.setHealth(playerManager.getMaxHealth());
@@ -95,31 +96,31 @@ public final class HyperSpecies extends JavaPlugin {
 
             boolean isDwarf = playerManager.getSpecies().getName().equals("Dwarf");
 
-            if(drunkenness >= 4 && !isDwarf) {
+            if (drunkenness >= 4 && !isDwarf) {
                 player.damage(0.5);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 5, 2, false, false, true));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 5, 0, false, false, true));
-            } else if(drunkenness >= 3.5 && !isDwarf) {
+            } else if (drunkenness >= 3.5 && !isDwarf) {
                 player.damage(0.2);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 5, 2, false, false, true));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 5, 0, false, false, true));
-            } else if(drunkenness >= 3.0 && !isDwarf) {
+            } else if (drunkenness >= 3.0 && !isDwarf) {
                 player.damage(0.1);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 5, 1, false, false, true));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 5, 0, false, false, true));
-            } else if(drunkenness >= 2.5 && !isDwarf) {
+            } else if (drunkenness >= 2.5 && !isDwarf) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 5, 1, false, false, true));
                 player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 5, 0, false, false, true));
-            } else if(drunkenness >= 1.8 && !isDwarf) {
+            } else if (drunkenness >= 1.8 && !isDwarf) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 5, 0, false, false, true));
-            } else if(drunkenness >= 0.8) {
+            } else if (drunkenness >= 0.8) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 20 * 5, 0, false, false, true));
-            } else if(drunkenness >= 0.2) {
+            } else if (drunkenness >= 0.2) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 0, false, false, true));
             }
 
-            if(playerManager.isDrunk()) {
-                playerManager.setDrunkenness(playerManager.getDrunkenness()-0.001);
+            if (playerManager.isDrunk()) {
+                playerManager.setDrunkenness(playerManager.getDrunkenness() - 0.001);
             } else playerManager.setDrunkenness(0);
 
         })), 5, 5);
@@ -128,14 +129,14 @@ public final class HyperSpecies extends JavaPlugin {
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> Bukkit.getOnlinePlayers().forEach((player -> {
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
-            if(playerManager.getMana() < playerManager.getMaxMana()) {
+            if (playerManager.getMana() < playerManager.getMaxMana()) {
                 playerManager.setMana(playerManager.getMana() + playerManager.getManaRegeneration());
             } else {
                 playerManager.setMana(playerManager.getMaxMana());
             }
 
-            if(!player.isDead() && playerManager.getHealth() > 0) {
-                if(!playerManager.isRegenerationCoolingDown() && playerManager.getHealthRegeneration() <= 0) {
+            if (!player.isDead() && playerManager.getHealth() > 0) {
+                if (!playerManager.isRegenerationCoolingDown() && playerManager.getHealthRegeneration() <= 0) {
                     playerManager.setHealthRegeneration(0.2);
                 }
                 playerManager.setHealth(Math.min(playerManager.getHealth() + playerManager.getHealthRegeneration(), playerManager.getMaxHealth()));
@@ -147,8 +148,8 @@ public final class HyperSpecies extends JavaPlugin {
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> Bukkit.getOnlinePlayers().forEach((player -> {
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
-            if(playerManager.getSpecies() == null) return;
-            if(playerManager.getSpecies().getPassive() == null) return;
+            if (playerManager.getSpecies() == null) return;
+            if (playerManager.getSpecies().getPassive() == null) return;
             playerManager.getSpecies().getPassive().execute(player);
 
         })), 5, 5);

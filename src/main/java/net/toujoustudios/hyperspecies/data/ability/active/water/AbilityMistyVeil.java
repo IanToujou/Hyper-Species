@@ -37,7 +37,7 @@ public class AbilityMistyVeil extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(5,7,9,11,13,15));
+        fields.put(AbilityField.DURATION, List.of(5, 7, 9, 11, 13, 15));
         setFields(fields);
 
     }
@@ -55,8 +55,9 @@ public class AbilityMistyVeil extends Ability {
                 location.getWorld().playSound(location, Sound.BLOCK_FIRE_EXTINGUISH, SoundCategory.MASTER, 3, 2f);
                 Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                 double radiusSquared = 5 * 5;
-                for(Player all : players) {
-                    if(all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * duration, 0, false, false, true));
+                for (Player all : players) {
+                    if (all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared)
+                        all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * duration, 0, false, false, true));
                 }
             }
         }.runTaskTimer(HyperSpecies.getInstance(), 0, 2);

@@ -38,8 +38,8 @@ public class AbilityEndblight extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.RANGE, List.of(10,12,14,16,18,20,22,24,25));
-        fields.put(AbilityField.DURATION, List.of(10,11,12,13,14,15,16,17,20));
+        fields.put(AbilityField.RANGE, List.of(10, 12, 14, 16, 18, 20, 22, 24, 25));
+        fields.put(AbilityField.DURATION, List.of(10, 11, 12, 13, 14, 15, 16, 17, 20));
 
         setFields(fields);
 
@@ -59,10 +59,11 @@ public class AbilityEndblight extends Ability {
         player.getWorld().spawnParticle(Particle.SMOKE_LARGE, player.getLocation(), 1000, 3, 0, 3);
 
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
-        double radiusSquared = range*range;
+        double radiusSquared = range * range;
         players.forEach(all -> {
-            if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
-                if(all != player) all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20*duration, 0, false, false, true));
+            if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
+                if (all != player)
+                    all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * duration, 0, false, false, true));
             }
         });
 

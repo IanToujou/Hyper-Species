@@ -14,7 +14,7 @@ public class PlayerMoveListener implements Listener {
         Player player = event.getPlayer();
         PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-        if(playerManager.isStunned()) event.setCancelled(true);
+        if (playerManager.isStunned()) event.setCancelled(true);
 
     }
 

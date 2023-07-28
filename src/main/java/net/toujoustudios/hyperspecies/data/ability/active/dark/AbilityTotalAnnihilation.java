@@ -36,8 +36,8 @@ public class AbilityTotalAnnihilation extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.RANGE, List.of(10,13,15,17,18,20));
-        fields.put(AbilityField.DAMAGE, List.of(15,17,19,21,23,25));
+        fields.put(AbilityField.RANGE, List.of(10, 13, 15, 17, 18, 20));
+        fields.put(AbilityField.DAMAGE, List.of(15, 17, 19, 21, 23, 25));
         setFields(fields);
 
     }
@@ -46,7 +46,7 @@ public class AbilityTotalAnnihilation extends Ability {
     public boolean execute(Player player) {
 
         Block block = player.getTargetBlock(null, 50);
-        if(block.getType() == Material.AIR) return false;
+        if (block.getType() == Material.AIR) return false;
 
         Location impactLocation = block.getLocation();
         Location spawnLocation = impactLocation.add(0, 150, 0);
@@ -56,15 +56,15 @@ public class AbilityTotalAnnihilation extends Ability {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
 
             List<Fireball> entities = List.of(
-                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX()-15, spawnLocation.getY(), spawnLocation.getZ()+15), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX(), spawnLocation.getY(), spawnLocation.getZ()+15), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX()+15, spawnLocation.getY(), spawnLocation.getZ()+15), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX()-15, spawnLocation.getY(), spawnLocation.getZ()), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX() - 15, spawnLocation.getY(), spawnLocation.getZ() + 15), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX(), spawnLocation.getY(), spawnLocation.getZ() + 15), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX() + 15, spawnLocation.getY(), spawnLocation.getZ() + 15), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX() - 15, spawnLocation.getY(), spawnLocation.getZ()), EntityType.FIREBALL),
                     (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX(), spawnLocation.getY(), spawnLocation.getZ()), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX()+15, spawnLocation.getY(), spawnLocation.getZ()), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX()-15, spawnLocation.getY(), spawnLocation.getZ()-15), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX(), spawnLocation.getY(), spawnLocation.getZ()-15), EntityType.FIREBALL),
-                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX()+15, spawnLocation.getY(), spawnLocation.getZ()-15), EntityType.FIREBALL)
+                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX() + 15, spawnLocation.getY(), spawnLocation.getZ()), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX() - 15, spawnLocation.getY(), spawnLocation.getZ() - 15), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX(), spawnLocation.getY(), spawnLocation.getZ() - 15), EntityType.FIREBALL),
+                    (Fireball) player.getWorld().spawnEntity(new Location(spawnLocation.getWorld(), spawnLocation.getX() + 15, spawnLocation.getY(), spawnLocation.getZ() - 15), EntityType.FIREBALL)
             );
 
             entities.forEach(entity -> {

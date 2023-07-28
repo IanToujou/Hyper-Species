@@ -39,7 +39,7 @@ public class AbilityThornSeedling extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(5,6,7,8,9,10,11,12,14));
+        fields.put(AbilityField.DURATION, List.of(5, 6, 7, 8, 9, 10, 11, 12, 14));
         setFields(fields);
 
     }
@@ -51,9 +51,9 @@ public class AbilityThornSeedling extends Ability {
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
 
         Block block = player.getTargetBlock(null, 30);
-        if((block.getType() == Material.GRASS_BLOCK || block.getType() == Material.MOSS_BLOCK || block.getType() == Material.PODZOL) && block.getLocation().add(0,1,0).getBlock().getType() == Material.AIR) {
+        if ((block.getType() == Material.GRASS_BLOCK || block.getType() == Material.MOSS_BLOCK || block.getType() == Material.PODZOL) && block.getLocation().add(0, 1, 0).getBlock().getType() == Material.AIR) {
 
-            Location location = block.getLocation().add(0,1,0);
+            Location location = block.getLocation().add(0, 1, 0);
             location.getBlock().setType(Material.FLOWERING_AZALEA);
 
             BukkitTask task = new BukkitRunnable() {
@@ -63,7 +63,7 @@ public class AbilityThornSeedling extends Ability {
                     location.getWorld().spawnParticle(Particle.WARPED_SPORE, location, 500, 2, 0.1, 2);
                     Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                     double radiusSquared = 5 * 5;
-                    for(Player all : players) {
+                    for (Player all : players) {
                         if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared) {
                             all.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 20 * duration, 1, false, false, true));
                         }

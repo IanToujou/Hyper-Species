@@ -38,84 +38,84 @@ public class TeamUI implements Listener {
 
         Player player = (Player) event.getWhoClicked();
 
-        if(event.getView().getTitle().equals("Team Management")) {
+        if (event.getView().getTitle().equals("Team Management")) {
 
-            if(event.getCurrentItem() == null) return;
+            if (event.getCurrentItem() == null) return;
             event.setCancelled(true);
 
             Material material = event.getCurrentItem().getType();
 
-            if(material == Material.ENDER_EYE) {
+            if (material == Material.ENDER_EYE) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.openInventory(teamBrowsePages.get(0));
-            } else if(material == Material.NETHER_STAR) {
+            } else if (material == Material.NETHER_STAR) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
                 creatingTeamPlayers.add(player.getUniqueId());
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in the §bname§7 of the new team§8. §7Type §bcancel§7 to cancel§8.");
                 player.closeInventory();
-            } else if(material == Material.BARRIER) {
+            } else if (material == Material.BARRIER) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.closeInventory();
             }
 
-        } else if(event.getView().getTitle().startsWith("Browse Teams: ")) {
+        } else if (event.getView().getTitle().startsWith("Browse Teams: ")) {
 
-            if(event.getCurrentItem() == null) return;
+            if (event.getCurrentItem() == null) return;
             event.setCancelled(true);
 
             Material material = event.getCurrentItem().getType();
-            if(event.getCurrentItem().getItemMeta() == null) return;
+            if (event.getCurrentItem().getItemMeta() == null) return;
             String name = event.getCurrentItem().getItemMeta().getDisplayName();
             int page = Integer.parseInt(event.getView().getTitle().split(" ")[3]);
-            int pageIndex = page-1;
+            int pageIndex = page - 1;
 
-            if(material == Material.PLAYER_HEAD) {
+            if (material == Material.PLAYER_HEAD) {
 
-                if(name.equals("§eBack")) {
+                if (name.equals("§eBack")) {
 
-                    if(teamBrowsePages.get(pageIndex-1) == null) return;
-
-                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                    player.openInventory(teamBrowsePages.get(pageIndex-1));
-
-                } else if(name.equals("§eNext")) {
-
-                    if(teamBrowsePages.get(pageIndex+1) == null) return;
+                    if (teamBrowsePages.get(pageIndex - 1) == null) return;
 
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                    player.openInventory(teamBrowsePages.get(pageIndex+1));
+                    player.openInventory(teamBrowsePages.get(pageIndex - 1));
+
+                } else if (name.equals("§eNext")) {
+
+                    if (teamBrowsePages.get(pageIndex + 1) == null) return;
+
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                    player.openInventory(teamBrowsePages.get(pageIndex + 1));
 
                 }
 
-            } else if(material == Material.BARRIER) {
+            } else if (material == Material.BARRIER) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 openInventory(player);
 
-            } else if(material == Material.ENDER_EYE) {
+            } else if (material == Material.ENDER_EYE) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.closeInventory();
 
                 Team team = Team.getTeam(name.substring(2));
 
-                if(team == null || team.getOwner() == null) {
+                if (team == null || team.getOwner() == null) {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
                     player.sendMessage(Config.MESSAGE_PREFIX + " §cYou are unable to join this team§8.");
                     return;
                 }
 
-                if(team.getStatus() == TeamStatus.OPEN) {
+                if (team.getStatus() == TeamStatus.OPEN) {
 
                     PlayerManager playerManager = PlayerManager.getPlayer(player);
                     playerManager.setTeam(team.getName());
                     team.addMember(player.getUniqueId());
 
-                } else if(team.getStatus() == TeamStatus.INVITE) {
+                } else if (team.getStatus() == TeamStatus.INVITE) {
 
                     Player target = Bukkit.getPlayer(team.getOwner());
 
-                    if(target == null) {
+                    if (target == null) {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
                         player.sendMessage(Config.MESSAGE_PREFIX + " §cThe owner of the team is not online§8.");
                         return;
@@ -136,41 +136,41 @@ public class TeamUI implements Listener {
 
             }
 
-        } else if(event.getView().getTitle().startsWith("Team: ")) {
+        } else if (event.getView().getTitle().startsWith("Team: ")) {
 
-            if(event.getCurrentItem() == null) return;
+            if (event.getCurrentItem() == null) return;
             event.setCancelled(true);
 
             Material material = event.getCurrentItem().getType();
-            if(event.getCurrentItem().getItemMeta() == null) return;
+            if (event.getCurrentItem().getItemMeta() == null) return;
             String name = event.getCurrentItem().getItemMeta().getDisplayName();
 
-            if(material == Material.BARRIER) {
+            if (material == Material.BARRIER) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.closeInventory();
-            } else if(material == Material.REDSTONE) {
+            } else if (material == Material.REDSTONE) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-                if(playerManager.getTeam().getOwner().equals(player.getUniqueId())) {
+                if (playerManager.getTeam().getOwner().equals(player.getUniqueId())) {
                     openInventory(player, TeamPage.SETTINGS_ADMIN.getIndex());
                 } else {
                     openInventory(player, TeamPage.SETTINGS.getIndex());
                 }
 
-            } else if(material == Material.PLAYER_HEAD) {
+            } else if (material == Material.PLAYER_HEAD) {
 
                 PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-                if(!playerManager.getTeam().getOwner().equals(player.getUniqueId())) return;
+                if (!playerManager.getTeam().getOwner().equals(player.getUniqueId())) return;
 
                 OfflinePlayer target = Bukkit.getOfflinePlayer(name.substring(2));
 
-                if(target.getUniqueId().equals(player.getUniqueId())) return;
+                if (target.getUniqueId().equals(player.getUniqueId())) return;
 
-                Inventory inventory = Bukkit.createInventory(null, 3*9, "Team Player: " + target.getName());
-                for(int i = 0; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
+                Inventory inventory = Bukkit.createInventory(null, 3 * 9, "Team Player: " + target.getName());
+                for (int i = 0; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
                 inventory.setItem(10, ItemListUI.PREVIOUS);
 
                 ItemStack skull = new ItemStack(Material.PLAYER_HEAD);
@@ -188,9 +188,9 @@ public class TeamUI implements Listener {
 
             }
 
-        } else if(event.getView().getTitle().startsWith("Team Player: ")) {
+        } else if (event.getView().getTitle().startsWith("Team Player: ")) {
 
-            if(event.getCurrentItem() == null) return;
+            if (event.getCurrentItem() == null) return;
             event.setCancelled(true);
 
             Material material = event.getCurrentItem().getType();
@@ -198,12 +198,12 @@ public class TeamUI implements Listener {
             PlayerManager playerManager = PlayerManager.getPlayer(player);
             PlayerManager targetManager = PlayerManager.getPlayer(target.getUniqueId());
 
-            if(material == Material.PLAYER_HEAD) {
+            if (material == Material.PLAYER_HEAD) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.closeInventory();
 
-            } else if(material == Material.FIRE_CHARGE) {
+            } else if (material == Material.FIRE_CHARGE) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §cYou kicked §e" + target.getName() + " §cout of the team§8.");
@@ -211,7 +211,7 @@ public class TeamUI implements Listener {
                 targetManager.setTeam(null);
                 player.closeInventory();
 
-            } else if(material == Material.MAGMA_CREAM) {
+            } else if (material == Material.MAGMA_CREAM) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You promoted §e" + target.getName() + " §7to be the owner§8.");
@@ -222,87 +222,87 @@ public class TeamUI implements Listener {
 
             }
 
-        } else if(event.getView().getTitle().equals("Team Settings")) {
+        } else if (event.getView().getTitle().equals("Team Settings")) {
 
-            if(event.getCurrentItem() == null) return;
+            if (event.getCurrentItem() == null) return;
             event.setCancelled(true);
 
             Material material = event.getCurrentItem().getType();
 
-            if(material == Material.PLAYER_HEAD) {
+            if (material == Material.PLAYER_HEAD) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.closeInventory();
 
-            } else if(material == Material.PUFFERFISH) {
+            } else if (material == Material.PUFFERFISH) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 openInventory(player, TeamPage.LEAVE_CONFIRM.getIndex());
 
-            } else if(material == Material.NAME_TAG) {
+            } else if (material == Material.NAME_TAG) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.closeInventory();
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in a new team name§8. §7Type §bcancel§7 to cancel§8.");
                 changingNamePlayers.add(player.getUniqueId());
 
-            } else if(material == Material.MINECART) {
+            } else if (material == Material.MINECART) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.closeInventory();
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in a new team description§8. §7Type §bcancel§7 to cancel§8.");
                 changingDescriptionPlayers.add(player.getUniqueId());
 
-            } else if(material == Material.PURPLE_DYE) {
+            } else if (material == Material.PURPLE_DYE) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 openInventory(player, TeamPage.SETTINGS_STATUS.getIndex());
 
             }
 
-        } else if(event.getView().getTitle().equals("Change Status")) {
+        } else if (event.getView().getTitle().equals("Change Status")) {
 
-            if(event.getCurrentItem() == null) return;
+            if (event.getCurrentItem() == null) return;
             event.setCancelled(true);
 
             Material material = event.getCurrentItem().getType();
             PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-            if(material == Material.PLAYER_HEAD) {
+            if (material == Material.PLAYER_HEAD) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 openInventory(player, TeamPage.SETTINGS_ADMIN.getIndex());
 
-            } else if(material == Material.GRAY_DYE) {
+            } else if (material == Material.GRAY_DYE) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You changed the status to§8: §cClosed§8.");
                 playerManager.getTeam().setStatus(TeamStatus.CLOSED);
                 player.closeInventory();
-            } else if(material == Material.PURPLE_DYE) {
+            } else if (material == Material.PURPLE_DYE) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You changed the status to§8: §dInvite§8.");
                 playerManager.getTeam().setStatus(TeamStatus.INVITE);
                 player.closeInventory();
-            } else if(material == Material.LIME_DYE) {
+            } else if (material == Material.LIME_DYE) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You changed the status to§8: §aOpen§8.");
                 playerManager.getTeam().setStatus(TeamStatus.OPEN);
                 player.closeInventory();
             }
 
-        } else if(event.getView().getTitle().equals("Leave Team")) {
+        } else if (event.getView().getTitle().equals("Leave Team")) {
 
-            if(event.getCurrentItem() == null) return;
+            if (event.getCurrentItem() == null) return;
             event.setCancelled(true);
 
             Material material = event.getCurrentItem().getType();
 
-            if(material == Material.BARRIER) {
+            if (material == Material.BARRIER) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.closeInventory();
 
-            } else if(material == Material.PUFFERFISH) {
+            } else if (material == Material.PUFFERFISH) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.closeInventory();
@@ -310,11 +310,11 @@ public class TeamUI implements Listener {
 
                 PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-                if(playerManager.getTeam().getOwner().toString().equals(player.getUniqueId().toString())) {
+                if (playerManager.getTeam().getOwner().toString().equals(player.getUniqueId().toString())) {
 
                     playerManager.getTeam().setOwner(null);
 
-                    if(playerManager.getTeam().getMembers().size() > 0) {
+                    if (playerManager.getTeam().getMembers().size() > 0) {
                         int random = new Random().nextInt(playerManager.getTeam().getMembers().size());
                         playerManager.getTeam().setOwner(playerManager.getTeam().getMembers().get(random));
                         playerManager.getTeam().getMembers().remove(random);
@@ -338,28 +338,28 @@ public class TeamUI implements Listener {
 
         Player player = event.getPlayer();
 
-        if(getCreatingTeamPlayers().contains(player.getUniqueId())) {
+        if (getCreatingTeamPlayers().contains(player.getUniqueId())) {
             event.setCancelled(true);
             String name = event.getMessage();
             Pattern pattern = Pattern.compile("^[ A-Za-z]+$");
             Matcher matcher = pattern.matcher(name);
-            if(name.equalsIgnoreCase("cancel")) {
+            if (name.equalsIgnoreCase("cancel")) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §cTeam creation has been cancelled§8.");
                 creatingTeamPlayers.remove(player.getUniqueId());
                 return;
             }
-            if(!matcher.matches()) {
+            if (!matcher.matches()) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §cThe team name can only contain letters and spaces§8.");
                 return;
             }
-            if(Team.getTeam(name) != null) {
+            if (Team.getTeam(name) != null) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §cA team with this name already exists§8.");
                 return;
             }
-            if(name.length() > 30) {
+            if (name.length() > 30) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §cThe name cannot be longer than 30 characters§8.");
                 return;
@@ -370,29 +370,29 @@ public class TeamUI implements Listener {
             PlayerManager playerManager = PlayerManager.getPlayer(player);
             playerManager.setTeam(name);
             getCreatingTeamPlayers().remove(player.getUniqueId());
-        } else if(getChangingNamePlayers().contains(player.getUniqueId())) {
+        } else if (getChangingNamePlayers().contains(player.getUniqueId())) {
 
             event.setCancelled(true);
             String name = event.getMessage();
             Pattern pattern = Pattern.compile("^[ A-Za-z]+$");
             Matcher matcher = pattern.matcher(name);
-            if(name.equalsIgnoreCase("cancel")) {
+            if (name.equalsIgnoreCase("cancel")) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §cTeam name change has been cancelled§8.");
                 changingNamePlayers.remove(player.getUniqueId());
                 return;
             }
-            if(!matcher.matches()) {
+            if (!matcher.matches()) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §cThe team name can only contain letters and spaces§8.");
                 return;
             }
-            if(Team.getTeam(name) != null) {
+            if (Team.getTeam(name) != null) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §cA team with this name already exists§8.");
                 return;
             }
-            if(name.length() > 30) {
+            if (name.length() > 30) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §cThe name cannot be longer than 30 characters§8.");
                 return;
@@ -403,24 +403,24 @@ public class TeamUI implements Listener {
             playerManager.getTeam().setName(name);
             getChangingNamePlayers().remove(player.getUniqueId());
 
-        } else if(getChangingDescriptionPlayers().contains(player.getUniqueId())) {
+        } else if (getChangingDescriptionPlayers().contains(player.getUniqueId())) {
 
             event.setCancelled(true);
             String description = event.getMessage();
             Pattern pattern = Pattern.compile("^[ A-Za-z]+$");
             Matcher matcher = pattern.matcher(description);
-            if(description.equalsIgnoreCase("cancel")) {
+            if (description.equalsIgnoreCase("cancel")) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §cTeam description change has been cancelled§8.");
                 changingDescriptionPlayers.remove(player.getUniqueId());
                 return;
             }
-            if(!matcher.matches()) {
+            if (!matcher.matches()) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §cThe team name can only contain letters and spaces§8.");
                 return;
             }
-            if(description.length() > 150) {
+            if (description.length() > 150) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §cThe description cannot be longer than 150 characters§8.");
                 return;
@@ -439,23 +439,23 @@ public class TeamUI implements Listener {
 
         // MAIN
 
-        Inventory pageMain = Bukkit.createInventory(null, 9*3, "Team Management");
-        for(int i = 0; i < pageMain.getSize(); i++) pageMain.setItem(i, ItemListUI.FILLER);
+        Inventory pageMain = Bukkit.createInventory(null, 9 * 3, "Team Management");
+        for (int i = 0; i < pageMain.getSize(); i++) pageMain.setItem(i, ItemListUI.FILLER);
         pageMain.setItem(10, ItemListUI.CANCEL);
         pageMain.setItem(13, ItemListUI.TEAM_BROWSE);
         pageMain.setItem(16, ItemListUI.TEAM_CREATE);
 
         // SETTINGS
 
-        Inventory pageSettings = Bukkit.createInventory(null, 9*3, "Team Settings");
-        for(int i = 0; i < pageSettings.getSize(); i++) pageSettings.setItem(i, ItemListUI.FILLER);
+        Inventory pageSettings = Bukkit.createInventory(null, 9 * 3, "Team Settings");
+        for (int i = 0; i < pageSettings.getSize(); i++) pageSettings.setItem(i, ItemListUI.FILLER);
         pageSettings.setItem(10, ItemListUI.PREVIOUS);
         pageSettings.setItem(16, ItemListUI.TEAM_LEAVE);
 
         // SETTINGS ADMIN
 
-        Inventory pageAdmin = Bukkit.createInventory(null, 9*5, "Team Settings");
-        for(int i = 0; i < pageAdmin.getSize(); i++) pageAdmin.setItem(i, ItemListUI.FILLER);
+        Inventory pageAdmin = Bukkit.createInventory(null, 9 * 5, "Team Settings");
+        for (int i = 0; i < pageAdmin.getSize(); i++) pageAdmin.setItem(i, ItemListUI.FILLER);
         pageAdmin.setItem(10, ItemListUI.TEAM_CHANGE_NAME);
         pageAdmin.setItem(13, ItemListUI.TEAM_CHANGE_DESCRIPTION);
         pageAdmin.setItem(16, ItemListUI.TEAM_CHANGE_STATUS);
@@ -464,8 +464,8 @@ public class TeamUI implements Listener {
 
         // CHANGE STATUS
 
-        Inventory pageStatus = Bukkit.createInventory(null, 9*3, "Change Status");
-        for(int i = 0; i < pageStatus.getSize(); i++) pageStatus.setItem(i, ItemListUI.FILLER);
+        Inventory pageStatus = Bukkit.createInventory(null, 9 * 3, "Change Status");
+        for (int i = 0; i < pageStatus.getSize(); i++) pageStatus.setItem(i, ItemListUI.FILLER);
         pageStatus.setItem(10, ItemListUI.PREVIOUS);
         pageStatus.setItem(12, ItemListUI.TEAM_CHANGE_STATUS_CLOSED);
         pageStatus.setItem(14, ItemListUI.TEAM_CHANGE_STATUS_INVITE);
@@ -473,8 +473,8 @@ public class TeamUI implements Listener {
 
         // LEAVE CONFIRM
 
-        Inventory pageLeaveConfirm = Bukkit.createInventory(null, 9*3, "Leave Team");
-        for(int i = 0; i < pageLeaveConfirm.getSize(); i++) pageLeaveConfirm.setItem(i, ItemListUI.FILLER);
+        Inventory pageLeaveConfirm = Bukkit.createInventory(null, 9 * 3, "Leave Team");
+        for (int i = 0; i < pageLeaveConfirm.getSize(); i++) pageLeaveConfirm.setItem(i, ItemListUI.FILLER);
         pageLeaveConfirm.setItem(16, ItemListUI.CANCEL);
         pageLeaveConfirm.setItem(10, ItemListUI.TEAM_LEAVE_CONFIRM);
 
@@ -489,32 +489,32 @@ public class TeamUI implements Listener {
         ArrayList<Team> teams = new ArrayList<>();
         Team.getTeams().forEach((name, team) -> teams.add(team));
 
-        for(int i = 0; i < pages; i++) {
+        for (int i = 0; i < pages; i++) {
 
-            int currentPage = i+1;
+            int currentPage = i + 1;
 
-            Inventory pageBrowse = Bukkit.createInventory(null, 9*5, "Browse Teams: Page " + currentPage);
-            for(int j = 0; j < 9; j++) pageBrowse.setItem(j, ItemListUI.FILLER);
-            for(int j = 36; j < pageBrowse.getSize(); j++) pageBrowse.setItem(j, ItemListUI.FILLER);
+            Inventory pageBrowse = Bukkit.createInventory(null, 9 * 5, "Browse Teams: Page " + currentPage);
+            for (int j = 0; j < 9; j++) pageBrowse.setItem(j, ItemListUI.FILLER);
+            for (int j = 36; j < pageBrowse.getSize(); j++) pageBrowse.setItem(j, ItemListUI.FILLER);
             pageBrowse.setItem(40, ItemListUI.CANCEL);
-            if(currentPage != 1) pageBrowse.setItem(36, ItemListUI.PREVIOUS);
-            if(currentPage < pages) pageBrowse.setItem(44, ItemListUI.NEXT);
+            if (currentPage != 1) pageBrowse.setItem(36, ItemListUI.PREVIOUS);
+            if (currentPage < pages) pageBrowse.setItem(44, ItemListUI.NEXT);
 
             List<Team> teamsInPage;
 
-            if(teams.size() < (currentPage*27)) {
-                teamsInPage = teams.subList((i*27), teams.size());
+            if (teams.size() < (currentPage * 27)) {
+                teamsInPage = teams.subList((i * 27), teams.size());
             } else {
-                teamsInPage = teams.subList((i*27), (i*27)+27);
+                teamsInPage = teams.subList((i * 27), (i * 27) + 27);
             }
 
             int j = 0;
-            for(Team team : teamsInPage) {
+            for (Team team : teamsInPage) {
 
-                if(team.getOwner() != null) {
+                if (team.getOwner() != null) {
                     ArrayList<String> lore = new ArrayList<>();
 
-                    if(team.getDescription() != null && team.getDescription().length() > 0) {
+                    if (team.getDescription() != null && team.getDescription().length() > 0) {
                         String[] descriptionLines = team.getDescription().split(" ");
                         for (String descriptionLine : descriptionLines) {
                             lore.add("§7" + descriptionLine);
@@ -529,7 +529,7 @@ public class TeamUI implements Listener {
                     lore.add("§r");
                     lore.add("§7Members:");
 
-                    if(team.getMembers().size() > 0) {
+                    if (team.getMembers().size() > 0) {
                         team.getMembers().forEach(member -> lore.add("§8- §b" + Bukkit.getOfflinePlayer(member).getName()));
                     } else lore.add("§8No Members");
 
@@ -539,7 +539,7 @@ public class TeamUI implements Listener {
                     itemMeta.setDisplayName(team.getColor() + team.getName());
                     itemMeta.setLore(lore);
                     item.setItemMeta(itemMeta);
-                    pageBrowse.setItem(j+9, item);
+                    pageBrowse.setItem(j + 9, item);
                     j++;
 
                 }
@@ -561,7 +561,7 @@ public class TeamUI implements Listener {
     }
 
     public static void openInventory(Player player, int page) {
-        if(inventories.get(page) == null) return;
+        if (inventories.get(page) == null) return;
         player.openInventory(inventories.get(page));
     }
 

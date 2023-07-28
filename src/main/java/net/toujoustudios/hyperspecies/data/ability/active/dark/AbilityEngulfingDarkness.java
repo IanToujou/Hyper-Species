@@ -37,8 +37,8 @@ public class AbilityEngulfingDarkness extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.RANGE, List.of(10,12,14,16,18,20,22,24,25));
-        fields.put(AbilityField.DURATION, List.of(20,22,24,26,28,30,32,34,36));
+        fields.put(AbilityField.RANGE, List.of(10, 12, 14, 16, 18, 20, 22, 24, 25));
+        fields.put(AbilityField.DURATION, List.of(20, 22, 24, 26, 28, 30, 32, 34, 36));
 
         setFields(fields);
 
@@ -58,11 +58,13 @@ public class AbilityEngulfingDarkness extends Ability {
         player.getWorld().spawnParticle(Particle.SMOKE_LARGE, player.getLocation(), 1000, 3, 0, 3);
 
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
-        double radiusSquared = range*range;
+        double radiusSquared = range * range;
         players.forEach(all -> {
-            if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
-                if(all != player) all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20*duration, 0, false, false, true));
-                if(all != player) all.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20*duration, 5, false, false, true));
+            if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
+                if (all != player)
+                    all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * duration, 0, false, false, true));
+                if (all != player)
+                    all.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * duration, 5, false, false, true));
             }
         });
 
@@ -71,8 +73,8 @@ public class AbilityEngulfingDarkness extends Ability {
             @Override
             public void run() {
                 players.forEach(all -> {
-                    if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
-                        if(all != player) all.stopAllSounds();
+                    if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
+                        if (all != player) all.stopAllSounds();
                     }
                 });
             }

@@ -34,7 +34,7 @@ public class AbilityRagingBurst extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(10,11,12,13,14,15,16,17,18));
+        fields.put(AbilityField.DURATION, List.of(10, 11, 12, 13, 14, 15, 16, 17, 18));
 
         setFields(fields);
 
@@ -43,7 +43,7 @@ public class AbilityRagingBurst extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        if(!AbilityDemonicRage.getDamagePlayers().contains(player.getUniqueId())) return false;
+        if (!AbilityDemonicRage.getDamagePlayers().contains(player.getUniqueId())) return false;
 
         AbilityDemonicRage.getDamagePlayers().remove(player.getUniqueId());
         AbilityDemonicRage.getUsingPlayers().remove(player.getUniqueId());
@@ -55,7 +55,7 @@ public class AbilityRagingBurst extends Ability {
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 4, 1f);
         player.getWorld().spawnParticle(Particle.LAVA, player.getLocation(), 100, 0, 2, 0);
         player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, player.getLocation(), 10, 0, 2, 0);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20*duration, 3, false, false, true));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * duration, 3, false, false, true));
 
         return true;
 

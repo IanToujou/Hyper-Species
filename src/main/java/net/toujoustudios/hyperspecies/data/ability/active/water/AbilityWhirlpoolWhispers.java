@@ -35,7 +35,7 @@ public class AbilityWhirlpoolWhispers extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(5,7,9,11,13,15));
+        fields.put(AbilityField.DURATION, List.of(5, 7, 9, 11, 13, 15));
         setFields(fields);
 
     }
@@ -47,27 +47,29 @@ public class AbilityWhirlpoolWhispers extends Ability {
         Location location = player.getLocation();
         new BukkitRunnable() {
             double y = 0;
+
             @Override
             public void run() {
 
-                if(y >= 3) this.cancel();
+                if (y >= 3) this.cancel();
 
                 int radius = 2;
-                double x = radius * Math.cos(y*4);
-                double z = radius * Math.sin(y*4);
+                double x = radius * Math.cos(y * 4);
+                double z = radius * Math.sin(y * 4);
 
                 for (int i = 0; i < 20; i++) {
-                    player.getWorld().spawnParticle(Particle.DRIP_WATER, new Location(location.getWorld(), location.getX()+x, location.getY()+y, location.getZ()+z), 4, 0.1, 0.1, 0.1);
-                    y+=0.01;
-                    x = radius * Math.cos(y*4);
-                    z = radius * Math.sin(y*4);
+                    player.getWorld().spawnParticle(Particle.DRIP_WATER, new Location(location.getWorld(), location.getX() + x, location.getY() + y, location.getZ() + z), 4, 0.1, 0.1, 0.1);
+                    y += 0.01;
+                    x = radius * Math.cos(y * 4);
+                    z = radius * Math.sin(y * 4);
                 }
 
                 player.getWorld().playSound(location, Sound.ITEM_BUCKET_EMPTY, SoundCategory.MASTER, 2, 0f);
                 Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                 double radiusSquared = 3 * 3;
-                for(Player all : players) {
-                    if(all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) all.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * duration, 0, false, false, true));
+                for (Player all : players) {
+                    if (all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared)
+                        all.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * duration, 0, false, false, true));
                 }
 
             }

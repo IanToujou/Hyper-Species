@@ -54,7 +54,7 @@ public enum Element {
         ItemMeta itemMeta = item.getItemMeta();
         assert itemMeta != null;
         itemMeta.setDisplayName(color + emoji + " " + name);
-        if(description) itemMeta.setLore(List.of(""));
+        if (description) itemMeta.setLore(List.of(""));
         item.setItemMeta(itemMeta);
 
         return item;

@@ -35,8 +35,8 @@ public class AbilityCelestialShot extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DAMAGE, List.of(10,15,20,25,30,35,40,45,50));
-        fields.put(AbilityField.DURATION, List.of(5,5,6,6,7,7,8,9,10));
+        fields.put(AbilityField.DAMAGE, List.of(10, 15, 20, 25, 30, 35, 40, 45, 50));
+        fields.put(AbilityField.DURATION, List.of(5, 5, 6, 6, 7, 7, 8, 9, 10));
         setFields(fields);
 
     }

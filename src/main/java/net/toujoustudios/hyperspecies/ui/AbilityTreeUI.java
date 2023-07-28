@@ -21,43 +21,43 @@ public class AbilityTreeUI implements Listener {
 
         Player player = (Player) event.getWhoClicked();
 
-        if(event.getView().getTitle().startsWith("Ability Trees")) {
+        if (event.getView().getTitle().startsWith("Ability Trees")) {
 
-            if(event.getCurrentItem() == null) return;
+            if (event.getCurrentItem() == null) return;
             event.setCancelled(true);
 
             Material material = event.getCurrentItem().getType();
-            if(event.getCurrentItem().getItemMeta() == null) return;
+            if (event.getCurrentItem().getItemMeta() == null) return;
             String name = event.getCurrentItem().getItemMeta().getDisplayName();
             int page = Integer.parseInt(event.getView().getTitle().split(" ")[3]);
 
-            if(material == Material.NETHER_STAR) {
+            if (material == Material.NETHER_STAR) {
 
                 String treeName = name.split(" ", 2)[1];
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
 
                 AbilityTree tree = AbilityTree.getTree(treeName);
 
-                if(tree != null) {
+                if (tree != null) {
                     player.openInventory(tree.buildInventory(player));
                 }
 
-            } else if(material == Material.BARRIER) {
+            } else if (material == Material.BARRIER) {
 
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
 
-            } else if(material == Material.PLAYER_HEAD) {
+            } else if (material == Material.PLAYER_HEAD) {
 
-                if(name.contains("Back")) {
+                if (name.contains("Back")) {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                    player.openInventory(AbilityTree.buildMainInventory(player, page-2));
-                } else if(name.contains("Next")) {
+                    player.openInventory(AbilityTree.buildMainInventory(player, page - 2));
+                } else if (name.contains("Next")) {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                     player.openInventory(AbilityTree.buildMainInventory(player, page));
                 }
 
-            } else if(material == Material.TNT) {
+            } else if (material == Material.TNT) {
 
                 player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 Your loadout has been reset§8."));
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 10, 2f);
@@ -67,22 +67,22 @@ public class AbilityTreeUI implements Listener {
 
             }
 
-        } else if(event.getView().getTitle().startsWith("Tree: ")) {
+        } else if (event.getView().getTitle().startsWith("Tree: ")) {
 
-            if(event.getCurrentItem() == null) return;
+            if (event.getCurrentItem() == null) return;
             event.setCancelled(true);
 
             Material material = event.getCurrentItem().getType();
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
 
-            if(itemMeta == null) return;
+            if (itemMeta == null) return;
 
-            if(material == Material.BARRIER) {
+            if (material == Material.BARRIER) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.openInventory(AbilityTree.buildMainInventory(player, 0));
 
-            } else if(material == Material.RED_WOOL) {
+            } else if (material == Material.RED_WOOL) {
 
                 String abilityName = itemMeta.getDisplayName().split(" ", 2)[1];
                 String[] abilityNameArray = abilityName.split(" ");
@@ -92,7 +92,7 @@ public class AbilityTreeUI implements Listener {
                 }
                 abilityName = nameBuilder.substring(1);
 
-                if(Ability.getAbility(abilityName) == null) {
+                if (Ability.getAbility(abilityName) == null) {
                     abilityName = itemMeta.getDisplayName().split(" ", 3)[2];
                     abilityNameArray = abilityName.split(" ");
                     nameBuilder = new StringBuilder();
@@ -103,10 +103,10 @@ public class AbilityTreeUI implements Listener {
                 }
 
                 Ability ability = Ability.getAbility(abilityName);
-                if(ability == null) return;
+                if (ability == null) return;
                 PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-                if(playerManager.getSkill() < ability.getCost()) {
+                if (playerManager.getSkill() < ability.getCost()) {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 0f);
                     player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c You don't have enough skill points§8."));
                     player.openInventory(AbilityTree.buildMainInventory(player, 0));
@@ -117,7 +117,7 @@ public class AbilityTreeUI implements Listener {
                 playerManager.setSkill(playerManager.getSkill() - ability.getCost());
                 player.openInventory(AbilityTree.buildMainInventory(player, 0));
 
-            } else if(itemMeta.getDisplayName().startsWith("§") && material != Material.GRAY_WOOL) {
+            } else if (itemMeta.getDisplayName().startsWith("§") && material != Material.GRAY_WOOL) {
 
                 String abilityName = itemMeta.getDisplayName().split(" ", 2)[1];
                 String[] abilityNameArray = abilityName.split(" ");
@@ -127,7 +127,7 @@ public class AbilityTreeUI implements Listener {
                 }
                 abilityName = nameBuilder.substring(1);
 
-                if(Ability.getAbility(abilityName) == null) {
+                if (Ability.getAbility(abilityName) == null) {
                     abilityName = itemMeta.getDisplayName().split(" ", 3)[2];
                     abilityNameArray = abilityName.split(" ");
                     nameBuilder = new StringBuilder();
@@ -138,15 +138,15 @@ public class AbilityTreeUI implements Listener {
                 }
 
                 Ability ability = Ability.getAbility(abilityName);
-                if(ability == null) return;
+                if (ability == null) return;
                 PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-                if(playerManager.getActiveAbilities().contains(ability)) {
+                if (playerManager.getActiveAbilities().contains(ability)) {
                     playerManager.removeActiveAbility(ability);
                     player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You removed §b" + ability.getName() + "§7 from your loadout§8."));
                     player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 New weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight()));
                 } else {
-                    if(playerManager.getAbilityWeight() + ability.getWeight() > playerManager.getMaxAbilityWeight()) {
+                    if (playerManager.getAbilityWeight() + ability.getWeight() > playerManager.getMaxAbilityWeight()) {
                         player.openInventory(AbilityTree.buildMainInventory(player, 0));
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 0f);
                         player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c You cannot carry a loadout this powerful§8."));

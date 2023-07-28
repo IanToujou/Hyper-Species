@@ -5,7 +5,6 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
-
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -35,7 +34,7 @@ public class AbilityTorrentialRain extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(10,11,12,13,14,15,16,17,18));
+        fields.put(AbilityField.DURATION, List.of(10, 11, 12, 13, 14, 15, 16, 17, 18));
         setFields(fields);
 
     }
@@ -47,15 +46,15 @@ public class AbilityTorrentialRain extends Ability {
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
         Location location = player.getLocation();
 
-        location.getWorld().spawnParticle(Particle.DRIP_WATER, location.add(0,4,0), 500, 2, 0.1, 2);
+        location.getWorld().spawnParticle(Particle.DRIP_WATER, location.add(0, 4, 0), 500, 2, 0.1, 2);
         location.getWorld().playSound(location, Sound.ITEM_BUCKET_EMPTY, SoundCategory.MASTER, 2, 0.5f);
-        location.subtract(0,4,0);
+        location.subtract(0, 4, 0);
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
             location.getWorld().playSound(location, Sound.ITEM_BUCKET_EMPTY, SoundCategory.MASTER, 2, 1.5f);
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
             double radiusSquared = 5 * 5;
-            for(Player all : players) {
+            for (Player all : players) {
                 if (all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                     all.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * duration, 2, false, false, true));
                 }

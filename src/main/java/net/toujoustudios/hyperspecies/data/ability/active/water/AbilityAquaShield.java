@@ -39,7 +39,7 @@ public class AbilityAquaShield extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.SHIELD, List.of(5,6,7,8,9,10));
+        fields.put(AbilityField.SHIELD, List.of(5, 6, 7, 8, 9, 10));
         setFields(fields);
 
     }
@@ -53,18 +53,19 @@ public class AbilityAquaShield extends Ability {
 
         new BukkitRunnable() {
             double phi = 0;
+
             @Override
             public void run() {
                 Location location = player.getLocation();
-                phi += Math.PI/10;
-                for(double theta = 0; theta <= 2*Math.PI; theta += Math.PI/40) {
+                phi += Math.PI / 10;
+                for (double theta = 0; theta <= 2 * Math.PI; theta += Math.PI / 40) {
                     double r = 1.5;
-                    double x = r*cos(theta)*sin(phi);
-                    double y = r*cos(phi) + 1.5;
-                    double z = r*sin(theta)*sin(phi);
-                    location.add(x,y,z);
+                    double x = r * cos(theta) * sin(phi);
+                    double y = r * cos(phi) + 1.5;
+                    double z = r * sin(theta) * sin(phi);
+                    location.add(x, y, z);
                     player.getWorld().spawnParticle(Particle.DRIP_WATER, location, 1, 0, 0, 0);
-                    location.subtract(x,y,z);
+                    location.subtract(x, y, z);
                 }
                 if (phi > Math.PI) {
                     this.cancel();
@@ -73,7 +74,7 @@ public class AbilityAquaShield extends Ability {
 
         }.runTaskTimer(HyperSpecies.getInstance(), 0, 1);
 
-        playerManager.setShield(playerManager.getShield()+shield);
+        playerManager.setShield(playerManager.getShield() + shield);
 
         return true;
 

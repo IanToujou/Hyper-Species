@@ -34,7 +34,7 @@ public class AbilitySupersonicSpeed extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(5,6,7,8,9,10));
+        fields.put(AbilityField.DURATION, List.of(5, 6, 7, 8, 9, 10));
         setFields(fields);
 
     }
@@ -52,11 +52,11 @@ public class AbilitySupersonicSpeed extends Ability {
         direction.multiply(15);
         location.add(direction);
 
-        if(location.getBlock().getType() != Material.AIR || block.getType() != Material.AIR) return false;
+        if (location.getBlock().getType() != Material.AIR || block.getType() != Material.AIR) return false;
         player.getWorld().playSound(player.getLocation(), Sound.BLOCK_PISTON_EXTEND, SoundCategory.MASTER, 2, 1.5f);
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 3, 0.8f);
         player.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, player.getLocation(), 100, 0.5, 0.5, 0.5);
-        player.teleport(new Location(location.getWorld(), location.getX(), player.getLocation().getY()+0.5, location.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch()));
+        player.teleport(new Location(location.getWorld(), location.getX(), player.getLocation().getY() + 0.5, location.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch()));
         player.setVelocity(player.getLocation().getDirection());
         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * duration, 2, false, false, true));
 

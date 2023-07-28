@@ -33,7 +33,7 @@ public class AbilitySharpStone extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DAMAGE, List.of(5,6,7,8,9,10,11,12,13));
+        fields.put(AbilityField.DAMAGE, List.of(5, 6, 7, 8, 9, 10, 11, 12, 13));
         setFields(fields);
 
     }

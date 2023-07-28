@@ -36,7 +36,7 @@ public class AbilityFlash extends Ability {
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
 
-        fields.put(AbilityField.DURATION, List.of(5,6,7,8,9,10));
+        fields.put(AbilityField.DURATION, List.of(5, 6, 7, 8, 9, 10));
 
         setFields(fields);
 

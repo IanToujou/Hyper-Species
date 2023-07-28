@@ -35,7 +35,7 @@ public class AbilityICBM extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DAMAGE, List.of(20,22,24,26,28,30,32,34,36));
+        fields.put(AbilityField.DAMAGE, List.of(20, 22, 24, 26, 28, 30, 32, 34, 36));
         setFields(fields);
     }
 
@@ -46,11 +46,11 @@ public class AbilityICBM extends Ability {
         int damage = getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(this));
         Location location = player.getLocation();
 
-        if(player.getWorld().getHighestBlockAt(location).getY() > player.getLocation().getY()) return false;
+        if (player.getWorld().getHighestBlockAt(location).getY() > player.getLocation().getY()) return false;
 
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 3, 0.8f);
         player.getWorld().spawnParticle(Particle.CLOUD, player.getLocation(), 100, 0.1, 0.1, 0.1, 3);
-        player.setVelocity(new Vector(0,1,0).multiply(3));
+        player.setVelocity(new Vector(0, 1, 0).multiply(3));
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
             Vector direction = player.getLocation().getDirection();
@@ -65,7 +65,7 @@ public class AbilityICBM extends Ability {
 
             @Override
             public void run() {
-                if(player.getLocation().add(0,-1,0).getBlock().getType() != Material.AIR) {
+                if (player.getLocation().add(0, -1, 0).getBlock().getType() != Material.AIR) {
                     player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 5, 0f);
                     player.getWorld().spawnParticle(Particle.LAVA, player.getLocation(), 100, 1, 0.1, 1);
                     player.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, player.getLocation(), 30, 3, 0.1, 3);
@@ -73,8 +73,8 @@ public class AbilityICBM extends Ability {
                     Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                     double radiusSquared = 15 * 15;
                     players.forEach(all -> {
-                        if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
-                            if(all != player) all.damage(damage, player);
+                        if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
+                            if (all != player) all.damage(damage, player);
                         }
                     });
 
@@ -89,7 +89,7 @@ public class AbilityICBM extends Ability {
         }.runTaskTimer(HyperSpecies.getInstance(), 20, 1);
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
-            if(!task.isCancelled()) {
+            if (!task.isCancelled()) {
                 task.cancel();
                 activePlayers.remove(player.getUniqueId());
             }

@@ -37,7 +37,7 @@ public class AbilityRayOfDoom extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DAMAGE, List.of(5,6,7,8,9,10));
+        fields.put(AbilityField.DAMAGE, List.of(5, 6, 7, 8, 9, 10));
         setFields(fields);
 
     }
@@ -46,7 +46,7 @@ public class AbilityRayOfDoom extends Ability {
     public boolean execute(Player player) {
 
         Block block = player.getTargetBlock(null, 50);
-        if(block.getType() == Material.AIR) return false;
+        if (block.getType() == Material.AIR) return false;
         Location impactLocation = block.getLocation();
 
         PlayerManager playerManager = PlayerManager.getPlayer(player);
@@ -58,7 +58,7 @@ public class AbilityRayOfDoom extends Ability {
         player.getWorld().playSound(impactLocation, Sound.BLOCK_BEACON_ACTIVATE, SoundCategory.MASTER, 3, 1.5f);
         player.getWorld().playSound(impactLocation, Sound.ENTITY_LIGHTNING_BOLT_THUNDER, SoundCategory.MASTER, 3, 0.5f);
         Location particleLocation = impactLocation.add(0, 10, 0);
-        Location damageLocation = new Location(player.getWorld(), impactLocation.getX(), impactLocation.getY()-10, impactLocation.getZ());
+        Location damageLocation = new Location(player.getWorld(), impactLocation.getX(), impactLocation.getY() - 10, impactLocation.getZ());
 
         BukkitTask task = new BukkitRunnable() {
 
@@ -72,7 +72,7 @@ public class AbilityRayOfDoom extends Ability {
                 Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                 double radiusSquared = 6 * 6;
                 players.forEach(all -> {
-                    if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(damageLocation) <= radiusSquared) {
+                    if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(damageLocation) <= radiusSquared) {
                         all.damage(damage, player);
                     }
                 });

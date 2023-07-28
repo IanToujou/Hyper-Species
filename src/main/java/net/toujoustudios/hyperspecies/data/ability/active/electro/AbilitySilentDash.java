@@ -6,7 +6,10 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.Particle;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -37,7 +40,7 @@ public class AbilitySilentDash extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(10,12,14,16,18,20));
+        fields.put(AbilityField.DURATION, List.of(10, 12, 14, 16, 18, 20));
         setFields(fields);
 
     }
@@ -53,19 +56,19 @@ public class AbilitySilentDash extends Ability {
             @Override
             public void run() {
 
-                if(remaining[0] <= 0) {
+                if (remaining[0] <= 0) {
                     this.cancel();
                     return;
                 }
 
-                if(player.isSneaking()) {
+                if (player.isSneaking()) {
 
                     Location location = player.getLocation();
                     Vector direction = location.getDirection();
                     direction.normalize();
                     direction.multiply(5);
                     location.add(direction);
-                    if(location.getBlock().getType() == Material.AIR) {
+                    if (location.getBlock().getType() == Material.AIR) {
                         player.teleport(new Location(location.getWorld(), location.getX(), player.getLocation().getY(), location.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch()));
                         player.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, player.getLocation(), 100, 0.5, 0.5, 0.5);
                         player.setVelocity(player.getLocation().getDirection());
@@ -80,7 +83,7 @@ public class AbilitySilentDash extends Ability {
         }.runTaskTimer(HyperSpecies.getInstance(), 10, 10);
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
-            if(!task.isCancelled()) task.cancel();
+            if (!task.isCancelled()) task.cancel();
         }, 20L * duration);
 
         return true;

@@ -6,7 +6,10 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -33,7 +36,7 @@ public class AbilityWaterDome extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(5,6,7,8,9,10));
+        fields.put(AbilityField.DURATION, List.of(5, 6, 7, 8, 9, 10));
         setFields(fields);
 
     }
@@ -48,12 +51,12 @@ public class AbilityWaterDome extends Ability {
 
         Block center = player.getLocation().getBlock();
         int radius = 15;
-        for(int x = -radius; x <= radius; x++) {
-            for(int y = -radius; y <= radius; y++) {
-                for(int z = -radius; z <= radius; z++) {
+        for (int x = -radius; x <= radius; x++) {
+            for (int y = -radius; y <= radius; y++) {
+                for (int z = -radius; z <= radius; z++) {
                     Block b = center.getRelative(x, y, z);
-                    if(center.getLocation().distance(b.getLocation()) <= radius) {
-                        if(b.getType() == Material.AIR) {
+                    if (center.getLocation().distance(b.getLocation()) <= radius) {
+                        if (b.getType() == Material.AIR) {
                             b.setType(Material.BLUE_STAINED_GLASS);
                             blocks.add(b);
                         }
@@ -63,12 +66,12 @@ public class AbilityWaterDome extends Ability {
         }
 
         int hollowRadius = 13;
-        for(int x = -hollowRadius; x <= hollowRadius; x++) {
-            for(int y = -hollowRadius; y <= hollowRadius; y++) {
-                for(int z = -hollowRadius; z <= hollowRadius; z++) {
+        for (int x = -hollowRadius; x <= hollowRadius; x++) {
+            for (int y = -hollowRadius; y <= hollowRadius; y++) {
+                for (int z = -hollowRadius; z <= hollowRadius; z++) {
                     Block b = center.getRelative(x, y, z);
-                    if(center.getLocation().distance(b.getLocation()) <= hollowRadius) {
-                        if(b.getType() == Material.BLUE_STAINED_GLASS) {
+                    if (center.getLocation().distance(b.getLocation()) <= hollowRadius) {
+                        if (b.getType() == Material.BLUE_STAINED_GLASS) {
                             b.setType(Material.AIR);
                         }
                     }
@@ -79,7 +82,7 @@ public class AbilityWaterDome extends Ability {
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
             player.getWorld().playSound(player.getLocation(), Sound.ITEM_TRIDENT_THUNDER, SoundCategory.MASTER, 2, 0f);
             blocks.forEach(b -> {
-                if(b.getType() == Material.BLUE_STAINED_GLASS) b.setType(Material.AIR);
+                if (b.getType() == Material.BLUE_STAINED_GLASS) b.setType(Material.AIR);
             });
         }, 20L * duration);
 

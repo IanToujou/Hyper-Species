@@ -36,7 +36,7 @@ public class AbilityEndblaze extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(10,11,12,14,15,16,17,18,20));
+        fields.put(AbilityField.DURATION, List.of(10, 11, 12, 14, 15, 16, 17, 18, 20));
 
         setFields(fields);
 
@@ -53,7 +53,7 @@ public class AbilityEndblaze extends Ability {
         player.getWorld().playSound(location, Sound.ITEM_FIRECHARGE_USE, 3, 2f);
         player.getWorld().spawnParticle(Particle.SMOKE_LARGE, location, 300, 0.3, 0, 0.3);
 
-        if(!players.contains(player.getUniqueId())) players.add(player.getUniqueId());
+        if (!players.contains(player.getUniqueId())) players.add(player.getUniqueId());
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> players.remove(player.getUniqueId()), 20L * duration);
 

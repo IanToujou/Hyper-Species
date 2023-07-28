@@ -26,7 +26,7 @@ public class Loader {
 
     public static void preInitialize() {
 
-        if(cancelled) return;
+        if (cancelled) return;
 
         state = LoaderState.PRE_INIT;
         Config.initialize();
@@ -34,14 +34,14 @@ public class Loader {
         ItemList.initialize();
         EmoteLoader.initialize();
 
-        if(cancelled) return;
+        if (cancelled) return;
 
         Logger.log(LogLevel.DEBUG, "Pre initialization completed.");
 
     }
 
     public static void initialize() {
-        if(cancelled) return;
+        if (cancelled) return;
         state = LoaderState.INIT;
         HyperSpecies.getInstance().registerUI();
         HyperSpecies.getInstance().registerEvents();
@@ -55,11 +55,11 @@ public class Loader {
 
     public static void postInitialize() {
 
-        if(cancelled) return;
+        if (cancelled) return;
         state = LoaderState.POST_INIT;
 
-        for(Player player : Bukkit.getOnlinePlayers()) {
-            if(player != null) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            if (player != null) {
                 PlayerManager playerManager = PlayerManager.getPlayer(player);
                 PlayerManager.getPlayers().put(player.getUniqueId(), playerManager);
             }

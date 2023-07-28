@@ -45,21 +45,21 @@ public class AbilityMineSight extends Ability {
 
         int radius = 8;
         int blocksFound = 0;
-        for(int x = -radius; x <= radius; x++) {
-            for(int y = -radius; y <= radius; y++) {
-                for(int z = -radius; z <= radius; z++) {
+        for (int x = -radius; x <= radius; x++) {
+            for (int y = -radius; y <= radius; y++) {
+                for (int z = -radius; z <= radius; z++) {
                     Block b = center.getRelative(x, y, z);
-                    if(center.getLocation().distance(b.getLocation()) <= radius) {
-                        if(materials.contains(b.getType())) blocksFound++;
+                    if (center.getLocation().distance(b.getLocation()) <= radius) {
+                        if (materials.contains(b.getType())) blocksFound++;
                     }
                 }
             }
         }
 
-        if(blocksFound > 10) {
+        if (blocksFound > 10) {
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1.3f);
             player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, player.getLocation(), 100, 0.5, 0.5, 0.5);
-        } else if(blocksFound > 0) {
+        } else if (blocksFound > 0) {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, SoundCategory.MASTER, 100, 2f);
             player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, player.getLocation(), 100, 0.5, 0.5, 0.5);
         } else player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 0f);

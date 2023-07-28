@@ -37,8 +37,8 @@ public class AbilityRevengeOfTheGround extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.RANGE, List.of(5,6,7,8,9,10));
-        fields.put(AbilityField.DAMAGE, List.of(3,4,5,6,7,8));
+        fields.put(AbilityField.RANGE, List.of(5, 6, 7, 8, 9, 10));
+        fields.put(AbilityField.DAMAGE, List.of(3, 4, 5, 6, 7, 8));
         setFields(fields);
 
     }
@@ -49,7 +49,7 @@ public class AbilityRevengeOfTheGround extends Ability {
         PlayerManager playerManager = PlayerManager.getPlayer(player);
         int radius = getFieldValue(AbilityField.RANGE, playerManager.getAbilityLevel(this));
         int damage = getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(this));
-        Block center = player.getLocation().add(0,-1,0).getBlock();
+        Block center = player.getLocation().add(0, -1, 0).getBlock();
 
         List<Material> materials = List.of(
                 Material.STONE,
@@ -64,23 +64,23 @@ public class AbilityRevengeOfTheGround extends Ability {
             @Override
             public void run() {
 
-                center.getWorld().spawnParticle(Particle.BLOCK_CRACK, new Location(center.getWorld(), center.getX(), center.getY()+1, center.getZ()), 300, (radius/2f)-1, 0.1, (radius/2f)-1, Material.DEEPSLATE.createBlockData());
+                center.getWorld().spawnParticle(Particle.BLOCK_CRACK, new Location(center.getWorld(), center.getX(), center.getY() + 1, center.getZ()), 300, (radius / 2f) - 1, 0.1, (radius / 2f) - 1, Material.DEEPSLATE.createBlockData());
                 center.getWorld().playSound(center.getLocation(), Sound.BLOCK_GRASS_BREAK, SoundCategory.MASTER, 3, 0.5f);
 
-                for(int x = -radius; x <= radius; x++) {
-                    for(int y = -radius; y <= radius; y++) {
-                        for(int z = -radius; z <= radius; z++) {
+                for (int x = -radius; x <= radius; x++) {
+                    for (int y = -radius; y <= radius; y++) {
+                        for (int z = -radius; z <= radius; z++) {
                             Block b = center.getRelative(x, y, z);
-                            if(center.getLocation().distance(b.getLocation()) <= radius) {
-                                if(materials.contains(b.getType())) {
+                            if (center.getLocation().distance(b.getLocation()) <= radius) {
+                                if (materials.contains(b.getType())) {
                                     Bukkit.getOnlinePlayers().forEach(all -> {
                                         Block playerBlock = all.getLocation().getBlock().getRelative(BlockFace.DOWN);
-                                        if(materials.contains(playerBlock.getType()) && player != all) {
+                                        if (materials.contains(playerBlock.getType()) && player != all) {
                                             FallingBlock block = all.getWorld().spawnFallingBlock(all.getLocation(), playerBlock.getType().createBlockData());
                                             block.setDropItem(true);
                                             block.setCancelDrop(true);
                                             block.setInvulnerable(true);
-                                            block.setVelocity(new Vector(0,0.6f,0));
+                                            block.setVelocity(new Vector(0, 0.6f, 0));
                                             all.damage(damage, player);
                                         }
                                     });

@@ -26,7 +26,7 @@ public class Species {
     }
 
     public static Species getSpecies(String name) {
-        if(species.containsKey(name)) return species.get(name);
+        if (species.containsKey(name)) return species.get(name);
         return null;
     }
 
@@ -35,14 +35,14 @@ public class Species {
                 name,
                 prefix,
                 icon,
-                (subSpecies==null ? new ArrayList<>() : subSpecies),
+                (subSpecies == null ? new ArrayList<>() : subSpecies),
                 passive
         ));
     }
 
     public SubSpecies getSubSpecies(String name) {
-        for(SubSpecies all : subSpecies) {
-            if(all.getName().equalsIgnoreCase(name)) return all;
+        for (SubSpecies all : subSpecies) {
+            if (all.getName().equalsIgnoreCase(name)) return all;
         }
         return null;
     }

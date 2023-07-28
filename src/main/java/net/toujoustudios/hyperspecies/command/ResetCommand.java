@@ -17,17 +17,17 @@ public class ResetCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
 
-        if(!(commandSender instanceof Player player)) {
+        if (!(commandSender instanceof Player player)) {
             Logger.log(LogLevel.ERROR, "You cannot use this command in the console.");
             return false;
         }
 
-        if(!player.hasPermission("hyperspecies.command.reset")) {
+        if (!player.hasPermission("hyperspecies.command.reset")) {
             player.sendMessage(Component.text(Config.MESSAGE_ERROR_PERMISSION));
             return false;
         }
 
-        if(args.length != 0) {
+        if (args.length != 0) {
             player.sendMessage(Component.text(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", this.getUsage())));
             return false;
         }

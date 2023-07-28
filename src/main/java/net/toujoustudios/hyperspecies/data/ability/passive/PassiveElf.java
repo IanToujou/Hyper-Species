@@ -9,7 +9,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 
-public class PassiveElf extends PassiveAbility{
+public class PassiveElf extends PassiveAbility {
     @Override
     public void execute(Player player) {
 
@@ -27,10 +27,10 @@ public class PassiveElf extends PassiveAbility{
         biomes.add(Biome.BAMBOO_JUNGLE);
         biomes.add(Biome.SPARSE_JUNGLE);
 
-        if(biomes.contains(player.getLocation().getBlock().getBiome())) {
+        if (biomes.contains(player.getLocation().getBlock().getBiome())) {
             playerManager.setHealthRegeneration(0.2);
         } else {
-            if(!playerManager.isRegenerationCoolingDown()) playerManager.setHealthRegeneration(0.2);
+            if (!playerManager.isRegenerationCoolingDown()) playerManager.setHealthRegeneration(0.2);
         }
 
         // Damage in cold biomes
@@ -45,7 +45,7 @@ public class PassiveElf extends PassiveAbility{
         coldBiomes.add(Biome.SNOWY_SLOPES);
         coldBiomes.add(Biome.SNOWY_TAIGA);
 
-        if(coldBiomes.contains(player.getLocation().add(0, -1, 0).getBlock().getBiome())) {
+        if (coldBiomes.contains(player.getLocation().add(0, -1, 0).getBlock().getBiome())) {
             player.damage(1);
         }
 
@@ -61,7 +61,7 @@ public class PassiveElf extends PassiveAbility{
         leafBlocks.add(Material.FLOWERING_AZALEA_LEAVES);
         leafBlocks.add(Material.SPRUCE_LEAVES);
 
-        if(leafBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
+        if (leafBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
             playerManager.setManaRegeneration(0.3);
         } else playerManager.setManaRegeneration(0.1);
 
@@ -86,7 +86,7 @@ public class PassiveElf extends PassiveAbility{
         woodBlocks.add(Material.CRIMSON_STEM);
         woodBlocks.add(Material.CRIMSON_PLANKS);
 
-        if(woodBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
+        if (woodBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * 10, 0, false, false, true));
         }
 
@@ -101,7 +101,7 @@ public class PassiveElf extends PassiveAbility{
         graniteBlocks.add(Material.BLACKSTONE_WALL);
         graniteBlocks.add(Material.BLACKSTONE_STAIRS);
 
-        if(graniteBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
+        if (graniteBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 10, 0, false, false, true));
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 10, 0, false, false, true));
         }

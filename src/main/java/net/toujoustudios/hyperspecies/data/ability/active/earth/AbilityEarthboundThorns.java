@@ -35,7 +35,7 @@ public class AbilityEarthboundThorns extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DAMAGE, List.of(5,7,9,11,12,14));
+        fields.put(AbilityField.DAMAGE, List.of(5, 7, 9, 11, 12, 14));
         setFields(fields);
 
     }
@@ -54,16 +54,18 @@ public class AbilityEarthboundThorns extends Ability {
 
         int radius = 2;
         ArrayList<Block> thorns = new ArrayList<>();
-        for(int x = -radius; x <= radius; x++) {
-            for(int y = -radius; y <= radius; y++) {
-                for(int z = -radius; z <= radius; z++) {
+        for (int x = -radius; x <= radius; x++) {
+            for (int y = -radius; y <= radius; y++) {
+                for (int z = -radius; z <= radius; z++) {
                     Block b1 = center1.getRelative(x, y, z);
-                    if(center1.getLocation().distance(b1.getLocation()) <= radius) {
-                        if(b1.getType() == Material.AIR && b1.getRelative(BlockFace.DOWN).getType() != Material.AIR && b1.getRelative(BlockFace.DOWN).getType() != Material.POINTED_DRIPSTONE) thorns.add(b1);
+                    if (center1.getLocation().distance(b1.getLocation()) <= radius) {
+                        if (b1.getType() == Material.AIR && b1.getRelative(BlockFace.DOWN).getType() != Material.AIR && b1.getRelative(BlockFace.DOWN).getType() != Material.POINTED_DRIPSTONE)
+                            thorns.add(b1);
                     }
                     Block b2 = center2.getRelative(x, y, z);
-                    if(center2.getLocation().distance(b2.getLocation()) <= radius) {
-                        if(b2.getType() == Material.AIR && b1.getRelative(BlockFace.DOWN).getType() != Material.AIR && b1.getRelative(BlockFace.DOWN).getType() != Material.POINTED_DRIPSTONE) thorns.add(b2);
+                    if (center2.getLocation().distance(b2.getLocation()) <= radius) {
+                        if (b2.getType() == Material.AIR && b1.getRelative(BlockFace.DOWN).getType() != Material.AIR && b1.getRelative(BlockFace.DOWN).getType() != Material.POINTED_DRIPSTONE)
+                            thorns.add(b2);
                     }
                 }
             }
@@ -73,11 +75,11 @@ public class AbilityEarthboundThorns extends Ability {
 
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
         double radiusSquared = 3 * 3;
-        for(Player all : players) {
-            if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(loc1) <= radiusSquared) {
-                if(all != player) all.damage(damage, player);
-            } else if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(loc2) <= radiusSquared) {
-                if(all != player) all.damage(damage, player);
+        for (Player all : players) {
+            if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(loc1) <= radiusSquared) {
+                if (all != player) all.damage(damage, player);
+            } else if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(loc2) <= radiusSquared) {
+                if (all != player) all.damage(damage, player);
             }
         }
 

@@ -35,8 +35,8 @@ public class AbilityRoarOfTheStone extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(5,6,7,8,9,10,11,12,15));
-        fields.put(AbilityField.RANGE, List.of(7,8,9,10,11,12,13,14,15));
+        fields.put(AbilityField.DURATION, List.of(5, 6, 7, 8, 9, 10, 11, 12, 15));
+        fields.put(AbilityField.RANGE, List.of(7, 8, 9, 10, 11, 12, 13, 14, 15));
         setFields(fields);
 
     }
@@ -55,8 +55,8 @@ public class AbilityRoarOfTheStone extends Ability {
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
         double radiusSquared = range * range;
         players.forEach(all -> {
-            if(all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
-                if(all != player) {
+            if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
+                if (all != player) {
                     Vector unitVector = all.getLocation().toVector().subtract(player.getLocation().toVector()).normalize();
                     all.setVelocity(new Vector(unitVector.getX(), 0.6f, unitVector.getZ()).multiply(1.2f));
                     all.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration * 20, 1, false, false, true));
