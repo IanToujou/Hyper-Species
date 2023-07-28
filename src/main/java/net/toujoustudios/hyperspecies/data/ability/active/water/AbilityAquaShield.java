@@ -9,7 +9,6 @@ import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,12 +26,12 @@ public class AbilityAquaShield extends Ability {
 
         super(
                 "Aqua Shield",
-                List.of("§8Sneak to dash in the direction you", "§8are looking at. You can pass through", "§8walls and gain invisibility. This", "§8effect stays active for §d{duration}s§8."),
+                List.of("§8Forms a protective shield of water", "§8that provides §e⛨ {shield}§8."),
                 Element.WATER,
                 AbilityType.UTILITY,
                 8,
                 180,
-                Material.HEART_OF_THE_SEA,
+                Material.NAUTILUS_SHELL,
                 5,
                 List.of("Aquatilia"),
                 5,
@@ -40,7 +39,7 @@ public class AbilityAquaShield extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(5,6,7,8,9,10));
+        fields.put(AbilityField.SHIELD, List.of(5,6,7,8,9,10));
         setFields(fields);
 
     }
@@ -49,11 +48,10 @@ public class AbilityAquaShield extends Ability {
     public boolean execute(Player player) {
 
         PlayerManager playerManager = PlayerManager.getPlayer(player);
-        int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
+        int shield = getFieldValue(AbilityField.SHIELD, playerManager.getAbilityLevel(this));
         player.playSound(player.getLocation(), Sound.ITEM_BUCKET_EMPTY, SoundCategory.MASTER, 2, 1.5f);
-        if(!activePlayers.contains(player.getUniqueId())) activePlayers.add(player.getUniqueId());
 
-        BukkitTask task = new BukkitRunnable() {
+        new BukkitRunnable() {
             double phi = 0;
             @Override
             public void run() {
@@ -69,24 +67,16 @@ public class AbilityAquaShield extends Ability {
                     location.subtract(x,y,z);
                 }
                 if (phi > Math.PI) {
-                    phi = 0;
+                    this.cancel();
                 }
             }
 
         }.runTaskTimer(HyperSpecies.getInstance(), 0, 1);
 
-        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
-            player.getWorld().playSound(player.getLocation(), Sound.BLOCK_FIRE_EXTINGUISH, SoundCategory.MASTER, 2, 2f);
-            activePlayers.remove(player.getUniqueId());
-            task.cancel();
-        }, 20L * duration);
+        playerManager.setShield(playerManager.getShield()+shield);
 
         return true;
 
-    }
-
-    public static ArrayList<UUID> getActivePlayers() {
-        return activePlayers;
     }
 
 }

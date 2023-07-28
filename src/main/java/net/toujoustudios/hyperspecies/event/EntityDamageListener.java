@@ -2,7 +2,6 @@ package net.toujoustudios.hyperspecies.event;
 
 import net.toujoustudios.hyperspecies.data.ability.active.air.AbilityICBM;
 import net.toujoustudios.hyperspecies.data.ability.active.earth.AbilityBornIntoStone;
-import net.toujoustudios.hyperspecies.data.ability.active.water.AbilityAquaShield;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Material;
@@ -36,11 +35,6 @@ public class EntityDamageListener implements Listener {
             PlayerManager playerManager = PlayerManager.getPlayer(player);
 
             if(playerManager.getSpecies() == null) return;
-
-            if(AbilityAquaShield.getActivePlayers().contains(player.getUniqueId())) {
-                event.setCancelled(true);
-                return;
-            }
 
             if(AbilityBornIntoStone.getPlayers().contains(player.getUniqueId())) {
                 event.setCancelled(true);
