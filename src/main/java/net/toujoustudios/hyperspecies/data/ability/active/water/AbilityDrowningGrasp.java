@@ -8,8 +8,6 @@ import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
@@ -17,27 +15,26 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
-public class AbilityMistyVeil extends Ability {
+public class AbilityDrowningGrasp extends Ability {
 
-    public AbilityMistyVeil() {
+    public AbilityDrowningGrasp() {
 
         super(
-                "Misty Veil",
-                List.of("§8Creates a thick fog that obscures the", "§8vision of enemies for §d{duration}s§8."),
+                "Drowning Grasp",
+                List.of("§8Envelops the target in a suffocating", "§8grip, restricting their movement for", "§d{duration}s§8."),
                 Element.WATER,
-                Element.AIR,
                 AbilityType.DEBUFF,
-                4,
-                120,
-                Material.BONE_MEAL,
+                8,
+                300,
+                Material.NAUTILUS_SHELL,
                 5,
-                List.of("Reptile", "Aquatilia"),
-                3,
-                2
+                List.of("Aquatilia"),
+                4,
+                4
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(5,7,9,11,13,15));
+        fields.put(AbilityField.DURATION, List.of(3,4,5,6,7,8));
         setFields(fields);
 
     }
@@ -50,19 +47,20 @@ public class AbilityMistyVeil extends Ability {
         BukkitTask task = new BukkitRunnable() {
             @Override
             public void run() {
-                location.getWorld().spawnParticle(Particle.CLOUD, location, 200, 2, 2, 2);
                 location.getWorld().spawnParticle(Particle.DRIP_WATER, location, 300, 3, 3, 3);
-                location.getWorld().playSound(location, Sound.BLOCK_FIRE_EXTINGUISH, SoundCategory.MASTER, 3, 2f);
+                location.getWorld().spawnParticle(Particle.DRIPPING_HONEY, location, 50, 3, 3, 3);
+                location.getWorld().playSound(location, Sound.ITEM_BUCKET_EMPTY, SoundCategory.MASTER, 3, 1f);
                 Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                 double radiusSquared = 5 * 5;
                 for(Player all : players) {
-                    if(all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) all.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * duration, 0, false, false, true));
+                    if(all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
+                        PlayerManager manager = PlayerManager.getPlayer(all);
+                        manager.stun(duration * 20);
+                    }
                 }
             }
         }.runTaskTimer(HyperSpecies.getInstance(), 0, 2);
-
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), task::cancel, 20L * duration);
-
         return true;
     }
 

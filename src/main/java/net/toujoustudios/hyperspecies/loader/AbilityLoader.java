@@ -212,6 +212,8 @@ public class AbilityLoader {
         Ability.createAbility(new AbilityAquaShield());
         Ability.createAbility(new AbilityWaterDome());
         Ability.createAbility(new AbilityMistyVeil());
+        Ability.createAbility(new AbilityWhirlpoolWhispers());
+        Ability.createAbility(new AbilityDrowningGrasp());
 
         HashMap<Integer, Ability> healingWatersAbilities = new HashMap<>();
         healingWatersAbilities.put(0, Ability.getAbility("Healing Waters"));
@@ -219,6 +221,8 @@ public class AbilityLoader {
         healingWatersAbilities.put(2, Ability.getAbility("Aqua Shield"));
         healingWatersAbilities.put(3, Ability.getAbility("Water Dome"));
         healingWatersAbilities.put(10, Ability.getAbility("Misty Veil"));
+        healingWatersAbilities.put(11, Ability.getAbility("Whirlpool Whispers"));
+        healingWatersAbilities.put(12, Ability.getAbility("Drowning Grasp"));
         AbilityTree.createTree("Healing Waters", new AbilityTree(healingWatersAbilities, List.of(0)));
 
     }
