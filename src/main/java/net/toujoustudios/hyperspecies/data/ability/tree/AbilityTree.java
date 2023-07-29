@@ -25,7 +25,6 @@ public class AbilityTree {
 
     private final HashMap<Integer, Ability> abilities;
     private List<Integer> links = new ArrayList<>();
-    private final HashMap<Integer, AbilityTree> treeLinks = new HashMap<>();
 
     public AbilityTree(HashMap<Integer, Ability> abilities) {
         this.abilities = abilities;
@@ -56,10 +55,6 @@ public class AbilityTree {
 
     public List<Integer> getLinks() {
         return links;
-    }
-
-    public HashMap<Integer, AbilityTree> getTreeLinks() {
-        return treeLinks;
     }
 
     public Inventory buildInventory(Player player) {

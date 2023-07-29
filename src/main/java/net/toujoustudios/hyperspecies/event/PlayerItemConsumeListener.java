@@ -31,7 +31,7 @@ public class PlayerItemConsumeListener implements Listener {
 
         if (playerManager.getSpecies() == null) return;
 
-        List<String> alcoholNames = List.of("§eBeer", "§6Rum", "§cRed Wine", "§fWhite Wine", "§5Anime Girl Fluids");
+        List<String> alcoholNames = List.of("§eBeer", "§6Rum", "§cRed Wine", "§fWhite Wine", "§6Mead", "§5Anime Girl Fluids");
 
         ItemMeta itemMeta = event.getItem().getItemMeta();
         if (itemMeta != null) {
@@ -42,7 +42,7 @@ public class PlayerItemConsumeListener implements Listener {
                 case "§eBeer" -> playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.2);
                 case "§6Rum" -> playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.6);
                 case "§cRed Wine" -> playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.5);
-                case "§fWhite Wine" -> playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.4);
+                case "§fWhite Wine", "§6Mead" -> playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.4);
                 case "§5Anime Girl Fluids" -> {
                     playerManager.setDrunkenness(playerManager.getDrunkenness() + 1);
                     Bukkit.broadcastMessage("§e" + player.getName() + "§d is turning into an anime girl§8...");

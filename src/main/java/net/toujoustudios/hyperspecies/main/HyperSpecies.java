@@ -10,10 +10,7 @@ import net.toujoustudios.hyperspecies.data.team.Team;
 import net.toujoustudios.hyperspecies.event.*;
 import net.toujoustudios.hyperspecies.item.ItemList;
 import net.toujoustudios.hyperspecies.loader.Loader;
-import net.toujoustudios.hyperspecies.ui.AbilityTreeUI;
-import net.toujoustudios.hyperspecies.ui.ResetUI;
-import net.toujoustudios.hyperspecies.ui.SpeciesUI;
-import net.toujoustudios.hyperspecies.ui.TeamUI;
+import net.toujoustudios.hyperspecies.ui.*;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
 import org.bukkit.Material;
@@ -187,6 +184,7 @@ public final class HyperSpecies extends JavaPlugin {
         pluginManager.registerEvents(new TeamUI(), this);
         pluginManager.registerEvents(new ResetUI(), this);
         pluginManager.registerEvents(new AbilityTreeUI(), this);
+        pluginManager.registerEvents(new CharacterUI(), this);
     }
 
     public void registerEvents() {
@@ -206,14 +204,14 @@ public final class HyperSpecies extends JavaPlugin {
 
     public void registerCrafting() {
 
-        ShapedRecipe alcoholBeerRecipe = new ShapedRecipe(new NamespacedKey(this, "alcoholBeer"), ItemList.ALCOHOL_BEER);
+        ShapedRecipe alcoholBeerRecipe = new ShapedRecipe(new NamespacedKey(this, "beer"), ItemList.ALCOHOL_BEER);
         alcoholBeerRecipe.shape("AAA", "ABA", "ACA");
         alcoholBeerRecipe.setIngredient('A', Material.WHEAT);
         alcoholBeerRecipe.setIngredient('B', Material.GLASS_BOTTLE);
         alcoholBeerRecipe.setIngredient('C', Material.WATER_BUCKET);
         Bukkit.addRecipe(alcoholBeerRecipe);
 
-        ShapedRecipe alcoholRumRecipe = new ShapedRecipe(new NamespacedKey(this, "alcoholRum"), ItemList.ALCOHOL_RUM);
+        ShapedRecipe alcoholRumRecipe = new ShapedRecipe(new NamespacedKey(this, "rum"), ItemList.ALCOHOL_RUM);
         alcoholRumRecipe.shape("AAA", "ABA", "DCD");
         alcoholRumRecipe.setIngredient('A', Material.SUGAR_CANE);
         alcoholRumRecipe.setIngredient('B', Material.GLASS_BOTTLE);
@@ -221,27 +219,35 @@ public final class HyperSpecies extends JavaPlugin {
         alcoholRumRecipe.setIngredient('D', Material.SUGAR);
         Bukkit.addRecipe(alcoholRumRecipe);
 
-        ShapedRecipe alcoholRedWineRecipe = new ShapedRecipe(new NamespacedKey(this, "alcoholRedWine"), ItemList.ALCOHOL_RED_WINE);
+        ShapedRecipe alcoholRedWineRecipe = new ShapedRecipe(new NamespacedKey(this, "redWine"), ItemList.ALCOHOL_RED_WINE);
         alcoholRedWineRecipe.shape("AAA", "ABA", "ACA");
         alcoholRedWineRecipe.setIngredient('A', Material.SWEET_BERRIES);
         alcoholRedWineRecipe.setIngredient('B', Material.GLASS_BOTTLE);
         alcoholRedWineRecipe.setIngredient('C', Material.WATER_BUCKET);
         Bukkit.addRecipe(alcoholRedWineRecipe);
 
-        ShapedRecipe alcoholWhiteWineRecipe = new ShapedRecipe(new NamespacedKey(this, "alcoholWhiteWine"), ItemList.ALCOHOL_WHITE_WINE);
+        ShapedRecipe alcoholWhiteWineRecipe = new ShapedRecipe(new NamespacedKey(this, "whiteWine"), ItemList.ALCOHOL_WHITE_WINE);
         alcoholWhiteWineRecipe.shape("AAA", "ABA", "ACA");
         alcoholWhiteWineRecipe.setIngredient('A', Material.GLOW_BERRIES);
         alcoholWhiteWineRecipe.setIngredient('B', Material.GLASS_BOTTLE);
         alcoholWhiteWineRecipe.setIngredient('C', Material.WATER_BUCKET);
         Bukkit.addRecipe(alcoholWhiteWineRecipe);
 
-        ShapedRecipe alcoholAnimeGirlFluidsRecipe = new ShapedRecipe(new NamespacedKey(this, "alcoholAnimeGirlFluids"), ItemList.ALCOHOL_ANIME_GIRL_FLUIDS);
-        alcoholAnimeGirlFluidsRecipe.shape("AAA", "ABA", "DCD");
-        alcoholAnimeGirlFluidsRecipe.setIngredient('A', Material.DIAMOND);
-        alcoholAnimeGirlFluidsRecipe.setIngredient('B', Material.GLASS_BOTTLE);
-        alcoholAnimeGirlFluidsRecipe.setIngredient('C', Material.WATER_BUCKET);
-        alcoholAnimeGirlFluidsRecipe.setIngredient('D', Material.NETHERITE_INGOT);
-        Bukkit.addRecipe(alcoholAnimeGirlFluidsRecipe);
+        ShapedRecipe meadRecipe = new ShapedRecipe(new NamespacedKey(this, "mead"), ItemList.ALCOHOL_ANIME_GIRL_FLUIDS);
+        meadRecipe.shape("AAA", "ABA", "DCD");
+        meadRecipe.setIngredient('A', Material.HONEYCOMB);
+        meadRecipe.setIngredient('B', Material.GLASS_BOTTLE);
+        meadRecipe.setIngredient('C', Material.WATER_BUCKET);
+        meadRecipe.setIngredient('D', Material.HONEYCOMB_BLOCK);
+        Bukkit.addRecipe(meadRecipe);
+
+        ShapedRecipe animeGirlFluidsRecipe = new ShapedRecipe(new NamespacedKey(this, "animeGirlFluids"), ItemList.ALCOHOL_ANIME_GIRL_FLUIDS);
+        animeGirlFluidsRecipe.shape("AAA", "ABA", "DCD");
+        animeGirlFluidsRecipe.setIngredient('A', Material.DIAMOND);
+        animeGirlFluidsRecipe.setIngredient('B', Material.GLASS_BOTTLE);
+        animeGirlFluidsRecipe.setIngredient('C', Material.WATER_BUCKET);
+        animeGirlFluidsRecipe.setIngredient('D', Material.NETHERITE_INGOT);
+        Bukkit.addRecipe(animeGirlFluidsRecipe);
 
         ShapelessRecipe molotovCocktailRecipe = new ShapelessRecipe(new NamespacedKey(this, "molotovCocktail"), ItemList.MOLOTOV_COCKTAIL);
         molotovCocktailRecipe.addIngredient(Material.GLASS_BOTTLE);
