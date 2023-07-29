@@ -160,7 +160,12 @@ public class AbilityTree {
                         newLore.add("§7Click to unlock this ability: §eⓄ " + ability.getCost() + " Skill Points");
                     } else if (item.getType() == Material.GRAY_WOOL)
                         newLore.add("§cYou cannot unlock this ability yet.");
-                } else item.setType(ability.getItem().getType());
+                } else {
+                    item.setType(ability.getItem().getType());
+                    if(playerManager.getActiveAbilities().contains(ability)) {
+                        newLore.add("§aClick to equip this ability.");
+                    } else newLore.add("§eClick to un-equip this ability.");
+                }
 
                 itemMeta.setLore(newLore);
                 item.setItemMeta(itemMeta);

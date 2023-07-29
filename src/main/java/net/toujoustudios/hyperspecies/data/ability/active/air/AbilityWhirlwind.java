@@ -62,7 +62,7 @@ public class AbilityWhirlwind extends Ability {
                 double radiusSquared = 3 * 3;
                 for (Player all : players) {
                     if (all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
-                        all.setVelocity(new Vector(0, 0.8, 0));
+                        all.setVelocity(new Vector(0, 1, 0));
                     }
                 }
 

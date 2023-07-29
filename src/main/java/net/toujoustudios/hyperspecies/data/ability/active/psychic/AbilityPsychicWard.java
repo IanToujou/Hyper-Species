@@ -49,7 +49,7 @@ public class AbilityPsychicWard extends Ability {
         PlayerManager playerManager = PlayerManager.getPlayer(player);
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
         Block block = player.getTargetBlock(null, 30);
-        if (block.getLocation().add(0, 1, 0).getBlock().getType() == Material.AIR) {
+        if (block.getType() != Material.AIR && block.getLocation().add(0, 1, 0).getBlock().getType() == Material.AIR) {
 
             Location location = block.getLocation().add(0, 1, 0);
             location.getBlock().setType(Material.TORCHFLOWER);

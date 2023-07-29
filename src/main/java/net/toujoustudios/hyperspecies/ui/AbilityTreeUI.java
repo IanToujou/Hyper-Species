@@ -153,6 +153,12 @@ public class AbilityTreeUI implements Listener {
                         player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 Current weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight()));
                         return;
                     }
+                    if (playerManager.getActiveAbilities().size() >= 8) {
+                        player.openInventory(AbilityTree.buildMainInventory(player, 0));
+                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 0f);
+                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c You cannot carry more than §b8§c abilities§8."));
+                        return;
+                    }
                     playerManager.addActiveAbility(ability);
                     player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You added §b" + ability.getName() + "§7 to your loadout§8."));
                     player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 New weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight()));

@@ -3,6 +3,7 @@ package net.toujoustudios.hyperspecies.loader;
 import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.ability.active.air.AbilityICBM;
 import net.toujoustudios.hyperspecies.data.ability.active.air.AbilitySupersonicSpeed;
+import net.toujoustudios.hyperspecies.data.ability.active.air.AbilityWhirlwind;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEndblight;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEngulfingDarkness;
 import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityStrikeOfCorruption;
@@ -250,6 +251,13 @@ public class AbilityLoader {
         HashMap<Integer, Ability> raigekiAbilities = new HashMap<>();
         raigekiAbilities.put(0, Ability.getAbility("Raigeki"));
         AbilityTree.createTree("Raigeki", new AbilityTree(raigekiAbilities));
+
+        // Whirlwind
+        Ability.createAbility(new AbilityWhirlwind());
+
+        HashMap<Integer, Ability> whirlwindAbilities = new HashMap<>();
+        whirlwindAbilities.put(0, Ability.getAbility("Whirlwind"));
+        AbilityTree.createTree("Whirlwind", new AbilityTree(whirlwindAbilities));
 
     }
 
