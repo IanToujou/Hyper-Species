@@ -3,6 +3,7 @@ package net.toujoustudios.hyperspecies.event;
 import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.ability.active.Ability;
+import net.toujoustudios.hyperspecies.data.ability.tree.AbilityTree;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.item.ItemListUI;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
@@ -135,6 +136,9 @@ public class PlayerInteractListener implements Listener {
                         player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You just gained §eⓄ 4 Skill Points§8."));
                         player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You now have a total of §eⓄ " + playerManager.getSkill() + " Skill Points§8."));
                     }
+                } else {
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                    player.openInventory(AbilityTree.buildMainInventory(player,0));
                 }
             }
 

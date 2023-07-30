@@ -67,7 +67,7 @@ permissions:
       hyperspecies.command.team: true
       hyperspecies.command.ability: false
       hyperspecies.command.reset: true
-      hyperspecies.command.loadout: true
+      hyperspecies.command.loadout: false
       hyperspecies.command.setshield: false
       hyperspecies.command.sethealth: false
       hyperspecies.command.setmana: false
@@ -101,7 +101,7 @@ permissions:
       hyperspecies.command.team: true
       hyperspecies.command.ability: false
       hyperspecies.command.reset: true
-      hyperspecies.command.loadout: true
+      hyperspecies.command.loadout: false
       hyperspecies.command.setshield: false
       hyperspecies.command.sethealth: false
       hyperspecies.command.setmana: false
@@ -127,7 +127,7 @@ permissions:
     default: true
   hyperspecies.command.loadout:
     description: Allows players to use the ability tree command.
-    default: true
+    default: op
   hyperspecies.command.setshield:
     description: Allows players to use the set shield command.
     default: op
