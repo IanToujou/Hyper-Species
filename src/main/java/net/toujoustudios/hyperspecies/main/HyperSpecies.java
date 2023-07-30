@@ -177,6 +177,8 @@ public final class HyperSpecies extends JavaPlugin {
         getCommand("unlock").setExecutor(new UnlockCommand());
         getCommand("setskill").setExecutor(new SetSkillCommand());
         getCommand("setexperience").setExecutor(new SetExperienceCommand());
+        getCommand("character").setExecutor(new CharacterCommand());
+        getCommand("char").setExecutor(new CharacterCommand());
     }
 
     public void registerUI() {

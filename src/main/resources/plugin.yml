@@ -52,6 +52,11 @@ commands:
   setexperience:
     description: Set the experience for a player.
     permission: hyperspecies.command.setexperience
+  character:
+    description: View your character.
+    permission: hyperspecies.command.character
+    aliases:
+      - char
 
 permissions:
   hyperspecies.group.player:
@@ -70,6 +75,7 @@ permissions:
       hyperspecies.command.unlock: false
       hyperspecies.command.setskill: false
       hyperspecies.command.setexperience: false
+      hyperspecies.command.character: true
   hyperspecies.group.admin:
     description: The administrator group. Grants all permissions.
     children:
@@ -86,6 +92,7 @@ permissions:
       hyperspecies.command.unlock: true
       hyperspecies.command.setskill: true
       hyperspecies.command.setexperience: true
+      hyperspecies.command.character: true
   hyperspecies.group.moderator:
     description: The administrator group. Grants all permissions.
     children:
@@ -102,6 +109,7 @@ permissions:
       hyperspecies.command.unlock: false
       hyperspecies.command.setskill: false
       hyperspecies.command.setexperience: false
+      hyperspecies.command.character: true
   hyperspecies.command.emote:
     description: Allows players to use the emote command.
     default: true
@@ -141,3 +149,6 @@ permissions:
   hyperspecies.command.setexperience:
     description: Allows players to use the set experience command.
     default: op
+  hyperspecies.command.character:
+    description: Allows players to use the character command.
+    default: true

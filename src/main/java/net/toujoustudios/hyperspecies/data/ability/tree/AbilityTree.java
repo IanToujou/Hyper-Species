@@ -157,7 +157,7 @@ public class AbilityTree {
                         newLore.add("§cYou cannot unlock this ability yet.");
                 } else {
                     item.setType(ability.getItem().getType());
-                    if(playerManager.getActiveAbilities().contains(ability)) {
+                    if(!playerManager.getActiveAbilities().contains(ability)) {
                         newLore.add("§aClick to equip this ability.");
                     } else newLore.add("§eClick to un-equip this ability.");
                 }

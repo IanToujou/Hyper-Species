@@ -35,7 +35,6 @@ public class AbilityWhirlwind extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
         Location location = player.getLocation();
 
         new BukkitRunnable() {

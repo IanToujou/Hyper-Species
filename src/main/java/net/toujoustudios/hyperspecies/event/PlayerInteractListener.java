@@ -1,12 +1,12 @@
 package net.toujoustudios.hyperspecies.event;
 
+import net.kyori.adventure.text.Component;
+import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.item.ItemListUI;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.EventHandler;
@@ -93,6 +93,51 @@ public class PlayerInteractListener implements Listener {
                 for (int i = 0; i < 9; i++) player.getInventory().setItem(i, playerManager.getSavedInventory().get(i));
                 playerManager.setSelectingAbility(false);
             }
+            return;
+
+        }
+
+        if(event.getClickedBlock() != null && event.getClickedBlock().getType() == Material.LAPIS_BLOCK) {
+            Location location = event.getClickedBlock().getLocation();
+            location.add(1,0,0);
+            if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
+            location.add(0,0,1);
+            if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
+            location.subtract(0,0,2);
+            if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
+            location.subtract(1,0,0);
+            if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
+            location.subtract(1,0,0);
+            if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
+            location.add(0,0,1);
+            if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
+            location.add(0,0,1);
+            if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
+            location.add(1,0,0);
+            if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
+
+            if(event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                if(event.getItem() != null) {
+                    if(event.getItem().getType() == Material.DIAMOND) {
+                        event.setCancelled(true);
+                        player.getItemInHand().subtract();
+                        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
+                        player.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, event.getClickedBlock().getLocation(), 100, 0.1, 3, 0.1);
+                        playerManager.setExperience(playerManager.getExperience() + 5);
+                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You just gained §a5 XP§8."));
+                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You are now §bLevel " + playerManager.getLevel() + "§8."));
+                    } else if(event.getItem().getType() == Material.DIAMOND_BLOCK) {
+                        event.setCancelled(true);
+                        player.getItemInHand().subtract();
+                        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
+                        player.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, event.getClickedBlock().getLocation(), 100, 0.1, 3, 0.1);
+                        playerManager.setSkill(playerManager.getSkill() + 4);
+                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You just gained §eⓄ 4 Skill Points§8."));
+                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You now have a total of §eⓄ " + playerManager.getSkill() + " Skill Points§8."));
+                    }
+                }
+            }
+
             return;
 
         }
