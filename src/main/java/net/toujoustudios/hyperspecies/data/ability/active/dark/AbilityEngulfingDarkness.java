@@ -5,6 +5,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -16,6 +17,7 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class AbilityEngulfingDarkness extends Ability {
 
@@ -33,7 +35,8 @@ public class AbilityEngulfingDarkness extends Ability {
                 8,
                 List.of("Demon"),
                 8,
-                4
+                4,
+                Objects.requireNonNull(Species.getSpecies("Demon")).getSubSpecies("Hellspawn")
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

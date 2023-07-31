@@ -3,11 +3,13 @@ package net.toujoustudios.hyperspecies.data.ability.active.electro;
 import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
+import net.toujoustudios.hyperspecies.data.species.Species;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import java.util.List;
+import java.util.Objects;
 
 public class AbilityDash extends Ability {
 
@@ -24,7 +26,8 @@ public class AbilityDash extends Ability {
                 8,
                 List.of("Dwarf"),
                 4,
-                3
+                3,
+                Objects.requireNonNull(Species.getSpecies("Dwarf")).getSubSpecies("Cartographer")
         );
 
     }

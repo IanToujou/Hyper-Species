@@ -5,6 +5,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
+import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -15,6 +16,7 @@ import org.bukkit.util.Vector;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class AbilityTotalAnnihilation extends Ability {
 
@@ -32,7 +34,8 @@ public class AbilityTotalAnnihilation extends Ability {
                 5,
                 List.of("Demon"),
                 8,
-                5
+                5,
+                Objects.requireNonNull(Species.getSpecies("Demon")).getSubSpecies("Fallen Angel")
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

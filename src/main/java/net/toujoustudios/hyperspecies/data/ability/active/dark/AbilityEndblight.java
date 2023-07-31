@@ -5,6 +5,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -17,6 +18,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class AbilityEndblight extends Ability {
 
@@ -34,7 +36,8 @@ public class AbilityEndblight extends Ability {
                 8,
                 List.of("Demon"),
                 3,
-                1
+                1,
+                Objects.requireNonNull(Species.getSpecies("Demon")).getSubSpecies("Hellspawn")
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

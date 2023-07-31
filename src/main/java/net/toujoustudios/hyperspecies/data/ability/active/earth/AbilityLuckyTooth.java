@@ -5,6 +5,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.data.species.Species;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -15,6 +16,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class AbilityLuckyTooth extends Ability {
 
@@ -31,7 +33,8 @@ public class AbilityLuckyTooth extends Ability {
                 8,
                 List.of("Dwarf"),
                 4,
-                3
+                3,
+                Objects.requireNonNull(Species.getSpecies("Dwarf")).getSubSpecies("Blacksmith")
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

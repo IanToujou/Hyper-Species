@@ -6,6 +6,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
 import org.bukkit.entity.Arrow;
@@ -16,6 +17,7 @@ import org.bukkit.scheduler.BukkitTask;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class AbilityStrikeOfCorruption extends Ability {
 
@@ -33,7 +35,8 @@ public class AbilityStrikeOfCorruption extends Ability {
                 8,
                 List.of("Demon"),
                 12,
-                6
+                6,
+                Objects.requireNonNull(Species.getSpecies("Demon")).getSubSpecies("Fallen Angel")
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

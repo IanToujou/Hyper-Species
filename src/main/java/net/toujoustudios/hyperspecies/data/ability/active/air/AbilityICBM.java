@@ -5,6 +5,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
@@ -31,7 +32,8 @@ public class AbilityICBM extends Ability {
                 8,
                 List.of("Feline"),
                 8,
-                5
+                5,
+                Objects.requireNonNull(Species.getSpecies("Feline")).getSubSpecies("Leopard")
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

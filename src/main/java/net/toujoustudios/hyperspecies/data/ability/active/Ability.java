@@ -3,6 +3,7 @@ package net.toujoustudios.hyperspecies.data.ability.active;
 import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.species.Species;
+import net.toujoustudios.hyperspecies.data.species.SubSpecies;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -30,6 +31,7 @@ public abstract class Ability {
     private final List<String> species;
     private final int cost;
     private final int weight;
+    private final SubSpecies subSpecies;
 
     private HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
 
@@ -46,6 +48,7 @@ public abstract class Ability {
         this.species = species;
         this.cost = cost;
         this.weight = weight;
+        this.subSpecies = null;
     }
 
     public Ability(String name, List<String> description, Element element, Element secondaryElement, AbilityType type, int manaCost, int delay, Material material, int maxLevel, List<String> species, int cost, int weight) {
@@ -61,6 +64,39 @@ public abstract class Ability {
         this.species = species;
         this.cost = cost;
         this.weight = weight;
+        this.subSpecies = null;
+    }
+
+    public Ability(String name, List<String> description, Element element, AbilityType type, int manaCost, int delay, Material material, int maxLevel, List<String> species, int cost, int weight, SubSpecies subSpecies) {
+        this.name = name;
+        this.description = description;
+        this.element = element;
+        this.secondaryElement = null;
+        this.type = type;
+        this.manaCost = manaCost;
+        this.delay = delay;
+        this.material = material;
+        this.maxLevel = maxLevel;
+        this.species = species;
+        this.cost = cost;
+        this.weight = weight;
+        this.subSpecies = subSpecies;
+    }
+
+    public Ability(String name, List<String> description, Element element, Element secondaryElement, AbilityType type, int manaCost, int delay, Material material, int maxLevel, List<String> species, int cost, int weight, SubSpecies subSpecies) {
+        this.name = name;
+        this.description = description;
+        this.element = element;
+        this.secondaryElement = secondaryElement;
+        this.type = type;
+        this.manaCost = manaCost;
+        this.delay = delay;
+        this.material = material;
+        this.maxLevel = maxLevel;
+        this.species = species;
+        this.cost = cost;
+        this.weight = weight;
+        this.subSpecies = subSpecies;
     }
 
     public static void createAbility(Ability ability) {
@@ -185,6 +221,14 @@ public abstract class Ability {
 
     public int getWeight() {
         return weight;
+    }
+
+    public SubSpecies getSubSpecies() {
+        return subSpecies;
+    }
+
+    public boolean hasSubSpecies() {
+        return subSpecies != null;
     }
 
     public static HashMap<String, Ability> getAbilities() {

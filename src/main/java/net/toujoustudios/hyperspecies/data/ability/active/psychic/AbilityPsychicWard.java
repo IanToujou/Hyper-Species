@@ -5,6 +5,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -20,6 +21,7 @@ import org.bukkit.scheduler.BukkitTask;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class AbilityPsychicWard extends Ability {
 
@@ -35,7 +37,8 @@ public class AbilityPsychicWard extends Ability {
                 8,
                 List.of("Elf"),
                 4,
-                2
+                2,
+                Objects.requireNonNull(Species.getSpecies("Elf")).getSubSpecies("Dryad")
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

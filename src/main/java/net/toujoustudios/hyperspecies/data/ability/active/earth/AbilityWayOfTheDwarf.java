@@ -3,11 +3,13 @@ package net.toujoustudios.hyperspecies.data.ability.active.earth;
 import net.toujoustudios.hyperspecies.data.ability.active.Ability;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
+import net.toujoustudios.hyperspecies.data.species.Species;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
 import java.util.List;
+import java.util.Objects;
 
 public class AbilityWayOfTheDwarf extends Ability {
 
@@ -24,7 +26,8 @@ public class AbilityWayOfTheDwarf extends Ability {
                 5,
                 List.of("Dwarf"),
                 5,
-                2
+                2,
+                Objects.requireNonNull(Species.getSpecies("Dwarf")).getSubSpecies("Blacksmith")
         );
 
     }

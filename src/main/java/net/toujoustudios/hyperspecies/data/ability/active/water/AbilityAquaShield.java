@@ -5,15 +5,13 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
@@ -35,7 +33,8 @@ public class AbilityAquaShield extends Ability {
                 5,
                 List.of("Aquatilia"),
                 5,
-                4
+                4,
+                Objects.requireNonNull(Species.getSpecies("Aquatilia")).getSubSpecies("Hydra")
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

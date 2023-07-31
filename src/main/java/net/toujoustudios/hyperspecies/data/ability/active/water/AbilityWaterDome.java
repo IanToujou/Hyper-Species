@@ -5,6 +5,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -16,6 +17,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class AbilityWaterDome extends Ability {
 
@@ -32,7 +34,8 @@ public class AbilityWaterDome extends Ability {
                 5,
                 List.of("Aquatilia"),
                 7,
-                5
+                5,
+                Objects.requireNonNull(Species.getSpecies("Aquatilia")).getSubSpecies("Hydra")
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

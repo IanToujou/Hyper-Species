@@ -5,6 +5,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -19,6 +20,7 @@ import org.bukkit.util.Vector;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class AbilitySilentDash extends Ability {
 
@@ -36,7 +38,8 @@ public class AbilitySilentDash extends Ability {
                 5,
                 List.of("Dwarf"),
                 6,
-                4
+                4,
+                Objects.requireNonNull(Species.getSpecies("Dwarf")).getSubSpecies("Cartographer")
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();

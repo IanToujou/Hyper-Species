@@ -5,6 +5,7 @@ import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.data.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.data.element.Element;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.data.species.Species;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -14,6 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 public class AbilityTimeDilation extends Ability {
 
@@ -30,7 +32,8 @@ public class AbilityTimeDilation extends Ability {
                 8,
                 List.of("Elf"),
                 7,
-                5
+                5,
+                Objects.requireNonNull(Species.getSpecies("Elf")).getSubSpecies("Guardian")
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
@@ -49,7 +52,7 @@ public class AbilityTimeDilation extends Ability {
         player.getWorld().playSound(player.getLocation(), Sound.BLOCK_PISTON_CONTRACT, 2, 2f);
         player.getWorld().playSound(player.getLocation(), Sound.BLOCK_FIRE_EXTINGUISH, 2, 2f);
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * duration, 4, false, false, true));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * duration, 6, false, false, true));
 
         return true;
 

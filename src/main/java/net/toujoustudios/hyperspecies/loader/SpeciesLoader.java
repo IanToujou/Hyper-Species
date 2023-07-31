@@ -14,7 +14,7 @@ public class SpeciesLoader {
 
         ArrayList<SubSpecies> demonSpecies = new ArrayList<>();
         demonSpecies.add(new SubSpecies("Hellspawn", null));
-        demonSpecies.add(new SubSpecies("Arch Angel", null));
+        demonSpecies.add(new SubSpecies("Fallen Angel", null));
 
         ArrayList<SubSpecies> elfSpecies = new ArrayList<>();
         elfSpecies.add(new SubSpecies("Dryad", null));
