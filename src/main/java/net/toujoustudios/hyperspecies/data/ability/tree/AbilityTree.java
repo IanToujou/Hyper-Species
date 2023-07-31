@@ -73,7 +73,7 @@ public class AbilityTree {
 
         abilities.forEach((slot, ability) -> {
 
-            if (ability.isAvailableForSpecies(playerManager.getSpecies()) || player.getGameMode() == GameMode.CREATIVE) {
+            if ((ability.isAvailableForSpecies(playerManager.getSpecies()) && ability.isAvailableForSubSpecies(playerManager.getSubSpecies())) || player.getGameMode() == GameMode.CREATIVE) {
 
                 int xp = playerManager.getAbilityExperience(ability);
                 int level = playerManager.getLevelFromExperience(xp);
@@ -236,7 +236,7 @@ public class AbilityTree {
             for (Map.Entry<String, AbilityTree> entry : trees.entrySet()) {
 
                 AbilityTree tree = trees.get(entry.getKey());
-                if (tree.getBaseAbility().getSpecies().contains(playerManager.getSpecies().getName()) || player.getGameMode() == GameMode.CREATIVE) {
+                if ((tree.getBaseAbility().isAvailableForSpecies(playerManager.getSpecies()) && tree.getBaseAbility().isAvailableForSubSpecies(playerManager.getSubSpecies())) || player.getGameMode() == GameMode.CREATIVE) {
                     Element element = tree.getBaseAbility().getElement();
 
                     ItemStack item = new ItemStack(Material.NETHER_STAR);

@@ -215,6 +215,12 @@ public abstract class Ability {
         return this.species.contains(species.getName());
     }
 
+    public boolean isAvailableForSubSpecies(SubSpecies subSpecies) {
+        if(hasSubSpecies()) {
+            return subSpecies != null && subSpecies.equals(this.subSpecies);
+        } else return true;
+    }
+
     public int getCost() {
         return cost;
     }
