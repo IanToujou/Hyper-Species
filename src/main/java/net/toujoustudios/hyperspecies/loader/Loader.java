@@ -47,8 +47,8 @@ public class Loader {
         HyperSpecies.getInstance().registerEvents();
         HyperSpecies.getInstance().registerCommands();
         HyperSpecies.getInstance().registerCrafting();
-        AbilityLoader.initialize();
         SpeciesLoader.initialize();
+        AbilityLoader.initialize();
         TeamLoader.initialize();
         Logger.log(LogLevel.DEBUG, "Initialization completed.");
     }

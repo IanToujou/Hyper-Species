@@ -114,7 +114,7 @@ permissions:
       hyperspecies.command.unlock: false
       hyperspecies.command.setskill: false
       hyperspecies.command.setexperience: false
-      hyperspecies.command.character: true#
+      hyperspecies.command.character: true
       hyperspecies.command.leave: true
   hyperspecies.command.emote:
     description: Allows players to use the emote command.

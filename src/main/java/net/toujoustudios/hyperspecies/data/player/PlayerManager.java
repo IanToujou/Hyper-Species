@@ -139,7 +139,7 @@ public class PlayerManager {
         abilityExperiences.forEach((ability, integer) -> playerConfig.set("Data." + uuid + ".Character.Experience.Ability." + ability, integer));
         playerConfig.set("Data." + uuid + ".Character.Species", (species != null ? species.getName() : null));
         playerConfig.set("Data." + uuid + ".Character.Team", team);
-        playerConfig.set("Data." + uuid + ".Character.SubSpecies", (subSpecies != null ? subSpecies.getName() : null));
+        playerConfig.set("Data." + uuid + ".Character.SubSpecies", (subSpecies != null ? subSpecies.name() : null));
         ArrayList<String> abilityNames = new ArrayList<>();
         abilities.forEach(ability -> abilityNames.add(ability.getName()));
         playerConfig.set("Data." + uuid + ".Character.Abilities", abilityNames);

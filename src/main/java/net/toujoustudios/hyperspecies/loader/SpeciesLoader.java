@@ -13,40 +13,40 @@ public class SpeciesLoader {
     public static void initialize() {
 
         ArrayList<SubSpecies> demonSpecies = new ArrayList<>();
-        demonSpecies.add(new SubSpecies("Hellspawn", null));
-        demonSpecies.add(new SubSpecies("Fallen Angel", null));
+        demonSpecies.add(new SubSpecies("Hellspawn"));
+        demonSpecies.add(new SubSpecies("Fallen Angel"));
 
         ArrayList<SubSpecies> elfSpecies = new ArrayList<>();
-        elfSpecies.add(new SubSpecies("Dryad", null));
-        elfSpecies.add(new SubSpecies("Guardian", null));
+        elfSpecies.add(new SubSpecies("Dryad"));
+        elfSpecies.add(new SubSpecies("Guardian"));
 
         ArrayList<SubSpecies> reptileSpecies = new ArrayList<>();
-        reptileSpecies.add(new SubSpecies("Lizard", null));
-        reptileSpecies.add(new SubSpecies("Snake", null));
+        reptileSpecies.add(new SubSpecies("Lizard"));
+        reptileSpecies.add(new SubSpecies("Snake"));
 
         ArrayList<SubSpecies> angelSpecies = new ArrayList<>();
-        angelSpecies.add(new SubSpecies("Arch Angel", null));
-        angelSpecies.add(new SubSpecies("Demi God", null));
+        angelSpecies.add(new SubSpecies("Arch Angel"));
+        angelSpecies.add(new SubSpecies("Demi God"));
 
         ArrayList<SubSpecies> humanSpecies = new ArrayList<>();
-        humanSpecies.add(new SubSpecies("Warrior", null));
-        humanSpecies.add(new SubSpecies("Mage", null));
+        humanSpecies.add(new SubSpecies("Warrior"));
+        humanSpecies.add(new SubSpecies("Mage"));
 
         ArrayList<SubSpecies> aquatiliaSpecies = new ArrayList<>();
-        aquatiliaSpecies.add(new SubSpecies("Hydra", null));
-        aquatiliaSpecies.add(new SubSpecies("Siren", null));
+        aquatiliaSpecies.add(new SubSpecies("Hydra"));
+        aquatiliaSpecies.add(new SubSpecies("Siren"));
 
         ArrayList<SubSpecies> felineSpecies = new ArrayList<>();
-        felineSpecies.add(new SubSpecies("Leopard", null));
-        felineSpecies.add(new SubSpecies("Forest Cat", null));
+        felineSpecies.add(new SubSpecies("Leopard"));
+        felineSpecies.add(new SubSpecies("Forest Cat"));
 
         ArrayList<SubSpecies> dwarfSpecies = new ArrayList<>();
-        dwarfSpecies.add(new SubSpecies("Blacksmith", null));
-        dwarfSpecies.add(new SubSpecies("Cartographer", null));
+        dwarfSpecies.add(new SubSpecies("Blacksmith"));
+        dwarfSpecies.add(new SubSpecies("Cartographer"));
 
         ArrayList<SubSpecies> wolfSpecies = new ArrayList<>();
-        wolfSpecies.add(new SubSpecies("Snow Wolf", null));
-        wolfSpecies.add(new SubSpecies("Forest Wolf", null));
+        wolfSpecies.add(new SubSpecies("Snow Wolf"));
+        wolfSpecies.add(new SubSpecies("Forest Wolf"));
 
         Species.createSpecies(
                 "Demon",

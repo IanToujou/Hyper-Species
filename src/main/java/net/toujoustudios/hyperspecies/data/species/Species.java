@@ -42,7 +42,7 @@ public class Species {
 
     public SubSpecies getSubSpecies(String name) {
         for (SubSpecies all : subSpecies) {
-            if (all.getName().equalsIgnoreCase(name)) return all;
+            if (all.name().equalsIgnoreCase(name)) return all;
         }
         return null;
     }
