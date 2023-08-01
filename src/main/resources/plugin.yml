@@ -57,6 +57,9 @@ commands:
     permission: hyperspecies.command.character
     aliases:
       - char
+  leave:
+    description: Leave the farmworld.
+    permission: hyperspecies.command.leave
 
 permissions:
   hyperspecies.group.player:
@@ -76,6 +79,7 @@ permissions:
       hyperspecies.command.setskill: false
       hyperspecies.command.setexperience: false
       hyperspecies.command.character: true
+      hyperspecies.command.leave: true
   hyperspecies.group.admin:
     description: The administrator group. Grants all permissions.
     children:
@@ -93,6 +97,7 @@ permissions:
       hyperspecies.command.setskill: true
       hyperspecies.command.setexperience: true
       hyperspecies.command.character: true
+      hyperspecies.command.leave: true
   hyperspecies.group.moderator:
     description: The administrator group. Grants all permissions.
     children:
@@ -109,7 +114,8 @@ permissions:
       hyperspecies.command.unlock: false
       hyperspecies.command.setskill: false
       hyperspecies.command.setexperience: false
-      hyperspecies.command.character: true
+      hyperspecies.command.character: true#
+      hyperspecies.command.leave: true
   hyperspecies.command.emote:
     description: Allows players to use the emote command.
     default: true
@@ -151,4 +157,7 @@ permissions:
     default: op
   hyperspecies.command.character:
     description: Allows players to use the character command.
+    default: true
+  hyperspecies.command.leave:
+    description: Allows players to use the leave command.
     default: true

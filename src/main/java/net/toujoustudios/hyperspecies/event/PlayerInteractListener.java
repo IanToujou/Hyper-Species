@@ -98,7 +98,10 @@ public class PlayerInteractListener implements Listener {
 
         }
 
-        if(event.getClickedBlock() != null && event.getClickedBlock().getType() == Material.LAPIS_BLOCK) {
+        if(event.getClickedBlock() != null && (event.getClickedBlock().getType() == Material.LAPIS_BLOCK || event.getClickedBlock().getType() == Material.EMERALD_BLOCK)) {
+
+            Material material = event.getClickedBlock().getType();
+
             Location location = event.getClickedBlock().getLocation();
             location.add(1,0,0);
             if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
@@ -117,29 +120,44 @@ public class PlayerInteractListener implements Listener {
             location.add(1,0,0);
             if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
 
-            if(event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                if(event.getItem() != null) {
-                    if(event.getItem().getType() == Material.DIAMOND) {
-                        event.setCancelled(true);
-                        player.getItemInHand().subtract();
-                        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
-                        player.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, event.getClickedBlock().getLocation(), 100, 0.1, 3, 0.1);
-                        playerManager.setExperience(playerManager.getExperience() + 5);
-                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You just gained §a5 XP§8."));
-                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You are now §bLevel " + playerManager.getLevel() + "§8."));
-                    } else if(event.getItem().getType() == Material.DIAMOND_BLOCK) {
-                        event.setCancelled(true);
-                        player.getItemInHand().subtract();
-                        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
-                        player.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, event.getClickedBlock().getLocation(), 100, 0.1, 3, 0.1);
-                        playerManager.setSkill(playerManager.getSkill() + 4);
-                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You just gained §eⓄ 4 Skill Points§8."));
-                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You now have a total of §eⓄ " + playerManager.getSkill() + " Skill Points§8."));
+            if(material == Material.LAPIS_BLOCK) {
+
+                if(event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                    if(event.getItem() != null) {
+                        if(event.getItem().getType() == Material.DIAMOND) {
+                            event.setCancelled(true);
+                            player.getItemInHand().subtract();
+                            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
+                            player.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, event.getClickedBlock().getLocation(), 100, 0.1, 3, 0.1);
+                            playerManager.setExperience(playerManager.getExperience() + 5);
+                            player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You just gained §a5 XP§8."));
+                            player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You are now §bLevel " + playerManager.getLevel() + "§8."));
+                        } else if(event.getItem().getType() == Material.DIAMOND_BLOCK) {
+                            event.setCancelled(true);
+                            player.getItemInHand().subtract();
+                            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
+                            player.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, event.getClickedBlock().getLocation(), 100, 0.1, 3, 0.1);
+                            playerManager.setSkill(playerManager.getSkill() + 4);
+                            player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You just gained §eⓄ 4 Skill Points§8."));
+                            player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You now have a total of §eⓄ " + playerManager.getSkill() + " Skill Points§8."));
+                        }
+                    } else {
+                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
+                        player.openInventory(AbilityTree.buildMainInventory(player,0));
                     }
-                } else {
-                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                    player.openInventory(AbilityTree.buildMainInventory(player,0));
                 }
+
+            } else if(material == Material.EMERALD_BLOCK) {
+
+                if(event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                    event.setCancelled(true);
+                    World world = Bukkit.getWorld("farmworld");
+                    if(player.isSneaking()) world = Bukkit.getWorld("farmworld_nether");
+                    assert world != null;
+                    player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You have been teleported to the farmworld§8. §7Type &b/leave §7to go back to the overworld§8."));
+                    player.teleport(world.getSpawnLocation());
+                }
+
             }
 
             return;
