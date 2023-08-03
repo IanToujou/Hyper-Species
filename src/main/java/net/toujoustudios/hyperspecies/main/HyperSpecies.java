@@ -146,6 +146,7 @@ public final class HyperSpecies extends JavaPlugin {
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
             if (playerManager.getSpecies() == null) return;
+            if (!Config.PASSIVES) return;
             if (playerManager.getSpecies().getPassive() == null) return;
             playerManager.getSpecies().getPassive().execute(player);
 
@@ -180,6 +181,7 @@ public final class HyperSpecies extends JavaPlugin {
         getCommand("character").setExecutor(new CharacterCommand());
         getCommand("char").setExecutor(new CharacterCommand());
         getCommand("leave").setExecutor(new LeaveCommand());
+        getCommand("passive").setExecutor(new PassiveCommand());
     }
 
     public void registerUI() {

@@ -60,6 +60,9 @@ commands:
   leave:
     description: Leave the farmworld.
     permission: hyperspecies.command.leave
+  passive:
+    description: Enable and disable the passives.
+    permission: hyperspecies.command.passive
 
 permissions:
   hyperspecies.group.player:
@@ -80,6 +83,7 @@ permissions:
       hyperspecies.command.setexperience: false
       hyperspecies.command.character: true
       hyperspecies.command.leave: true
+      hyperspecies.command.passive: false
   hyperspecies.group.admin:
     description: The administrator group. Grants all permissions.
     children:
@@ -98,6 +102,7 @@ permissions:
       hyperspecies.command.setexperience: true
       hyperspecies.command.character: true
       hyperspecies.command.leave: true
+      hyperspecies.command.passive: true
   hyperspecies.group.moderator:
     description: The administrator group. Grants all permissions.
     children:
@@ -116,6 +121,7 @@ permissions:
       hyperspecies.command.setexperience: false
       hyperspecies.command.character: true
       hyperspecies.command.leave: true
+      hyperspecies.command.passive: false
   hyperspecies.command.emote:
     description: Allows players to use the emote command.
     default: true
@@ -161,3 +167,6 @@ permissions:
   hyperspecies.command.leave:
     description: Allows players to use the leave command.
     default: true
+  hyperspecies.command.passive:
+    description: Allows players to use the passive command.
+    default: op

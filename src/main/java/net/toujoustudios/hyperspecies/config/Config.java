@@ -25,6 +25,7 @@ public class Config {
     public static String MESSAGE_ERROR_EMOTE_PERFORM;
     public static String MESSAGE_ERROR_ABILITY_INVALID;
     public static String MESSAGE_ERROR_NO_SPECIES;
+    public static boolean PASSIVES;
 
     @SuppressWarnings("all")
     public static void initialize() {
@@ -57,6 +58,8 @@ public class Config {
                 configuration.set("Message.Error.AbilityInvalid", "{Prefix} §cThe ability does not exist§8.");
             if (!configuration.isSet("Message.Error.NoSpecies"))
                 configuration.set("Message.Error.NoSpecies", "§cYou need to select a species in order to continue.");
+            if (!configuration.isSet("Temporary.Passives"))
+                configuration.set("Temporary.Passives", true);
 
             try {
                 configuration.save(settingsConfigFile);
@@ -90,6 +93,8 @@ public class Config {
                 configuration.set("Message.Error.AbilityInvalid", "{Prefix} §cThe ability does not exist§8.");
             if (!configuration.isSet("Message.Error.NoSpecies"))
                 configuration.set("Message.Error.NoSpecies", "§cYou need to select a species in order to continue.");
+            if (!configuration.isSet("Temporary.Passives"))
+                configuration.set("Temporary.Passives", true);
 
             try {
                 configuration.save(settingsConfigFile);
@@ -113,6 +118,7 @@ public class Config {
         MESSAGE_ERROR_EMOTE_PERFORM = settingsConfig.getString("Message.Error.EmotePerform").replace("{Prefix}", MESSAGE_PREFIX);
         MESSAGE_ERROR_ABILITY_INVALID = settingsConfig.getString("Message.Error.AbilityInvalid").replace("{Prefix}", MESSAGE_PREFIX);
         MESSAGE_ERROR_NO_SPECIES = settingsConfig.getString("Message.Error.NoSpecies");
+        PASSIVES = settingsConfig.getBoolean("Temporary.Passives");
 
         Logger.log(LogLevel.INFORMATION, "Successfully loaded the configuration files.");
 
