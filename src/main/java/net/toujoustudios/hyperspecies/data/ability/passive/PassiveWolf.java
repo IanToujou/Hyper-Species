@@ -21,7 +21,7 @@ public class PassiveWolf extends PassiveAbility {
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
             double radiusSquared = 25 * 25;
             players.forEach(all -> {
-                if (all.getLocation().distanceSquared(player.getLocation()) <= radiusSquared) {
+                if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(player.getLocation()) <= radiusSquared) {
                     if (all != player)
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, SoundCategory.MASTER, 100, 2f);
                 }

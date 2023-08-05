@@ -22,15 +22,16 @@ public class PassiveElf extends PassiveAbility {
         biomes.add(Biome.BIRCH_FOREST);
         biomes.add(Biome.DARK_FOREST);
         biomes.add(Biome.BIRCH_FOREST);
+        biomes.add(Biome.TAIGA);
         biomes.add(Biome.OLD_GROWTH_BIRCH_FOREST);
         biomes.add(Biome.JUNGLE);
         biomes.add(Biome.BAMBOO_JUNGLE);
         biomes.add(Biome.SPARSE_JUNGLE);
+        biomes.add(Biome.WARPED_FOREST);
+        biomes.add(Biome.CRIMSON_FOREST);
 
         if (biomes.contains(player.getLocation().getBlock().getBiome())) {
-            playerManager.setHealthRegeneration(0.2);
-        } else {
-            if (!playerManager.isRegenerationCoolingDown()) playerManager.setHealthRegeneration(0.2);
+            player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 20 * 5, 0, false, false, true));
         }
 
         // Damage in cold biomes
@@ -61,25 +62,25 @@ public class PassiveElf extends PassiveAbility {
         leafBlocks.add(Material.FLOWERING_AZALEA_LEAVES);
         leafBlocks.add(Material.SPRUCE_LEAVES);
 
-        if (leafBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
+        if (leafBlocks.contains(player.getLocation().subtract(0,1,0).getBlock().getType()) || leafBlocks.contains(player.getLocation().getBlock().getType())) {
             playerManager.setManaRegeneration(0.3);
         } else playerManager.setManaRegeneration(0.1);
 
         // Strength on wood blocks
         ArrayList<Material> woodBlocks = new ArrayList<>();
-        woodBlocks.add(Material.OAK_WOOD);
+        woodBlocks.add(Material.OAK_LOG);
         woodBlocks.add(Material.OAK_PLANKS);
-        woodBlocks.add(Material.BIRCH_WOOD);
+        woodBlocks.add(Material.BIRCH_LOG);
         woodBlocks.add(Material.BIRCH_PLANKS);
-        woodBlocks.add(Material.ACACIA_WOOD);
+        woodBlocks.add(Material.ACACIA_LOG);
         woodBlocks.add(Material.ACACIA_PLANKS);
-        woodBlocks.add(Material.DARK_OAK_WOOD);
+        woodBlocks.add(Material.DARK_OAK_LOG);
         woodBlocks.add(Material.DARK_OAK_PLANKS);
-        woodBlocks.add(Material.JUNGLE_WOOD);
+        woodBlocks.add(Material.JUNGLE_LOG);
         woodBlocks.add(Material.JUNGLE_PLANKS);
-        woodBlocks.add(Material.SPRUCE_WOOD);
+        woodBlocks.add(Material.SPRUCE_LOG);
         woodBlocks.add(Material.SPRUCE_PLANKS);
-        woodBlocks.add(Material.MANGROVE_WOOD);
+        woodBlocks.add(Material.MANGROVE_LOG);
         woodBlocks.add(Material.MANGROVE_PLANKS);
         woodBlocks.add(Material.WARPED_STEM);
         woodBlocks.add(Material.WARPED_PLANKS);

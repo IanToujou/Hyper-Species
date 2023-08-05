@@ -27,12 +27,12 @@ public class PassiveAngel extends PassiveAbility {
                 playerManager.setHealthRegeneration(0.2);
             }
         } else {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 20, 1, false, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 20, 0, false, false, true));
         }
 
         // Slowness in water
         if (player.getWorld().isThundering() || player.getWorld().hasStorm() || player.getLocation().getBlock().getType() == Material.WATER) {
-            player.damage(1);
+            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 10, 0, false, false, true));
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 10, 1, false, false, true));
         }
 

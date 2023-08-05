@@ -2,26 +2,20 @@ package net.toujoustudios.hyperspecies.event;
 
 import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
-import net.toujoustudios.hyperspecies.ui.SpeciesUI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
-public class PlayerJoinListener implements Listener {
+public class PlayerQuitListener implements Listener {
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent event) {
+    public void onJoin(PlayerQuitEvent event) {
 
         Player player = event.getPlayer();
         PlayerManager playerManager = PlayerManager.getPlayer(player);
-
-        if (playerManager.getSpecies() == null) {
-            SpeciesUI.openInventory(player);
-        }
-
-        playerManager.refreshScoreboard();
-        event.joinMessage(Component.text(""));
+        playerManager.save();
+        event.quitMessage(Component.text(""));
 
     }
 

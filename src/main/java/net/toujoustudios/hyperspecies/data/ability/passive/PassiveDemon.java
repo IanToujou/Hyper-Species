@@ -2,6 +2,7 @@ package net.toujoustudios.hyperspecies.data.ability.passive;
 
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -25,14 +26,14 @@ public class PassiveDemon extends PassiveAbility {
         } else {
             Block block = player.getWorld().getHighestBlockAt(player.getLocation());
             if (block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
-                player.damage(1);
+                if(!player.getWorld().isUltraWarm() && player.getWorld().getEnvironment() != World.Environment.THE_END) player.damage(0.5);
             }
         }
 
         // Slowness and weakness in water
         if (player.getLocation().getBlock().getType() == Material.WATER) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 20, 1, false, false, true));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 20, 1, false, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 2, 1, false, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 2, 0, false, false, true));
         } else if (player.getWorld().hasStorm() || player.getWorld().isThundering()) {
             Block block = player.getWorld().getHighestBlockAt(player.getLocation());
             if (block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {

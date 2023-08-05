@@ -22,7 +22,7 @@ public class PassiveFeline extends PassiveAbility {
         // Speed except for tight places
         if (player.getLocation().add(0, 2, 0).getBlock().getType() != Material.AIR && player.getLocation().add(0, -1, 0).getBlock().getType() != Material.AIR) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 2, 2, false, false, true));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 2, 1, false, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 2, 0, false, false, true));
         } else {
             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 5, 1, false, false, true));
         }

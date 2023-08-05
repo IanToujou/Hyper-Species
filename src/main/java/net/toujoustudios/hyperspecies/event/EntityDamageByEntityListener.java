@@ -90,7 +90,7 @@ public class EntityDamageByEntityListener implements Listener {
                 Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                 double radiusSquared = 50 * 50;
                 players.forEach(all -> {
-                    if (all.getLocation().distanceSquared(player.getLocation()) <= radiusSquared) {
+                    if (player.getWorld() == all.getWorld() && all.getLocation().distanceSquared(player.getLocation()) <= radiusSquared) {
                         if (all != player) {
                             PlayerManager allManager = PlayerManager.getPlayer(all);
                             if (allManager.getSpecies().getName().equals("Wolf")) {
