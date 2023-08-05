@@ -134,7 +134,7 @@ public class EntityDamageByEntityListener implements Listener {
 
             }
 
-            event.setDamage(0);
+            event.setDamage(trueDamage);
             playerManager.setHealth(health - trueDamage);
 
             player.getWorld().spawnParticle(Particle.BLOCK_CRACK, player.getLocation().add(0, 0.5, 0), 50, Material.REDSTONE_BLOCK.createBlockData());

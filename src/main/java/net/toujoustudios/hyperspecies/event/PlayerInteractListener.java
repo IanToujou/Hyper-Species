@@ -129,7 +129,7 @@ public class PlayerInteractListener implements Listener {
                             player.getItemInHand().subtract();
                             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
                             player.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, event.getClickedBlock().getLocation(), 100, 0.1, 3, 0.1);
-                            playerManager.setExperience(playerManager.getExperience() + 5);
+                            playerManager.setExperience(playerManager.getExperience() + 8);
                             player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You just gained §a5 XP§8."));
                             player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You are now §bLevel " + playerManager.getLevel() + "§8."));
                         } else if(event.getItem().getType() == Material.DIAMOND_BLOCK) {
