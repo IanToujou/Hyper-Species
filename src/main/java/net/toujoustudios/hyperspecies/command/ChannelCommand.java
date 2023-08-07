@@ -36,7 +36,7 @@ public class ChannelCommand implements CommandExecutor {
 
         String channel = args[0].toUpperCase();
 
-        if(channel.equalsIgnoreCase("LOCAL") || channel.equalsIgnoreCase("GLOBAL") || channel.equalsIgnoreCase("SUPPORT")) {
+        if(!channel.equalsIgnoreCase("LOCAL") && !channel.equalsIgnoreCase("GLOBAL") && !channel.equalsIgnoreCase("SUPPORT")) {
             player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c The chat channel does not exist§8."));
             player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c Valid channels§8: §bLocal, Global, Support"));
             return false;
@@ -47,7 +47,7 @@ public class ChannelCommand implements CommandExecutor {
 
         playerManager.setChannel(chatChannel);
 
-        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 Your channel has been set to §8:§b " + chatChannel));
+        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 Your channel has been set to§8:§b " + chatChannel));
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 1f);
 
         return false;
@@ -55,7 +55,7 @@ public class ChannelCommand implements CommandExecutor {
     }
 
     public String getUsage() {
-        return "/channel";
+        return "/channel <global|local|support>";
     }
 
 }

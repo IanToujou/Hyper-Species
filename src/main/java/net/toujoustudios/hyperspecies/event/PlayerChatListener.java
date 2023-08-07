@@ -5,6 +5,8 @@ import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import net.toujoustudios.hyperspecies.ui.TeamUI;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -27,19 +29,16 @@ public class PlayerChatListener implements Listener {
         PlayerManager playerManager = PlayerManager.getPlayer(player);
         ChatChannel channel = playerManager.getChannel();
 
-        String format = "§9\uD83C\uDFF4 §8| §e{Player} §8> §7{Message}";
+        String format = "§2\uD83C\uDFF4 §8| §e{Player} §8> §7{Message}";
 
         if(channel == ChatChannel.GLOBAL) {
-            format = "§6\uD83C\uDF0D §8| §e{Player} §8> §7{Message}";
+            format = "§9\uD83C\uDF0D §8| §e{Player} §8> §b{Message}";
         } else if(channel == ChatChannel.SUPPORT) {
-            format = "§b\uD83C\uDF10 §8| §e{Player} §8> §7{Message}";
+            format = "§5\uD83C\uDF10 §8| §e{Player} §8> §d{Message}";
         }
 
         format = format.replace("{Player}", player.getDisplayName());
-        format = format.replace("{Message}", event.getMessage());
         format = format.replace("&", "§");
-
-        event.setFormat(format);
 
         if (playerManager.isKawaii()) {
 
@@ -79,21 +78,26 @@ public class PlayerChatListener implements Listener {
         }
 
         event.setCancelled(true);
+        String message = format.replace("{Message}", event.getMessage());
 
         if(channel == ChatChannel.LOCAL) {
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
             double radiusSquared = 50 * 50;
             players.forEach(all -> {
                 if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(player.getLocation()) <= radiusSquared) {
-                    all.sendMessage(event.getMessage());
+                    all.sendMessage(message);
                 }
             });
         } else if(channel == ChatChannel.GLOBAL) {
-            Bukkit.getOnlinePlayers().forEach(all -> all.sendMessage(event.getMessage()));
+            Bukkit.getOnlinePlayers().forEach(all -> all.sendMessage(message));
         } else if(channel == ChatChannel.SUPPORT) {
             player.sendMessage(event.getMessage());
             Bukkit.getOnlinePlayers().forEach(all -> {
-                if(all.hasPermission("hyperspecies.group.moderator")) all.sendMessage(event.getMessage());
+                player.sendMessage(message);
+                if(all.hasPermission("hyperspecies.group.moderator") && all != player) {
+                    all.sendMessage(message);
+                    all.playSound(all.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, SoundCategory.MASTER, 100, 2f);
+                }
             });
         }
 

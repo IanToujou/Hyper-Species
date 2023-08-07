@@ -199,6 +199,9 @@ public final class HyperSpecies extends JavaPlugin {
         getCommand("passive").setExecutor(new PassiveCommand());
         getCommand("channel").setExecutor(new ChannelCommand());
         getCommand("c").setExecutor(new ChannelCommand());
+        getCommand("message").setExecutor(new MessageCommand());
+        getCommand("tell").setExecutor(new MessageCommand());
+        getCommand("msg").setExecutor(new MessageCommand());
     }
 
     public void registerUI() {

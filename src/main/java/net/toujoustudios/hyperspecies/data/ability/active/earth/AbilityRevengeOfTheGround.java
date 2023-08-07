@@ -67,6 +67,7 @@ public class AbilityRevengeOfTheGround extends Ability {
                 center.getWorld().spawnParticle(Particle.BLOCK_CRACK, new Location(center.getWorld(), center.getX(), center.getY() + 1, center.getZ()), 300, (radius / 2f) - 1, 0.1, (radius / 2f) - 1, Material.DEEPSLATE.createBlockData());
                 center.getWorld().playSound(center.getLocation(), Sound.BLOCK_GRASS_BREAK, SoundCategory.MASTER, 3, 0.5f);
 
+                double radiusSquared = radius * radius;
                 for (int x = -radius; x <= radius; x++) {
                     for (int y = -radius; y <= radius; y++) {
                         for (int z = -radius; z <= radius; z++) {
@@ -74,15 +75,18 @@ public class AbilityRevengeOfTheGround extends Ability {
                             if (center.getLocation().distance(b.getLocation()) <= radius) {
                                 if (materials.contains(b.getType())) {
                                     Bukkit.getOnlinePlayers().forEach(all -> {
-                                        Block playerBlock = all.getLocation().getBlock().getRelative(BlockFace.DOWN);
-                                        if (materials.contains(playerBlock.getType()) && player != all) {
-                                            FallingBlock block = all.getWorld().spawnFallingBlock(all.getLocation(), playerBlock.getType().createBlockData());
-                                            block.setDropItem(true);
-                                            block.setCancelDrop(true);
-                                            block.setInvulnerable(true);
-                                            block.setVelocity(new Vector(0, 0.6f, 0));
-                                            all.damage(damage, player);
+                                        if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(center.getLocation()) <= radiusSquared) {
+                                            Block playerBlock = all.getLocation().getBlock().getRelative(BlockFace.DOWN);
+                                            if (materials.contains(playerBlock.getType()) && player != all) {
+                                                FallingBlock block = all.getWorld().spawnFallingBlock(all.getLocation(), playerBlock.getType().createBlockData());
+                                                block.setDropItem(true);
+                                                block.setCancelDrop(true);
+                                                block.setInvulnerable(true);
+                                                block.setVelocity(new Vector(0, 0.6f, 0));
+                                                all.damage(damage, player);
+                                            }
                                         }
+
                                     });
                                 }
                             }

@@ -68,6 +68,12 @@ commands:
     permission: hyperspecies.command.channel
     aliases:
       - c
+  message:
+    description: Privately message a player.
+    permission: hyperspecies.command.message
+    aliases:
+      - tell
+      - msg
 
 permissions:
   hyperspecies.group.player:
@@ -90,6 +96,7 @@ permissions:
       hyperspecies.command.leave: true
       hyperspecies.command.passive: false
       hyperspecies.command.channel: true
+      hyperspecies.command.message: true
   hyperspecies.group.admin:
     description: The administrator group. Grants all permissions.
     children:
@@ -110,6 +117,7 @@ permissions:
       hyperspecies.command.leave: true
       hyperspecies.command.passive: true
       hyperspecies.command.channel: true
+      hyperspecies.command.message: true
   hyperspecies.group.moderator:
     description: The administrator group. Grants all permissions.
     children:
@@ -130,6 +138,7 @@ permissions:
       hyperspecies.command.leave: true
       hyperspecies.command.passive: false
       hyperspecies.command.channel: true
+      hyperspecies.command.message: true
   hyperspecies.command.emote:
     description: Allows players to use the emote command.
     default: true
@@ -180,4 +189,7 @@ permissions:
     default: op
   hyperspecies.command.channel:
     description: Allows players to use the channel command.
+    default: true
+  hyperspecies.command.message:
+    description: Allows players to use the message command.
     default: true
