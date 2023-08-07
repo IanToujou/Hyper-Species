@@ -47,7 +47,7 @@ public class PassiveReptile extends PassiveAbility {
 
         // Weakness at night
         if (player.getWorld().getTime() > 12500 && player.getWorld().getTime() < 23500) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 20, 1, false, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 20, 0, false, false, true));
         }
 
     }

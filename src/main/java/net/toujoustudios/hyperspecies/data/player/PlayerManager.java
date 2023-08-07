@@ -3,6 +3,7 @@ package net.toujoustudios.hyperspecies.data.player;
 import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.ability.active.Ability;
+import net.toujoustudios.hyperspecies.data.chat.ChatChannel;
 import net.toujoustudios.hyperspecies.data.species.Species;
 import net.toujoustudios.hyperspecies.data.species.SubSpecies;
 import net.toujoustudios.hyperspecies.data.team.Team;
@@ -46,6 +47,7 @@ public class PlayerManager {
     private double drunkenness;
     private boolean kawaii;
     private boolean stunned;
+    private ChatChannel channel;
 
     public PlayerManager(UUID uuid) {
 
@@ -112,6 +114,7 @@ public class PlayerManager {
 
         kawaii = false;
         stunned = false;
+        channel = ChatChannel.LOCAL;
 
     }
 
@@ -156,11 +159,15 @@ public class PlayerManager {
     }
 
     public static void unloadAll() {
+        saveAll();
+        players.clear();
+    }
+
+    public static void saveAll() {
         if (players == null || players.size() == 0) return;
         for (Map.Entry<UUID, PlayerManager> entry : players.entrySet()) {
             players.get(entry.getKey()).save();
         }
-        players.clear();
     }
 
     // CUSTOM METHODS
@@ -460,6 +467,14 @@ public class PlayerManager {
     public void stun(int duration) {
         setStunned(true);
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> setStunned(false), duration);
+    }
+
+    public ChatChannel getChannel() {
+        return channel;
+    }
+
+    public void setChannel(ChatChannel channel) {
+        this.channel = channel;
     }
 
     public void unlockAbility(Ability ability) {

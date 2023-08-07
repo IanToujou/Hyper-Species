@@ -165,6 +165,8 @@ public final class HyperSpecies extends JavaPlugin {
 
         })), 5, 5);
 
+        Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, PlayerManager::saveAll, 20 * 600, 20 * 600);
+
     }
 
     @Override
@@ -195,6 +197,8 @@ public final class HyperSpecies extends JavaPlugin {
         getCommand("char").setExecutor(new CharacterCommand());
         getCommand("leave").setExecutor(new LeaveCommand());
         getCommand("passive").setExecutor(new PassiveCommand());
+        getCommand("channel").setExecutor(new ChannelCommand());
+        getCommand("c").setExecutor(new ChannelCommand());
     }
 
     public void registerUI() {

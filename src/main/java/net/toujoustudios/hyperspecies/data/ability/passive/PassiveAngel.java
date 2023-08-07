@@ -31,9 +31,9 @@ public class PassiveAngel extends PassiveAbility {
         }
 
         // Slowness in water
-        if (player.getWorld().isThundering() || player.getWorld().hasStorm() || player.getLocation().getBlock().getType() == Material.WATER) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 10, 0, false, false, true));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 10, 1, false, false, true));
+        if (player.getLocation().getBlock().getType() == Material.WATER) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 3, 0, false, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 3, 1, false, false, true));
         }
 
         // Mana regeneration on gold

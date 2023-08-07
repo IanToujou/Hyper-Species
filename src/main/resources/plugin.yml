@@ -63,6 +63,11 @@ commands:
   passive:
     description: Enable and disable the passives.
     permission: hyperspecies.command.passive
+  channel:
+    description: Switch chat channels.
+    permission: hyperspecies.command.channel
+    aliases:
+      - c
 
 permissions:
   hyperspecies.group.player:
@@ -84,6 +89,7 @@ permissions:
       hyperspecies.command.character: true
       hyperspecies.command.leave: true
       hyperspecies.command.passive: false
+      hyperspecies.command.channel: true
   hyperspecies.group.admin:
     description: The administrator group. Grants all permissions.
     children:
@@ -103,6 +109,7 @@ permissions:
       hyperspecies.command.character: true
       hyperspecies.command.leave: true
       hyperspecies.command.passive: true
+      hyperspecies.command.channel: true
   hyperspecies.group.moderator:
     description: The administrator group. Grants all permissions.
     children:
@@ -122,6 +129,7 @@ permissions:
       hyperspecies.command.character: true
       hyperspecies.command.leave: true
       hyperspecies.command.passive: false
+      hyperspecies.command.channel: true
   hyperspecies.command.emote:
     description: Allows players to use the emote command.
     default: true
@@ -170,3 +178,6 @@ permissions:
   hyperspecies.command.passive:
     description: Allows players to use the passive command.
     default: op
+  hyperspecies.command.channel:
+    description: Allows players to use the channel command.
+    default: true

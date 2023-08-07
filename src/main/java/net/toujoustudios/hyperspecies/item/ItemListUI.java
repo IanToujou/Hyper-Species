@@ -400,7 +400,10 @@ public class ItemListUI {
         ItemMeta treeResetMeta = TREE_RESET.getItemMeta();
         treeResetMeta.displayName(Component.text("§cReset Loadout"));
         treeResetMeta.setLore(List.of(
-                "§7Remove all items from your loadout."
+                "§7Remove all items from your loadout.",
+                "§r",
+                "§cThis will only clear your loadout,",
+                "§cNot delete any progress you made!"
         ));
         TREE_RESET.setItemMeta(treeResetMeta);
 
@@ -408,9 +411,9 @@ public class ItemListUI {
         treeHelpMeta.displayName(Component.text("§aHow To Use"));
         treeHelpMeta.setLore(List.of(
                 "§7First, you need to gain §eⓄ Skill Points",
-                "§7by leveling your character. This can be",
-                "§7done by killing other players or doing",
-                "§7species-specific activities.",
+                "§7by donating diamond blocks to the",
+                "§7altar. You can donate normal diamonds",
+                "§7to the altar to gain &bXP§7.",
                 "§r",
                 "§7Then, you can unlock abilities with these",
                 "§7points. After you bought them, click them",

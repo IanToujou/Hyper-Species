@@ -128,7 +128,7 @@ public class PlayerInteractListener implements Listener {
                             event.setCancelled(true);
                             player.getItemInHand().subtract();
                             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
-                            player.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, event.getClickedBlock().getLocation(), 100, 0.1, 3, 0.1);
+                            player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, event.getClickedBlock().getLocation(), 100, 0.1, 1, 0.1);
                             playerManager.setExperience(playerManager.getExperience() + 8);
                             player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You just gained §a5 XP§8."));
                             player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You are now §bLevel " + playerManager.getLevel() + "§8."));
@@ -136,7 +136,7 @@ public class PlayerInteractListener implements Listener {
                             event.setCancelled(true);
                             player.getItemInHand().subtract();
                             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
-                            player.getWorld().spawnParticle(Particle.FIREWORKS_SPARK, event.getClickedBlock().getLocation(), 100, 0.1, 3, 0.1);
+                            player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, event.getClickedBlock().getLocation(), 100, 0.1, 1, 0.1);
                             playerManager.setSkill(playerManager.getSkill() + 4);
                             player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You just gained §eⓄ 4 Skill Points§8."));
                             player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You now have a total of §eⓄ " + playerManager.getSkill() + " Skill Points§8."));
@@ -153,9 +153,11 @@ public class PlayerInteractListener implements Listener {
                     event.setCancelled(true);
                     World world = Bukkit.getWorld("farmworld");
                     if(player.isSneaking()) world = Bukkit.getWorld("farmworld_nether");
-                    assert world != null;
-                    player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You have been teleported to the farmworld§8. §7Type &b/leave §7to go back to the overworld§8."));
-                    player.teleport(world.getSpawnLocation());
+                    if(world != null) {
+                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You have been teleported to the farmworld§8. §7Type §b/leave §7to go back to the overworld§8."));
+                        player.teleport(world.getSpawnLocation());
+                    } else player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c The farmworld is currently not available§8."));
+
                 }
 
             }

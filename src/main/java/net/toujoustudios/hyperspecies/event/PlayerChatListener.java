@@ -1,12 +1,16 @@
 package net.toujoustudios.hyperspecies.event;
 
+import net.toujoustudios.hyperspecies.data.chat.ChatChannel;
 import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import net.toujoustudios.hyperspecies.ui.TeamUI;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import java.util.Collection;
 import java.util.Random;
 
 public class PlayerChatListener implements Listener {
@@ -21,6 +25,21 @@ public class PlayerChatListener implements Listener {
         }
 
         PlayerManager playerManager = PlayerManager.getPlayer(player);
+        ChatChannel channel = playerManager.getChannel();
+
+        String format = "§9\uD83C\uDFF4 §8| §e{Player} §8> §7{Message}";
+
+        if(channel == ChatChannel.GLOBAL) {
+            format = "§6\uD83C\uDF0D §8| §e{Player} §8> §7{Message}";
+        } else if(channel == ChatChannel.SUPPORT) {
+            format = "§b\uD83C\uDF10 §8| §e{Player} §8> §7{Message}";
+        }
+
+        format = format.replace("{Player}", player.getDisplayName());
+        format = format.replace("{Message}", event.getMessage());
+        format = format.replace("&", "§");
+
+        event.setFormat(format);
 
         if (playerManager.isKawaii()) {
 
@@ -57,6 +76,25 @@ public class PlayerChatListener implements Listener {
 
             event.setMessage(newMessage.toString());
 
+        }
+
+        event.setCancelled(true);
+
+        if(channel == ChatChannel.LOCAL) {
+            Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
+            double radiusSquared = 50 * 50;
+            players.forEach(all -> {
+                if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(player.getLocation()) <= radiusSquared) {
+                    all.sendMessage(event.getMessage());
+                }
+            });
+        } else if(channel == ChatChannel.GLOBAL) {
+            Bukkit.getOnlinePlayers().forEach(all -> all.sendMessage(event.getMessage()));
+        } else if(channel == ChatChannel.SUPPORT) {
+            player.sendMessage(event.getMessage());
+            Bukkit.getOnlinePlayers().forEach(all -> {
+                if(all.hasPermission("hyperspecies.group.moderator")) all.sendMessage(event.getMessage());
+            });
         }
 
     }

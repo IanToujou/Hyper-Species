@@ -26,14 +26,16 @@ public class PassiveDemon extends PassiveAbility {
         } else {
             Block block = player.getWorld().getHighestBlockAt(player.getLocation());
             if (block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
-                if(!player.getWorld().isUltraWarm() && player.getWorld().getEnvironment() != World.Environment.THE_END) player.damage(0.5);
+                if(!player.getWorld().isUltraWarm() && player.getWorld().getEnvironment() != World.Environment.THE_END) {
+                    if(!player.getWorld().hasStorm() && !player.getWorld().isThundering()) player.damage(1);
+                }
             }
         }
 
         // Slowness and weakness in water
         if (player.getLocation().getBlock().getType() == Material.WATER) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 2, 1, false, false, true));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 2, 0, false, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 3, 1, false, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 3, 0, false, false, true));
         } else if (player.getWorld().hasStorm() || player.getWorld().isThundering()) {
             Block block = player.getWorld().getHighestBlockAt(player.getLocation());
             if (block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
