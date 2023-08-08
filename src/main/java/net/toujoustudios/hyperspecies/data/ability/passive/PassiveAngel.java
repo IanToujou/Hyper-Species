@@ -44,7 +44,10 @@ public class PassiveAngel extends PassiveAbility {
         }
 
         if (player.getWorld().isUltraWarm()) {
-            player.damage(3);
+            if(!player.getWorld().getName().contains("farmworld")) {
+                // TODO: Remove in release
+                player.damage(3);
+            }
         }
 
     }

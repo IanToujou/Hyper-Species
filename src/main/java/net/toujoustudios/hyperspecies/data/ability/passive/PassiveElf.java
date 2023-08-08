@@ -47,7 +47,10 @@ public class PassiveElf extends PassiveAbility {
         coldBiomes.add(Biome.SNOWY_TAIGA);
 
         if (coldBiomes.contains(player.getLocation().add(0, -1, 0).getBlock().getBiome())) {
-            player.damage(1);
+            if(!player.getWorld().getName().contains("farmworld")) {
+                // TODO: Remove in release
+                player.damage(1);
+            }
         }
 
         // Mana regeneration on leaf blocks
