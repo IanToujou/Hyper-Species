@@ -29,20 +29,20 @@ public class MessageCommand implements CommandExecutor {
         }
 
         Player target = Bukkit.getPlayer(args[0]);
-        if(target == null) {
+        if (target == null) {
             player.sendMessage(Component.text(Config.MESSAGE_ERROR_PLAYER_INVALID));
             return false;
         }
 
-        if(target == player) {
+        if (target == player) {
             player.sendMessage(Config.MESSAGE_ERROR_PLAYER_SELF);
             return false;
         }
 
         StringBuilder messageBuilder = new StringBuilder();
-        for(int i = 1; i < args.length; i++) {
+        for (int i = 1; i < args.length; i++) {
             messageBuilder.append(args[i]);
-            if(i != (args.length - 1)) messageBuilder.append(" ");
+            if (i != (args.length - 1)) messageBuilder.append(" ");
         }
 
         String message = messageBuilder.toString();

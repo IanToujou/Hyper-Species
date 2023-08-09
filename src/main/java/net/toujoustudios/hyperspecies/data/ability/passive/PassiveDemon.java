@@ -26,9 +26,9 @@ public class PassiveDemon extends PassiveAbility {
         } else {
             Block block = player.getWorld().getHighestBlockAt(player.getLocation());
             if (block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
-                if(!player.getWorld().isUltraWarm() && player.getWorld().getEnvironment() != World.Environment.THE_END) {
-                    if(!player.getWorld().hasStorm() && !player.getWorld().isThundering()) {
-                        if(!player.getWorld().getName().contains("farmworld")) {
+                if (!player.getWorld().isUltraWarm() && player.getWorld().getEnvironment() != World.Environment.THE_END) {
+                    if (!player.getWorld().hasStorm() && !player.getWorld().isThundering()) {
+                        if (!player.getWorld().getName().contains("farmworld")) {
                             // TODO: Remove in release
                             player.damage(1);
                         }

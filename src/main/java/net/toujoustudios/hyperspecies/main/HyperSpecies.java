@@ -55,10 +55,10 @@ public final class HyperSpecies extends JavaPlugin {
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-            if(!playerManager.isSelectingAbility()) {
-                for(int i = 0; i < player.getInventory().getSize(); i++){
+            if (!playerManager.isSelectingAbility()) {
+                for (int i = 0; i < player.getInventory().getSize(); i++) {
                     ItemStack itm = player.getInventory().getItem(i);
-                    if(itm != null && (itm.getType() == Material.BARRIER || itm.getType() == Material.ELYTRA)) {
+                    if (itm != null && (itm.getType() == Material.BARRIER || itm.getType() == Material.ELYTRA)) {
                         int amt = itm.getAmount() - 1;
                         itm.setAmount(0);
                         player.getInventory().setItem(i, amt > 0 ? itm : null);

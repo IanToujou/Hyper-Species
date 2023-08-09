@@ -216,7 +216,7 @@ public abstract class Ability {
     }
 
     public boolean isAvailableForSubSpecies(SubSpecies subSpecies) {
-        if(hasSubSpecies()) {
+        if (hasSubSpecies()) {
             return subSpecies != null && subSpecies.equals(this.subSpecies);
         } else return true;
     }

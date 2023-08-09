@@ -98,33 +98,33 @@ public class PlayerInteractListener implements Listener {
 
         }
 
-        if(event.getClickedBlock() != null && (event.getClickedBlock().getType() == Material.LAPIS_BLOCK || event.getClickedBlock().getType() == Material.EMERALD_BLOCK)) {
+        if (event.getClickedBlock() != null && (event.getClickedBlock().getType() == Material.LAPIS_BLOCK || event.getClickedBlock().getType() == Material.EMERALD_BLOCK)) {
 
             Material material = event.getClickedBlock().getType();
 
             Location location = event.getClickedBlock().getLocation();
-            location.add(1,0,0);
-            if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
-            location.add(0,0,1);
-            if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
-            location.subtract(0,0,2);
-            if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
-            location.subtract(1,0,0);
-            if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
-            location.subtract(1,0,0);
-            if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
-            location.add(0,0,1);
-            if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
-            location.add(0,0,1);
-            if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
-            location.add(1,0,0);
-            if(location.getBlock().getType() != Material.GOLD_BLOCK) return;
+            location.add(1, 0, 0);
+            if (location.getBlock().getType() != Material.GOLD_BLOCK) return;
+            location.add(0, 0, 1);
+            if (location.getBlock().getType() != Material.GOLD_BLOCK) return;
+            location.subtract(0, 0, 2);
+            if (location.getBlock().getType() != Material.GOLD_BLOCK) return;
+            location.subtract(1, 0, 0);
+            if (location.getBlock().getType() != Material.GOLD_BLOCK) return;
+            location.subtract(1, 0, 0);
+            if (location.getBlock().getType() != Material.GOLD_BLOCK) return;
+            location.add(0, 0, 1);
+            if (location.getBlock().getType() != Material.GOLD_BLOCK) return;
+            location.add(0, 0, 1);
+            if (location.getBlock().getType() != Material.GOLD_BLOCK) return;
+            location.add(1, 0, 0);
+            if (location.getBlock().getType() != Material.GOLD_BLOCK) return;
 
-            if(material == Material.LAPIS_BLOCK) {
+            if (material == Material.LAPIS_BLOCK) {
 
-                if(event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                    if(event.getItem() != null) {
-                        if(event.getItem().getType() == Material.DIAMOND) {
+                if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                    if (event.getItem() != null) {
+                        if (event.getItem().getType() == Material.DIAMOND) {
                             event.setCancelled(true);
                             player.getItemInHand().subtract();
                             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
@@ -132,7 +132,7 @@ public class PlayerInteractListener implements Listener {
                             playerManager.setExperience(playerManager.getExperience() + 8);
                             player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You just gained §a5 XP§8."));
                             player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You are now §bLevel " + playerManager.getLevel() + "§8."));
-                        } else if(event.getItem().getType() == Material.DIAMOND_BLOCK) {
+                        } else if (event.getItem().getType() == Material.DIAMOND_BLOCK) {
                             event.setCancelled(true);
                             player.getItemInHand().subtract();
                             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
@@ -143,20 +143,21 @@ public class PlayerInteractListener implements Listener {
                         }
                     } else {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                        player.openInventory(AbilityTree.buildMainInventory(player,0));
+                        player.openInventory(AbilityTree.buildMainInventory(player, 0));
                     }
                 }
 
-            } else if(material == Material.EMERALD_BLOCK) {
+            } else if (material == Material.EMERALD_BLOCK) {
 
-                if(event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
                     event.setCancelled(true);
                     World world = Bukkit.getWorld("farmworld");
-                    if(player.isSneaking()) world = Bukkit.getWorld("farmworld_nether");
-                    if(world != null) {
+                    if (player.isSneaking()) world = Bukkit.getWorld("farmworld_nether");
+                    if (world != null) {
                         player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You have been teleported to the farmworld§8. §7Type §b/leave §7to go back to the overworld§8."));
                         player.teleport(world.getSpawnLocation());
-                    } else player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c The farmworld is currently not available§8."));
+                    } else
+                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c The farmworld is currently not available§8."));
 
                 }
 

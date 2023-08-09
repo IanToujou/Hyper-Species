@@ -34,7 +34,7 @@ public class AbilityWindShock extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DAMAGE, List.of(5,6,7,8,9,10));
+        fields.put(AbilityField.DAMAGE, List.of(5, 6, 7, 8, 9, 10));
         setFields(fields);
 
     }
@@ -55,7 +55,7 @@ public class AbilityWindShock extends Ability {
         double radiusSquared = 4 * 4;
         for (Player all : players) {
             if (all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared) {
-                all.setVelocity(new Vector(direction.getX(),1,direction.getY()).multiply(1.3f));
+                all.setVelocity(new Vector(direction.getX(), 1, direction.getY()).multiply(1.3f));
                 all.damage(damage, player);
             }
         }

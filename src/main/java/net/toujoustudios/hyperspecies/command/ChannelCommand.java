@@ -36,7 +36,7 @@ public class ChannelCommand implements CommandExecutor {
 
         String channel = args[0].toUpperCase();
 
-        if(!channel.equalsIgnoreCase("LOCAL") && !channel.equalsIgnoreCase("GLOBAL") && !channel.equalsIgnoreCase("SUPPORT") && !channel.equalsIgnoreCase("ADMIN") && !channel.equalsIgnoreCase("TEAM")) {
+        if (!channel.equalsIgnoreCase("LOCAL") && !channel.equalsIgnoreCase("GLOBAL") && !channel.equalsIgnoreCase("SUPPORT") && !channel.equalsIgnoreCase("ADMIN") && !channel.equalsIgnoreCase("TEAM")) {
             player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c The chat channel does not exist§8."));
             player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c Valid channels§8: §bLocal, Global, Support, Admin, Team"));
             return false;

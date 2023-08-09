@@ -19,14 +19,14 @@ public class PassiveAquatilia extends PassiveAbility {
         PlayerManager playerManager = PlayerManager.getPlayer(player);
 
         // Buffs underwater, debuffs on land
-        if (player.getLocation().getBlock().getType() == Material.WATER || player.getLocation().add(0,1,0).getBlock().getType() == Material.WATER || player.getLocation().add(1,0,0).getBlock().getType() == Material.WATER || player.getLocation().add(0,0,1).getBlock().getType() == Material.WATER || player.getLocation().add(0,0,-1).getBlock().getType() == Material.WATER || player.getLocation().add(0,0,1).getBlock().getType() == Material.WATER) {
+        if (player.getLocation().getBlock().getType() == Material.WATER || player.getLocation().add(0, 1, 0).getBlock().getType() == Material.WATER || player.getLocation().add(1, 0, 0).getBlock().getType() == Material.WATER || player.getLocation().add(0, 0, 1).getBlock().getType() == Material.WATER || player.getLocation().add(0, 0, -1).getBlock().getType() == Material.WATER || player.getLocation().add(0, 0, 1).getBlock().getType() == Material.WATER) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 20 * 10, 0, false, false, true));
             player.addPotionEffect(new PotionEffect(PotionEffectType.CONDUIT_POWER, 20 * 10, 2, false, false, true));
             player.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 20 * 10, 3, false, false, true));
         } else {
             if (!player.getWorld().isThundering() && !player.getWorld().hasStorm()) {
                 // TODO: Remove in release
-                if(!player.getWorld().getName().contains("farmworld")) {
+                if (!player.getWorld().getName().contains("farmworld")) {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 10, 2, false, false, true));
                 }
             }
@@ -34,9 +34,9 @@ public class PassiveAquatilia extends PassiveAbility {
 
         // Damage in sunlight and hot biomes
         // TODO: Remove in release
-        if(!player.getWorld().getName().contains("farmworld")) {
+        if (!player.getWorld().getName().contains("farmworld")) {
             if (player.getWorld().getTime() < 12500 || player.getWorld().getTime() > 23500) {
-                if(player.getWorld().getEnvironment() != World.Environment.THE_END) {
+                if (player.getWorld().getEnvironment() != World.Environment.THE_END) {
                     Block block = player.getWorld().getHighestBlockAt(player.getLocation());
                     if (block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
                         List<Biome> hotBiomes = List.of(Biome.DESERT, Biome.BADLANDS);
@@ -52,7 +52,7 @@ public class PassiveAquatilia extends PassiveAbility {
 
         if (player.getWorld().isUltraWarm()) {
             // TODO: Remove in release
-            if(!player.getWorld().getName().contains("farmworld")) {
+            if (!player.getWorld().getName().contains("farmworld")) {
                 player.damage(3);
             }
         }

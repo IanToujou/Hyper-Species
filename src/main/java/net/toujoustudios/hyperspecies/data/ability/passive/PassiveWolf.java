@@ -35,7 +35,7 @@ public class PassiveWolf extends PassiveAbility {
         } else {
             Block block = player.getWorld().getHighestBlockAt(player.getLocation().add(0, 1, 0));
             if (block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
-                if(!player.getWorld().getName().contains("farmworld")) {
+                if (!player.getWorld().getName().contains("farmworld")) {
                     // TODO: Remove in release
                     player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 5, 0, false, false, true));
                 }

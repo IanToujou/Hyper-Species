@@ -47,7 +47,7 @@ public class PassiveElf extends PassiveAbility {
         coldBiomes.add(Biome.SNOWY_TAIGA);
 
         if (coldBiomes.contains(player.getLocation().add(0, -1, 0).getBlock().getBiome())) {
-            if(!player.getWorld().getName().contains("farmworld")) {
+            if (!player.getWorld().getName().contains("farmworld")) {
                 // TODO: Remove in release
                 player.damage(1);
             }
@@ -65,7 +65,7 @@ public class PassiveElf extends PassiveAbility {
         leafBlocks.add(Material.FLOWERING_AZALEA_LEAVES);
         leafBlocks.add(Material.SPRUCE_LEAVES);
 
-        if (leafBlocks.contains(player.getLocation().subtract(0,1,0).getBlock().getType()) || leafBlocks.contains(player.getLocation().getBlock().getType())) {
+        if (leafBlocks.contains(player.getLocation().subtract(0, 1, 0).getBlock().getType()) || leafBlocks.contains(player.getLocation().getBlock().getType())) {
             playerManager.setManaRegeneration(0.3);
         } else playerManager.setManaRegeneration(0.1);
 
