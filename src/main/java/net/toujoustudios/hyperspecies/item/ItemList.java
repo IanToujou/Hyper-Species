@@ -3,7 +3,6 @@ package net.toujoustudios.hyperspecies.item;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
@@ -14,8 +13,7 @@ public class ItemList {
     public static ItemStack ALCOHOL_RUM = new ItemStack(Material.POTION);
     public static ItemStack ALCOHOL_RED_WINE = new ItemStack(Material.POTION);
     public static ItemStack ALCOHOL_WHITE_WINE = new ItemStack(Material.POTION);
-    public static ItemStack ALCOHOL_MEAD = new ItemStack(Material.HONEY_BOTTLE);
-    public static ItemStack ALCOHOL_ANIME_GIRL_FLUIDS = new ItemStack(Material.POTION);
+    public static ItemStack ALCOHOL_MEAD = new ItemStack(Material.POTION);
     public static ItemStack MOLOTOV_COCKTAIL = new ItemStack(Material.SPLASH_POTION);
 
     @SuppressWarnings("all")
@@ -45,15 +43,11 @@ public class ItemList {
         alcoholWhiteWineMeta.setBasePotionData(new PotionData(PotionType.WATER));
         ALCOHOL_WHITE_WINE.setItemMeta(alcoholWhiteWineMeta);
 
-        ItemMeta meadMeta = ALCOHOL_MEAD.getItemMeta();
-        meadMeta.setDisplayName("§6Mead");
-        ALCOHOL_MEAD.setItemMeta(alcoholWhiteWineMeta);
-
-        PotionMeta alcoholAnimeBodyFluids = (PotionMeta) ALCOHOL_ANIME_GIRL_FLUIDS.getItemMeta();
-        alcoholAnimeBodyFluids.setColor(Color.PURPLE);
-        alcoholAnimeBodyFluids.setDisplayName("§5Anime Girl Fluids");
-        alcoholAnimeBodyFluids.setBasePotionData(new PotionData(PotionType.WATER));
-        ALCOHOL_ANIME_GIRL_FLUIDS.setItemMeta(alcoholAnimeBodyFluids);
+        PotionMeta alcoholMeadMeta = (PotionMeta) ALCOHOL_MEAD.getItemMeta();
+        alcoholMeadMeta.setColor(Color.ORANGE);
+        alcoholMeadMeta.setDisplayName("§6Mead");
+        alcoholMeadMeta.setBasePotionData(new PotionData(PotionType.WATER));
+        ALCOHOL_MEAD.setItemMeta(alcoholMeadMeta);
 
         PotionMeta molotovCocktailMeta = (PotionMeta) MOLOTOV_COCKTAIL.getItemMeta();
         molotovCocktailMeta.setColor(Color.ORANGE);

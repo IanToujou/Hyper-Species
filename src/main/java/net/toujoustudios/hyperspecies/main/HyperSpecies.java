@@ -100,7 +100,6 @@ public final class HyperSpecies extends JavaPlugin {
                 playerManager.setShield(0);
                 playerManager.setMana(playerManager.getMaxMana());
                 playerManager.setDrunkenness(0);
-                playerManager.setKawaii(false);
             }
 
             player.setScoreboard(scoreboard);
@@ -259,21 +258,13 @@ public final class HyperSpecies extends JavaPlugin {
         alcoholWhiteWineRecipe.setIngredient('C', Material.WATER_BUCKET);
         Bukkit.addRecipe(alcoholWhiteWineRecipe);
 
-        ShapedRecipe meadRecipe = new ShapedRecipe(new NamespacedKey(this, "mead"), ItemList.ALCOHOL_ANIME_GIRL_FLUIDS);
+        ShapedRecipe meadRecipe = new ShapedRecipe(new NamespacedKey(this, "mead"), ItemList.ALCOHOL_MEAD);
         meadRecipe.shape("AAA", "ABA", "DCD");
         meadRecipe.setIngredient('A', Material.HONEYCOMB);
         meadRecipe.setIngredient('B', Material.GLASS_BOTTLE);
         meadRecipe.setIngredient('C', Material.WATER_BUCKET);
         meadRecipe.setIngredient('D', Material.HONEYCOMB_BLOCK);
         Bukkit.addRecipe(meadRecipe);
-
-        ShapedRecipe animeGirlFluidsRecipe = new ShapedRecipe(new NamespacedKey(this, "animeGirlFluids"), ItemList.ALCOHOL_ANIME_GIRL_FLUIDS);
-        animeGirlFluidsRecipe.shape("AAA", "ABA", "DCD");
-        animeGirlFluidsRecipe.setIngredient('A', Material.DIAMOND);
-        animeGirlFluidsRecipe.setIngredient('B', Material.GLASS_BOTTLE);
-        animeGirlFluidsRecipe.setIngredient('C', Material.WATER_BUCKET);
-        animeGirlFluidsRecipe.setIngredient('D', Material.NETHERITE_INGOT);
-        Bukkit.addRecipe(animeGirlFluidsRecipe);
 
         ShapelessRecipe molotovCocktailRecipe = new ShapelessRecipe(new NamespacedKey(this, "molotovCocktail"), ItemList.MOLOTOV_COCKTAIL);
         molotovCocktailRecipe.addIngredient(Material.GLASS_BOTTLE);
