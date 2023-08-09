@@ -24,6 +24,7 @@ public class PlayerChatListener implements Listener {
 
         if (TeamUI.getCreatingTeamPlayers().contains(player.getUniqueId())) {
             event.setCancelled(true);
+            return;
         }
 
         PlayerManager playerManager = PlayerManager.getPlayer(player);

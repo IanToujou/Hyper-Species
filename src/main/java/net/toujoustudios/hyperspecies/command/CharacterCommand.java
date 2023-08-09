@@ -2,6 +2,7 @@ package net.toujoustudios.hyperspecies.command;
 
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.data.character.Character;
+import net.toujoustudios.hyperspecies.data.player.PlayerManager;
 import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
 import org.bukkit.Sound;
@@ -30,6 +31,9 @@ public class CharacterCommand implements CommandExecutor {
             player.sendMessage(Config.MESSAGE_ERROR_SYNTAX.replace("{Usage}", this.getUsage()));
             return false;
         }
+
+        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        if(playerManager.getSpecies() == null) return false;
 
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
         player.openInventory(Character.openInventory(player));

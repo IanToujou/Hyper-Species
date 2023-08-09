@@ -61,7 +61,7 @@ public class AbilitySupersonicSpeed extends Ability {
         player.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, player.getLocation(), 100, 0.5, 0.5, 0.5);
         player.teleport(new Location(location.getWorld(), location.getX(), player.getLocation().getY() + 0.5, location.getZ(), player.getLocation().getYaw(), player.getLocation().getPitch()));
         player.setVelocity(player.getLocation().getDirection());
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * duration, 2, false, false, true));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * duration, 4, false, false, true));
 
         return true;
 

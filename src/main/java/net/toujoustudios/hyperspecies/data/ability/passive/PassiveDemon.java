@@ -44,7 +44,10 @@ public class PassiveDemon extends PassiveAbility {
         } else if (player.getWorld().hasStorm() || player.getWorld().isThundering()) {
             Block block = player.getWorld().getHighestBlockAt(player.getLocation());
             if (block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 20, 1, false, false, true));
+                if (!player.getWorld().getName().contains("farmworld")) {
+                    // TODO: Remove in release
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 20, 1, false, false, true));
+                }
             }
         }
 

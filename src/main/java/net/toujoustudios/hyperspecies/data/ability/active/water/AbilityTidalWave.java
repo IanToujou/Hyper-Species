@@ -62,10 +62,12 @@ public class AbilityTidalWave extends Ability {
                     loc.add(x, y, z);
                     player.getWorld().spawnParticle(Particle.FALLING_WATER, loc, 5, 0.1, 0.1, 0.1);
                     for (Player all : players) {
-                        if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(loc) <= 1) {
-                            if (all != player) {
-                                all.damage(damage, player);
-                                all.setVelocity(new Vector(0, 0.5, 0));
+                        if (all.getWorld() == player.getWorld()) {
+                            if(all.getLocation().distanceSquared(loc) <= 1) {
+                                if (all != player) {
+                                    all.damage(damage, player);
+                                    all.setVelocity(new Vector(0, 0.5, 0));
+                                }
                             }
                         }
                     }
