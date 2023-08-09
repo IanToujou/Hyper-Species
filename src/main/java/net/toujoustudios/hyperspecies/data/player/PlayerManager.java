@@ -140,7 +140,7 @@ public class PlayerManager {
         playerConfig.set("Data." + uuid + ".Character.Experience.Main", experience);
         playerConfig.set("Data." + uuid + ".Character.Skill", skill);
         abilityExperiences.forEach((ability, integer) -> playerConfig.set("Data." + uuid + ".Character.Experience.Ability." + ability, integer));
-        playerConfig.set("Data." + uuid + ".Character.Species", (species != null ? species.getName() : null));
+        playerConfig.set("Data." + uuid + ".Character.Species", (species != null ? species.name() : null));
         playerConfig.set("Data." + uuid + ".Character.Team", team);
         playerConfig.set("Data." + uuid + ".Character.SubSpecies", (subSpecies != null ? subSpecies.name() : null));
         ArrayList<String> abilityNames = new ArrayList<>();
@@ -238,7 +238,7 @@ public class PlayerManager {
 
         final org.bukkit.scoreboard.Team scoreboardTeam = HyperSpecies.getInstance().getScoreboard().registerNewTeam(uuid.toString());
         scoreboardTeam.setColor(ChatColor.GRAY);
-        scoreboardTeam.setPrefix((species != null ? species.getPrefix() : "§7None") + " §7| ");
+        scoreboardTeam.setPrefix((species != null ? species.prefix() : "§7None") + " §7| ");
         scoreboardTeam.addEntry(Bukkit.getPlayer(uuid).getName());
 
     }

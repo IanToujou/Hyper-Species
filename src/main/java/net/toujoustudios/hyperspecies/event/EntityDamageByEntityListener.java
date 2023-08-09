@@ -54,7 +54,7 @@ public class EntityDamageByEntityListener implements Listener {
             if (event.getDamager() instanceof Player dealer) {
 
                 PlayerManager dealerManager = PlayerManager.getPlayer(dealer);
-                if (dealerManager.getSpecies() != null && dealerManager.getSpecies().getName().equals("Wolf")) {
+                if (dealerManager.getSpecies() != null && dealerManager.getSpecies().name().equals("Wolf")) {
                     if (playerManager.getHealth() < playerManager.getMaxHealth() / 3) {
                         trueDamage *= 2;
                         player.getWorld().spawnParticle(Particle.BLOCK_CRACK, player.getLocation(), 100, Material.REDSTONE_BLOCK.createBlockData());
@@ -85,7 +85,7 @@ public class EntityDamageByEntityListener implements Listener {
 
             }
 
-            if (playerManager.getSpecies().getName().equals("Wolf")) {
+            if (playerManager.getSpecies().name().equals("Wolf")) {
                 AtomicBoolean isWolfNearby = new AtomicBoolean(false);
                 Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                 double radiusSquared = 50 * 50;
@@ -93,7 +93,7 @@ public class EntityDamageByEntityListener implements Listener {
                     if (player.getWorld() == all.getWorld() && all.getLocation().distanceSquared(player.getLocation()) <= radiusSquared) {
                         if (all != player) {
                             PlayerManager allManager = PlayerManager.getPlayer(all);
-                            if (allManager.getSpecies().getName().equals("Wolf")) {
+                            if (allManager.getSpecies().name().equals("Wolf")) {
                                 isWolfNearby.set(true);
                             }
                         }

@@ -26,7 +26,7 @@ public class Character {
         characterMeta.setOwningPlayer(Bukkit.getOfflinePlayer(player.getUniqueId()));
         characterMeta.displayName(Component.text("§eYour Character"));
         characterMeta.setLore(List.of(
-                "§7Species: " + playerManager.getSpecies().getPrefix(),
+                "§7Species: " + playerManager.getSpecies().prefix(),
                 "§7Subspecies: " + (playerManager.getSubSpecies()!=null ? playerManager.getSubSpecies() : "§8None"),
                 "§7Level: §b" + playerManager.getLevel(),
                 "§7Skill Points: §eⓄ " + playerManager.getSkill()

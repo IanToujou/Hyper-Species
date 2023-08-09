@@ -7,23 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Species {
+public record Species(String name, String prefix, ItemStack icon, List<SubSpecies> subSpecies, PassiveAbility passive) {
 
     private static final HashMap<String, Species> species = new HashMap<>();
-
-    private final String name;
-    private final String prefix;
-    private final ItemStack icon;
-    private final List<SubSpecies> subSpecies;
-    private final PassiveAbility passive;
-
-    public Species(String name, String prefix, ItemStack icon, List<SubSpecies> subSpecies, PassiveAbility passive) {
-        this.name = name;
-        this.prefix = prefix;
-        this.icon = icon;
-        this.subSpecies = subSpecies;
-        this.passive = passive;
-    }
 
     public static Species getSpecies(String name) {
         if (species.containsKey(name)) return species.get(name);
@@ -46,30 +32,6 @@ public class Species {
         }
         return null;
     }
-
-    // GETTERS AND SETTERS
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public ItemStack getIcon() {
-        return icon;
-    }
-
-    public List<SubSpecies> getSubSpecies() {
-        return subSpecies;
-    }
-
-    public PassiveAbility getPassive() {
-        return passive;
-    }
-
-    // STATIC METHODS
 
     public static HashMap<String, Species> getSpecies() {
         return species;

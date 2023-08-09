@@ -38,7 +38,7 @@ public class SetSpeciesCommand implements CommandExecutor {
                 return false;
             }
 
-            player.sendMessage(Component.text(Config.MESSAGE_PREFIX + " §7You set your species to §b" + species.getName() + "§8."));
+            player.sendMessage(Component.text(Config.MESSAGE_PREFIX + " §7You set your species to §b" + species.name() + "§8."));
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
@@ -61,7 +61,7 @@ public class SetSpeciesCommand implements CommandExecutor {
                 return false;
             }
 
-            player.sendMessage(Component.text(Config.MESSAGE_PREFIX + " §7You set the species of §e" + target.getName() + "§7 to §b" + species.getName() + "§8."));
+            player.sendMessage(Component.text(Config.MESSAGE_PREFIX + " §7You set the species of §e" + target.getName() + "§7 to §b" + species.name() + "§8."));
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
 
             PlayerManager playerManager = PlayerManager.getPlayer(target);

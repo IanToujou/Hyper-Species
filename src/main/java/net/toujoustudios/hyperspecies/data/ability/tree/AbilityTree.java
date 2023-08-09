@@ -292,7 +292,7 @@ public class AbilityTree {
             for (Map.Entry<String, AbilityTree> entry : trees.entrySet()) {
 
                 AbilityTree tree = trees.get(entry.getKey());
-                if (tree.getBaseAbility().getSpecies().contains(playerManager.getSpecies().getName()) || player.getGameMode() == GameMode.CREATIVE) {
+                if (tree.getBaseAbility().getSpecies().contains(playerManager.getSpecies().name()) || player.getGameMode() == GameMode.CREATIVE) {
 
                     Element element = tree.getBaseAbility().getElement();
 
@@ -341,7 +341,7 @@ public class AbilityTree {
             for (Map.Entry<String, AbilityTree> entry : trees.entrySet()) {
 
                 AbilityTree tree = trees.get(entry.getKey());
-                if (tree.getBaseAbility().getSpecies().contains(playerManager.getSpecies().getName()) || player.getGameMode() == GameMode.CREATIVE) {
+                if (tree.getBaseAbility().getSpecies().contains(playerManager.getSpecies().name()) || player.getGameMode() == GameMode.CREATIVE) {
 
                     Element element = tree.getBaseAbility().getElement();
 

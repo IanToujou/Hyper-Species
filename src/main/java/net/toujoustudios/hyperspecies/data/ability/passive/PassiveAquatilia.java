@@ -25,7 +25,10 @@ public class PassiveAquatilia extends PassiveAbility {
             player.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 20 * 10, 3, false, false, true));
         } else {
             if (!player.getWorld().isThundering() && !player.getWorld().hasStorm()) {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 10, 2, false, false, true));
+                // TODO: Remove in release
+                if(!player.getWorld().getName().contains("farmworld")) {
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 10, 2, false, false, true));
+                }
             }
         }
 
@@ -48,7 +51,10 @@ public class PassiveAquatilia extends PassiveAbility {
         }
 
         if (player.getWorld().isUltraWarm()) {
-            player.damage(3);
+            // TODO: Remove in release
+            if(!player.getWorld().getName().contains("farmworld")) {
+                player.damage(3);
+            }
         }
 
         // Permanent night vision

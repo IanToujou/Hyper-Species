@@ -57,13 +57,13 @@ public class AbilityHailstormBarrage extends Ability {
                 int x = new Random().nextInt(11) - 5;
                 int z = new Random().nextInt(11) - 5;
 
-                Location blockLocation = new Location(location.getWorld(), location.getX() + x, location.getY() + 6, location.getZ() + z);
+                Location blockLocation = new Location(location.getWorld(), location.getX() + x, location.getY() + 8, location.getZ() + z);
 
                 FallingBlock block = location.getWorld().spawnFallingBlock(blockLocation, Material.BLUE_ICE.createBlockData());
                 block.setDropItem(true);
                 block.setCancelDrop(true);
                 block.setInvulnerable(true);
-                block.setVelocity(new Vector(0, -0.3f, 0));
+                block.setVelocity(new Vector(0, -2f, 0));
 
                 blocks.add(block);
                 block.getWorld().playSound(blockLocation, Sound.BLOCK_GLASS_BREAK, SoundCategory.MASTER, 3, 2f);

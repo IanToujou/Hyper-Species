@@ -212,7 +212,7 @@ public abstract class Ability {
     }
 
     public boolean isAvailableForSpecies(Species species) {
-        return this.species.contains(species.getName());
+        return this.species.contains(species.name());
     }
 
     public boolean isAvailableForSubSpecies(SubSpecies subSpecies) {

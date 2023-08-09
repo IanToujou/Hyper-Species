@@ -7,6 +7,7 @@ import net.toujoustudios.hyperspecies.data.species.Species;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import java.util.List;
 import java.util.Objects;
@@ -48,12 +49,28 @@ public class AbilityWayOfTheDwarf extends Ability {
 
         int radius = 8;
         int blocksFound = 0;
+        double space = 0.1;
         for (int x = -radius; x <= radius; x++) {
             for (int y = -radius; y <= radius; y++) {
                 for (int z = -radius; z <= radius; z++) {
                     Block b = center.getRelative(x, y, z);
                     if (center.getLocation().distance(b.getLocation()) <= radius) {
-                        if (materials.contains(b.getType())) blocksFound++;
+                        if (materials.contains(b.getType())) {
+                            Location point1 = player.getLocation().add(0, 1, 0);
+                            Location point2 = b.getLocation();
+                            World world = point1.getWorld();
+                            if (point1.getWorld() != point2.getWorld()) return false;
+                            double distance = point1.distance(point2);
+                            Vector p1 = point1.toVector();
+                            Vector p2 = point2.toVector();
+                            Vector vector = p2.clone().subtract(p1).normalize().multiply(space);
+                            double length = 0;
+                            for (; length < distance; p1.add(vector)) {
+                                world.spawnParticle(Particle.VILLAGER_HAPPY, p1.getX(), p1.getY(), p1.getZ(), 5, 0.1, 0.1, 0.1);
+                                length += space;
+                            }
+                            blocksFound++;
+                        }
                     }
                 }
             }
@@ -61,10 +78,8 @@ public class AbilityWayOfTheDwarf extends Ability {
 
         if (blocksFound > 5) {
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1.3f);
-            player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, player.getLocation(), 100, 0.5, 0.5, 0.5);
         } else if (blocksFound > 0) {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, SoundCategory.MASTER, 100, 2f);
-            player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, player.getLocation(), 100, 0.5, 0.5, 0.5);
         } else player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 0f);
 
         return true;

@@ -105,7 +105,7 @@ public final class HyperSpecies extends JavaPlugin {
 
             player.setScoreboard(scoreboard);
 
-            boolean isDwarf = playerManager.getSpecies().getName().equals("Dwarf");
+            boolean isDwarf = playerManager.getSpecies().name().equals("Dwarf");
 
             if (drunkenness >= 4 && !isDwarf) {
                 player.damage(0.5);
@@ -160,8 +160,8 @@ public final class HyperSpecies extends JavaPlugin {
 
             PlayerManager playerManager = PlayerManager.getPlayer(player);
             if (playerManager.getSpecies() == null) return;
-            if (playerManager.getSpecies().getPassive() == null) return;
-            playerManager.getSpecies().getPassive().execute(player);
+            if (playerManager.getSpecies().passive() == null) return;
+            playerManager.getSpecies().passive().execute(player);
 
         })), 5, 5);
 

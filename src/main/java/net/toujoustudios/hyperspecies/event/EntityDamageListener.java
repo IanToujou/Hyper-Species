@@ -43,7 +43,7 @@ public class EntityDamageListener implements Listener {
 
             if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
 
-                if (playerManager.getSpecies().getName().equals("Reptile") || playerManager.getSpecies().getName().equals("Feline")) {
+                if (playerManager.getSpecies().name().equals("Reptile") || playerManager.getSpecies().name().equals("Feline")) {
                     event.setCancelled(true);
                     return;
                 }

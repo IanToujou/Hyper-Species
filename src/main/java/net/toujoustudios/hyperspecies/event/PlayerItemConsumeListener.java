@@ -100,7 +100,7 @@ public class PlayerItemConsumeListener implements Listener {
             return;
         }
 
-        if (playerManager.getSpecies().getName().equals("Elf")) {
+        if (playerManager.getSpecies().name().equals("Elf")) {
 
             if (meat.contains(material)) {
 
@@ -112,7 +112,7 @@ public class PlayerItemConsumeListener implements Listener {
 
             }
 
-        } else if (playerManager.getSpecies().getName().equals("Feline") || playerManager.getSpecies().getName().equals("Wolf")) {
+        } else if (playerManager.getSpecies().name().equals("Feline") || playerManager.getSpecies().name().equals("Wolf")) {
 
             if (!meat.contains(material)) {
 
