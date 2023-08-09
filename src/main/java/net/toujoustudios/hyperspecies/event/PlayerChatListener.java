@@ -36,7 +36,7 @@ public class PlayerChatListener implements Listener {
         event.setCancelled(true);
         String message = format.replace("{Message}", event.getMessage());
 
-        Logger.log(LogLevel.INFORMATION, "(" + channel.getName() + ") " + player.getName() + " > " + message);
+        Logger.log(LogLevel.INFORMATION, message);
 
         if(channel == ChatChannel.LOCAL) {
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
