@@ -176,10 +176,6 @@ public final class HyperSpecies extends JavaPlugin {
 
     @SuppressWarnings("all")
     public void registerCommands() {
-        getCommand("emote").setExecutor(new EmoteCommand());
-        getCommand("e").setExecutor(new EmoteCommand());
-        getCommand("emotelist").setExecutor(new EmoteListCommand());
-        getCommand("elist").setExecutor(new EmoteListCommand());
         getCommand("team").setExecutor(new TeamCommand());
         getCommand("ability").setExecutor(new AbilityCommand());
         getCommand("reset").setExecutor(new ResetCommand());

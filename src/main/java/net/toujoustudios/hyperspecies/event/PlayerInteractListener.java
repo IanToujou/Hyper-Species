@@ -84,6 +84,7 @@ public class PlayerInteractListener implements Listener {
 
                     if (playerManager.useAbility(ability)) {
                         player.sendTitle("", "§a" + ability.getName(), 5, 10, 5);
+                        playerManager.addAbilityExperience(ability, 1);
                     } else {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.4f);
                         player.sendTitle("", "§cFailed", 5, 10, 5);

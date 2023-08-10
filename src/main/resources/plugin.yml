@@ -7,16 +7,6 @@ authors:
   - IanToujou
 
 commands:
-  emote:
-    description: Use an emote on yourself or another player.
-    permission: hyperspecies.command.emote
-    aliases:
-      - e
-  emotelist:
-    description: Show a list of all the emotes available.
-    permission: hyperspecies.command.emotelist
-    aliases:
-      - elist
   team:
     description: Show and manage your team.
     permission: hyperspecies.command.team
@@ -79,8 +69,6 @@ permissions:
   hyperspecies.group.player:
     description: The player group.
     children:
-      hyperspecies.command.emote: true
-      hyperspecies.command.emotelist: true
       hyperspecies.command.team: true
       hyperspecies.command.ability: false
       hyperspecies.command.reset: true
@@ -100,8 +88,6 @@ permissions:
   hyperspecies.group.admin:
     description: The administrator group. Grants all permissions.
     children:
-      hyperspecies.command.emote: true
-      hyperspecies.command.emotelist: true
       hyperspecies.command.team: true
       hyperspecies.command.ability: true
       hyperspecies.command.reset: true
@@ -121,8 +107,6 @@ permissions:
   hyperspecies.group.moderator:
     description: The administrator group. Grants all permissions.
     children:
-      hyperspecies.command.emote: true
-      hyperspecies.command.emotelist: true
       hyperspecies.command.team: true
       hyperspecies.command.ability: false
       hyperspecies.command.reset: true
@@ -139,12 +123,6 @@ permissions:
       hyperspecies.command.passive: false
       hyperspecies.command.channel: true
       hyperspecies.command.message: true
-  hyperspecies.command.emote:
-    description: Allows players to use the emote command.
-    default: true
-  hyperspecies.command.emotelist:
-    description: Allows players to use the emotelist command.
-    default: true
   hyperspecies.command.team:
     description: Allows players to use the team command.
     default: true
