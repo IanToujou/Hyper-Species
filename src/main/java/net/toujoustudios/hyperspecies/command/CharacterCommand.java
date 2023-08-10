@@ -36,7 +36,7 @@ public class CharacterCommand implements CommandExecutor {
         if(playerManager.getSpecies() == null) return false;
 
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-        player.openInventory(Character.openInventory(player));
+        player.openInventory(Character.buildInventory(player));
 
         return false;
 

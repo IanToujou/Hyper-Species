@@ -41,7 +41,8 @@ public class AbilityMineSight extends Ability {
                 Material.IRON_ORE,
                 Material.DEEPSLATE_IRON_ORE,
                 Material.GOLD_ORE,
-                Material.DEEPSLATE_GOLD_ORE
+                Material.DEEPSLATE_GOLD_ORE,
+                Material.NETHER_GOLD_ORE
         );
 
         int radius = 8;

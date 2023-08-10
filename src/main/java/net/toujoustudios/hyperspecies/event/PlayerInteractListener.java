@@ -132,6 +132,7 @@ public class PlayerInteractListener implements Listener {
                             playerManager.setExperience(playerManager.getExperience() + 8);
                             player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You just gained §a5 XP§8."));
                             player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You are now §bLevel " + playerManager.getLevel() + "§8."));
+                            if(playerManager.getLevel() > 7 && playerManager.getSubSpecies() == null) player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§a You can now select a subspecies with §b/character§8!"));
                         } else if (event.getItem().getType() == Material.DIAMOND_BLOCK) {
                             event.setCancelled(true);
                             player.getItemInHand().subtract();
