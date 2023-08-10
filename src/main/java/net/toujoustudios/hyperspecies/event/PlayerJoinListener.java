@@ -1,7 +1,7 @@
 package net.toujoustudios.hyperspecies.event;
 
 import net.kyori.adventure.text.Component;
-import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.ui.SpeciesUI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

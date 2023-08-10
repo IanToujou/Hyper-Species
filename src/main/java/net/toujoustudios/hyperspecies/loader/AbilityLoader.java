@@ -1,20 +1,20 @@
 package net.toujoustudios.hyperspecies.loader;
 
-import net.toujoustudios.hyperspecies.data.ability.active.Ability;
-import net.toujoustudios.hyperspecies.data.ability.active.air.*;
-import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEndblight;
-import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityEngulfingDarkness;
-import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityStrikeOfCorruption;
-import net.toujoustudios.hyperspecies.data.ability.active.dark.AbilityTotalAnnihilation;
-import net.toujoustudios.hyperspecies.data.ability.active.earth.*;
-import net.toujoustudios.hyperspecies.data.ability.active.electro.*;
-import net.toujoustudios.hyperspecies.data.ability.active.fairy.*;
-import net.toujoustudios.hyperspecies.data.ability.active.fire.*;
-import net.toujoustudios.hyperspecies.data.ability.active.flora.*;
-import net.toujoustudios.hyperspecies.data.ability.active.psychic.AbilityPsychicWard;
-import net.toujoustudios.hyperspecies.data.ability.active.psychic.AbilityTimothy;
-import net.toujoustudios.hyperspecies.data.ability.active.water.*;
-import net.toujoustudios.hyperspecies.data.ability.tree.AbilityTree;
+import net.toujoustudios.hyperspecies.ability.active.Ability;
+import net.toujoustudios.hyperspecies.ability.active.air.*;
+import net.toujoustudios.hyperspecies.ability.active.dark.AbilityEndblight;
+import net.toujoustudios.hyperspecies.ability.active.dark.AbilityEngulfingDarkness;
+import net.toujoustudios.hyperspecies.ability.active.dark.AbilityStrikeOfCorruption;
+import net.toujoustudios.hyperspecies.ability.active.dark.AbilityTotalAnnihilation;
+import net.toujoustudios.hyperspecies.ability.active.earth.*;
+import net.toujoustudios.hyperspecies.ability.active.electro.*;
+import net.toujoustudios.hyperspecies.ability.active.fairy.*;
+import net.toujoustudios.hyperspecies.ability.active.fire.*;
+import net.toujoustudios.hyperspecies.ability.active.flora.*;
+import net.toujoustudios.hyperspecies.ability.active.psychic.AbilityPsychicWard;
+import net.toujoustudios.hyperspecies.ability.active.psychic.AbilityTimothy;
+import net.toujoustudios.hyperspecies.ability.active.water.*;
+import net.toujoustudios.hyperspecies.ability.tree.AbilityTree;
 
 import java.util.HashMap;
 import java.util.List;

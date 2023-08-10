@@ -1,6 +1,6 @@
 package net.toujoustudios.hyperspecies.event;
 
-import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;

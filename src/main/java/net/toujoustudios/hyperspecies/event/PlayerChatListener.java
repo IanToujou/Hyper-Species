@@ -2,8 +2,8 @@ package net.toujoustudios.hyperspecies.event;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
-import net.toujoustudios.hyperspecies.data.chat.ChatChannel;
-import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.chat.ChatChannel;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;

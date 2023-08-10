@@ -1,8 +1,8 @@
 package net.toujoustudios.hyperspecies.event;
 
-import net.toujoustudios.hyperspecies.data.ability.active.Ability;
-import net.toujoustudios.hyperspecies.data.ability.active.AbilityField;
-import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.ability.active.Ability;
+import net.toujoustudios.hyperspecies.ability.active.AbilityField;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
 import org.bukkit.block.Block;

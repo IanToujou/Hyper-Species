@@ -1,8 +1,8 @@
 package net.toujoustudios.hyperspecies.loader;
 
 import net.toujoustudios.hyperspecies.config.Config;
-import net.toujoustudios.hyperspecies.data.team.Team;
-import net.toujoustudios.hyperspecies.data.team.TeamStatus;
+import net.toujoustudios.hyperspecies.team.Team;
+import net.toujoustudios.hyperspecies.team.TeamStatus;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.util.ArrayList;

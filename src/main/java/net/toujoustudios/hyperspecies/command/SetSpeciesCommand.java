@@ -2,8 +2,8 @@ package net.toujoustudios.hyperspecies.command;
 
 import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.config.Config;
-import net.toujoustudios.hyperspecies.data.player.PlayerManager;
-import net.toujoustudios.hyperspecies.data.species.Species;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
+import net.toujoustudios.hyperspecies.species.Species;
 import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
 import org.bukkit.Bukkit;

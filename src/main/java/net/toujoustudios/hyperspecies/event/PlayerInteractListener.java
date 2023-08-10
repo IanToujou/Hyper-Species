@@ -2,9 +2,9 @@ package net.toujoustudios.hyperspecies.event;
 
 import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.config.Config;
-import net.toujoustudios.hyperspecies.data.ability.active.Ability;
-import net.toujoustudios.hyperspecies.data.ability.tree.AbilityTree;
-import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.ability.active.Ability;
+import net.toujoustudios.hyperspecies.ability.tree.AbilityTree;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.item.ItemListUI;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;

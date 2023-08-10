@@ -1,9 +1,9 @@
 package net.toujoustudios.hyperspecies.ui;
 
 import net.toujoustudios.hyperspecies.config.Config;
-import net.toujoustudios.hyperspecies.data.player.PlayerManager;
-import net.toujoustudios.hyperspecies.data.team.Team;
-import net.toujoustudios.hyperspecies.data.team.TeamStatus;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
+import net.toujoustudios.hyperspecies.team.Team;
+import net.toujoustudios.hyperspecies.team.TeamStatus;
 import net.toujoustudios.hyperspecies.item.ItemListUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

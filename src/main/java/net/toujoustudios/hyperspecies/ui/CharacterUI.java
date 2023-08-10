@@ -2,9 +2,9 @@ package net.toujoustudios.hyperspecies.ui;
 
 import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.config.Config;
-import net.toujoustudios.hyperspecies.data.character.Character;
-import net.toujoustudios.hyperspecies.data.player.PlayerManager;
-import net.toujoustudios.hyperspecies.data.species.SubSpecies;
+import net.toujoustudios.hyperspecies.character.Character;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
+import net.toujoustudios.hyperspecies.species.SubSpecies;
 import net.toujoustudios.hyperspecies.item.ItemListUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;

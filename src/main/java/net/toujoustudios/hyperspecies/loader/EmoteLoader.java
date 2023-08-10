@@ -1,6 +1,6 @@
 package net.toujoustudios.hyperspecies.loader;
 
-import net.toujoustudios.hyperspecies.data.emote.*;
+import net.toujoustudios.hyperspecies.emote.*;
 
 public class EmoteLoader {
 

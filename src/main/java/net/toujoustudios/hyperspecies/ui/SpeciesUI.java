@@ -1,8 +1,8 @@
 package net.toujoustudios.hyperspecies.ui;
 
 import net.toujoustudios.hyperspecies.config.Config;
-import net.toujoustudios.hyperspecies.data.player.PlayerManager;
-import net.toujoustudios.hyperspecies.data.species.Species;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
+import net.toujoustudios.hyperspecies.species.Species;
 import net.toujoustudios.hyperspecies.item.ItemListUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

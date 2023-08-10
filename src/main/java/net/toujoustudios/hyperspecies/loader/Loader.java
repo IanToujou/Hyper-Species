@@ -1,7 +1,7 @@
 package net.toujoustudios.hyperspecies.loader;
 
 import net.toujoustudios.hyperspecies.config.Config;
-import net.toujoustudios.hyperspecies.data.player.PlayerManager;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.item.ItemList;
 import net.toujoustudios.hyperspecies.item.ItemListUI;
 import net.toujoustudios.hyperspecies.log.LogLevel;
