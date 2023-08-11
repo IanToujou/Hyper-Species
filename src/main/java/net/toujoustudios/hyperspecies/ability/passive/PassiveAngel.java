@@ -32,8 +32,11 @@ public class PassiveAngel extends PassiveAbility {
 
         // Slowness in water
         if (player.getLocation().getBlock().getType() == Material.WATER) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 3, 0, false, false, true));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 3, 1, false, false, true));
+            // TODO: Remove in release
+            if (!player.getWorld().getName().contains("farmworld")) {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 3, 0, false, false, true));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 3, 1, false, false, true));
+            }
         }
 
         // Mana regeneration on gold
@@ -44,8 +47,8 @@ public class PassiveAngel extends PassiveAbility {
         }
 
         if (player.getWorld().isUltraWarm()) {
+            // TODO: Remove in release
             if (!player.getWorld().getName().contains("farmworld")) {
-                // TODO: Remove in release
                 player.damage(3);
             }
         }

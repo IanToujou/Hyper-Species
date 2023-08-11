@@ -47,6 +47,7 @@ public class PlayerManager {
     private double drunkenness;
     private boolean stunned;
     private ChatChannel channel;
+    private boolean kawaii;
 
     public PlayerManager(UUID uuid) {
 
@@ -113,6 +114,7 @@ public class PlayerManager {
 
         stunned = false;
         channel = ChatChannel.LOCAL;
+        kawaii = false;
 
     }
 
@@ -488,6 +490,14 @@ public class PlayerManager {
             weight += ability.getWeight();
         }
         return weight;
+    }
+
+    public boolean isKawaii() {
+        return kawaii;
+    }
+
+    public void setKawaii(boolean kawaii) {
+        this.kawaii = kawaii;
     }
 
     // STATIC METHODS

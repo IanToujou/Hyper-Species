@@ -9,51 +9,58 @@ import org.bukkit.potion.PotionType;
 
 public class ItemList {
 
-    public static ItemStack ALCOHOL_BEER = new ItemStack(Material.POTION);
-    public static ItemStack ALCOHOL_RUM = new ItemStack(Material.POTION);
-    public static ItemStack ALCOHOL_RED_WINE = new ItemStack(Material.POTION);
-    public static ItemStack ALCOHOL_WHITE_WINE = new ItemStack(Material.POTION);
-    public static ItemStack ALCOHOL_MEAD = new ItemStack(Material.POTION);
+    public static ItemStack BEER = new ItemStack(Material.POTION);
+    public static ItemStack RUM = new ItemStack(Material.POTION);
+    public static ItemStack RED_WINE = new ItemStack(Material.POTION);
+    public static ItemStack WHITE_WINE = new ItemStack(Material.POTION);
+    public static ItemStack MEAD = new ItemStack(Material.POTION);
     public static ItemStack MOLOTOV_COCKTAIL = new ItemStack(Material.SPLASH_POTION);
+    public static ItemStack ANIME_GIRL_FLUIDS = new ItemStack(Material.POTION);
 
     @SuppressWarnings("all")
     public static void initialize() {
 
-        PotionMeta alcoholBeerMeta = (PotionMeta) ALCOHOL_BEER.getItemMeta();
-        alcoholBeerMeta.setColor(Color.YELLOW);
-        alcoholBeerMeta.setDisplayName("§eBeer");
-        alcoholBeerMeta.setBasePotionData(new PotionData(PotionType.WATER));
-        ALCOHOL_BEER.setItemMeta(alcoholBeerMeta);
+        PotionMeta beerMeta = (PotionMeta) BEER.getItemMeta();
+        beerMeta.setColor(Color.YELLOW);
+        beerMeta.setDisplayName("§eBeer");
+        beerMeta.setBasePotionData(new PotionData(PotionType.WATER));
+        BEER.setItemMeta(beerMeta);
 
-        PotionMeta alcoholRumMeta = (PotionMeta) ALCOHOL_RUM.getItemMeta();
-        alcoholRumMeta.setColor(Color.ORANGE);
-        alcoholRumMeta.setDisplayName("§6Rum");
-        alcoholRumMeta.setBasePotionData(new PotionData(PotionType.WATER));
-        ALCOHOL_RUM.setItemMeta(alcoholRumMeta);
+        PotionMeta rumMeta = (PotionMeta) RUM.getItemMeta();
+        rumMeta.setColor(Color.ORANGE);
+        rumMeta.setDisplayName("§6Rum");
+        rumMeta.setBasePotionData(new PotionData(PotionType.WATER));
+        RUM.setItemMeta(rumMeta);
 
-        PotionMeta alcoholRedWineMeta = (PotionMeta) ALCOHOL_RED_WINE.getItemMeta();
-        alcoholRedWineMeta.setColor(Color.RED);
-        alcoholRedWineMeta.setDisplayName("§cRed Wine");
-        alcoholRedWineMeta.setBasePotionData(new PotionData(PotionType.WATER));
-        ALCOHOL_RED_WINE.setItemMeta(alcoholRedWineMeta);
+        PotionMeta redWineMeta = (PotionMeta) RED_WINE.getItemMeta();
+        redWineMeta.setColor(Color.RED);
+        redWineMeta.setDisplayName("§cRed Wine");
+        redWineMeta.setBasePotionData(new PotionData(PotionType.WATER));
+        RED_WINE.setItemMeta(redWineMeta);
 
-        PotionMeta alcoholWhiteWineMeta = (PotionMeta) ALCOHOL_WHITE_WINE.getItemMeta();
-        alcoholWhiteWineMeta.setColor(Color.WHITE);
-        alcoholWhiteWineMeta.setDisplayName("§fWhite Wine");
-        alcoholWhiteWineMeta.setBasePotionData(new PotionData(PotionType.WATER));
-        ALCOHOL_WHITE_WINE.setItemMeta(alcoholWhiteWineMeta);
+        PotionMeta whiteWineMeta = (PotionMeta) WHITE_WINE.getItemMeta();
+        whiteWineMeta.setColor(Color.WHITE);
+        whiteWineMeta.setDisplayName("§fWhite Wine");
+        whiteWineMeta.setBasePotionData(new PotionData(PotionType.WATER));
+        WHITE_WINE.setItemMeta(whiteWineMeta);
 
-        PotionMeta alcoholMeadMeta = (PotionMeta) ALCOHOL_MEAD.getItemMeta();
-        alcoholMeadMeta.setColor(Color.ORANGE);
-        alcoholMeadMeta.setDisplayName("§6Mead");
-        alcoholMeadMeta.setBasePotionData(new PotionData(PotionType.WATER));
-        ALCOHOL_MEAD.setItemMeta(alcoholMeadMeta);
+        PotionMeta meadMeta = (PotionMeta) MEAD.getItemMeta();
+        meadMeta.setColor(Color.ORANGE);
+        meadMeta.setDisplayName("§6Mead");
+        meadMeta.setBasePotionData(new PotionData(PotionType.WATER));
+        MEAD.setItemMeta(meadMeta);
 
         PotionMeta molotovCocktailMeta = (PotionMeta) MOLOTOV_COCKTAIL.getItemMeta();
         molotovCocktailMeta.setColor(Color.ORANGE);
         molotovCocktailMeta.setDisplayName("§fMolotov Cocktail");
         molotovCocktailMeta.setBasePotionData(new PotionData(PotionType.WATER));
         MOLOTOV_COCKTAIL.setItemMeta(molotovCocktailMeta);
+
+        PotionMeta animeBodyFluidsMeta = (PotionMeta) ANIME_GIRL_FLUIDS.getItemMeta();
+        animeBodyFluidsMeta.setColor(Color.PURPLE);
+        animeBodyFluidsMeta.setDisplayName("§5Anime Girl Fluids");
+        animeBodyFluidsMeta.setBasePotionData(new PotionData(PotionType.WATER));
+        ANIME_GIRL_FLUIDS.setItemMeta(animeBodyFluidsMeta);
 
     }
 

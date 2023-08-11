@@ -32,7 +32,6 @@ public class Loader {
         Config.initialize();
         ItemListUI.initialize();
         ItemList.initialize();
-        EmoteLoader.initialize();
 
         if (cancelled) return;
 

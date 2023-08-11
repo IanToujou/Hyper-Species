@@ -225,14 +225,14 @@ public final class HyperSpecies extends JavaPlugin {
 
     public void registerCrafting() {
 
-        ShapedRecipe alcoholBeerRecipe = new ShapedRecipe(new NamespacedKey(this, "beer"), ItemList.ALCOHOL_BEER);
+        ShapedRecipe alcoholBeerRecipe = new ShapedRecipe(new NamespacedKey(this, "beer"), ItemList.BEER);
         alcoholBeerRecipe.shape("AAA", "ABA", "ACA");
         alcoholBeerRecipe.setIngredient('A', Material.WHEAT);
         alcoholBeerRecipe.setIngredient('B', Material.GLASS_BOTTLE);
         alcoholBeerRecipe.setIngredient('C', Material.WATER_BUCKET);
         Bukkit.addRecipe(alcoholBeerRecipe);
 
-        ShapedRecipe alcoholRumRecipe = new ShapedRecipe(new NamespacedKey(this, "rum"), ItemList.ALCOHOL_RUM);
+        ShapedRecipe alcoholRumRecipe = new ShapedRecipe(new NamespacedKey(this, "rum"), ItemList.RUM);
         alcoholRumRecipe.shape("AAA", "ABA", "DCD");
         alcoholRumRecipe.setIngredient('A', Material.SUGAR_CANE);
         alcoholRumRecipe.setIngredient('B', Material.GLASS_BOTTLE);
@@ -240,21 +240,21 @@ public final class HyperSpecies extends JavaPlugin {
         alcoholRumRecipe.setIngredient('D', Material.SUGAR);
         Bukkit.addRecipe(alcoholRumRecipe);
 
-        ShapedRecipe alcoholRedWineRecipe = new ShapedRecipe(new NamespacedKey(this, "redWine"), ItemList.ALCOHOL_RED_WINE);
+        ShapedRecipe alcoholRedWineRecipe = new ShapedRecipe(new NamespacedKey(this, "redWine"), ItemList.RED_WINE);
         alcoholRedWineRecipe.shape("AAA", "ABA", "ACA");
         alcoholRedWineRecipe.setIngredient('A', Material.SWEET_BERRIES);
         alcoholRedWineRecipe.setIngredient('B', Material.GLASS_BOTTLE);
         alcoholRedWineRecipe.setIngredient('C', Material.WATER_BUCKET);
         Bukkit.addRecipe(alcoholRedWineRecipe);
 
-        ShapedRecipe alcoholWhiteWineRecipe = new ShapedRecipe(new NamespacedKey(this, "whiteWine"), ItemList.ALCOHOL_WHITE_WINE);
+        ShapedRecipe alcoholWhiteWineRecipe = new ShapedRecipe(new NamespacedKey(this, "whiteWine"), ItemList.WHITE_WINE);
         alcoholWhiteWineRecipe.shape("AAA", "ABA", "ACA");
         alcoholWhiteWineRecipe.setIngredient('A', Material.GLOW_BERRIES);
         alcoholWhiteWineRecipe.setIngredient('B', Material.GLASS_BOTTLE);
         alcoholWhiteWineRecipe.setIngredient('C', Material.WATER_BUCKET);
         Bukkit.addRecipe(alcoholWhiteWineRecipe);
 
-        ShapedRecipe meadRecipe = new ShapedRecipe(new NamespacedKey(this, "mead"), ItemList.ALCOHOL_MEAD);
+        ShapedRecipe meadRecipe = new ShapedRecipe(new NamespacedKey(this, "mead"), ItemList.MEAD);
         meadRecipe.shape("AAA", "ABA", "DCD");
         meadRecipe.setIngredient('A', Material.HONEYCOMB);
         meadRecipe.setIngredient('B', Material.GLASS_BOTTLE);
@@ -267,6 +267,14 @@ public final class HyperSpecies extends JavaPlugin {
         molotovCocktailRecipe.addIngredient(Material.PAPER);
         molotovCocktailRecipe.addIngredient(Material.LAVA_BUCKET);
         Bukkit.addRecipe(molotovCocktailRecipe);
+
+        ShapedRecipe animeGirlFluidsRecipe = new ShapedRecipe(new NamespacedKey(this, "animeGirlFluids"), ItemList.ANIME_GIRL_FLUIDS);
+        animeGirlFluidsRecipe.shape("AAA", "ABA", "DCD");
+        animeGirlFluidsRecipe.setIngredient('A', Material.DIAMOND);
+        animeGirlFluidsRecipe.setIngredient('B', Material.GLASS_BOTTLE);
+        animeGirlFluidsRecipe.setIngredient('C', Material.WATER_BUCKET);
+        animeGirlFluidsRecipe.setIngredient('D', Material.NETHERITE_INGOT);
+        Bukkit.addRecipe(animeGirlFluidsRecipe);
 
     }
 

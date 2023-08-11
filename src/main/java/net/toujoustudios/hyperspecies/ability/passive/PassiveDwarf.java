@@ -15,7 +15,10 @@ public class PassiveDwarf extends PassiveAbility {
 
         player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 20 * 10, 1, false, false, true));
         player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 20, 0, false, false, true));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 10, 0, false, false, true));
+        // TODO: Remove in release
+        if (!player.getWorld().getName().contains("farmworld")) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 10, 0, false, false, true));
+        }
 
         if (playerManager.isDrunk()) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20 * 5, 0, false, false, true));
@@ -25,7 +28,10 @@ public class PassiveDwarf extends PassiveAbility {
         }
 
         if (player.getLocation().getBlock().getType() == Material.WATER) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 20 * 5, 2, false, false, true));
+            // TODO: Remove in release
+            if (!player.getWorld().getName().contains("farmworld")) {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 20 * 5, 2, false, false, true));
+            }
         }
 
     }

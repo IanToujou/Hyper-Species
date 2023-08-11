@@ -39,8 +39,11 @@ public class PassiveDemon extends PassiveAbility {
 
         // Slowness and weakness in water
         if (player.getLocation().getBlock().getType() == Material.WATER) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 3, 1, false, false, true));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 3, 0, false, false, true));
+            // TODO: Remove in release
+            if (!player.getWorld().getName().contains("farmworld")) {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 3, 1, false, false, true));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 3, 0, false, false, true));
+            }
         } else if (player.getWorld().hasStorm() || player.getWorld().isThundering()) {
             Block block = player.getWorld().getHighestBlockAt(player.getLocation());
             if (block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {

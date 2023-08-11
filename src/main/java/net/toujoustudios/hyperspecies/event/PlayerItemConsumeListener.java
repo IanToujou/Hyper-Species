@@ -1,6 +1,9 @@
 package net.toujoustudios.hyperspecies.event;
 
+import net.kyori.adventure.text.Component;
+import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
@@ -40,6 +43,12 @@ public class PlayerItemConsumeListener implements Listener {
                 case "§6Rum" -> playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.6);
                 case "§cRed Wine" -> playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.5);
                 case "§fWhite Wine", "§6Mead" -> playerManager.setDrunkenness(playerManager.getDrunkenness() + 0.4);
+                case "§5Anime Girl Fluids" -> {
+                    Bukkit.broadcastMessage("§e" + player.getName() + "§d is turning into an anime girl§8...");
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_AMBIENT, SoundCategory.MASTER, 100, 2f);
+                    player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You can revert this by drinking milk§8."));
+                    playerManager.setKawaii(true);
+                }
             }
 
             if (alcoholNames.contains(name)) {
