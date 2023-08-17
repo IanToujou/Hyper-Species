@@ -68,7 +68,7 @@ public class AbilityStarwhisper extends Ability {
                         PlayerManager manager = PlayerManager.getPlayer(all);
                         location.getWorld().spawnParticle(Particle.CHERRY_LEAVES, location, 100, 3, 3, 3);
                         if (manager.hasTeam() && playerManager.hasTeam() && manager.getTeam() == playerManager.getTeam()) {
-                            all.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * duration, 5, false, false, true));
+                            all.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * duration, 0, false, false, true));
                         } else if (all != player) all.damage(damage, player);
                     }
                 });
