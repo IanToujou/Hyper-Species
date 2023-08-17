@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.event;
 
-import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.Bukkit;
@@ -46,7 +45,7 @@ public class PlayerItemConsumeListener implements Listener {
                 case "§5Anime Girl Fluids" -> {
                     Bukkit.broadcastMessage("§e" + player.getName() + "§d is turning into an anime girl§8...");
                     player.getWorld().playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_AMBIENT, SoundCategory.MASTER, 100, 2f);
-                    player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You can revert this by drinking milk§8."));
+                    player.sendMessage(Config.MESSAGE_PREFIX + "§7 You can revert this by drinking milk§8.");
                     playerManager.setKawaii(true);
                 }
             }

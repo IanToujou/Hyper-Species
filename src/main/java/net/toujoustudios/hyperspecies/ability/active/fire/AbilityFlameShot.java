@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.ability.active.fire;
 
-import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
@@ -53,7 +52,7 @@ public class AbilityFlameShot extends Ability {
 
         Arrow projectile = player.launchProjectile(Arrow.class);
         player.getWorld().playSound(player.getLocation(), Sound.ITEM_FIRECHARGE_USE, SoundCategory.MASTER, 2, 0.8f);
-        projectile.customName(Component.text("Flame Shot of " + player.getName()));
+        projectile.setCustomName("Flame Shot of " + player.getName());
         projectile.setCustomNameVisible(false);
         projectile.setDamage(damage);
         projectile.setVisualFire(true);

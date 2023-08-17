@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.ability.active.fire;
 
-import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
@@ -72,7 +71,7 @@ public class AbilityMeteorStrike extends Ability {
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
 
             Fireball entity = (Fireball) player.getWorld().spawnEntity(spawnLocation, EntityType.FIREBALL);
-            entity.customName(Component.text("Meteor Strike of " + player.getName()));
+            entity.setCustomName("Meteor Strike of " + player.getName());
             entity.setCustomNameVisible(false);
             entity.setDirection(new Vector(0, -3, 0));
             entity.setIsIncendiary(false);

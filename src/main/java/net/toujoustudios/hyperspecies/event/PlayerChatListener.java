@@ -1,7 +1,5 @@
 package net.toujoustudios.hyperspecies.event;
 
-import io.papermc.paper.event.player.AsyncChatEvent;
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.toujoustudios.hyperspecies.chat.ChatChannel;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.log.LogLevel;
@@ -12,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import java.util.Collection;
 import java.util.Random;
@@ -19,7 +18,7 @@ import java.util.Random;
 public class PlayerChatListener implements Listener {
 
     @EventHandler
-    public void onPlayerChat(AsyncChatEvent event) {
+    public void onPlayerChat(AsyncPlayerChatEvent event) {
 
         Player player = event.getPlayer();
 
@@ -33,10 +32,10 @@ public class PlayerChatListener implements Listener {
 
         String format = channel.getFullName() + " §8| §e{Player} §8> " + channel.getChatColor() + "{Message}";
 
-        format = format.replace("{Player}", PlainTextComponentSerializer.plainText().serialize(player.displayName()));
+        format = format.replace("{Player}", player.getDisplayName());
         format = format.replace("&", "§");
 
-        String message = PlainTextComponentSerializer.plainText().serialize(event.message());
+        String message = event.getMessage();
 
         if (playerManager.isKawaii()) {
 

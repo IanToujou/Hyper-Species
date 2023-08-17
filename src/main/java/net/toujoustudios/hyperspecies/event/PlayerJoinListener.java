@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.event;
 
-import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.ui.SpeciesUI;
 import org.bukkit.entity.Player;
@@ -21,7 +20,7 @@ public class PlayerJoinListener implements Listener {
         }
 
         playerManager.refreshScoreboard();
-        event.joinMessage(Component.text(""));
+        event.setJoinMessage("");
 
     }
 

@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.ability.active.dark;
 
-import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
@@ -71,7 +70,7 @@ public class AbilityTotalAnnihilation extends Ability {
             );
 
             entities.forEach(entity -> {
-                entity.customName(Component.text("Total Annihilation of " + player.getName()));
+                entity.setCustomName("Total Annihilation of " + player.getName());
                 entity.setCustomNameVisible(false);
                 entity.setDirection(new Vector(0, -3, 0));
                 entity.setIsIncendiary(false);

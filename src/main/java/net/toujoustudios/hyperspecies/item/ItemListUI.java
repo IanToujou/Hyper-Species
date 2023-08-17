@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.item;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -398,7 +397,7 @@ public class ItemListUI {
         TREE_TRACK_UNLOCKED.setItemMeta(treeTrackUnlockedMeta);
 
         ItemMeta treeResetMeta = TREE_RESET.getItemMeta();
-        treeResetMeta.displayName(Component.text("§cReset Loadout"));
+        treeResetMeta.setDisplayName("§cReset Loadout");
         treeResetMeta.setLore(List.of(
                 "§7Remove all items from your loadout.",
                 "§r",
@@ -408,7 +407,7 @@ public class ItemListUI {
         TREE_RESET.setItemMeta(treeResetMeta);
 
         ItemMeta treeHelpMeta = TREE_HELP.getItemMeta();
-        treeHelpMeta.displayName(Component.text("§aHow To Use"));
+        treeHelpMeta.setDisplayName("§aHow To Use");
         treeHelpMeta.setLore(List.of(
                 "§7First, you need to gain §eⓄ Skill Points",
                 "§7by donating diamond blocks to the",

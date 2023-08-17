@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.ability.active.earth;
 
-import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
@@ -43,7 +42,7 @@ public class AbilitySharpStone extends Ability {
         player.getWorld().playSound(player.getLocation(), Sound.BLOCK_STONE_BREAK, SoundCategory.MASTER, 1, 1f);
         Arrow arrow = player.launchProjectile(Arrow.class);
         arrow.setDamage(2);
-        arrow.customName(Component.text("Sharp Stone of " + player.getName()));
+        arrow.setCustomName("Sharp Stone of " + player.getName());
         arrow.setCustomNameVisible(false);
         return true;
     }

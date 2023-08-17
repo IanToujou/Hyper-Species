@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.ability.active.fairy;
 
-import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
@@ -54,7 +53,7 @@ public class AbilityCelestialShot extends Ability {
             Arrow arrow = player.launchProjectile(Arrow.class);
             arrow.setVelocity(arrow.getVelocity().multiply(1.3f));
             arrow.setDamage(0);
-            arrow.customName(Component.text("Celestial Shot of " + player.getName()));
+            arrow.setCustomName("Celestial Shot of " + player.getName());
             arrow.setVisualFire(false);
 
             BukkitTask task = new BukkitRunnable() {

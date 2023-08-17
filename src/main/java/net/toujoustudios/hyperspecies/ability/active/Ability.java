@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.ability.active;
 
-import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.element.Element;
 import net.toujoustudios.hyperspecies.species.Species;
 import net.toujoustudios.hyperspecies.species.SubSpecies;
@@ -170,7 +169,7 @@ public abstract class Ability {
         ItemMeta itemMeta = item.getItemMeta();
         assert itemMeta != null;
 
-        itemMeta.displayName(Component.text(getFullName() + " §7(§aLVL {level}§7)"));
+        itemMeta.setDisplayName(getFullName() + " §7(§aLVL {level}§7)");
         List<String> lore = new ArrayList<>();
         lore.add("§8" + type.getName() + " Spell");
         lore.add("§b" + manaCost + " Mana §8/ §6" + delay + "s §8/ §5" + weight + " Weight");
@@ -202,7 +201,7 @@ public abstract class Ability {
     }
 
     public int getFieldValue(AbilityField field, int level) {
-        if (fields.get(field) == null || fields.get(field).size() == 0) return 0;
+        if (fields.get(field) == null || fields.get(field).isEmpty()) return 0;
         if (fields.get(field).size() < level) return fields.get(field).get(fields.get(field).size() - 1);
         return fields.get(field).get(level);
     }

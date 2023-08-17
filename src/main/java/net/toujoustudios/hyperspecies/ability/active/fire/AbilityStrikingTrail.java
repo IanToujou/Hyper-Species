@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.ability.active.fire;
 
-import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
@@ -50,7 +49,7 @@ public class AbilityStrikingTrail extends Ability {
 
         Fireball fireball = player.launchProjectile(Fireball.class);
         fireball.setYield(0);
-        fireball.customName(Component.text("Striking Trail of " + player.getName()));
+        fireball.setCustomName("Striking Trail of " + player.getName());
         fireball.setCustomNameVisible(false);
 
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));

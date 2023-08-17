@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.ability.tree;
 
-import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.element.Element;
@@ -61,11 +60,11 @@ public class AbilityTree {
 
         PlayerManager playerManager = PlayerManager.getPlayer(player);
 
-        Inventory inventory = Bukkit.createInventory(null, 9 * 6, Component.text("Tree: " + getBaseAbility().getName()));
+        Inventory inventory = Bukkit.createInventory(null, 9 * 6, "Tree: " + getBaseAbility().getName());
         ItemStack element = new ItemStack(getBaseAbility().getElement().getMaterial());
         ItemMeta elementMeta = element.getItemMeta();
         assert elementMeta != null;
-        elementMeta.displayName(Component.text(" "));
+        elementMeta.setDisplayName(" ");
         element.setItemMeta(elementMeta);
         for (int i = 0; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
         for (int i = 45; i < inventory.getSize(); i++) inventory.setItem(i, element);
@@ -114,7 +113,7 @@ public class AbilityTree {
                 }
                 ItemMeta itemMeta = item.getItemMeta();
                 assert itemMeta != null;
-                itemMeta.displayName(Component.text(itemMeta.getDisplayName().replace("{level}", String.valueOf(level))));
+                itemMeta.setDisplayName(itemMeta.getDisplayName().replace("{level}", String.valueOf(level)));
                 List<String> oldLore = itemMeta.getLore();
                 ArrayList<String> newLore = new ArrayList<>();
 
@@ -215,7 +214,7 @@ public class AbilityTree {
 
         if (page == 0) {
 
-            Inventory inventory = Bukkit.createInventory(null, 9 * 6, Component.text("Ability Trees: Page 1"));
+            Inventory inventory = Bukkit.createInventory(null, 9 * 6, "Ability Trees: Page 1");
             for (int i = inventory.getSize() - 9; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
             inventory.setItem(47, ItemListUI.TREE_RESET);
             inventory.setItem(49, ItemListUI.CANCEL);
@@ -242,8 +241,8 @@ public class AbilityTree {
                     ItemStack item = new ItemStack(Material.NETHER_STAR);
                     ItemMeta itemMeta = item.getItemMeta();
                     assert itemMeta != null;
-                    itemMeta.displayName(Component.text(tree.getBaseAbility().getElement().getEmoji() + " " + tree.getBaseAbility().getName()));
-                    itemMeta.lore(List.of(Component.text("§7View this ability tree.")));
+                    itemMeta.setDisplayName(tree.getBaseAbility().getElement().getEmoji() + " " + tree.getBaseAbility().getName());
+                    itemMeta.setLore(List.of("§7View this ability tree."));
                     item.setItemMeta(itemMeta);
 
                     if (element == Element.FIRE) {
@@ -270,7 +269,7 @@ public class AbilityTree {
 
         } else if (page == 1) {
 
-            Inventory inventory = Bukkit.createInventory(null, 9 * 6, Component.text("Ability Trees: Page 2"));
+            Inventory inventory = Bukkit.createInventory(null, 9 * 6, "Ability Trees: Page 2");
             for (int i = inventory.getSize() - 9; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
             inventory.setItem(45, ItemListUI.PREVIOUS);
             inventory.setItem(47, ItemListUI.TREE_RESET);
@@ -299,8 +298,8 @@ public class AbilityTree {
                     ItemStack item = new ItemStack(Material.NETHER_STAR);
                     ItemMeta itemMeta = item.getItemMeta();
                     assert itemMeta != null;
-                    itemMeta.displayName(Component.text(tree.getBaseAbility().getElement().getEmoji() + " " + tree.getBaseAbility().getName()));
-                    itemMeta.lore(List.of(Component.text("§7View this ability tree.")));
+                    itemMeta.setDisplayName(tree.getBaseAbility().getElement().getEmoji() + " " + tree.getBaseAbility().getName());
+                    itemMeta.setLore(List.of("§7View this ability tree."));
                     item.setItemMeta(itemMeta);
 
                     if (element == Element.ELECTRO) {
@@ -328,7 +327,7 @@ public class AbilityTree {
 
         } else {
 
-            Inventory inventory = Bukkit.createInventory(null, 9 * 2, Component.text("Ability Trees: Page 3"));
+            Inventory inventory = Bukkit.createInventory(null, 9 * 2, "Ability Trees: Page 3");
             for (int i = inventory.getSize() - 9; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
             inventory.setItem(9, ItemListUI.PREVIOUS);
             inventory.setItem(11, ItemListUI.TREE_RESET);
@@ -348,8 +347,8 @@ public class AbilityTree {
                     ItemStack item = new ItemStack(Material.NETHER_STAR);
                     ItemMeta itemMeta = item.getItemMeta();
                     assert itemMeta != null;
-                    itemMeta.displayName(Component.text(tree.getBaseAbility().getElement().getEmoji() + " " + tree.getBaseAbility().getName()));
-                    itemMeta.lore(List.of(Component.text("§7View this ability tree.")));
+                    itemMeta.setDisplayName(tree.getBaseAbility().getElement().getEmoji() + " " + tree.getBaseAbility().getName());
+                    itemMeta.setLore(List.of("§7View this ability tree."));
                     item.setItemMeta(itemMeta);
 
                     if (element == Element.DARK) {

@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.main;
 
-import net.kyori.adventure.text.Component;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.toujoustudios.hyperspecies.command.*;
@@ -35,13 +34,13 @@ public final class HyperSpecies extends JavaPlugin {
     private Scoreboard scoreboard;
 
     @Override
-    @SuppressWarnings("deprecation")
     public void onEnable() {
 
         instance = this;
 
         this.pluginManager = Bukkit.getPluginManager();
         ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
+        assert scoreboardManager != null;
         scoreboard = scoreboardManager.getNewScoreboard();
         Loader.startLoading();
 
@@ -62,7 +61,6 @@ public final class HyperSpecies extends JavaPlugin {
                         int amt = itm.getAmount() - 1;
                         itm.setAmount(0);
                         player.getInventory().setItem(i, amt > 0 ? itm : null);
-                        player.updateInventory();
                         break;
                     }
                 }
@@ -70,7 +68,7 @@ public final class HyperSpecies extends JavaPlugin {
 
             if (playerManager.getSpecies() == null) {
                 if (player.getOpenInventory().getType() == InventoryType.PLAYER)
-                    player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c Please rejoin and select a species§8."));
+                    player.sendMessage(Config.MESSAGE_PREFIX + "§c Please rejoin and select a species§8.");
                 return;
             }
 
@@ -219,7 +217,7 @@ public final class HyperSpecies extends JavaPlugin {
         pluginManager.registerEvents(new EntityDamageByEntityListener(), this);
         pluginManager.registerEvents(new PlayerDropItemListener(), this);
         pluginManager.registerEvents(new PlayerMoveListener(), this);
-        pluginManager.registerEvents(new PlayerPickupItemListener(), this);
+        pluginManager.registerEvents(new EntityPickupItemListener(), this);
         pluginManager.registerEvents(new PlayerQuitListener(), this);
     }
 

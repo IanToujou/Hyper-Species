@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.ui;
 
-import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.character.Character;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
@@ -34,16 +33,18 @@ public class CharacterUI implements Listener {
             if(name.equals("§aSelect Subspecies")) {
                 PlayerManager playerManager = PlayerManager.getPlayer(player);
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                Inventory inventory = Bukkit.createInventory(null, 9 * 3, Component.text("Select Subspecies"));
+                Inventory inventory = Bukkit.createInventory(null, 9 * 3, "Select Subspecies");
                 for (int i = 0; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
                 inventory.setItem(10, ItemListUI.PREVIOUS);
                 ItemStack subOne = new ItemStack(playerManager.getSpecies().icon().getType());
                 ItemMeta subOneMeta = subOne.getItemMeta();
-                subOneMeta.displayName(Component.text("§a" + playerManager.getSpecies().subSpecies().get(0).name()));
+                assert subOneMeta != null;
+                subOneMeta.setDisplayName("§a" + playerManager.getSpecies().subSpecies().get(0).name());
                 subOne.setItemMeta(subOneMeta);
                 ItemStack subTwo = new ItemStack(playerManager.getSpecies().icon().getType());
                 ItemMeta subTwoMeta = subTwo.getItemMeta();
-                subTwoMeta.displayName(Component.text("§a" + playerManager.getSpecies().subSpecies().get(1).name()));
+                assert subTwoMeta != null;
+                subTwoMeta.setDisplayName("§a" + playerManager.getSpecies().subSpecies().get(1).name());
                 subTwo.setItemMeta(subTwoMeta);
                 inventory.setItem(13, subOne);
                 inventory.setItem(16, subTwo);
@@ -69,7 +70,7 @@ public class CharacterUI implements Listener {
                 if(sub == null) return;
                 playerManager.setSubSpecies(sub);
                 player.closeInventory();
-                player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You selected the subspecies§8: §b" + sub.name()));
+                player.sendMessage(Config.MESSAGE_PREFIX + "§7 You selected the subspecies§8: §b" + sub.name());
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 2f);
             }
 

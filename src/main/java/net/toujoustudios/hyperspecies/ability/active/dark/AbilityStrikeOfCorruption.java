@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.ability.active.dark;
 
-import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
@@ -62,7 +61,7 @@ public class AbilityStrikeOfCorruption extends Ability {
             Arrow arrow = player.launchProjectile(Arrow.class);
             arrow.setVelocity(arrow.getVelocity().multiply(1.2f));
             arrow.setDamage(0);
-            arrow.customName(Component.text("Strike Of Corruption of " + player.getName()));
+            arrow.setCustomName("Strike Of Corruption of " + player.getName());
 
             BukkitTask task = new BukkitRunnable() {
 

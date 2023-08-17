@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.player;
 
-import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.chat.ChatChannel;
@@ -33,7 +32,6 @@ public class PlayerManager {
     private double maxMana;
     private double manaRegeneration;
     private double shield;
-    private double maxShield;
     private String team;
     private Species species;
     private SubSpecies subSpecies;
@@ -64,7 +62,6 @@ public class PlayerManager {
         maxHealth = 50;
         maxMana = 20;
         manaRegeneration = 0.1;
-        maxShield = maxHealth / 2;
 
         if (playerConfig.isSet("Data." + uuid + ".Points.Health"))
             health = playerConfig.getDouble("Data." + uuid + ".Points.Health");
@@ -164,7 +161,7 @@ public class PlayerManager {
     }
 
     public static void saveAll() {
-        if (players == null || players.size() == 0) return;
+        if (players == null || players.isEmpty()) return;
         for (Map.Entry<UUID, PlayerManager> entry : players.entrySet()) {
             players.get(entry.getKey()).save();
         }
@@ -178,18 +175,10 @@ public class PlayerManager {
         if (getMana() < ability.getManaCost()) return false;
         if (ability.execute(Bukkit.getPlayer(uuid))) {
             setMana(getMana() - ability.getManaCost());
-            addAbilityCooldown(ability);
+            abilityCooldowns.add(ability);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> abilityCooldowns.remove(ability), ability.getDelay() * 20L);
             return true;
         } else return false;
-    }
-
-    public void addAbilityCooldown(Ability ability) {
-        abilityCooldowns.add(ability);
-        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> abilityCooldowns.remove(ability), ability.getDelay() * 20L);
-    }
-
-    public void removeAbilityCooldown(Ability ability) {
-        abilityCooldowns.remove(ability);
     }
 
     public int getLevelFromExperience(int experience) {
@@ -321,14 +310,6 @@ public class PlayerManager {
         this.shield = shield;
     }
 
-    public double getMaxShield() {
-        return maxShield;
-    }
-
-    public void setMaxShield(double maxShield) {
-        this.maxShield = maxShield;
-    }
-
     public Team getTeam() {
         return Team.getTeam(team);
     }
@@ -357,20 +338,12 @@ public class PlayerManager {
         this.subSpecies = subSpecies;
     }
 
-    public List<Ability> getAbilities() {
-        return abilities;
-    }
-
     public boolean hasAbility(Ability ability) {
         return abilities.contains(ability);
     }
 
     public void addAbility(Ability ability) {
         if (!abilities.contains(ability)) abilities.add(ability);
-    }
-
-    public void removeAbility(Ability ability) {
-        abilities.remove(ability);
     }
 
     public List<Ability> getActiveAbilities() {
@@ -412,14 +385,6 @@ public class PlayerManager {
 
     public ArrayList<Ability> getCooldownAbilities() {
         return abilityCooldowns;
-    }
-
-    public void setCooldownAbilities(ArrayList<Ability> cooldownAbilities) {
-        this.abilityCooldowns = cooldownAbilities;
-    }
-
-    public HashMap<String, Integer> getAbilityExperiences() {
-        return abilityExperiences;
     }
 
     public int getAbilityExperience(Ability ability) {
@@ -474,7 +439,7 @@ public class PlayerManager {
             addAbility(ability);
             Player player = Bukkit.getPlayer(uuid);
             if (player != null) {
-                player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You unlocked the ability§8: §b" + ability.getName()));
+                player.sendMessage(Config.MESSAGE_PREFIX + "§7 You unlocked the ability§8: §b" + ability.getName());
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
             }
         }
@@ -504,10 +469,6 @@ public class PlayerManager {
 
     public static HashMap<UUID, PlayerManager> getPlayers() {
         return players;
-    }
-
-    public static YamlConfiguration getPlayerConfig() {
-        return playerConfig;
     }
 
 }

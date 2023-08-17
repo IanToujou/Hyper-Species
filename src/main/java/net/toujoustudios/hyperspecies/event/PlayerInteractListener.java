@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.event;
 
-import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.tree.AbilityTree;
@@ -60,7 +59,7 @@ public class PlayerInteractListener implements Listener {
                 } else if (item.getItemMeta().getDisplayName().contains("§a") || item.getItemMeta().getDisplayName().contains("§c")) {
 
                     if (item.getItemMeta().getLore() == null) return;
-                    if (item.getItemMeta().getLore().size() < 1) return;
+                    if (item.getItemMeta().getLore().isEmpty()) return;
                     String abilityName = item.getItemMeta().getLore().get(0).substring(2);
                     Ability ability = Ability.getAbility(abilityName);
 
@@ -127,21 +126,21 @@ public class PlayerInteractListener implements Listener {
                     if (event.getItem() != null) {
                         if (event.getItem().getType() == Material.DIAMOND) {
                             event.setCancelled(true);
-                            player.getItemInHand().subtract();
+                            player.getItemInHand().setAmount(player.getItemInHand().getAmount()-1);
                             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
                             player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, event.getClickedBlock().getLocation(), 100, 0.1, 1, 0.1);
                             playerManager.setExperience(playerManager.getExperience() + 8);
-                            player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You just gained §a5 XP§8."));
-                            player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You are now §bLevel " + playerManager.getLevel() + "§8."));
-                            if(playerManager.getLevel() > 7 && playerManager.getSubSpecies() == null) player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§a You can now select a subspecies with §b/character§8!"));
+                            player.sendMessage(Config.MESSAGE_PREFIX + "§7 You just gained §a5 XP§8.");
+                            player.sendMessage(Config.MESSAGE_PREFIX + "§7 You are now §bLevel " + playerManager.getLevel() + "§8.");
+                            if(playerManager.getLevel() > 7 && playerManager.getSubSpecies() == null) player.sendMessage(Config.MESSAGE_PREFIX + "§a You can now select a subspecies with §b/character§8!");
                         } else if (event.getItem().getType() == Material.DIAMOND_BLOCK) {
                             event.setCancelled(true);
-                            player.getItemInHand().subtract();
+                            player.getItemInHand().setAmount(player.getItemInHand().getAmount()-1);
                             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
                             player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, event.getClickedBlock().getLocation(), 100, 0.1, 1, 0.1);
                             playerManager.setSkill(playerManager.getSkill() + 4);
-                            player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You just gained §eⓄ 4 Skill Points§8."));
-                            player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You now have a total of §eⓄ " + playerManager.getSkill() + " Skill Points§8."));
+                            player.sendMessage(Config.MESSAGE_PREFIX + "§7 You just gained §eⓄ 4 Skill Points§8.");
+                            player.sendMessage(Config.MESSAGE_PREFIX + "§7 You now have a total of §eⓄ " + playerManager.getSkill() + " Skill Points§8.");
                         }
                     } else {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
@@ -156,10 +155,10 @@ public class PlayerInteractListener implements Listener {
                     World world = Bukkit.getWorld("farmworld");
                     if (player.isSneaking()) world = Bukkit.getWorld("farmworld_nether");
                     if (world != null) {
-                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You have been teleported to the farmworld§8. §7Type §b/leave §7to go back to the overworld§8."));
+                        player.sendMessage(Config.MESSAGE_PREFIX + "§7 You have been teleported to the farmworld§8. §7Type §b/leave §7to go back to the overworld§8.");
                         player.teleport(world.getSpawnLocation());
                     } else
-                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c The farmworld is currently not available§8."));
+                        player.sendMessage(Config.MESSAGE_PREFIX + "§c The farmworld is currently not available§8.");
 
                 }
 

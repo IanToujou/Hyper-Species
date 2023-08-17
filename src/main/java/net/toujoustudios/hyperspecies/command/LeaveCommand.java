@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.command;
 
-import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
@@ -10,12 +9,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
 
 public class LeaveCommand implements CommandExecutor {
 
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(@Nonnull CommandSender commandSender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
 
         if (!(commandSender instanceof Player player)) {
             Logger.log(LogLevel.ERROR, "You cannot use this command in the console.");
@@ -35,15 +35,15 @@ public class LeaveCommand implements CommandExecutor {
         World world = Bukkit.getWorld("world");
 
         if (world == null) {
-            player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c The main world is not available§8."));
+            player.sendMessage(Config.MESSAGE_PREFIX + "§c The main world is not available§8.");
             return false;
         }
 
         if (player.getWorld().getName().equals("farmworld") || player.getWorld().getName().equals("farmworld_nether")) {
-            if (player.getBedSpawnLocation() != null && (player.getBedSpawnLocation().getWorld().getName().equals("world") || player.getBedSpawnLocation().getWorld().getName().equals("world_nether"))) {
+            if (player.getBedSpawnLocation() != null && player.getBedSpawnLocation().getWorld() != null && (player.getBedSpawnLocation().getWorld().getName().equals("world") || player.getBedSpawnLocation().getWorld().getName().equals("world_nether"))) {
                 player.teleport(player.getBedSpawnLocation());
             } else player.teleport(world.getSpawnLocation());
-        } else player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c You are not in the farmworld§8."));
+        } else player.sendMessage(Config.MESSAGE_PREFIX + "§c You are not in the farmworld§8.");
 
         return false;
 

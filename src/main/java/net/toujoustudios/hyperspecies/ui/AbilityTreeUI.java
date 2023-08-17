@@ -1,6 +1,5 @@
 package net.toujoustudios.hyperspecies.ui;
 
-import net.kyori.adventure.text.Component;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.tree.AbilityTree;
@@ -59,7 +58,7 @@ public class AbilityTreeUI implements Listener {
 
             } else if (material == Material.TNT) {
 
-                player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 Your loadout has been reset§8."));
+                player.sendMessage(Config.MESSAGE_PREFIX + "§7 Your loadout has been reset§8.");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 10, 2f);
                 PlayerManager playerManager = PlayerManager.getPlayer(player);
                 playerManager.getActiveAbilities().clear();
@@ -108,7 +107,7 @@ public class AbilityTreeUI implements Listener {
 
                 if (playerManager.getSkill() < ability.getCost()) {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 0f);
-                    player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c You don't have enough skill points§8."));
+                    player.sendMessage(Config.MESSAGE_PREFIX + "§c You don't have enough skill points§8.");
                     player.openInventory(AbilityTree.buildMainInventory(player, 0));
                     return;
                 }
@@ -143,25 +142,25 @@ public class AbilityTreeUI implements Listener {
 
                 if (playerManager.getActiveAbilities().contains(ability)) {
                     playerManager.removeActiveAbility(ability);
-                    player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You removed §b" + ability.getName() + "§7 from your loadout§8."));
-                    player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 New weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight()));
+                    player.sendMessage(Config.MESSAGE_PREFIX + "§7 You removed §b" + ability.getName() + "§7 from your loadout§8.");
+                    player.sendMessage(Config.MESSAGE_PREFIX + "§7 New weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight());
                 } else {
                     if (playerManager.getAbilityWeight() + ability.getWeight() > playerManager.getMaxAbilityWeight()) {
                         player.openInventory(AbilityTree.buildMainInventory(player, 0));
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 0f);
-                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c You cannot carry a loadout this powerful§8."));
-                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 Current weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight()));
+                        player.sendMessage(Config.MESSAGE_PREFIX + "§c You cannot carry a loadout this powerful§8.");
+                        player.sendMessage(Config.MESSAGE_PREFIX + "§7 Current weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight());
                         return;
                     }
                     if (playerManager.getActiveAbilities().size() >= 8) {
                         player.openInventory(AbilityTree.buildMainInventory(player, 0));
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 0f);
-                        player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§c You cannot carry more than §b8§c abilities§8."));
+                        player.sendMessage(Config.MESSAGE_PREFIX + "§c You cannot carry more than §b8§c abilities§8.");
                         return;
                     }
                     playerManager.addActiveAbility(ability);
-                    player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 You added §b" + ability.getName() + "§7 to your loadout§8."));
-                    player.sendMessage(Component.text(Config.MESSAGE_PREFIX + "§7 New weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight()));
+                    player.sendMessage(Config.MESSAGE_PREFIX + "§7 You added §b" + ability.getName() + "§7 to your loadout§8.");
+                    player.sendMessage(Config.MESSAGE_PREFIX + "§7 New weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight());
                 }
 
                 player.openInventory(AbilityTree.buildMainInventory(player, 0));
