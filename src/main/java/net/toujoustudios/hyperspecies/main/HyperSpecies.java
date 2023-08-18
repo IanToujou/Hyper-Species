@@ -131,6 +131,8 @@ public final class HyperSpecies extends JavaPlugin {
                 playerManager.setDrunkenness(playerManager.getDrunkenness() - 0.001);
             } else playerManager.setDrunkenness(0);
 
+            if (playerManager.getShield() > playerManager.getMaxHealth()/2) playerManager.setShield(playerManager.getMaxHealth()/2);
+
         })), 5, 5);
 
         // Regeneration
@@ -139,9 +141,7 @@ public final class HyperSpecies extends JavaPlugin {
             PlayerManager playerManager = PlayerManager.getPlayer(player);
             if (playerManager.getMana() < playerManager.getMaxMana()) {
                 playerManager.setMana(playerManager.getMana() + playerManager.getManaRegeneration());
-            } else {
-                playerManager.setMana(playerManager.getMaxMana());
-            }
+            } else playerManager.setMana(playerManager.getMaxMana());
 
             if (!player.isDead() && playerManager.getHealth() > 0) {
                 if (!playerManager.isRegenerationCoolingDown() && playerManager.getHealthRegeneration() <= 0) {
