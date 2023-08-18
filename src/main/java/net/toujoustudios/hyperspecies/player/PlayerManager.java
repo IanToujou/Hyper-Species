@@ -1,12 +1,12 @@
 package net.toujoustudios.hyperspecies.player;
 
-import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.chat.ChatChannel;
+import net.toujoustudios.hyperspecies.config.Config;
+import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import net.toujoustudios.hyperspecies.species.Species;
 import net.toujoustudios.hyperspecies.species.SubSpecies;
 import net.toujoustudios.hyperspecies.team.Team;
-import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -40,7 +40,7 @@ public class PlayerManager {
     private boolean selectingAbility;
     private boolean regenerationCoolingDown;
     private ArrayList<ItemStack> savedInventory;
-    private ArrayList<Ability> abilityCooldowns;
+    private final ArrayList<Ability> abilityCooldowns;
     private final HashMap<String, Integer> abilityExperiences = new HashMap<>();
     private double drunkenness;
     private boolean stunned;
@@ -173,6 +173,7 @@ public class PlayerManager {
         if (Bukkit.getPlayer(uuid) == null) return false;
         if (getCooldownAbilities().contains(ability)) return false;
         if (getMana() < ability.getManaCost()) return false;
+        if (getAbilityLevel(ability) >= ability.getMaxLevel()) return false;
         if (ability.execute(Bukkit.getPlayer(uuid))) {
             setMana(getMana() - ability.getManaCost());
             abilityCooldowns.add(ability);

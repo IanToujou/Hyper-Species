@@ -1,11 +1,11 @@
 package net.toujoustudios.hyperspecies.event;
 
-import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.tree.AbilityTree;
-import net.toujoustudios.hyperspecies.player.PlayerManager;
+import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.item.ItemListUI;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.ThrownPotion;
@@ -83,7 +83,9 @@ public class PlayerInteractListener implements Listener {
 
                     if (playerManager.useAbility(ability)) {
                         player.sendTitle("", "§a" + ability.getName(), 5, 10, 5);
-                        playerManager.addAbilityExperience(ability, 1);
+                        if (playerManager.getAbilityLevel(ability) < ability.getMaxLevel()) {
+                            playerManager.addAbilityExperience(ability, 1);
+                        }
                     } else {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.4f);
                         player.sendTitle("", "§cFailed", 5, 10, 5);
@@ -126,16 +128,17 @@ public class PlayerInteractListener implements Listener {
                     if (event.getItem() != null) {
                         if (event.getItem().getType() == Material.DIAMOND) {
                             event.setCancelled(true);
-                            player.getItemInHand().setAmount(player.getItemInHand().getAmount()-1);
+                            player.getItemInHand().setAmount(player.getItemInHand().getAmount() - 1);
                             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
                             player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, event.getClickedBlock().getLocation(), 100, 0.1, 1, 0.1);
                             playerManager.setExperience(playerManager.getExperience() + 8);
                             player.sendMessage(Config.MESSAGE_PREFIX + "§7 You just gained §a5 XP§8.");
                             player.sendMessage(Config.MESSAGE_PREFIX + "§7 You are now §bLevel " + playerManager.getLevel() + "§8.");
-                            if(playerManager.getLevel() > 7 && playerManager.getSubSpecies() == null) player.sendMessage(Config.MESSAGE_PREFIX + "§a You can now select a subspecies with §b/character§8!");
+                            if (playerManager.getLevel() > 7 && playerManager.getSubSpecies() == null)
+                                player.sendMessage(Config.MESSAGE_PREFIX + "§a You can now select a subspecies with §b/character§8!");
                         } else if (event.getItem().getType() == Material.DIAMOND_BLOCK) {
                             event.setCancelled(true);
-                            player.getItemInHand().setAmount(player.getItemInHand().getAmount()-1);
+                            player.getItemInHand().setAmount(player.getItemInHand().getAmount() - 1);
                             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
                             player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, event.getClickedBlock().getLocation(), 100, 0.1, 1, 0.1);
                             playerManager.setSkill(playerManager.getSkill() + 4);

@@ -4,8 +4,8 @@ import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.element.Element;
-import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -52,6 +52,7 @@ public class AbilityStarwhisper extends Ability {
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
         int damage = getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(this));
         Location location = player.getLocation();
+        assert location.getWorld() != null;
 
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 3, 2f);
         player.getWorld().spawnParticle(Particle.CRIT_MAGIC, player.getLocation(), 100, 3, 0, 3);

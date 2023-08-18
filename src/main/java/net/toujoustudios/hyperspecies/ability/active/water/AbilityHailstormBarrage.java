@@ -4,8 +4,8 @@ import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.element.Element;
-import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.*;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.entity.Player;
@@ -47,6 +47,7 @@ public class AbilityHailstormBarrage extends Ability {
         int damage = getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(this));
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
         Location location = player.getLocation();
+        assert location.getWorld() != null;
         ArrayList<FallingBlock> blocks = new ArrayList<>();
 
         BukkitTask task = new BukkitRunnable() {

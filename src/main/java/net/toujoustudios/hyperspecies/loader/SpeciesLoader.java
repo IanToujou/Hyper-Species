@@ -1,9 +1,9 @@
 package net.toujoustudios.hyperspecies.loader;
 
 import net.toujoustudios.hyperspecies.ability.passive.*;
+import net.toujoustudios.hyperspecies.item.ItemListUI;
 import net.toujoustudios.hyperspecies.species.Species;
 import net.toujoustudios.hyperspecies.species.SubSpecies;
-import net.toujoustudios.hyperspecies.item.ItemListUI;
 
 import java.util.ArrayList;
 

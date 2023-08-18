@@ -4,8 +4,8 @@ import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.element.Element;
-import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -71,7 +71,9 @@ public class AbilityTyphoon extends Ability {
                 int x = (int) (randomX + location.getX());
                 int z = (int) (randomZ + location.getZ());
 
+                assert location.getWorld() != null;
                 Location loc = new Location(location.getWorld(), x, location.getWorld().getHighestBlockYAt(x, z), z);
+                assert loc.getWorld() != null;
                 loc.getWorld().strikeLightningEffect(loc);
 
                 new BukkitRunnable() {

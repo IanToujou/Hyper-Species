@@ -4,8 +4,8 @@ import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.element.Element;
-import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -58,7 +58,7 @@ public class AbilityStunSpore extends Ability {
 
                 @Override
                 public void run() {
-                    location.getWorld().spawnParticle(Particle.FALLING_OBSIDIAN_TEAR, new Location(location.getWorld(), location.getX(), location.getY() + 2, location.getZ()), 100, 2, 0.1, 2);
+                    player.getWorld().spawnParticle(Particle.FALLING_OBSIDIAN_TEAR, new Location(location.getWorld(), location.getX(), location.getY() + 2, location.getZ()), 100, 2, 0.1, 2);
                     Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                     double radiusSquared = 7 * 7;
                     for (Player all : players) {

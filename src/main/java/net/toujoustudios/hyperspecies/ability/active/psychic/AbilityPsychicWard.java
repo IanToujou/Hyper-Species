@@ -4,9 +4,9 @@ import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.element.Element;
+import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.species.Species;
-import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -49,12 +49,15 @@ public class AbilityPsychicWard extends Ability {
 
     @Override
     public boolean execute(Player player) {
+
         PlayerManager playerManager = PlayerManager.getPlayer(player);
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
         Block block = player.getTargetBlock(null, 30);
+
         if (block.getType() != Material.AIR && block.getLocation().add(0, 1, 0).getBlock().getType() == Material.AIR) {
 
             Location location = block.getLocation().add(0, 1, 0);
+            assert location.getWorld() != null;
             location.getBlock().setType(Material.TORCHFLOWER);
 
             BukkitTask task = new BukkitRunnable() {

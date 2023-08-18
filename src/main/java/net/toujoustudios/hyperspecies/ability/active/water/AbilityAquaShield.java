@@ -4,9 +4,9 @@ import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.element.Element;
+import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.species.Species;
-import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -17,8 +17,6 @@ import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 
 public class AbilityAquaShield extends Ability {
-
-    private static final ArrayList<UUID> activePlayers = new ArrayList<>();
 
     public AbilityAquaShield() {
 

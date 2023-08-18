@@ -1,10 +1,10 @@
 package net.toujoustudios.hyperspecies.ui;
 
 import net.toujoustudios.hyperspecies.config.Config;
+import net.toujoustudios.hyperspecies.item.ItemListUI;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.team.Team;
 import net.toujoustudios.hyperspecies.team.TeamStatus;
-import net.toujoustudios.hyperspecies.item.ItemListUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -314,7 +314,7 @@ public class TeamUI implements Listener {
 
                     playerManager.getTeam().setOwner(null);
 
-                    if (playerManager.getTeam().getMembers().size() > 0) {
+                    if (!playerManager.getTeam().getMembers().isEmpty()) {
                         int random = new Random().nextInt(playerManager.getTeam().getMembers().size());
                         playerManager.getTeam().setOwner(playerManager.getTeam().getMembers().get(random));
                         playerManager.getTeam().getMembers().remove(random);
@@ -514,7 +514,7 @@ public class TeamUI implements Listener {
                 if (team.getOwner() != null) {
                     ArrayList<String> lore = new ArrayList<>();
 
-                    if (team.getDescription() != null && team.getDescription().length() > 0) {
+                    if (team.getDescription() != null && !team.getDescription().isEmpty()) {
                         String[] descriptionLines = team.getDescription().split(" ");
                         for (String descriptionLine : descriptionLines) {
                             lore.add("§7" + descriptionLine);
@@ -529,7 +529,7 @@ public class TeamUI implements Listener {
                     lore.add("§r");
                     lore.add("§7Members:");
 
-                    if (team.getMembers().size() > 0) {
+                    if (!team.getMembers().isEmpty()) {
                         team.getMembers().forEach(member -> lore.add("§8- §b" + Bukkit.getOfflinePlayer(member).getName()));
                     } else lore.add("§8No Members");
 

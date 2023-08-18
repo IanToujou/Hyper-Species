@@ -1,11 +1,11 @@
 package net.toujoustudios.hyperspecies.command;
 
 import net.toujoustudios.hyperspecies.config.Config;
-import net.toujoustudios.hyperspecies.player.PlayerManager;
-import net.toujoustudios.hyperspecies.team.Team;
 import net.toujoustudios.hyperspecies.item.ItemListUI;
 import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
+import net.toujoustudios.hyperspecies.team.Team;
 import net.toujoustudios.hyperspecies.ui.TeamUI;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

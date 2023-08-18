@@ -4,9 +4,9 @@ import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.element.Element;
+import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.species.Species;
-import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -50,9 +50,9 @@ public class AbilityDrowningGrasp extends Ability {
         BukkitTask task = new BukkitRunnable() {
             @Override
             public void run() {
-                location.getWorld().spawnParticle(Particle.DRIP_WATER, location, 300, 3, 3, 3);
-                location.getWorld().spawnParticle(Particle.DRIPPING_HONEY, location, 50, 3, 3, 3);
-                location.getWorld().playSound(location, Sound.ITEM_BUCKET_EMPTY, SoundCategory.MASTER, 3, 1f);
+                player.getWorld().spawnParticle(Particle.DRIP_WATER, location, 300, 3, 3, 3);
+                player.getWorld().spawnParticle(Particle.DRIPPING_HONEY, location, 50, 3, 3, 3);
+                player.getWorld().playSound(location, Sound.ITEM_BUCKET_EMPTY, SoundCategory.MASTER, 3, 1f);
                 Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                 double radiusSquared = 5 * 5;
                 for (Player all : players) {

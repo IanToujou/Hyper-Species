@@ -48,7 +48,8 @@ public class AbilityFlash extends Ability {
         PlayerManager playerManager = PlayerManager.getPlayer(player);
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
 
-        if(playerManager.getSpecies().name().equals("Feline")) player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * duration, 3, false, false, true));
+        if (playerManager.getSpecies().name().equals("Feline"))
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * duration, 3, false, false, true));
         else player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * duration, 1, false, false, true));
 
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GUARDIAN_ATTACK, SoundCategory.MASTER, 2, 1.5f);

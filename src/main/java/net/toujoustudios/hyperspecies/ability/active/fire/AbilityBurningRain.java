@@ -4,8 +4,8 @@ import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.element.Element;
-import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.*;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
@@ -54,9 +54,9 @@ public class AbilityBurningRain extends Ability {
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
             Location location = arrow.getLocation();
             arrow.remove();
-            location.getWorld().spawnParticle(Particle.LAVA, location, 50, 0.1, 0.1, 0.1);
-            location.getWorld().playSound(location, Sound.ENTITY_GENERIC_EXTINGUISH_FIRE, SoundCategory.MASTER, 5, 0.5f);
-            location.getWorld().spawnEntity(location, EntityType.LIGHTNING);
+            player.getWorld().spawnParticle(Particle.LAVA, location, 50, 0.1, 0.1, 0.1);
+            player.getWorld().playSound(location, Sound.ENTITY_GENERIC_EXTINGUISH_FIRE, SoundCategory.MASTER, 5, 0.5f);
+            player.getWorld().spawnEntity(location, EntityType.LIGHTNING);
         }, 10);
 
         ArrayList<Arrow> arrowList = new ArrayList<>();
@@ -67,6 +67,7 @@ public class AbilityBurningRain extends Ability {
             public void run() {
 
                 Location location = arrow.getLocation();
+                assert location.getWorld() != null;
                 Arrow flameArrow = location.getWorld().spawn(location, Arrow.class);
                 int randomX = new Random().nextInt(100) - 50;
                 int randomZ = new Random().nextInt(100) - 50;

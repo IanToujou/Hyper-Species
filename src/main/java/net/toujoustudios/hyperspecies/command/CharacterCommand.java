@@ -1,10 +1,10 @@
 package net.toujoustudios.hyperspecies.command;
 
-import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.character.Character;
-import net.toujoustudios.hyperspecies.player.PlayerManager;
+import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -34,7 +34,7 @@ public class CharacterCommand implements CommandExecutor {
         }
 
         PlayerManager playerManager = PlayerManager.getPlayer(player);
-        if(playerManager.getSpecies() == null) return false;
+        if (playerManager.getSpecies() == null) return false;
 
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
         player.openInventory(Character.buildInventory(player));

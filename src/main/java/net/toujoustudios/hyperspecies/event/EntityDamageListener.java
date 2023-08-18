@@ -2,8 +2,8 @@ package net.toujoustudios.hyperspecies.event;
 
 import net.toujoustudios.hyperspecies.ability.active.air.AbilityICBM;
 import net.toujoustudios.hyperspecies.ability.active.earth.AbilityBornIntoStone;
-import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -23,7 +23,6 @@ public class EntityDamageListener implements Listener {
     private static final HashMap<UUID, BukkitTask> tasks = new HashMap<>();
 
     @EventHandler
-    @SuppressWarnings("deprecation")
     public void onEntityDamage(EntityDamageEvent event) {
 
         if (event.getEntity() instanceof Player player) {

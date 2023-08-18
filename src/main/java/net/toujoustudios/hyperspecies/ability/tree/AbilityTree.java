@@ -3,8 +3,8 @@ package net.toujoustudios.hyperspecies.ability.tree;
 import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.element.Element;
-import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.item.ItemListUI;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -143,8 +143,13 @@ public class AbilityTree {
                     line = line.replace("{shield}", String.valueOf(ability.getFieldValue(AbilityField.SHIELD, level)));
                     line = line.replace("{lockStatus}", playerManager.hasAbility(ability) ? "§a§lUNLOCKED" : "§c§lLOCKED");
                     if (line.contains("{xpBar}")) {
-                        line = line.replace("{xpBar}", barBuilder.toString());
-                        line = line.replace("{xpLeft}", xpBuilder.toString());
+                        if (ability.getMaxLevel() <= playerManager.getAbilityLevel(ability)) {
+                            line = line.replace("{xpBar}", "§a§lMax Level");
+                            line = line.replace("{xpLeft}", "");
+                        } else {
+                            line = line.replace("{xpBar}", barBuilder.toString());
+                            line = line.replace("{xpLeft}", xpBuilder.toString());
+                        }
                         if (playerManager.hasAbility(ability)) newLore.add(line);
                     } else newLore.add(line);
                 });

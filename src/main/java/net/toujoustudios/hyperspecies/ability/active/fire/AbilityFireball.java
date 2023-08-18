@@ -4,8 +4,8 @@ import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.element.Element;
-import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.*;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
@@ -43,12 +43,6 @@ public class AbilityFireball extends Ability {
 
     @Override
     public boolean execute(Player player) {
-
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
-        int xp = playerManager.getAbilityExperience(this);
-        int level = playerManager.getLevelFromExperience(xp);
-
-        int damage = getFieldValue(AbilityField.DAMAGE, level);
 
         Fireball projectile = player.launchProjectile(Fireball.class);
         player.getWorld().playSound(player.getLocation(), Sound.ITEM_FIRECHARGE_USE, SoundCategory.MASTER, 2, 0.8f);

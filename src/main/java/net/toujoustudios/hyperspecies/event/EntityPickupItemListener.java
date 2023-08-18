@@ -10,7 +10,7 @@ public class EntityPickupItemListener implements Listener {
 
     @EventHandler
     public void onItemPickup(EntityPickupItemEvent event) {
-        if(!(event.getEntity() instanceof Player)) return;
+        if (!(event.getEntity() instanceof Player)) return;
         PlayerManager playerManager = PlayerManager.getPlayer((Player) event.getEntity());
         if (playerManager.isSelectingAbility()) event.setCancelled(true);
     }

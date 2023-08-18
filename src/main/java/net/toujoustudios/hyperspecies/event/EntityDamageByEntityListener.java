@@ -5,8 +5,8 @@ import net.toujoustudios.hyperspecies.ability.active.fire.AbilityDemonicRage;
 import net.toujoustudios.hyperspecies.ability.active.fire.AbilityEndblaze;
 import net.toujoustudios.hyperspecies.ability.active.fire.AbilityEnhancingFlame;
 import net.toujoustudios.hyperspecies.ability.active.fire.AbilityHellblaze;
-import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,7 +25,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class EntityDamageByEntityListener implements Listener {
 
     @EventHandler
-    @SuppressWarnings("deprecation")
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
 
         if (event.getEntity() instanceof Player player) {

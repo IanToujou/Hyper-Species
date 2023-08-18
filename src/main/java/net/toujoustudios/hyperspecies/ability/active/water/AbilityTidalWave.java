@@ -4,8 +4,8 @@ import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.element.Element;
-import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -63,7 +63,7 @@ public class AbilityTidalWave extends Ability {
                     player.getWorld().spawnParticle(Particle.FALLING_WATER, loc, 5, 0.1, 0.1, 0.1);
                     for (Player all : players) {
                         if (all.getWorld() == player.getWorld()) {
-                            if(all.getLocation().distanceSquared(loc) <= 1) {
+                            if (all.getLocation().distanceSquared(loc) <= 1) {
                                 if (all != player) {
                                     all.damage(damage, player);
                                     all.setVelocity(new Vector(0, 0.5, 0));

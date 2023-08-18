@@ -1,7 +1,7 @@
 package net.toujoustudios.hyperspecies.command;
 
-import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.ability.tree.AbilityTree;
+import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
 import org.bukkit.Sound;

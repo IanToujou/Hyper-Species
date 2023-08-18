@@ -3,8 +3,8 @@ package net.toujoustudios.hyperspecies.ability.active.psychic;
 import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.element.Element;
-import net.toujoustudios.hyperspecies.species.Species;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
+import net.toujoustudios.hyperspecies.species.Species;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -50,8 +50,8 @@ public class AbilityTimothy extends Ability {
         }
         if (target == null) return false;
 
-        location.getWorld().spawnParticle(Particle.SMOKE_LARGE, location, 200, 0.3, 0.3, 0.3);
-        location.getWorld().playSound(location, Sound.ENTITY_WITHER_AMBIENT, SoundCategory.MASTER, 5, 1f);
+        player.getWorld().spawnParticle(Particle.SMOKE_LARGE, location, 200, 0.3, 0.3, 0.3);
+        player.getWorld().playSound(location, Sound.ENTITY_WITHER_AMBIENT, SoundCategory.MASTER, 5, 1f);
         if (target.getBedSpawnLocation() != null) target.teleport(target.getBedSpawnLocation());
         else target.teleport(target.getWorld().getSpawnLocation());
         target.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 * 2, 0, false, false, true));

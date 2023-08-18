@@ -4,8 +4,8 @@ import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.element.Element;
-import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -49,6 +49,7 @@ public class AbilityAquaticSurge extends Ability {
         Location point1 = player.getLocation().add(0, 1, 0);
         Location point2 = player.getLocation().add(0, 1, 0).add(direction.multiply(8));
         World world = point1.getWorld();
+        assert world != null;
 
         if (point1.getWorld() != point2.getWorld()) return false;
 

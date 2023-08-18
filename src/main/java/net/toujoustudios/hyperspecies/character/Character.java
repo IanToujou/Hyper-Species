@@ -1,7 +1,7 @@
 package net.toujoustudios.hyperspecies.character;
 
-import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.item.ItemListUI;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -37,8 +37,8 @@ public class Character {
         inventory.setItem(13, character);
         inventory.setItem(28, ItemListUI.PREVIOUS);
 
-        if(playerManager.getLevel() > 7) {
-            if(playerManager.getSubSpecies() != null) {
+        if (playerManager.getLevel() > 7) {
+            if (playerManager.getSubSpecies() != null) {
                 ItemStack subSpecies = new ItemStack(playerManager.getSpecies().icon().getType());
                 ItemMeta subSpeciesMeta = subSpecies.getItemMeta();
                 assert subSpeciesMeta != null;
