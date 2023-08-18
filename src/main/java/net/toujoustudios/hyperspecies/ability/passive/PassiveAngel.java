@@ -27,7 +27,10 @@ public class PassiveAngel extends PassiveAbility {
                 playerManager.setHealthRegeneration(0.2);
             }
         } else {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 20, 0, false, false, true));
+            // TODO: Remove in release
+            if (!player.getWorld().getName().contains("farmworld")) {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * 20, 0, false, false, true));
+            }
         }
 
         // Slowness in water
