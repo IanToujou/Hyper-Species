@@ -52,8 +52,8 @@ public class AbilityLightspeed extends Ability {
         player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 20 * duration, 1, false, false, true));
         player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20 * duration, 0, false, false, true));
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_GUARDIAN_ATTACK, SoundCategory.MASTER, 2, 2f);
+        player.getWorld().playSound(player.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.MASTER, 3, 1f);
         player.getWorld().spawnParticle(Particle.ENCHANTMENT_TABLE, player.getLocation(), 100, 0.5, 0.5, 0.5);
-        player.getWorld().spawnEntity(player.getLocation().add(0, 2, 0), EntityType.LIGHTNING);
 
         return true;
 
