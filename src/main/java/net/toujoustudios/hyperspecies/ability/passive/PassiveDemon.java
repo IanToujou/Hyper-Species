@@ -49,7 +49,7 @@ public class PassiveDemon extends PassiveAbility {
             if (block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
                 if (!player.getWorld().getName().contains("farmworld")) {
                     // TODO: Remove in release
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 20, 1, false, false, true));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 3, 1, false, false, true));
                 }
             }
         }
