@@ -16,6 +16,8 @@ public class PassiveWolf extends PassiveAbility {
     @Override
     public void execute(Player player) {
 
+        if(player.hasPotionEffect(PotionEffectType.HUNGER)) player.removePotionEffect(PotionEffectType.HUNGER);
+
         if (player.isSneaking()) {
 
             Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
