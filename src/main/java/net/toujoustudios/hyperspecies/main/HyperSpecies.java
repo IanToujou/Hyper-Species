@@ -52,7 +52,7 @@ public final class HyperSpecies extends JavaPlugin {
         // Main Thread
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> Bukkit.getOnlinePlayers().forEach((player -> {
 
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager playerManager = PlayerManager.get(player);
 
             if (!playerManager.isSelectingAbility()) {
                 for (int i = 0; i < player.getInventory().getSize(); i++) {
@@ -138,7 +138,7 @@ public final class HyperSpecies extends JavaPlugin {
         // Regeneration
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> Bukkit.getOnlinePlayers().forEach((player -> {
 
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager playerManager = PlayerManager.get(player);
             if (playerManager.getMana() < playerManager.getMaxMana()) {
                 playerManager.setMana(playerManager.getMana() + playerManager.getManaRegeneration());
             } else playerManager.setMana(playerManager.getMaxMana());
@@ -155,7 +155,7 @@ public final class HyperSpecies extends JavaPlugin {
         // Passive
         Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> Bukkit.getOnlinePlayers().forEach((player -> {
 
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager playerManager = PlayerManager.get(player);
             if (playerManager.getSpecies() == null) return;
             if (playerManager.getSpecies().passive() == null) return;
             playerManager.getSpecies().passive().execute(player);

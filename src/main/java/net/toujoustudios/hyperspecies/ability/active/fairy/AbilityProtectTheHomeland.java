@@ -51,7 +51,7 @@ public class AbilityProtectTheHomeland extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int shield = getFieldValue(AbilityField.SHIELD, playerManager.getAbilityLevel(this));
         Location location = player.getLocation();
 
@@ -63,7 +63,7 @@ public class AbilityProtectTheHomeland extends Ability {
         players.forEach(all -> {
             if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                 all.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 3, 5, false, false, true));
-                PlayerManager manager = PlayerManager.getPlayer(all);
+                PlayerManager manager = PlayerManager.get(all);
                 manager.setShield(manager.getShield() + shield);
             }
         });

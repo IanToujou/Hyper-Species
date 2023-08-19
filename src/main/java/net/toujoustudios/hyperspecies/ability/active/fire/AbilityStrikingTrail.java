@@ -45,7 +45,7 @@ public class AbilityStrikingTrail extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
 
         Fireball fireball = player.launchProjectile(Fireball.class);
         fireball.setYield(0);

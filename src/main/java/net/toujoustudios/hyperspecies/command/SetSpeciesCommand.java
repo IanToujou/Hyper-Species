@@ -41,7 +41,7 @@ public class SetSpeciesCommand implements CommandExecutor {
             player.sendMessage(Config.MESSAGE_PREFIX + " §7You set your species to §b" + species.name() + "§8.");
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
 
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager playerManager = PlayerManager.get(player);
             playerManager.setSpecies(species);
             playerManager.refreshScoreboard();
 
@@ -64,7 +64,7 @@ public class SetSpeciesCommand implements CommandExecutor {
             player.sendMessage(Config.MESSAGE_PREFIX + " §7You set the species of §e" + target.getName() + "§7 to §b" + species.name() + "§8.");
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
 
-            PlayerManager playerManager = PlayerManager.getPlayer(target);
+            PlayerManager playerManager = PlayerManager.get(target);
             playerManager.setSpecies(species);
             playerManager.refreshScoreboard();
 

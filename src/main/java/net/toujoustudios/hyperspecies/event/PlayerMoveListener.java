@@ -12,7 +12,7 @@ public class PlayerMoveListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent event) {
 
         Player player = event.getPlayer();
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
 
         if (playerManager.isStunned()) event.setCancelled(true);
 

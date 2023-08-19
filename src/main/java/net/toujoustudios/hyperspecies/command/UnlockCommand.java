@@ -45,7 +45,7 @@ public class UnlockCommand implements CommandExecutor {
             return false;
         }
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
 
         playerManager.addAbility(ability);
         player.sendMessage(Config.MESSAGE_PREFIX + " §7You unlocked the ability §e" + ability.getName() + "§8.");

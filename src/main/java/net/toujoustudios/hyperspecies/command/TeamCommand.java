@@ -36,7 +36,7 @@ public class TeamCommand implements CommandExecutor {
             return false;
         }
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
 
         if (args.length == 2 && (args[0].equalsIgnoreCase("accept") || args[0].equalsIgnoreCase("deny"))) {
 
@@ -66,7 +66,7 @@ public class TeamCommand implements CommandExecutor {
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You invited §b" + target.getName() + "§7 to your team§8.");
                 target.sendMessage(Config.MESSAGE_PREFIX + " §7Your team join request got accepted§8.");
 
-                PlayerManager targetManager = PlayerManager.getPlayer(target);
+                PlayerManager targetManager = PlayerManager.get(target);
                 targetManager.setTeam(playerManager.getTeam().getName());
                 playerManager.getTeam().addMember(target.getUniqueId());
 

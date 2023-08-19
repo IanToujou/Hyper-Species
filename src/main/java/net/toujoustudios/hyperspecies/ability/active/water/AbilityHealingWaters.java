@@ -44,7 +44,7 @@ public class AbilityHealingWaters extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int heal = getFieldValue(AbilityField.HEAL, playerManager.getAbilityLevel(this));
         Block block = player.getTargetBlock(null, 50);
 
@@ -61,7 +61,7 @@ public class AbilityHealingWaters extends Ability {
         player.getWorld().playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 2, 2f);
         target.getWorld().spawnParticle(Particle.WATER_SPLASH, target.getLocation().add(0, 2, 0), 50, 0.3, 0.1, 0.3);
 
-        PlayerManager targetManager = PlayerManager.getPlayer(target);
+        PlayerManager targetManager = PlayerManager.get(target);
         targetManager.setHealth(targetManager.getHealth() + heal);
 
         return true;

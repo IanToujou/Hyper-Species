@@ -12,7 +12,7 @@ public class PlayerQuitListener implements Listener {
     public void onJoin(PlayerQuitEvent event) {
 
         Player player = event.getPlayer();
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         playerManager.save();
         event.setQuitMessage("");
 

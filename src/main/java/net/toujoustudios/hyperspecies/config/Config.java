@@ -31,7 +31,7 @@ public class Config {
     public static void initialize() {
 
         Logger.log(LogLevel.INFORMATION, "Loading configuration files...");
-        File settingsConfigFile = new File("plugins/" + HyperSpecies.PLUGIN_NAME + "/settings.yml");
+        File settingsConfigFile = new File("plugins/" + HyperSpecies.PLUGIN_NAME + "/general.yml");
 
         if (settingsConfigFile.exists()) {
 

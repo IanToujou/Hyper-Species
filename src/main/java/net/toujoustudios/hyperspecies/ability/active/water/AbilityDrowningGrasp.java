@@ -44,7 +44,7 @@ public class AbilityDrowningGrasp extends Ability {
 
     @Override
     public boolean execute(Player player) {
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
         Location location = player.getLocation();
         BukkitTask task = new BukkitRunnable() {
@@ -57,7 +57,7 @@ public class AbilityDrowningGrasp extends Ability {
                 double radiusSquared = 5 * 5;
                 for (Player all : players) {
                     if (all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
-                        PlayerManager manager = PlayerManager.getPlayer(all);
+                        PlayerManager manager = PlayerManager.get(all);
                         manager.stun(duration * 20);
                     }
                 }

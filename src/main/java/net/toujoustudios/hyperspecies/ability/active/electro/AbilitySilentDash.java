@@ -50,7 +50,7 @@ public class AbilitySilentDash extends Ability {
 
     @Override
     public boolean execute(Player player) {
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
         final int[] remaining = {3};
 

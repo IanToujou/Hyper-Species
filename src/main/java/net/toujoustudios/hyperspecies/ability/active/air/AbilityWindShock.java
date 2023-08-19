@@ -42,7 +42,7 @@ public class AbilityWindShock extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int damage = getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(this));
         Block block = player.getTargetBlock(null, 10);
         Location location = block.getLocation();

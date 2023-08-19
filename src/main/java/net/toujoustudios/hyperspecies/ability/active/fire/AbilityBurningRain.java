@@ -48,7 +48,7 @@ public class AbilityBurningRain extends Ability {
     public boolean execute(Player player) {
 
         Arrow arrow = player.launchProjectile(Arrow.class);
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int damage = getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(this));
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {

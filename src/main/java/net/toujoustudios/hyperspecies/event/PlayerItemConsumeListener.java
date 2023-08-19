@@ -22,7 +22,7 @@ public class PlayerItemConsumeListener implements Listener {
     public void onPlayerItemConsume(PlayerItemConsumeEvent event) {
 
         Player player = event.getPlayer();
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
 
         if (event.getItem().getType() == Material.MILK_BUCKET) {
             playerManager.setDrunkenness(playerManager.getDrunkenness() - 0.2);

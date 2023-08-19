@@ -27,7 +27,7 @@ public class PlayerChatListener implements Listener {
             return;
         }
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         ChatChannel channel = playerManager.getChannel();
 
         String format = channel.getFullName() + " §8| §e{Player} §8> " + channel.getChatColor() + "{Message}";
@@ -96,7 +96,7 @@ public class PlayerChatListener implements Listener {
         } else if (channel == ChatChannel.TEAM) {
             player.sendMessage(fullMessage);
             Bukkit.getOnlinePlayers().forEach(all -> {
-                PlayerManager manager = PlayerManager.getPlayer(all);
+                PlayerManager manager = PlayerManager.get(all);
                 if (manager.getTeam() == playerManager.getTeam() && all != player) all.sendMessage(fullMessage);
             });
         } else if (channel == ChatChannel.ADMIN) {

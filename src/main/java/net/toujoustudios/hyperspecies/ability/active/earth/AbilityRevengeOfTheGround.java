@@ -46,7 +46,7 @@ public class AbilityRevengeOfTheGround extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int radius = getFieldValue(AbilityField.RANGE, playerManager.getAbilityLevel(this));
         int damage = getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(this));
         Block center = player.getLocation().add(0, -1, 0).getBlock();

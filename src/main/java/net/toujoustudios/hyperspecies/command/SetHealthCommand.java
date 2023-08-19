@@ -36,7 +36,7 @@ public class SetHealthCommand implements CommandExecutor {
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You set your health to §c❤ " + health + "§8.");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
 
-                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                PlayerManager playerManager = PlayerManager.get(player);
                 playerManager.setHealth(health);
 
             } catch (Exception exception) {
@@ -55,7 +55,7 @@ public class SetHealthCommand implements CommandExecutor {
             try {
 
                 int health = Integer.parseInt(args[0]);
-                PlayerManager playerManager = PlayerManager.getPlayer(target);
+                PlayerManager playerManager = PlayerManager.get(target);
                 playerManager.setHealth(health);
 
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You set the health of §e" + target.getName() + " §7to §c❤ " + health + "§8.");

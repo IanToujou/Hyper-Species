@@ -13,7 +13,7 @@ public class PassiveElf extends PassiveAbility {
     @Override
     public void execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
 
         // Regeneration in green biomes
         ArrayList<Biome> biomes = new ArrayList<>();

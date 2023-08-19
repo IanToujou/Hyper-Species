@@ -49,7 +49,7 @@ public class AbilityRayOfDoom extends Ability {
         if (block.getType() == Material.AIR) return false;
         Location impactLocation = block.getLocation();
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int damage = getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(this));
 
         player.getWorld().spawnParticle(Particle.LAVA, impactLocation, 20, 0.1, 1, 0.1);

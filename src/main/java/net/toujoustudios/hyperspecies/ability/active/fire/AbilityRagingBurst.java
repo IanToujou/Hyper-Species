@@ -47,7 +47,7 @@ public class AbilityRagingBurst extends Ability {
 
         AbilityDemonicRage.getDamagePlayers().remove(player.getUniqueId());
         AbilityDemonicRage.getUsingPlayers().remove(player.getUniqueId());
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
 
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
 

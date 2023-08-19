@@ -63,10 +63,10 @@ public class PassiveDemon extends PassiveAbility {
 
         // Mana drain on soul sand
         if (player.getLocation().add(0, -0.8, 0).getBlock().getType() == Material.SOUL_SAND) {
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager playerManager = PlayerManager.get(player);
             playerManager.setMana(playerManager.getMana() - 0.5);
         } else {
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager playerManager = PlayerManager.get(player);
             playerManager.setManaRegeneration(0.1);
         }
 

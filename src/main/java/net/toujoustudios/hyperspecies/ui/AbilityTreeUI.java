@@ -60,7 +60,7 @@ public class AbilityTreeUI implements Listener {
 
                 player.sendMessage(Config.MESSAGE_PREFIX + "§7 Your loadout has been reset§8.");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 10, 2f);
-                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                PlayerManager playerManager = PlayerManager.get(player);
                 playerManager.getActiveAbilities().clear();
                 player.closeInventory();
 
@@ -103,7 +103,7 @@ public class AbilityTreeUI implements Listener {
 
                 Ability ability = Ability.getAbility(abilityName);
                 if (ability == null) return;
-                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                PlayerManager playerManager = PlayerManager.get(player);
 
                 if (playerManager.getSkill() < ability.getCost()) {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 0f);
@@ -138,7 +138,7 @@ public class AbilityTreeUI implements Listener {
 
                 Ability ability = Ability.getAbility(abilityName);
                 if (ability == null) return;
-                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                PlayerManager playerManager = PlayerManager.get(player);
 
                 if (playerManager.getActiveAbilities().contains(ability)) {
                     playerManager.removeActiveAbility(ability);

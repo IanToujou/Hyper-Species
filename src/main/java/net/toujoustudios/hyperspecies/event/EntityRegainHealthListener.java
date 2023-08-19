@@ -14,7 +14,7 @@ public class EntityRegainHealthListener implements Listener {
         if (event.getEntity() instanceof Player player) {
 
             if (event.getRegainReason() == EntityRegainHealthEvent.RegainReason.MAGIC || event.getRegainReason() == EntityRegainHealthEvent.RegainReason.MAGIC_REGEN) {
-                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                PlayerManager playerManager = PlayerManager.get(player);
                 playerManager.setHealth(playerManager.getHealth() + event.getAmount());
             }
 

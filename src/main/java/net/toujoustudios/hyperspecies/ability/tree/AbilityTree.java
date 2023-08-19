@@ -58,7 +58,7 @@ public class AbilityTree {
 
     public Inventory buildInventory(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
 
         Inventory inventory = Bukkit.createInventory(null, 9 * 6, "Tree: " + getBaseAbility().getName());
         ItemStack element = new ItemStack(getBaseAbility().getElement().getMaterial());
@@ -215,7 +215,7 @@ public class AbilityTree {
 
     public static Inventory buildMainInventory(Player player, int page) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
 
         if (page == 0) {
 

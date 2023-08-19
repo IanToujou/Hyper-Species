@@ -45,7 +45,7 @@ public class AbilityTidalWave extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int damage = getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(this));
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
 

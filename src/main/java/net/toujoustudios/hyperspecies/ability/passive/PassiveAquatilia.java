@@ -16,7 +16,7 @@ public class PassiveAquatilia extends PassiveAbility {
     @Override
     public void execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
 
         // Buffs underwater, debuffs on land
         if (player.getLocation().getBlock().getType() == Material.WATER || player.getLocation().add(0, -1, 0).getBlock().getType() == Material.WATER || player.getLocation().add(0, 1, 0).getBlock().getType() == Material.WATER || player.getLocation().add(1, 0, 0).getBlock().getType() == Material.WATER || player.getLocation().add(0, 0, 1).getBlock().getType() == Material.WATER || player.getLocation().add(0, 0, -1).getBlock().getType() == Material.WATER || player.getLocation().add(0, 0, 1).getBlock().getType() == Material.WATER) {

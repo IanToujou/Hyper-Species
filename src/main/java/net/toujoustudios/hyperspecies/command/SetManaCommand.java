@@ -36,7 +36,7 @@ public class SetManaCommand implements CommandExecutor {
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You set your mana to §b\uD83D\uDD25 " + mana + "§8.");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
 
-                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                PlayerManager playerManager = PlayerManager.get(player);
                 playerManager.setMana(mana);
 
             } catch (Exception exception) {
@@ -55,7 +55,7 @@ public class SetManaCommand implements CommandExecutor {
             try {
 
                 int mana = Integer.parseInt(args[0]);
-                PlayerManager playerManager = PlayerManager.getPlayer(target);
+                PlayerManager playerManager = PlayerManager.get(target);
                 playerManager.setMana(mana);
 
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You set the mana of §e" + target.getName() + " §7to §b\uD83D\uDD25 " + mana + "§8.");

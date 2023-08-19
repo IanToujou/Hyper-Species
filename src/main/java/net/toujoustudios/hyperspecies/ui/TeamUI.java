@@ -107,7 +107,7 @@ public class TeamUI implements Listener {
 
                 if (team.getStatus() == TeamStatus.OPEN) {
 
-                    PlayerManager playerManager = PlayerManager.getPlayer(player);
+                    PlayerManager playerManager = PlayerManager.get(player);
                     playerManager.setTeam(team.getName());
                     team.addMember(player.getUniqueId());
 
@@ -151,7 +151,7 @@ public class TeamUI implements Listener {
             } else if (material == Material.REDSTONE) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                PlayerManager playerManager = PlayerManager.get(player);
 
                 if (playerManager.getTeam().getOwner().equals(player.getUniqueId())) {
                     openInventory(player, TeamPage.SETTINGS_ADMIN.getIndex());
@@ -161,7 +161,7 @@ public class TeamUI implements Listener {
 
             } else if (material == Material.PLAYER_HEAD) {
 
-                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                PlayerManager playerManager = PlayerManager.get(player);
 
                 if (!playerManager.getTeam().getOwner().equals(player.getUniqueId())) return;
 
@@ -195,8 +195,8 @@ public class TeamUI implements Listener {
 
             Material material = event.getCurrentItem().getType();
             OfflinePlayer target = Bukkit.getOfflinePlayer(event.getView().getTitle().split(" ")[2]);
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
-            PlayerManager targetManager = PlayerManager.getPlayer(target.getUniqueId());
+            PlayerManager playerManager = PlayerManager.get(player);
+            PlayerManager targetManager = PlayerManager.get(target.getUniqueId());
 
             if (material == Material.PLAYER_HEAD) {
 
@@ -266,7 +266,7 @@ public class TeamUI implements Listener {
             event.setCancelled(true);
 
             Material material = event.getCurrentItem().getType();
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager playerManager = PlayerManager.get(player);
 
             if (material == Material.PLAYER_HEAD) {
 
@@ -308,7 +308,7 @@ public class TeamUI implements Listener {
                 player.closeInventory();
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You left your team and are all alone now§8.");
 
-                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                PlayerManager playerManager = PlayerManager.get(player);
 
                 if (playerManager.getTeam().getOwner().toString().equals(player.getUniqueId().toString())) {
 
@@ -367,7 +367,7 @@ public class TeamUI implements Listener {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
             player.sendMessage(Config.MESSAGE_PREFIX + " §7The team §b" + name + "§7 has been created§8.");
             Team.createTeam(name, null, "§e", player.getUniqueId(), TeamStatus.INVITE, null);
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager playerManager = PlayerManager.get(player);
             playerManager.setTeam(name);
             getCreatingTeamPlayers().remove(player.getUniqueId());
         } else if (getChangingNamePlayers().contains(player.getUniqueId())) {
@@ -399,7 +399,7 @@ public class TeamUI implements Listener {
             }
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
             player.sendMessage(Config.MESSAGE_PREFIX + " §7The team got renamed to §b" + name + "§8.");
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager playerManager = PlayerManager.get(player);
             playerManager.getTeam().setName(name);
             getChangingNamePlayers().remove(player.getUniqueId());
 
@@ -427,7 +427,7 @@ public class TeamUI implements Listener {
             }
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
             player.sendMessage(Config.MESSAGE_PREFIX + " §7The team description got changed§8.");
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager playerManager = PlayerManager.get(player);
             playerManager.getTeam().setDescription(description);
             getChangingDescriptionPlayers().remove(player.getUniqueId());
 

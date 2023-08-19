@@ -44,7 +44,7 @@ public class AbilityWoodlandsBlessing extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int heal = getFieldValue(AbilityField.HEAL, playerManager.getAbilityLevel(this));
         Block block = player.getTargetBlock(null, 50);
 
@@ -60,7 +60,7 @@ public class AbilityWoodlandsBlessing extends Ability {
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 100, 2f);
         target.getWorld().spawnParticle(Particle.HEART, target.getLocation().add(0, 3, 0), 50, 0.3, 0.1, 0.3);
 
-        PlayerManager targetManager = PlayerManager.getPlayer(target);
+        PlayerManager targetManager = PlayerManager.get(target);
         targetManager.setHealth(targetManager.getHealth() + heal);
 
         return true;

@@ -12,7 +12,7 @@ public class PassiveAngel extends PassiveAbility {
     @Override
     public void execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
 
         // Slow fall on shift
         if (player.isSneaking()) {

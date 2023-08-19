@@ -74,7 +74,7 @@ public class SpeciesUI implements Listener {
 
             } else if (material == Material.GREEN_CONCRETE) {
 
-                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                PlayerManager playerManager = PlayerManager.get(player);
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
                 player.closeInventory();
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You selected the species §b" + className + "§8.");

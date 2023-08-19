@@ -45,7 +45,7 @@ public class AbilityLuckyTooth extends Ability {
 
     @Override
     public boolean execute(Player player) {
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
         player.addPotionEffect(new PotionEffect(PotionEffectType.LUCK, 20 * duration, 2, false, false, true));
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);

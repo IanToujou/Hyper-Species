@@ -31,7 +31,7 @@ public class CharacterUI implements Listener {
             String name = event.getCurrentItem().getItemMeta().getDisplayName();
 
             if (name.equals("§aSelect Subspecies")) {
-                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                PlayerManager playerManager = PlayerManager.get(player);
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 Inventory inventory = Bukkit.createInventory(null, 9 * 3, "Select Subspecies");
                 for (int i = 0; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
@@ -65,7 +65,7 @@ public class CharacterUI implements Listener {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.openInventory(Character.buildInventory(player));
             } else if (name.startsWith("§a")) {
-                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                PlayerManager playerManager = PlayerManager.get(player);
                 SubSpecies sub = playerManager.getSpecies().getSubSpecies(name.substring(2));
                 if (sub == null) return;
                 playerManager.setSubSpecies(sub);

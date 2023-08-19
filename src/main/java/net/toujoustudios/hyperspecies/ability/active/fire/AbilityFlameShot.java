@@ -44,7 +44,7 @@ public class AbilityFlameShot extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int xp = playerManager.getAbilityExperience(this);
         int level = playerManager.getLevelFromExperience(xp);
 

@@ -60,7 +60,7 @@ public class ProjectileHitListener implements Listener {
             if (player == null) return;
             if (ability == null) return;
 
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager playerManager = PlayerManager.get(player);
 
             int xp = playerManager.getAbilityExperience(ability);
             int level = playerManager.getLevelFromExperience(xp);
@@ -87,7 +87,7 @@ public class ProjectileHitListener implements Listener {
             if (player == null) return;
             if (ability == null) return;
 
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager playerManager = PlayerManager.get(player);
 
             int damage = ability.getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(ability));
             int range = ability.getFieldValue(AbilityField.RANGE, playerManager.getAbilityLevel(ability));
@@ -137,7 +137,7 @@ public class ProjectileHitListener implements Listener {
             if (player == null) return;
             if (ability == null) return;
 
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager playerManager = PlayerManager.get(player);
 
             int damage = ability.getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(ability));
             int grassRadius = ability.getFieldValue(AbilityField.RANGE, playerManager.getAbilityLevel(ability));
@@ -220,7 +220,7 @@ public class ProjectileHitListener implements Listener {
             if (player == null) return;
             if (ability == null) return;
 
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager playerManager = PlayerManager.get(player);
             projectile.getWorld().spawnEntity(location, EntityType.LIGHTNING);
             projectile.getWorld().spawnParticle(Particle.FLASH, location, 100, 0.1, 0.1, 0.1);
 
@@ -245,7 +245,7 @@ public class ProjectileHitListener implements Listener {
             if (player == null) return;
             if (ability == null) return;
 
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager playerManager = PlayerManager.get(player);
             projectile.getWorld().spawnEntity(location, EntityType.LIGHTNING);
             projectile.getWorld().spawnParticle(Particle.FLASH, location, 100, 0.1, 0.1, 0.1);
 
@@ -258,7 +258,7 @@ public class ProjectileHitListener implements Listener {
                 if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
                     all.damage(damage, player);
                     all.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * duration, 200, false, false, true));
-                    PlayerManager manager = PlayerManager.getPlayer(all);
+                    PlayerManager manager = PlayerManager.get(all);
                     manager.stun(duration * 20);
                 }
             });

@@ -43,7 +43,7 @@ public class AbilityHailstormBarrage extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int damage = getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(this));
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
         Location location = player.getLocation();
@@ -86,7 +86,7 @@ public class AbilityHailstormBarrage extends Ability {
                                 all.damage(damage, player);
                                 int random = new Random().nextInt(4);
                                 if (random == 0) {
-                                    PlayerManager manager = PlayerManager.getPlayer(all);
+                                    PlayerManager manager = PlayerManager.get(all);
                                     manager.stun(20 * duration);
                                     b.getWorld().playSound(b.getLocation(), Sound.BLOCK_GLASS_BREAK, SoundCategory.MASTER, 3, 0f);
                                 } else

@@ -59,7 +59,7 @@ public class Loader {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player != null) {
-                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                PlayerManager playerManager = PlayerManager.get(player);
                 PlayerManager.getPlayers().put(player.getUniqueId(), playerManager);
             }
         }

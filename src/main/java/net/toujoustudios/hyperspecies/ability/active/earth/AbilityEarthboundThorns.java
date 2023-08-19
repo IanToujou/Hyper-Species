@@ -43,7 +43,7 @@ public class AbilityEarthboundThorns extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int damage = getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(this));
         player.getWorld().playSound(player.getLocation(), Sound.BLOCK_GRASS_BREAK, SoundCategory.MASTER, 2, 0.5f);
 

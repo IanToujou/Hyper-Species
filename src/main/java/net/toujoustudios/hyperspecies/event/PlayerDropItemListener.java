@@ -11,7 +11,7 @@ public class PlayerDropItemListener implements Listener {
     @EventHandler
     public void onItemDrop(PlayerDropItemEvent event) {
         Player player = event.getPlayer();
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         if (playerManager.isSelectingAbility()) event.setCancelled(true);
     }
 

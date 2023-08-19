@@ -48,7 +48,7 @@ public class AbilityStarwhisper extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
         int damage = getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(this));
         Location location = player.getLocation();
@@ -66,7 +66,7 @@ public class AbilityStarwhisper extends Ability {
                 double radiusSquared = 5 * 5;
                 players.forEach(all -> {
                     if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
-                        PlayerManager manager = PlayerManager.getPlayer(all);
+                        PlayerManager manager = PlayerManager.get(all);
                         location.getWorld().spawnParticle(Particle.CHERRY_LEAVES, location, 100, 3, 3, 3);
                         if (manager.hasTeam() && playerManager.hasTeam() && manager.getTeam() == playerManager.getTeam()) {
                             all.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * duration, 0, false, false, true));

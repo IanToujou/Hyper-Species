@@ -45,7 +45,7 @@ public class AbilityManaPool extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
         int rate = getFieldValue(AbilityField.RATE, playerManager.getAbilityLevel(this));
 
@@ -61,7 +61,7 @@ public class AbilityManaPool extends Ability {
                 double radiusSquared = 6 * 6;
                 players.forEach(all -> {
                     if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
-                        PlayerManager manager = PlayerManager.getPlayer(all);
+                        PlayerManager manager = PlayerManager.get(all);
                         if (manager.getMana() < manager.getMaxMana()) manager.setMana(manager.getMana() + rate);
                         location.getWorld().spawnParticle(Particle.DRIP_WATER, location, 100, 5, 0.1, 5);
                     }

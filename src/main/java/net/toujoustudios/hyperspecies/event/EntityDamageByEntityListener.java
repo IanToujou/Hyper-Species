@@ -33,7 +33,7 @@ public class EntityDamageByEntityListener implements Listener {
                 return;
             }
 
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager playerManager = PlayerManager.get(player);
 
             if (playerManager.getSpecies() == null) return;
 
@@ -52,7 +52,7 @@ public class EntityDamageByEntityListener implements Listener {
 
             if (event.getDamager() instanceof Player dealer) {
 
-                PlayerManager dealerManager = PlayerManager.getPlayer(dealer);
+                PlayerManager dealerManager = PlayerManager.get(dealer);
                 if (dealerManager.getSpecies() != null && dealerManager.getSpecies().name().equals("Wolf")) {
                     if (playerManager.getHealth() < playerManager.getMaxHealth() / 3) {
                         trueDamage *= 2;
@@ -91,7 +91,7 @@ public class EntityDamageByEntityListener implements Listener {
                 players.forEach(all -> {
                     if (player.getWorld() == all.getWorld() && all.getLocation().distanceSquared(player.getLocation()) <= radiusSquared) {
                         if (all != player) {
-                            PlayerManager allManager = PlayerManager.getPlayer(all);
+                            PlayerManager allManager = PlayerManager.get(all);
                             if (allManager.getSpecies().name().equals("Wolf")) {
                                 isWolfNearby.set(true);
                             }

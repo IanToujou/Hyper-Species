@@ -45,7 +45,7 @@ public class AbilityTimeDilation extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
 
         player.getWorld().spawnParticle(Particle.CLOUD, player.getLocation(), 100, 0.1, 0.1, 0.1);

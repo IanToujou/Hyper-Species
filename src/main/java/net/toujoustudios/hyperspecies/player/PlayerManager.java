@@ -22,6 +22,7 @@ public class PlayerManager {
 
     private static final HashMap<UUID, PlayerManager> players = new HashMap<>();
     private static final YamlConfiguration playerConfig = Config.getConfigFile("players.yml");
+
     private final UUID uuid;
     private int experience;
     private int skill;
@@ -59,8 +60,8 @@ public class PlayerManager {
             skill = playerConfig.getInt("Data." + uuid + ".Character.Skill");
         else skill = 0;
 
-        maxHealth = 50;
-        maxMana = 20;
+        maxHealth = 20 + getLevel()*3;
+        maxMana = 20 + getLevel();
         manaRegeneration = 0.1;
 
         if (playerConfig.isSet("Data." + uuid + ".Points.Health"))
@@ -115,19 +116,24 @@ public class PlayerManager {
 
     }
 
-    public static PlayerManager getPlayer(UUID uuid) {
+    public static PlayerManager get(UUID uuid) {
         if (players.containsKey(uuid)) return players.get(uuid);
         PlayerManager playerManager = new PlayerManager(uuid);
         players.put(uuid, playerManager);
         return playerManager;
     }
 
-    public static PlayerManager getPlayer(Player player) {
-        return getPlayer(player.getUniqueId());
+    public static PlayerManager get(Player player) {
+        return get(player.getUniqueId());
     }
 
-    // BASE METHODS
-
+    /**
+     * Saves all the data that is stored in the in-memory hashmap to the config file.
+     * This method does NOT clear any in-memory data.
+     *
+     * @since 1.0.0
+     * @see PlayerManager#destroy()
+     */
     public void save() {
 
         playerConfig.set("Data." + uuid + ".Points.Health", health);
@@ -151,6 +157,13 @@ public class PlayerManager {
 
     }
 
+    /**
+     * Destroys the data stored in the in-memory hashmap.
+     * This method does NOT save the data. It simply removes it from the memory.
+     *
+     * @since 1.0.0
+     * @see PlayerManager#save()
+     */
     public void destroy() {
         players.remove(uuid);
     }
@@ -173,10 +186,11 @@ public class PlayerManager {
         if (Bukkit.getPlayer(uuid) == null) return false;
         if (getCooldownAbilities().contains(ability)) return false;
         if (getMana() < ability.getManaCost()) return false;
-        if (getAbilityLevel(ability) >= ability.getMaxLevel()) return false;
+        if (getAbilityLevel(ability) > ability.getMaxLevel()) setAbilityLevel(ability, ability.getMaxLevel());
         if (ability.execute(Bukkit.getPlayer(uuid))) {
             setMana(getMana() - ability.getManaCost());
             abilityCooldowns.add(ability);
+            if (getAbilityLevel(ability) < ability.getMaxLevel()) addAbilityExperience(ability, 1);
             Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> abilityCooldowns.remove(ability), ability.getDelay() * 20L);
             return true;
         } else return false;
@@ -215,21 +229,20 @@ public class PlayerManager {
         return threshold - getLevelThreshold(level - 1);
     }
 
-    @SuppressWarnings("all")
     public void refreshScoreboard() {
 
         if (Bukkit.getPlayer(uuid) == null) return;
 
         Scoreboard board = HyperSpecies.getInstance().getScoreboard();
 
-        if (board.getTeam(uuid.toString()) != null && board.getTeams().size() > 0) {
-            board.getTeam(uuid.toString()).unregister();
+        if (board.getTeam(uuid.toString()) != null && !board.getTeams().isEmpty()) {
+            Objects.requireNonNull(board.getTeam(uuid.toString())).unregister();
         }
 
         final org.bukkit.scoreboard.Team scoreboardTeam = HyperSpecies.getInstance().getScoreboard().registerNewTeam(uuid.toString());
         scoreboardTeam.setColor(ChatColor.GRAY);
         scoreboardTeam.setPrefix((species != null ? species.prefix() : "§7None") + " §7| ");
-        scoreboardTeam.addEntry(Bukkit.getPlayer(uuid).getName());
+        scoreboardTeam.addEntry(Objects.requireNonNull(Bukkit.getPlayer(uuid)).getName());
 
     }
 
@@ -392,8 +405,17 @@ public class PlayerManager {
         return abilityExperiences.getOrDefault(ability.getName(), 0);
     }
 
+    public void setAbilityExperience(Ability ability, int experience) {
+        abilityExperiences.remove(ability.getName());
+        abilityExperiences.put(ability.getName(), experience);
+    }
+
     public int getAbilityLevel(Ability ability) {
         return getLevelFromExperience(getAbilityExperience(ability));
+    }
+
+    public void setAbilityLevel(Ability ability, int level) {
+        setAbilityExperience(ability, getLevelThreshold(level));
     }
 
     public void addAbilityExperience(Ability ability, int experience) {

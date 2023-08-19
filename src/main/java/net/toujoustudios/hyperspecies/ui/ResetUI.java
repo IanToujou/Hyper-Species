@@ -48,7 +48,7 @@ public class ResetUI implements Listener {
 
             if (material == Material.REDSTONE_BLOCK) {
 
-                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                PlayerManager playerManager = PlayerManager.get(player);
                 playerConfig.set("Data." + player.getUniqueId(), null);
                 Config.saveToFile(playerConfig, "players.yml");
                 playerManager.destroy();

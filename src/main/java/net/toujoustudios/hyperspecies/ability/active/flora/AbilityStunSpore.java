@@ -45,7 +45,7 @@ public class AbilityStunSpore extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
 
         Block block = player.getTargetBlock(null, 30);
@@ -64,7 +64,7 @@ public class AbilityStunSpore extends Ability {
                     for (Player all : players) {
                         if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared) {
                             if (all != player) {
-                                PlayerManager allManager = PlayerManager.getPlayer(all);
+                                PlayerManager allManager = PlayerManager.get(all);
                                 if (!allManager.isStunned()) {
                                     allManager.stun(duration);
                                 }

@@ -43,7 +43,7 @@ public class AbilityHealingNature extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int heal = getFieldValue(AbilityField.HEAL, playerManager.getAbilityLevel(this));
         Block block = player.getTargetBlock(null, 50);
 
@@ -63,7 +63,7 @@ public class AbilityHealingNature extends Ability {
         BukkitTask task = new BukkitRunnable() {
             @Override
             public void run() {
-                PlayerManager manager = PlayerManager.getPlayer(finalTarget);
+                PlayerManager manager = PlayerManager.get(finalTarget);
                 manager.setHealth(manager.getHealth() + heal / 10f);
             }
         }.runTaskTimer(HyperSpecies.getInstance(), 0, 20);

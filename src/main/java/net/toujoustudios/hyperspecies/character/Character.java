@@ -16,7 +16,7 @@ public class Character {
 
     public static Inventory buildInventory(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
 
         Inventory inventory = Bukkit.createInventory(null, 9 * 5, "Your Character");
         for (int i = 0; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);

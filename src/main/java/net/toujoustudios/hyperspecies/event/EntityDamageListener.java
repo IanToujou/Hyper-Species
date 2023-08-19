@@ -31,7 +31,7 @@ public class EntityDamageListener implements Listener {
                 return;
             }
 
-            PlayerManager playerManager = PlayerManager.getPlayer(player);
+            PlayerManager playerManager = PlayerManager.get(player);
 
             if (playerManager.getSpecies() == null) return;
 

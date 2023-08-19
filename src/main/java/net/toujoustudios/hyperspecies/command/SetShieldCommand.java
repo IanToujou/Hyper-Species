@@ -36,7 +36,7 @@ public class SetShieldCommand implements CommandExecutor {
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You set your shield to §e⛨ " + shield + "§8.");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
 
-                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                PlayerManager playerManager = PlayerManager.get(player);
                 playerManager.setShield(shield);
 
             } catch (Exception exception) {
@@ -55,7 +55,7 @@ public class SetShieldCommand implements CommandExecutor {
             try {
 
                 int shield = Integer.parseInt(args[0]);
-                PlayerManager playerManager = PlayerManager.getPlayer(target);
+                PlayerManager playerManager = PlayerManager.get(target);
                 playerManager.setShield(shield);
 
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You set the shield of §e" + target.getName() + " §7to §e⛨ " + shield + "§8.");

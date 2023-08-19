@@ -36,7 +36,7 @@ public class SetSkillCommand implements CommandExecutor {
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You set your skill to §eⓄ " + skill + "§8.");
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
 
-                PlayerManager playerManager = PlayerManager.getPlayer(player);
+                PlayerManager playerManager = PlayerManager.get(player);
                 playerManager.setSkill(skill);
 
             } catch (Exception exception) {
@@ -55,7 +55,7 @@ public class SetSkillCommand implements CommandExecutor {
             try {
 
                 int skill = Integer.parseInt(args[0]);
-                PlayerManager playerManager = PlayerManager.getPlayer(target);
+                PlayerManager playerManager = PlayerManager.get(target);
                 playerManager.setSkill(skill);
 
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You set the skill of §e" + target.getName() + " §7to §eⓄ " + skill + "§8.");

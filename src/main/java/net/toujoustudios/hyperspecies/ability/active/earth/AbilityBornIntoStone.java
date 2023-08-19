@@ -45,7 +45,7 @@ public class AbilityBornIntoStone extends Ability {
 
     @Override
     public boolean execute(Player player) {
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
         player.getWorld().playSound(player.getLocation(), Sound.BLOCK_ANVIL_PLACE, SoundCategory.MASTER, 2, 1f);
         playerManager.stun(duration * 20);

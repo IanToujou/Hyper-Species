@@ -47,7 +47,7 @@ public class AbilityStrikeOfCorruption extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         player.damage(playerManager.getHealth() / 2);
 
         player.getWorld().spawnEntity(player.getLocation().add(0, 3, 0), EntityType.LIGHTNING);

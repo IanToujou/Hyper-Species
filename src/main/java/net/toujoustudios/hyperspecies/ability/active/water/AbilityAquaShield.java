@@ -44,7 +44,7 @@ public class AbilityAquaShield extends Ability {
     @Override
     public boolean execute(Player player) {
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         int shield = getFieldValue(AbilityField.SHIELD, playerManager.getAbilityLevel(this));
         player.playSound(player.getLocation(), Sound.ITEM_BUCKET_EMPTY, SoundCategory.MASTER, 2, 1.5f);
 

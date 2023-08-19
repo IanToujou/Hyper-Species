@@ -43,7 +43,7 @@ public class ChannelCommand implements CommandExecutor {
         }
 
         ChatChannel chatChannel = ChatChannel.valueOf(channel);
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
 
         playerManager.setChannel(chatChannel);
 

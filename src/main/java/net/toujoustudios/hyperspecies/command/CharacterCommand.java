@@ -33,7 +33,7 @@ public class CharacterCommand implements CommandExecutor {
             return false;
         }
 
-        PlayerManager playerManager = PlayerManager.getPlayer(player);
+        PlayerManager playerManager = PlayerManager.get(player);
         if (playerManager.getSpecies() == null) return false;
 
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
