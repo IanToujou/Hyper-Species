@@ -19,7 +19,7 @@ public class PassiveAquatilia extends PassiveAbility {
         PlayerManager playerManager = PlayerManager.get(player);
 
         // Buffs underwater, debuffs on land
-        if (player.getLocation().getBlock().getType() == Material.WATER || player.getLocation().add(0, -1, 0).getBlock().getType() == Material.WATER || player.getLocation().add(0, 1, 0).getBlock().getType() == Material.WATER || player.getLocation().add(1, 0, 0).getBlock().getType() == Material.WATER || player.getLocation().add(0, 0, 1).getBlock().getType() == Material.WATER || player.getLocation().add(0, 0, -1).getBlock().getType() == Material.WATER || player.getLocation().add(0, 0, 1).getBlock().getType() == Material.WATER) {
+        if (player.getLocation().getBlock().getType() == Material.WATER || player.getLocation().subtract(0, 1, 0).getBlock().getType() == Material.WATER || player.getLocation().add(0, 1, 0).getBlock().getType() == Material.WATER || player.getLocation().add(1, 0, 0).getBlock().getType() == Material.WATER || player.getLocation().add(0, 0, 1).getBlock().getType() == Material.WATER || player.getLocation().subtract(1, 0, 0).getBlock().getType() == Material.WATER || player.getLocation().subtract(0, 0, 1).getBlock().getType() == Material.WATER) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 20 * 10, 0, false, false, true));
             player.addPotionEffect(new PotionEffect(PotionEffectType.CONDUIT_POWER, 20 * 10, 2, false, false, true));
             player.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 20 * 10, 3, false, false, true));

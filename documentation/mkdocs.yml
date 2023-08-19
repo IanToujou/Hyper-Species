@@ -1,12 +1,70 @@
-# yaml-language-server: $schema=https://squidfunk.github.io/mkdocs-material/schema.json
-
 site_name: Hyper Species
-extra_css:
-  - css/main.css
+repo_url: https://github.com/IanToujou/Hyper-Species
+repo_name: IanToujou/Hyper-Species
 theme:
   language: en
   name: material
   palette:
     scheme: slate
-    primary: orange
-    accent: deep orange
+    primary: deep purple
+    accent: indigo
+  icon:
+    repo: fontawesome/brands/git-alt
+    logo: material/library
+  features:
+    - navigation.tabs
+    - search.suggest
+    - search.highlight
+    - search.share
+extra:
+  homepage: https://toujoustudios.net
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+copyright: >
+  Copyright &copy; 2023 Toujou Studios –
+  <a href="#__consent">Change cookie settings</a>
+plugins:
+  - search
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  - attr_list
+  - tables
+  - abbr
+  - md_in_html
+  - footnotes
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - Home: 'index.md'
+  - 'Getting Started':
+    - 'Installation': 'getting-started/installation.md'
+    - 'Configuration': 'getting-started/configuration.md'
