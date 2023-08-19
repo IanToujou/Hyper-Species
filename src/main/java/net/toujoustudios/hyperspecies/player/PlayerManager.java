@@ -27,10 +27,8 @@ public class PlayerManager {
     private int experience;
     private int skill;
     private double health;
-    private double maxHealth;
     private double healthRegeneration;
     private double mana;
-    private double maxMana;
     private double manaRegeneration;
     private double shield;
     private String team;
@@ -52,24 +50,17 @@ public class PlayerManager {
 
         this.uuid = uuid;
 
-        if (playerConfig.isSet("Data." + uuid + ".Character.Experience.Main"))
-            experience = playerConfig.getInt("Data." + uuid + ".Character.Experience.Main");
-        else experience = 0;
+        experience = playerConfig.getInt("Data." + uuid + ".Character.Experience.Main");
+        skill = playerConfig.getInt("Data." + uuid + ".Character.Skill");
 
-        if (playerConfig.isSet("Data." + uuid + ".Character.Skill"))
-            skill = playerConfig.getInt("Data." + uuid + ".Character.Skill");
-        else skill = 0;
-
-        maxHealth = 20 + getLevel()*3;
-        maxMana = 20 + getLevel();
         manaRegeneration = 0.1;
 
         if (playerConfig.isSet("Data." + uuid + ".Points.Health"))
             health = playerConfig.getDouble("Data." + uuid + ".Points.Health");
-        else health = maxHealth;
+        else health = getMaxHealth();
         if (playerConfig.isSet("Data." + uuid + ".Points.Mana"))
             mana = playerConfig.getDouble("Data." + uuid + ".Points.Mana");
-        else mana = maxMana;
+        else mana = getMaxMana();
         if (playerConfig.isSet("Data." + uuid + ".Points.Shield"))
             shield = playerConfig.getDouble("Data." + uuid + ".Points.Shield");
         else shield = 0;
@@ -277,11 +268,7 @@ public class PlayerManager {
     }
 
     public double getMaxHealth() {
-        return maxHealth;
-    }
-
-    public void setMaxHealth(double maxHealth) {
-        this.maxHealth = maxHealth;
+        return 20+getLevel()*3;
     }
 
     public double getHealthRegeneration() {
@@ -301,11 +288,7 @@ public class PlayerManager {
     }
 
     public double getMaxMana() {
-        return maxMana;
-    }
-
-    public void setMaxMana(double maxMana) {
-        this.maxMana = maxMana;
+        return 20+getLevel();
     }
 
     public double getManaRegeneration() {
