@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.ability.passive;
 
+import net.toujoustudios.hyperspecies.item.MaterialType;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -18,7 +19,6 @@ public class PassiveAquatilia extends PassiveAbility {
 
         PlayerManager playerManager = PlayerManager.get(player);
 
-        // Buffs underwater, debuffs on land
         if (player.getLocation().getBlock().getType() == Material.WATER || player.getLocation().subtract(0, 1, 0).getBlock().getType() == Material.WATER || player.getLocation().add(0, 1, 0).getBlock().getType() == Material.WATER || player.getLocation().add(1, 0, 0).getBlock().getType() == Material.WATER || player.getLocation().add(0, 0, 1).getBlock().getType() == Material.WATER || player.getLocation().subtract(1, 0, 0).getBlock().getType() == Material.WATER || player.getLocation().subtract(0, 0, 1).getBlock().getType() == Material.WATER) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 20 * 10, 0, false, false, true));
             player.addPotionEffect(new PotionEffect(PotionEffectType.CONDUIT_POWER, 20 * 10, 2, false, false, true));
@@ -32,7 +32,6 @@ public class PassiveAquatilia extends PassiveAbility {
             }
         }
 
-        // Damage in sunlight and hot biomes
         // TODO: Remove in release
         if (!player.getWorld().getName().contains("farmworld")) {
             if (player.getWorld().getTime() < 12500 || player.getWorld().getTime() > 23500) {
@@ -57,18 +56,9 @@ public class PassiveAquatilia extends PassiveAbility {
             }
         }
 
-        // Permanent night vision
         player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 20, 0, false, false, true));
 
-        List<Material> coralBlocks = List.of(
-                Material.BRAIN_CORAL_BLOCK,
-                Material.BUBBLE_CORAL_BLOCK,
-                Material.FIRE_CORAL_BLOCK,
-                Material.HORN_CORAL_BLOCK,
-                Material.TUBE_CORAL_BLOCK
-        );
-
-        if (coralBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
+        if (MaterialType.BLOCKS_CORAL.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
             playerManager.setHealthRegeneration(0.4);
         } else {
             if (!playerManager.isRegenerationCoolingDown()) playerManager.setHealthRegeneration(0.4);

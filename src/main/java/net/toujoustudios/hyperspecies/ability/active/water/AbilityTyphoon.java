@@ -34,7 +34,7 @@ public class AbilityTyphoon extends Ability {
                 Element.AIR,
                 AbilityType.DAMAGE,
                 15,
-                600,
+                480,
                 Material.GLOW_INK_SAC,
                 5,
                 List.of("Aquatilia"),
@@ -56,6 +56,7 @@ public class AbilityTyphoon extends Ability {
         int damage = getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(this));
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
         Location location = player.getLocation();
+        assert location.getWorld() != null;
 
         Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
         player.getWorld().setStorm(true);
@@ -65,13 +66,11 @@ public class AbilityTyphoon extends Ability {
             @Override
             public void run() {
 
-                player.getWorld().setStorm(true);
                 int randomX = new Random().nextInt(71) - 35;
                 int randomZ = new Random().nextInt(71) - 35;
                 int x = (int) (randomX + location.getX());
                 int z = (int) (randomZ + location.getZ());
 
-                assert location.getWorld() != null;
                 Location loc = new Location(location.getWorld(), x, location.getWorld().getHighestBlockYAt(x, z), z);
                 assert loc.getWorld() != null;
                 loc.getWorld().strikeLightningEffect(loc);
@@ -86,9 +85,9 @@ public class AbilityTyphoon extends Ability {
                             double y = 2 * Math.exp(-0.1 * t) * sin(t) + 1.5;
                             double z = t * sin(theta);
                             loc.add(x, y, z);
-                            player.getWorld().spawnParticle(Particle.FALLING_WATER, loc, 5, 0.1, 0.1, 0.1);
+                            loc.getWorld().spawnParticle(Particle.FALLING_WATER, loc, 5, 0.1, 0.1, 0.1);
                             for (Player all : players) {
-                                if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(loc) <= 1) {
+                                if (all.getWorld() == loc.getWorld() && all.getLocation().distanceSquared(loc) <= 1) {
                                     if (all != player) {
                                         all.damage(damage, player);
                                         all.setVelocity(new Vector(0, 0.5, 0));
@@ -103,9 +102,9 @@ public class AbilityTyphoon extends Ability {
                             y = 2 * Math.exp(-0.1 * t) * sin(t) + 1.5;
                             z = t * sin(theta);
                             loc.add(x, y, z);
-                            player.getWorld().spawnParticle(Particle.FALLING_WATER, loc, 5, 0.1, 0.1, 0.1);
+                            loc.getWorld().spawnParticle(Particle.FALLING_WATER, loc, 5, 0.1, 0.1, 0.1);
                             for (Player all : players) {
-                                if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(loc) <= 1) {
+                                if (all.getWorld() == loc.getWorld() && all.getLocation().distanceSquared(loc) <= 1) {
                                     if (all != player) {
                                         all.damage(damage, player);
                                         all.setVelocity(new Vector(0, 0.5, 0));

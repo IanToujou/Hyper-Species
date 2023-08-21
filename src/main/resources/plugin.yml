@@ -7,6 +7,9 @@ authors:
   - IanToujou
 
 commands:
+  species:
+    description: Open the species UI.
+    permission: hyperspecies.command.species
   team:
     description: Show and manage your team.
     permission: hyperspecies.command.team
@@ -69,6 +72,7 @@ permissions:
   hyperspecies.group.player:
     description: The player group.
     children:
+      hyperspecies.command.species: true
       hyperspecies.command.team: true
       hyperspecies.command.ability: false
       hyperspecies.command.reset: true
@@ -88,6 +92,7 @@ permissions:
   hyperspecies.group.admin:
     description: The administrator group. Grants all permissions.
     children:
+      hyperspecies.command.species: true
       hyperspecies.command.team: true
       hyperspecies.command.ability: true
       hyperspecies.command.reset: true
@@ -107,6 +112,7 @@ permissions:
   hyperspecies.group.moderator:
     description: The administrator group. Grants all permissions.
     children:
+      hyperspecies.command.species: true
       hyperspecies.command.team: true
       hyperspecies.command.ability: false
       hyperspecies.command.reset: true
@@ -123,6 +129,9 @@ permissions:
       hyperspecies.command.passive: false
       hyperspecies.command.channel: true
       hyperspecies.command.message: true
+  hyperspecies.command.species:
+    description: Allows players to use the species command.
+    default: true
   hyperspecies.command.team:
     description: Allows players to use the team command.
     default: true

@@ -1,7 +1,7 @@
 package net.toujoustudios.hyperspecies.event;
 
 import net.toujoustudios.hyperspecies.ability.active.Ability;
-import net.toujoustudios.hyperspecies.ability.tree.AbilityTree;
+import net.toujoustudios.hyperspecies.ability.tree.Loadout;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.item.ItemListUI;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
@@ -144,7 +144,7 @@ public class PlayerInteractListener implements Listener {
                         }
                     } else {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                        player.openInventory(AbilityTree.buildMainInventory(player, 0));
+                        player.openInventory(Loadout.buildMainInventory(player, 0));
                     }
                 }
 

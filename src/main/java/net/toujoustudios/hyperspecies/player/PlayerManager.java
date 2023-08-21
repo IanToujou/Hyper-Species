@@ -61,9 +61,7 @@ public class PlayerManager {
         if (playerConfig.isSet("Data." + uuid + ".Points.Mana"))
             mana = playerConfig.getDouble("Data." + uuid + ".Points.Mana");
         else mana = getMaxMana();
-        if (playerConfig.isSet("Data." + uuid + ".Points.Shield"))
-            shield = playerConfig.getDouble("Data." + uuid + ".Points.Shield");
-        else shield = 0;
+        shield = playerConfig.getDouble("Data." + uuid + ".Points.Shield");
 
         selectingAbility = false;
         regenerationCoolingDown = false;
@@ -87,19 +85,11 @@ public class PlayerManager {
             if (!activeAbilities.contains(Ability.getAbility(item))) activeAbilities.add(Ability.getAbility(item));
         });
 
-        abilities.forEach(ability -> {
-            if (playerConfig.contains("Data." + uuid + ".Character.Experience.Ability." + ability.getName())) {
-                abilityExperiences.put(ability.getName(), playerConfig.getInt("Data." + uuid + ".Character.Experience.Ability." + ability.getName()));
-            } else {
-                abilityExperiences.put(ability.getName(), 0);
-            }
-        });
+        abilities.forEach(ability -> abilityExperiences.put(ability.getName(), playerConfig.getInt("Data." + uuid + ".Character.Experience.Ability." + ability.getName())));
 
         refreshScoreboard();
 
-        if (playerConfig.isSet("Data." + uuid + ".Points.Drunkenness"))
-            drunkenness = playerConfig.getDouble("Data." + uuid + ".Points.Drunkenness");
-        else drunkenness = 0;
+        drunkenness = playerConfig.getDouble("Data." + uuid + ".Points.Drunkenness");
 
         stunned = false;
         channel = ChatChannel.LOCAL;

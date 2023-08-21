@@ -38,22 +38,20 @@ public class AbilityFertilizingRain extends Ability {
 
         Block center = player.getTargetBlock(null, 15);
         Location location = center.getLocation();
+        assert location.getWorld() != null;
 
         BukkitTask task = new BukkitRunnable() {
 
             @Override
             public void run() {
 
-                int radius = 4;
+                int radius = 7;
                 for (int x = -radius; x <= radius; x++) {
                     for (int y = -radius; y <= radius; y++) {
                         for (int z = -radius; z <= radius; z++) {
                             Block block = center.getRelative(x, y, z);
                             if (center.getLocation().distance(block.getLocation()) <= radius) {
-                                if (block.getType() == Material.WHEAT || block.getType() == Material.CARROTS || block.getType() == Material.BEETROOTS || block.getType() == Material.MELON_STEM || block.getType() == Material.PUMPKIN_STEM || block.getType() == Material.TORCHFLOWER_CROP || block.getType() == Material.PITCHER_CROP) {
-                                    block.applyBoneMeal(BlockFace.UP);
-                                    player.playSound(player.getLocation(), Sound.BLOCK_COMPOSTER_FILL_SUCCESS, SoundCategory.MASTER, 100, 1f);
-                                }
+                                if (block.applyBoneMeal(BlockFace.UP)) player.playSound(player.getLocation(), Sound.BLOCK_COMPOSTER_FILL_SUCCESS, SoundCategory.MASTER, 100, 1f);
                             }
                         }
                     }

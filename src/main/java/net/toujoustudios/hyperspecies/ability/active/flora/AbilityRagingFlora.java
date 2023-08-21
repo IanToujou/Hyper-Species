@@ -51,7 +51,7 @@ public class AbilityRagingFlora extends Ability {
         int duration = getFieldValue(AbilityField.DURATION, playerManager.getAbilityLevel(this));
 
         Block block = player.getTargetBlock(null, 30);
-        if ((block.getType() == Material.GRASS_BLOCK || block.getType() == Material.MOSS_BLOCK || block.getType() == Material.PODZOL) && block.getLocation().add(0, 1, 0).getBlock().getType() == Material.AIR) {
+        if (block.getLocation().add(0, 1, 0).getBlock().getType() == Material.AIR) {
 
             Location location = block.getLocation().add(0, 1, 0);
             assert location.getWorld() != null;

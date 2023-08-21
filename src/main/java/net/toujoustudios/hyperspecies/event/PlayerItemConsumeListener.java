@@ -1,6 +1,7 @@
 package net.toujoustudios.hyperspecies.event;
 
 import net.toujoustudios.hyperspecies.config.Config;
+import net.toujoustudios.hyperspecies.item.MaterialType;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -72,26 +73,6 @@ public class PlayerItemConsumeListener implements Listener {
                 Material.MILK_BUCKET
         );
 
-        List<Material> meat = List.of(
-                Material.CHICKEN,
-                Material.COOKED_CHICKEN,
-                Material.BEEF,
-                Material.COOKED_BEEF,
-                Material.PORKCHOP,
-                Material.COOKED_PORKCHOP,
-                Material.RABBIT,
-                Material.COOKED_RABBIT,
-                Material.MUTTON,
-                Material.COOKED_MUTTON,
-                Material.ROTTEN_FLESH,
-                Material.COD,
-                Material.COOKED_COD,
-                Material.SALMON,
-                Material.COOKED_SALMON,
-                Material.TROPICAL_FISH,
-                Material.PUFFERFISH
-        );
-
         Material material = event.getItem().getType();
 
         if (exceptions.contains(material)) {
@@ -100,7 +81,7 @@ public class PlayerItemConsumeListener implements Listener {
 
         if (playerManager.getSpecies().name().equals("Elf")) {
 
-            if (meat.contains(material)) {
+            if (MaterialType.FOOD_MEAT.contains(material)) {
 
                 player.damage(5);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 20, 0, false, false, true));
@@ -112,7 +93,7 @@ public class PlayerItemConsumeListener implements Listener {
 
         } else if (playerManager.getSpecies().name().equals("Feline") || playerManager.getSpecies().name().equals("Wolf")) {
 
-            if (!meat.contains(material)) {
+            if (!MaterialType.FOOD_MEAT.contains(material)) {
 
                 player.damage(5);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * 20, 0, false, false, true));

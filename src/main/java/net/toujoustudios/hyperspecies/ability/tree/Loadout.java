@@ -18,28 +18,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AbilityTree {
+public class Loadout {
 
-    private static final HashMap<String, AbilityTree> trees = new HashMap<>();
+    private static final HashMap<String, Loadout> trees = new HashMap<>();
 
     private final HashMap<Integer, Ability> abilities;
     private List<Integer> links = new ArrayList<>();
 
-    public AbilityTree(HashMap<Integer, Ability> abilities) {
+    public Loadout(HashMap<Integer, Ability> abilities) {
         this.abilities = abilities;
         links.add(-1);
     }
 
-    public AbilityTree(HashMap<Integer, Ability> abilities, List<Integer> links) {
+    public Loadout(HashMap<Integer, Ability> abilities, List<Integer> links) {
         this.abilities = abilities;
         this.links = links;
     }
 
-    public static void createTree(String name, AbilityTree tree) {
+    public static void create(String name, Loadout tree) {
         trees.put(name, tree);
     }
 
-    public static AbilityTree getTree(String name) {
+    public static Loadout get(String name) {
         if (trees.containsKey(name)) return trees.get(name);
         return null;
     }
@@ -209,7 +209,7 @@ public class AbilityTree {
 
     }
 
-    public static HashMap<String, AbilityTree> getTrees() {
+    public static HashMap<String, Loadout> getTrees() {
         return trees;
     }
 
@@ -237,9 +237,9 @@ public class AbilityTree {
             int indexFlora = 0;
             int indexFairy = 0;
 
-            for (Map.Entry<String, AbilityTree> entry : trees.entrySet()) {
+            for (Map.Entry<String, Loadout> entry : trees.entrySet()) {
 
-                AbilityTree tree = trees.get(entry.getKey());
+                Loadout tree = trees.get(entry.getKey());
                 if ((tree.getBaseAbility().isAvailableForSpecies(playerManager.getSpecies()) && tree.getBaseAbility().isAvailableForSubSpecies(playerManager.getSubSpecies())) || player.getGameMode() == GameMode.CREATIVE) {
                     Element element = tree.getBaseAbility().getElement();
 
@@ -293,9 +293,9 @@ public class AbilityTree {
             int indexNormal = 0;
             int indexLight = 0;
 
-            for (Map.Entry<String, AbilityTree> entry : trees.entrySet()) {
+            for (Map.Entry<String, Loadout> entry : trees.entrySet()) {
 
-                AbilityTree tree = trees.get(entry.getKey());
+                Loadout tree = trees.get(entry.getKey());
                 if (tree.getBaseAbility().getSpecies().contains(playerManager.getSpecies().name()) || player.getGameMode() == GameMode.CREATIVE) {
 
                     Element element = tree.getBaseAbility().getElement();
@@ -342,9 +342,9 @@ public class AbilityTree {
 
             int indexDark = 0;
 
-            for (Map.Entry<String, AbilityTree> entry : trees.entrySet()) {
+            for (Map.Entry<String, Loadout> entry : trees.entrySet()) {
 
-                AbilityTree tree = trees.get(entry.getKey());
+                Loadout tree = trees.get(entry.getKey());
                 if (tree.getBaseAbility().getSpecies().contains(playerManager.getSpecies().name()) || player.getGameMode() == GameMode.CREATIVE) {
 
                     Element element = tree.getBaseAbility().getElement();

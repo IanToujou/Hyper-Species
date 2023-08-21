@@ -36,8 +36,7 @@ public class AbilityQuickGrowth extends Ability {
 
         Block block = player.getTargetBlock(null, 15);
 
-        if (block.getType() == Material.WHEAT || block.getType() == Material.CARROTS || block.getType() == Material.BEETROOTS || block.getType() == Material.MELON_STEM || block.getType() == Material.PUMPKIN_STEM || block.getType() == Material.TORCHFLOWER_CROP || block.getType() == Material.PITCHER_CROP) {
-            block.applyBoneMeal(BlockFace.UP);
+        if (block.applyBoneMeal(BlockFace.UP)) {
             player.playSound(player.getLocation(), Sound.BLOCK_COMPOSTER_FILL_SUCCESS, SoundCategory.MASTER, 100, 1f);
             return true;
         }

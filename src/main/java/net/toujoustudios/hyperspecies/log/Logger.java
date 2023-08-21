@@ -6,8 +6,6 @@ import org.bukkit.Bukkit;
 
 /**
  * A custom logging system for the plugin. Supports debug logging, and different log output levels.
- *
- * @since 1.0.0
  */
 public class Logger {
 
@@ -25,7 +23,7 @@ public class Logger {
      */
     public static void log(LogLevel level, String message) {
         if (level == LogLevel.DEBUG) if (!Config.DEBUG) return;
-        Bukkit.getConsoleSender().sendMessage(level.getColor() + "[" + HyperSpecies.PLUGIN_NAME + " - " + level + "] " + message);
+        Bukkit.getConsoleSender().sendMessage(level.color() + "[" + HyperSpecies.PLUGIN_NAME + " - " + level + "] " + message);
     }
 
 }

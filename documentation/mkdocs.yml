@@ -68,3 +68,11 @@ nav:
   - 'Getting Started':
     - 'Installation': 'getting-started/installation.md'
     - 'Configuration': 'getting-started/configuration.md'
+  - 'Main Features':
+      - 'Overview': 'features/overview.md'
+  - 'Side Features':
+      - 'Overview': 'side-features/overview.md'
+  - 'Support':
+      - 'Introduction': 'support/introduction.md'
+  - 'Contribute':
+      - 'Introduction': 'contribute/introduction.md'

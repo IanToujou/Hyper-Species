@@ -1,7 +1,7 @@
 package net.toujoustudios.hyperspecies.ui;
 
 import net.toujoustudios.hyperspecies.ability.active.Ability;
-import net.toujoustudios.hyperspecies.ability.tree.AbilityTree;
+import net.toujoustudios.hyperspecies.ability.tree.Loadout;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.Material;
@@ -35,7 +35,7 @@ public class AbilityTreeUI implements Listener {
                 String treeName = name.split(" ", 2)[1];
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
 
-                AbilityTree tree = AbilityTree.getTree(treeName);
+                Loadout tree = Loadout.get(treeName);
 
                 if (tree != null) {
                     player.openInventory(tree.buildInventory(player));
@@ -50,10 +50,10 @@ public class AbilityTreeUI implements Listener {
 
                 if (name.contains("Back")) {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                    player.openInventory(AbilityTree.buildMainInventory(player, page - 2));
+                    player.openInventory(Loadout.buildMainInventory(player, page - 2));
                 } else if (name.contains("Next")) {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                    player.openInventory(AbilityTree.buildMainInventory(player, page));
+                    player.openInventory(Loadout.buildMainInventory(player, page));
                 }
 
             } else if (material == Material.TNT) {
@@ -79,7 +79,7 @@ public class AbilityTreeUI implements Listener {
             if (material == Material.BARRIER) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                player.openInventory(AbilityTree.buildMainInventory(player, 0));
+                player.openInventory(Loadout.buildMainInventory(player, 0));
 
             } else if (material == Material.RED_WOOL) {
 
@@ -108,13 +108,13 @@ public class AbilityTreeUI implements Listener {
                 if (playerManager.getSkill() < ability.getCost()) {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 0f);
                     player.sendMessage(Config.MESSAGE_PREFIX + "§c You don't have enough skill points§8.");
-                    player.openInventory(AbilityTree.buildMainInventory(player, 0));
+                    player.openInventory(Loadout.buildMainInventory(player, 0));
                     return;
                 }
 
                 playerManager.unlockAbility(ability);
                 playerManager.setSkill(playerManager.getSkill() - ability.getCost());
-                player.openInventory(AbilityTree.buildMainInventory(player, 0));
+                player.openInventory(Loadout.buildMainInventory(player, 0));
 
             } else if (itemMeta.getDisplayName().startsWith("§") && material != Material.GRAY_WOOL) {
 
@@ -146,14 +146,14 @@ public class AbilityTreeUI implements Listener {
                     player.sendMessage(Config.MESSAGE_PREFIX + "§7 New weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight());
                 } else {
                     if (playerManager.getAbilityWeight() + ability.getWeight() > playerManager.getMaxAbilityWeight()) {
-                        player.openInventory(AbilityTree.buildMainInventory(player, 0));
+                        player.openInventory(Loadout.buildMainInventory(player, 0));
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 0f);
                         player.sendMessage(Config.MESSAGE_PREFIX + "§c You cannot carry a loadout this powerful§8.");
                         player.sendMessage(Config.MESSAGE_PREFIX + "§7 Current weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight());
                         return;
                     }
                     if (playerManager.getActiveAbilities().size() >= 8) {
-                        player.openInventory(AbilityTree.buildMainInventory(player, 0));
+                        player.openInventory(Loadout.buildMainInventory(player, 0));
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 0f);
                         player.sendMessage(Config.MESSAGE_PREFIX + "§c You cannot carry more than §b8§c abilities§8.");
                         return;
@@ -163,7 +163,7 @@ public class AbilityTreeUI implements Listener {
                     player.sendMessage(Config.MESSAGE_PREFIX + "§7 New weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight());
                 }
 
-                player.openInventory(AbilityTree.buildMainInventory(player, 0));
+                player.openInventory(Loadout.buildMainInventory(player, 0));
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, SoundCategory.MASTER, 100, 2f);
 
             }

@@ -174,6 +174,7 @@ public final class HyperSpecies extends JavaPlugin {
 
     @SuppressWarnings("all")
     public void registerCommands() {
+        getCommand("species").setExecutor(new SpeciesCommand());
         getCommand("team").setExecutor(new TeamCommand());
         getCommand("ability").setExecutor(new AbilityCommand());
         getCommand("reset").setExecutor(new ResetCommand());

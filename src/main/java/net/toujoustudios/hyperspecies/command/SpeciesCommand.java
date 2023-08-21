@@ -1,10 +1,10 @@
 package net.toujoustudios.hyperspecies.command;
 
-import net.toujoustudios.hyperspecies.ability.tree.Loadout;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
-import org.bukkit.Sound;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
+import net.toujoustudios.hyperspecies.ui.SpeciesUI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
 
-public class LoadoutCommand implements CommandExecutor {
+public class SpeciesCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@Nonnull CommandSender commandSender, @Nonnull Command command, @Nonnull String label, @Nonnull String[] args) {
@@ -22,7 +22,7 @@ public class LoadoutCommand implements CommandExecutor {
             return false;
         }
 
-        if (!player.hasPermission("hyperspecies.command.loadout")) {
+        if (!player.hasPermission("hyperspecies.command.species")) {
             player.sendMessage(Config.MESSAGE_ERROR_PERMISSION);
             return false;
         }
@@ -32,15 +32,20 @@ public class LoadoutCommand implements CommandExecutor {
             return false;
         }
 
-        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-        player.openInventory(Loadout.buildMainInventory(player, 0));
+        PlayerManager playerManager = PlayerManager.get(player);
+
+        if (playerManager.getSpecies() == null) {
+            SpeciesUI.openInventory(player);
+        } else {
+            player.sendMessage(Config.MESSAGE_PREFIX + "§c You already selected a species§8.");
+        }
 
         return false;
 
     }
 
     public String getUsage() {
-        return "/loadout";
+        return "/setspecies <species> [<player>]";
     }
 
 }

@@ -38,7 +38,7 @@ public class AbilityLuckyTooth extends Ability {
         );
 
         HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DURATION, List.of(20, 30, 40, 50, 60, 70, 80, 90, 100));
+        fields.put(AbilityField.DURATION, List.of(60, 70, 80, 90, 100, 110, 120, 130, 140));
         setFields(fields);
 
     }
