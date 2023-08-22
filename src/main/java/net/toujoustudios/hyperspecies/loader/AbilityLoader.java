@@ -11,10 +11,13 @@ import net.toujoustudios.hyperspecies.ability.active.electro.*;
 import net.toujoustudios.hyperspecies.ability.active.fairy.*;
 import net.toujoustudios.hyperspecies.ability.active.fire.*;
 import net.toujoustudios.hyperspecies.ability.active.flora.*;
+import net.toujoustudios.hyperspecies.ability.active.light.*;
 import net.toujoustudios.hyperspecies.ability.active.psychic.AbilityPsychicWard;
 import net.toujoustudios.hyperspecies.ability.active.psychic.AbilityTimothy;
 import net.toujoustudios.hyperspecies.ability.active.water.*;
-import net.toujoustudios.hyperspecies.ability.tree.Loadout;
+import net.toujoustudios.hyperspecies.ability.tree.AbilityTree;
+import net.toujoustudios.hyperspecies.log.LogLevel;
+import net.toujoustudios.hyperspecies.log.Logger;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,244 +27,261 @@ public class AbilityLoader {
     public static void initialize() {
 
         // Hellblight
-        Ability.createAbility(new AbilityHellblight());
-        Ability.createAbility(new AbilityFlamingBlight());
-        Ability.createAbility(new AbilityEndblight());
-        Ability.createAbility(new AbilityEngulfingDarkness());
+        Ability.create(new AbilityHellblight());
+        Ability.create(new AbilityFlamingBlight());
+        Ability.create(new AbilityEndblight());
+        Ability.create(new AbilityEngulfingDarkness());
 
         HashMap<Integer, Ability> hellblightAbilities = new HashMap<>();
-        hellblightAbilities.put(0, Ability.getAbility("Hellblight"));
-        hellblightAbilities.put(1, Ability.getAbility("Flaming Blight"));
-        Loadout.create("Hellblight", new Loadout(hellblightAbilities));
+        hellblightAbilities.put(0, Ability.get("Hellblight"));
+        hellblightAbilities.put(1, Ability.get("Flaming Blight"));
+        AbilityTree.create("Hellblight", new AbilityTree(hellblightAbilities));
 
         HashMap<Integer, Ability> endblightAbilities = new HashMap<>();
-        endblightAbilities.put(0, Ability.getAbility("Endblight"));
-        endblightAbilities.put(1, Ability.getAbility("Engulfing Darkness"));
-        Loadout.create("Endblight", new Loadout(endblightAbilities));
+        endblightAbilities.put(0, Ability.get("Endblight"));
+        endblightAbilities.put(1, Ability.get("Engulfing Darkness"));
+        AbilityTree.create("Endblight", new AbilityTree(endblightAbilities));
 
         // Flame Shot
-        Ability.createAbility(new AbilityFlameShot());
-        Ability.createAbility(new AbilityFireball());
-        Ability.createAbility(new AbilityMeteorStrike());
-        Ability.createAbility(new AbilityRayOfDoom());
-        Ability.createAbility(new AbilityTotalAnnihilation());
-        Ability.createAbility(new AbilityStrikeOfCorruption());
-        Ability.createAbility(new AbilityBurningRain());
-        Ability.createAbility(new AbilityStrikingTrail());
+        Ability.create(new AbilityFlameShot());
+        Ability.create(new AbilityFireball());
+        Ability.create(new AbilityMeteorStrike());
+        Ability.create(new AbilityRayOfDoom());
+        Ability.create(new AbilityTotalAnnihilation());
+        Ability.create(new AbilityStrikeOfCorruption());
+        Ability.create(new AbilityBurningRain());
+        Ability.create(new AbilityStrikingTrail());
         // TODO: Dark Matter
         // TODO: Black Hole
         // TODO: Collapsing Universe
 
         HashMap<Integer, Ability> flameShotAbilities = new HashMap<>();
-        flameShotAbilities.put(0, Ability.getAbility("Flame Shot"));
-        flameShotAbilities.put(1, Ability.getAbility("Fireball"));
-        flameShotAbilities.put(2, Ability.getAbility("Meteor Strike"));
-        flameShotAbilities.put(3, Ability.getAbility("Ray Of Doom"));
-        flameShotAbilities.put(10, Ability.getAbility("Burning Rain"));
-        flameShotAbilities.put(11, Ability.getAbility("Striking Trail"));
-        Loadout.create("Flame Shot", new Loadout(flameShotAbilities, List.of(0, 1)));
+        flameShotAbilities.put(0, Ability.get("Flame Shot"));
+        flameShotAbilities.put(1, Ability.get("Fireball"));
+        flameShotAbilities.put(2, Ability.get("Meteor Strike"));
+        flameShotAbilities.put(3, Ability.get("Ray Of Doom"));
+        flameShotAbilities.put(10, Ability.get("Burning Rain"));
+        flameShotAbilities.put(11, Ability.get("Striking Trail"));
+        AbilityTree.create("Flame Shot", new AbilityTree(flameShotAbilities, List.of(0, 1)));
 
         HashMap<Integer, Ability> totalAnnihilationAbilities = new HashMap<>();
-        totalAnnihilationAbilities.put(0, Ability.getAbility("Total Annihilation"));
-        totalAnnihilationAbilities.put(1, Ability.getAbility("Strike Of Corruption"));
-        Loadout.create("Total Annihilation", new Loadout(totalAnnihilationAbilities));
+        totalAnnihilationAbilities.put(0, Ability.get("Total Annihilation"));
+        totalAnnihilationAbilities.put(1, Ability.get("Strike Of Corruption"));
+        AbilityTree.create("Total Annihilation", new AbilityTree(totalAnnihilationAbilities));
 
         // Enhancing Flame
-        Ability.createAbility(new AbilityEnhancingFlame());
-        Ability.createAbility(new AbilityDemonicRage());
-        Ability.createAbility(new AbilityRagingBurst());
-        Ability.createAbility(new AbilityMagmaticDetonation());
-        Ability.createAbility(new AbilityHellblaze());
-        Ability.createAbility(new AbilityEndblaze());
+        Ability.create(new AbilityEnhancingFlame());
+        Ability.create(new AbilityDemonicRage());
+        Ability.create(new AbilityRagingBurst());
+        Ability.create(new AbilityMagmaticDetonation());
+        Ability.create(new AbilityHellblaze());
+        Ability.create(new AbilityEndblaze());
 
         HashMap<Integer, Ability> enhancingFlameAbilities = new HashMap<>();
-        enhancingFlameAbilities.put(0, Ability.getAbility("Enhancing Flame"));
-        enhancingFlameAbilities.put(1, Ability.getAbility("Demonic Rage"));
-        enhancingFlameAbilities.put(2, Ability.getAbility("Raging Burst"));
-        enhancingFlameAbilities.put(3, Ability.getAbility("Magmatic Detonation"));
-        enhancingFlameAbilities.put(10, Ability.getAbility("Hellblaze"));
-        enhancingFlameAbilities.put(11, Ability.getAbility("Endblaze"));
-        Loadout.create("Enhancing Flame", new Loadout(enhancingFlameAbilities, List.of(0)));
+        enhancingFlameAbilities.put(0, Ability.get("Enhancing Flame"));
+        enhancingFlameAbilities.put(1, Ability.get("Demonic Rage"));
+        enhancingFlameAbilities.put(2, Ability.get("Raging Burst"));
+        enhancingFlameAbilities.put(3, Ability.get("Magmatic Detonation"));
+        enhancingFlameAbilities.put(10, Ability.get("Hellblaze"));
+        enhancingFlameAbilities.put(11, Ability.get("Endblaze"));
+        AbilityTree.create("Enhancing Flame", new AbilityTree(enhancingFlameAbilities, List.of(0)));
 
         // Light Diffraction
-        Ability.createAbility(new AbilityLightDiffraction());
-        Ability.createAbility(new AbilityManaPool());
-        Ability.createAbility(new AbilityProtectTheHomeland());
-        Ability.createAbility(new AbilityTimeDilation());
-        Ability.createAbility(new AbilityStarwhisper());
-        Ability.createAbility(new AbilityCelestialShot());
+        Ability.create(new AbilityLightDiffraction());
+        Ability.create(new AbilityManaPool());
+        Ability.create(new AbilityProtectTheHomeland());
+        Ability.create(new AbilityTimeDilation());
+        Ability.create(new AbilityStarwhisper());
+        Ability.create(new AbilityCelestialShot());
 
         HashMap<Integer, Ability> lightDiffractionAbilities = new HashMap<>();
-        lightDiffractionAbilities.put(0, Ability.getAbility("Light Diffraction"));
-        lightDiffractionAbilities.put(1, Ability.getAbility("Mana Pool"));
-        lightDiffractionAbilities.put(2, Ability.getAbility("Protect The Homeland"));
-        lightDiffractionAbilities.put(3, Ability.getAbility("Time Dilation"));
-        lightDiffractionAbilities.put(10, Ability.getAbility("Starwhisper"));
-        lightDiffractionAbilities.put(11, Ability.getAbility("Celestial Shot"));
-        Loadout.create("Light Diffraction", new Loadout(lightDiffractionAbilities, List.of(0, 1)));
+        lightDiffractionAbilities.put(0, Ability.get("Light Diffraction"));
+        lightDiffractionAbilities.put(1, Ability.get("Mana Pool"));
+        lightDiffractionAbilities.put(2, Ability.get("Protect The Homeland"));
+        lightDiffractionAbilities.put(3, Ability.get("Time Dilation"));
+        lightDiffractionAbilities.put(10, Ability.get("Starwhisper"));
+        lightDiffractionAbilities.put(11, Ability.get("Celestial Shot"));
+        AbilityTree.create("Light Diffraction", new AbilityTree(lightDiffractionAbilities, List.of(0, 1)));
+
+        // Levitation
+        Ability.create(new AbilityLevitation());
+        Ability.create(new AbilityFly());
+        Ability.create(new AbilityBlindingLight());
+        Ability.create(new AbilityZaWarudo());
+        Ability.create(new AbilityCleanse());
+
+        HashMap<Integer, Ability> levitationAbilities = new HashMap<>();
+        levitationAbilities.put(0, Ability.get("Levitation"));
+        levitationAbilities.put(1, Ability.get("Fly"));
+        levitationAbilities.put(2, Ability.get("Blinding Light"));
+        levitationAbilities.put(3, Ability.get("Za Warudo"));
+        levitationAbilities.put(10, Ability.get("Cleanse"));
+        AbilityTree.create("Levitation", new AbilityTree(levitationAbilities, List.of(0)));
 
         // Healing Nature
-        Ability.createAbility(new AbilityHealingNature());
-        Ability.createAbility(new AbilityWoodlandsBlessing());
+        Ability.create(new AbilityHealingNature());
+        Ability.create(new AbilityWoodlandsBlessing());
 
         HashMap<Integer, Ability> healingNatureAbilities = new HashMap<>();
-        healingNatureAbilities.put(0, Ability.getAbility("Healing Nature"));
-        healingNatureAbilities.put(1, Ability.getAbility("Woodlands Blessing"));
-        Loadout.create("Healing Nature", new Loadout(healingNatureAbilities));
+        healingNatureAbilities.put(0, Ability.get("Healing Nature"));
+        healingNatureAbilities.put(1, Ability.get("Woodlands Blessing"));
+        AbilityTree.create("Healing Nature", new AbilityTree(healingNatureAbilities));
 
         // Thorn Seedling
-        Ability.createAbility(new AbilityThornSeedling());
-        Ability.createAbility(new AbilityRagingFlora());
-        Ability.createAbility(new AbilityStunSpore());
+        Ability.create(new AbilityThornSeedling());
+        Ability.create(new AbilityRagingFlora());
+        Ability.create(new AbilityStunSpore());
 
         HashMap<Integer, Ability> thornSeedlingAbilities = new HashMap<>();
-        thornSeedlingAbilities.put(0, Ability.getAbility("Thorn Seedling"));
-        thornSeedlingAbilities.put(1, Ability.getAbility("Raging Flora"));
-        thornSeedlingAbilities.put(2, Ability.getAbility("Stun Spore"));
-        Loadout.create("Thorn Seedling", new Loadout(thornSeedlingAbilities));
+        thornSeedlingAbilities.put(0, Ability.get("Thorn Seedling"));
+        thornSeedlingAbilities.put(1, Ability.get("Raging Flora"));
+        thornSeedlingAbilities.put(2, Ability.get("Stun Spore"));
+        AbilityTree.create("Thorn Seedling", new AbilityTree(thornSeedlingAbilities));
 
         // Psychic Ward
-        Ability.createAbility(new AbilityPsychicWard());
-        Ability.createAbility(new AbilityTimothy());
+        Ability.create(new AbilityPsychicWard());
+        Ability.create(new AbilityTimothy());
 
         HashMap<Integer, Ability> psychicWardAbilities = new HashMap<>();
-        psychicWardAbilities.put(0, Ability.getAbility("Psychic Ward"));
-        psychicWardAbilities.put(1, Ability.getAbility("Timothy"));
-        Loadout.create("Psychic Ward", new Loadout(psychicWardAbilities));
+        psychicWardAbilities.put(0, Ability.get("Psychic Ward"));
+        psychicWardAbilities.put(1, Ability.get("Timothy"));
+        AbilityTree.create("Psychic Ward", new AbilityTree(psychicWardAbilities));
 
         // Quick Growth
-        Ability.createAbility(new AbilityQuickGrowth());
-        Ability.createAbility(new AbilityFertilizingRain());
+        Ability.create(new AbilityQuickGrowth());
+        Ability.create(new AbilityFertilizingRain());
 
         HashMap<Integer, Ability> quickGrowthAbilities = new HashMap<>();
-        quickGrowthAbilities.put(0, Ability.getAbility("Quick Growth"));
-        quickGrowthAbilities.put(1, Ability.getAbility("Fertilizing Rain"));
-        Loadout.create("Quick Growth", new Loadout(quickGrowthAbilities));
+        quickGrowthAbilities.put(0, Ability.get("Quick Growth"));
+        quickGrowthAbilities.put(1, Ability.get("Fertilizing Rain"));
+        AbilityTree.create("Quick Growth", new AbilityTree(quickGrowthAbilities));
 
         // Flash
-        Ability.createAbility(new AbilityFlash());
-        Ability.createAbility(new AbilityLightspeed());
+        Ability.create(new AbilityFlash());
+        Ability.create(new AbilityLightspeed());
 
         HashMap<Integer, Ability> flashAbilities = new HashMap<>();
-        flashAbilities.put(0, Ability.getAbility("Flash"));
-        flashAbilities.put(1, Ability.getAbility("Lightspeed"));
-        Loadout.create("Flash", new Loadout(flashAbilities));
+        flashAbilities.put(0, Ability.get("Flash"));
+        flashAbilities.put(1, Ability.get("Lightspeed"));
+        AbilityTree.create("Flash", new AbilityTree(flashAbilities));
 
         // Supersonic Speed
-        Ability.createAbility(new AbilitySupersonicSpeed());
-        Ability.createAbility(new AbilityICBM());
+        Ability.create(new AbilitySupersonicSpeed());
+        Ability.create(new AbilityICBM());
 
         HashMap<Integer, Ability> supersonicSpeedAbilities = new HashMap<>();
-        supersonicSpeedAbilities.put(0, Ability.getAbility("Supersonic Speed"));
-        supersonicSpeedAbilities.put(1, Ability.getAbility("ICBM"));
-        Loadout.create("Supersonic Speed", new Loadout(supersonicSpeedAbilities));
+        supersonicSpeedAbilities.put(0, Ability.get("Supersonic Speed"));
+        supersonicSpeedAbilities.put(1, Ability.get("ICBM"));
+        AbilityTree.create("Supersonic Speed", new AbilityTree(supersonicSpeedAbilities));
 
         // Sharp Stone
-        Ability.createAbility(new AbilitySharpStone());
-        Ability.createAbility(new AbilityRoarOfTheStone());
-        Ability.createAbility(new AbilitySpikingEarth());
-        Ability.createAbility(new AbilityEarthboundThorns());
+        Ability.create(new AbilitySharpStone());
+        Ability.create(new AbilityRoarOfTheStone());
+        Ability.create(new AbilitySpikingEarth());
+        Ability.create(new AbilityEarthboundThorns());
 
         HashMap<Integer, Ability> sharpStoneAbilities = new HashMap<>();
-        sharpStoneAbilities.put(0, Ability.getAbility("Sharp Stone"));
-        sharpStoneAbilities.put(1, Ability.getAbility("Roar Of The Stone"));
-        sharpStoneAbilities.put(2, Ability.getAbility("Spiking Earth"));
-        sharpStoneAbilities.put(3, Ability.getAbility("Earthbound Thorns"));
-        Loadout.create("Sharp Stone", new Loadout(sharpStoneAbilities));
+        sharpStoneAbilities.put(0, Ability.get("Sharp Stone"));
+        sharpStoneAbilities.put(1, Ability.get("Roar Of The Stone"));
+        sharpStoneAbilities.put(2, Ability.get("Spiking Earth"));
+        sharpStoneAbilities.put(3, Ability.get("Earthbound Thorns"));
+        AbilityTree.create("Sharp Stone", new AbilityTree(sharpStoneAbilities));
 
         // Mine Sight
-        Ability.createAbility(new AbilityMineSight());
-        Ability.createAbility(new AbilityWayOfTheDwarf());
-        Ability.createAbility(new AbilityLuckyTooth());
-        Ability.createAbility(new AbilityRevengeOfTheGround());
+        Ability.create(new AbilityMineSight());
+        Ability.create(new AbilityWayOfTheDwarf());
+        Ability.create(new AbilityLuckyTooth());
+        Ability.create(new AbilityRevengeOfTheGround());
 
         HashMap<Integer, Ability> mineSightAbilities = new HashMap<>();
-        mineSightAbilities.put(0, Ability.getAbility("Mine Sight"));
-        mineSightAbilities.put(1, Ability.getAbility("Way Of The Dwarf"));
-        mineSightAbilities.put(2, Ability.getAbility("Lucky Tooth"));
-        mineSightAbilities.put(10, Ability.getAbility("Revenge Of The Ground"));
-        Loadout.create("Mine Sight", new Loadout(mineSightAbilities, List.of(0)));
+        mineSightAbilities.put(0, Ability.get("Mine Sight"));
+        mineSightAbilities.put(1, Ability.get("Way Of The Dwarf"));
+        mineSightAbilities.put(2, Ability.get("Lucky Tooth"));
+        mineSightAbilities.put(10, Ability.get("Revenge Of The Ground"));
+        AbilityTree.create("Mine Sight", new AbilityTree(mineSightAbilities, List.of(0)));
 
         // Stone Born
-        Ability.createAbility(new AbilityStoneBorn());
-        Ability.createAbility(new AbilityBornIntoStone());
+        Ability.create(new AbilityStoneBorn());
+        Ability.create(new AbilityBornIntoStone());
 
         HashMap<Integer, Ability> stoneBornAbilities = new HashMap<>();
-        stoneBornAbilities.put(0, Ability.getAbility("Stone Born"));
-        stoneBornAbilities.put(1, Ability.getAbility("Born Into Stone"));
-        Loadout.create("Stone Born", new Loadout(stoneBornAbilities));
+        stoneBornAbilities.put(0, Ability.get("Stone Born"));
+        stoneBornAbilities.put(1, Ability.get("Born Into Stone"));
+        AbilityTree.create("Stone Born", new AbilityTree(stoneBornAbilities));
 
         // Dash
-        Ability.createAbility(new AbilityDash());
-        Ability.createAbility(new AbilitySilentDash());
+        Ability.create(new AbilityDash());
+        Ability.create(new AbilitySilentDash());
 
         HashMap<Integer, Ability> dashAbilities = new HashMap<>();
-        dashAbilities.put(0, Ability.getAbility("Dash"));
-        dashAbilities.put(1, Ability.getAbility("Silent Dash"));
-        Loadout.create("Dash", new Loadout(dashAbilities));
+        dashAbilities.put(0, Ability.get("Dash"));
+        dashAbilities.put(1, Ability.get("Silent Dash"));
+        AbilityTree.create("Dash", new AbilityTree(dashAbilities));
 
         // Aquatic Surge
-        Ability.createAbility(new AbilityAquaticSurge());
-        Ability.createAbility(new AbilityTidalWave());
-        Ability.createAbility(new AbilityTyphoon());
-        Ability.createAbility(new AbilityHydroblast());
+        Ability.create(new AbilityAquaticSurge());
+        Ability.create(new AbilityTidalWave());
+        Ability.create(new AbilityTyphoon());
+        Ability.create(new AbilityHydroblast());
 
         HashMap<Integer, Ability> aquaticSurgeAbilities = new HashMap<>();
-        aquaticSurgeAbilities.put(0, Ability.getAbility("Aquatic Surge"));
-        aquaticSurgeAbilities.put(1, Ability.getAbility("Tidal Wave"));
-        aquaticSurgeAbilities.put(2, Ability.getAbility("Typhoon"));
-        aquaticSurgeAbilities.put(10, Ability.getAbility("Hydroblast"));
-        Loadout.create("Aquatic Surge", new Loadout(aquaticSurgeAbilities, List.of(0)));
+        aquaticSurgeAbilities.put(0, Ability.get("Aquatic Surge"));
+        aquaticSurgeAbilities.put(1, Ability.get("Tidal Wave"));
+        aquaticSurgeAbilities.put(2, Ability.get("Typhoon"));
+        aquaticSurgeAbilities.put(10, Ability.get("Hydroblast"));
+        AbilityTree.create("Aquatic Surge", new AbilityTree(aquaticSurgeAbilities, List.of(0)));
 
         // Healing Waters
-        Ability.createAbility(new AbilityHealingWaters());
-        Ability.createAbility(new AbilityHydrokinesis());
-        Ability.createAbility(new AbilityAquaShield());
-        Ability.createAbility(new AbilityWaterDome());
-        Ability.createAbility(new AbilityMistyVeil());
-        Ability.createAbility(new AbilityWhirlpoolWhispers());
-        Ability.createAbility(new AbilityDrowningGrasp());
+        Ability.create(new AbilityHealingWaters());
+        Ability.create(new AbilityHydrokinesis());
+        Ability.create(new AbilityAquaShield());
+        Ability.create(new AbilityWaterDome());
+        Ability.create(new AbilityMistyVeil());
+        Ability.create(new AbilityWhirlpoolWhispers());
+        Ability.create(new AbilityDrowningGrasp());
 
         HashMap<Integer, Ability> healingWatersAbilities = new HashMap<>();
-        healingWatersAbilities.put(0, Ability.getAbility("Healing Waters"));
-        healingWatersAbilities.put(1, Ability.getAbility("Hydrokinesis"));
-        healingWatersAbilities.put(2, Ability.getAbility("Aqua Shield"));
-        healingWatersAbilities.put(3, Ability.getAbility("Water Dome"));
-        healingWatersAbilities.put(10, Ability.getAbility("Misty Veil"));
-        healingWatersAbilities.put(11, Ability.getAbility("Whirlpool Whispers"));
-        healingWatersAbilities.put(12, Ability.getAbility("Drowning Grasp"));
-        Loadout.create("Healing Waters", new Loadout(healingWatersAbilities, List.of(0)));
+        healingWatersAbilities.put(0, Ability.get("Healing Waters"));
+        healingWatersAbilities.put(1, Ability.get("Hydrokinesis"));
+        healingWatersAbilities.put(2, Ability.get("Aqua Shield"));
+        healingWatersAbilities.put(3, Ability.get("Water Dome"));
+        healingWatersAbilities.put(10, Ability.get("Misty Veil"));
+        healingWatersAbilities.put(11, Ability.get("Whirlpool Whispers"));
+        healingWatersAbilities.put(12, Ability.get("Drowning Grasp"));
+        AbilityTree.create("Healing Waters", new AbilityTree(healingWatersAbilities, List.of(0)));
 
         // Torrential Rain
-        Ability.createAbility(new AbilityTorrentialRain());
-        Ability.createAbility(new AbilityHailstormBarrage());
-        Ability.createAbility(new AbilityFrostbite());
+        Ability.create(new AbilityTorrentialRain());
+        Ability.create(new AbilityHailstormBarrage());
+        Ability.create(new AbilityFrostbite());
 
         HashMap<Integer, Ability> torrentialRainAbilities = new HashMap<>();
-        torrentialRainAbilities.put(0, Ability.getAbility("Torrential Rain"));
-        torrentialRainAbilities.put(1, Ability.getAbility("Hailstorm Barrage"));
-        torrentialRainAbilities.put(10, Ability.getAbility("Frostbite"));
-        Loadout.create("Torrential Rain", new Loadout(torrentialRainAbilities, List.of(0)));
+        torrentialRainAbilities.put(0, Ability.get("Torrential Rain"));
+        torrentialRainAbilities.put(1, Ability.get("Hailstorm Barrage"));
+        torrentialRainAbilities.put(10, Ability.get("Frostbite"));
+        AbilityTree.create("Torrential Rain", new AbilityTree(torrentialRainAbilities, List.of(0)));
 
         // Raigeki
-        Ability.createAbility(new AbilityRaigeki());
-        Ability.createAbility(new AbilityLightningStorm());
+        Ability.create(new AbilityRaigeki());
+        Ability.create(new AbilityLightningStorm());
 
         HashMap<Integer, Ability> raigekiAbilities = new HashMap<>();
-        raigekiAbilities.put(0, Ability.getAbility("Raigeki"));
-        raigekiAbilities.put(1, Ability.getAbility("Lightning Storm"));
-        Loadout.create("Raigeki", new Loadout(raigekiAbilities));
+        raigekiAbilities.put(0, Ability.get("Raigeki"));
+        raigekiAbilities.put(1, Ability.get("Lightning Storm"));
+        AbilityTree.create("Raigeki", new AbilityTree(raigekiAbilities));
 
         // Whirlwind
-        Ability.createAbility(new AbilityWhirlwind());
-        Ability.createAbility(new AbilityWindShock());
-        Ability.createAbility(new AbilitySlashingWind());
+        Ability.create(new AbilityWhirlwind());
+        Ability.create(new AbilityWindShock());
+        Ability.create(new AbilitySlashingWind());
 
         HashMap<Integer, Ability> whirlwindAbilities = new HashMap<>();
-        whirlwindAbilities.put(0, Ability.getAbility("Whirlwind"));
-        whirlwindAbilities.put(1, Ability.getAbility("Wind Shock"));
-        whirlwindAbilities.put(10, Ability.getAbility("Slashing Wind"));
-        Loadout.create("Whirlwind", new Loadout(whirlwindAbilities, List.of(0)));
+        whirlwindAbilities.put(0, Ability.get("Whirlwind"));
+        whirlwindAbilities.put(1, Ability.get("Wind Shock"));
+        whirlwindAbilities.put(10, Ability.get("Slashing Wind"));
+        AbilityTree.create("Whirlwind", new AbilityTree(whirlwindAbilities, List.of(0)));
+
+        Logger.log(LogLevel.DEBUG, "Registered a total of " + Ability.get().size() + " abilities.");
 
     }
 

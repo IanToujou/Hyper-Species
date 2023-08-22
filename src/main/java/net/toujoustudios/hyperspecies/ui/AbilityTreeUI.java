@@ -1,7 +1,7 @@
 package net.toujoustudios.hyperspecies.ui;
 
 import net.toujoustudios.hyperspecies.ability.active.Ability;
-import net.toujoustudios.hyperspecies.ability.tree.Loadout;
+import net.toujoustudios.hyperspecies.ability.tree.AbilityTree;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.Material;
@@ -35,7 +35,7 @@ public class AbilityTreeUI implements Listener {
                 String treeName = name.split(" ", 2)[1];
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
 
-                Loadout tree = Loadout.get(treeName);
+                AbilityTree tree = AbilityTree.get(treeName);
 
                 if (tree != null) {
                     player.openInventory(tree.buildInventory(player));
@@ -50,10 +50,10 @@ public class AbilityTreeUI implements Listener {
 
                 if (name.contains("Back")) {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                    player.openInventory(Loadout.buildMainInventory(player, page - 2));
+                    player.openInventory(AbilityTree.buildMainInventory(player, page - 2));
                 } else if (name.contains("Next")) {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                    player.openInventory(Loadout.buildMainInventory(player, page));
+                    player.openInventory(AbilityTree.buildMainInventory(player, page));
                 }
 
             } else if (material == Material.TNT) {
@@ -79,7 +79,7 @@ public class AbilityTreeUI implements Listener {
             if (material == Material.BARRIER) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                player.openInventory(Loadout.buildMainInventory(player, 0));
+                player.openInventory(AbilityTree.buildMainInventory(player, 0));
 
             } else if (material == Material.RED_WOOL) {
 
@@ -91,7 +91,7 @@ public class AbilityTreeUI implements Listener {
                 }
                 abilityName = nameBuilder.substring(1);
 
-                if (Ability.getAbility(abilityName) == null) {
+                if (Ability.get(abilityName) == null) {
                     abilityName = itemMeta.getDisplayName().split(" ", 3)[2];
                     abilityNameArray = abilityName.split(" ");
                     nameBuilder = new StringBuilder();
@@ -101,20 +101,20 @@ public class AbilityTreeUI implements Listener {
                     abilityName = nameBuilder.substring(1);
                 }
 
-                Ability ability = Ability.getAbility(abilityName);
+                Ability ability = Ability.get(abilityName);
                 if (ability == null) return;
                 PlayerManager playerManager = PlayerManager.get(player);
 
-                if (playerManager.getSkill() < ability.getCost()) {
+                if (playerManager.getSkill() < ability.cost()) {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 0f);
                     player.sendMessage(Config.MESSAGE_PREFIX + "§c You don't have enough skill points§8.");
-                    player.openInventory(Loadout.buildMainInventory(player, 0));
+                    player.openInventory(AbilityTree.buildMainInventory(player, 0));
                     return;
                 }
 
                 playerManager.unlockAbility(ability);
-                playerManager.setSkill(playerManager.getSkill() - ability.getCost());
-                player.openInventory(Loadout.buildMainInventory(player, 0));
+                playerManager.setSkill(playerManager.getSkill() - ability.cost());
+                player.openInventory(AbilityTree.buildMainInventory(player, 0));
 
             } else if (itemMeta.getDisplayName().startsWith("§") && material != Material.GRAY_WOOL) {
 
@@ -126,7 +126,7 @@ public class AbilityTreeUI implements Listener {
                 }
                 abilityName = nameBuilder.substring(1);
 
-                if (Ability.getAbility(abilityName) == null) {
+                if (Ability.get(abilityName) == null) {
                     abilityName = itemMeta.getDisplayName().split(" ", 3)[2];
                     abilityNameArray = abilityName.split(" ");
                     nameBuilder = new StringBuilder();
@@ -136,34 +136,34 @@ public class AbilityTreeUI implements Listener {
                     abilityName = nameBuilder.substring(1);
                 }
 
-                Ability ability = Ability.getAbility(abilityName);
+                Ability ability = Ability.get(abilityName);
                 if (ability == null) return;
                 PlayerManager playerManager = PlayerManager.get(player);
 
                 if (playerManager.getActiveAbilities().contains(ability)) {
                     playerManager.removeActiveAbility(ability);
-                    player.sendMessage(Config.MESSAGE_PREFIX + "§7 You removed §b" + ability.getName() + "§7 from your loadout§8.");
+                    player.sendMessage(Config.MESSAGE_PREFIX + "§7 You removed §b" + ability.name() + "§7 from your loadout§8.");
                     player.sendMessage(Config.MESSAGE_PREFIX + "§7 New weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight());
                 } else {
-                    if (playerManager.getAbilityWeight() + ability.getWeight() > playerManager.getMaxAbilityWeight()) {
-                        player.openInventory(Loadout.buildMainInventory(player, 0));
+                    if (playerManager.getAbilityWeight() + ability.weight() > playerManager.getMaxAbilityWeight()) {
+                        player.openInventory(AbilityTree.buildMainInventory(player, 0));
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 0f);
                         player.sendMessage(Config.MESSAGE_PREFIX + "§c You cannot carry a loadout this powerful§8.");
                         player.sendMessage(Config.MESSAGE_PREFIX + "§7 Current weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight());
                         return;
                     }
                     if (playerManager.getActiveAbilities().size() >= 8) {
-                        player.openInventory(Loadout.buildMainInventory(player, 0));
+                        player.openInventory(AbilityTree.buildMainInventory(player, 0));
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, SoundCategory.MASTER, 100, 0f);
                         player.sendMessage(Config.MESSAGE_PREFIX + "§c You cannot carry more than §b8§c abilities§8.");
                         return;
                     }
                     playerManager.addActiveAbility(ability);
-                    player.sendMessage(Config.MESSAGE_PREFIX + "§7 You added §b" + ability.getName() + "§7 to your loadout§8.");
+                    player.sendMessage(Config.MESSAGE_PREFIX + "§7 You added §b" + ability.name() + "§7 to your loadout§8.");
                     player.sendMessage(Config.MESSAGE_PREFIX + "§7 New weight§8: §5" + playerManager.getAbilityWeight() + " §8/§5 " + playerManager.getMaxAbilityWeight());
                 }
 
-                player.openInventory(Loadout.buildMainInventory(player, 0));
+                player.openInventory(AbilityTree.buildMainInventory(player, 0));
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, SoundCategory.MASTER, 100, 2f);
 
             }

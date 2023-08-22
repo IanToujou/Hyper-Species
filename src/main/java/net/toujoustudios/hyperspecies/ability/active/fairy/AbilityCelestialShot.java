@@ -55,6 +55,7 @@ public class AbilityCelestialShot extends Ability {
             arrow.setDamage(0);
             arrow.setCustomName("Celestial Shot of " + player.getName());
             arrow.setVisualFire(false);
+            arrow.setBounce(false);
 
             BukkitTask task = new BukkitRunnable() {
 

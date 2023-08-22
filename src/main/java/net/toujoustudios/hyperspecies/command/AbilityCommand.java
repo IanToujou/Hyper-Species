@@ -37,9 +37,9 @@ public class AbilityCommand implements CommandExecutor {
             if (i != (args.length - 1)) nameBuilder.append(" ");
         }
 
-        Ability ability = Ability.getAbility(nameBuilder.toString());
+        Ability ability = Ability.get(nameBuilder.toString());
 
-        if (args[0].equalsIgnoreCase("ICBM")) ability = Ability.getAbility("ICBM");
+        if (args[0].equalsIgnoreCase("ICBM")) ability = Ability.get("ICBM");
 
         if (ability == null) {
             player.sendMessage(Config.MESSAGE_ERROR_ABILITY_INVALID);
@@ -47,7 +47,7 @@ public class AbilityCommand implements CommandExecutor {
         }
 
         ability.execute(player);
-        player.sendMessage(Config.MESSAGE_PREFIX + " §7You used the ability §e" + ability.getName() + "§8.");
+        player.sendMessage(Config.MESSAGE_PREFIX + " §7You used the ability §e" + ability.name() + "§8.");
 
         return false;
 

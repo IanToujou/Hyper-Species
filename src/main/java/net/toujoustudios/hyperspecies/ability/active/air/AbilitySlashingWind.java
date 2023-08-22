@@ -32,9 +32,7 @@ public class AbilitySlashingWind extends Ability {
                 4
         );
 
-        HashMap<AbilityField, List<Integer>> fields = new HashMap<>();
-        fields.put(AbilityField.DAMAGE, List.of(5, 6, 7, 8, 9, 10, 12, 14, 15));
-        setFields(fields);
+        addField(AbilityField.DAMAGE, List.of(5,6,7,8,9,10,12,14,15));
 
     }
 

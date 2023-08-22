@@ -38,7 +38,7 @@ public class UnlockCommand implements CommandExecutor {
             if (i != (args.length - 1)) nameBuilder.append(" ");
         }
 
-        Ability ability = Ability.getAbility(nameBuilder.toString());
+        Ability ability = Ability.get(nameBuilder.toString());
 
         if (ability == null) {
             player.sendMessage(Config.MESSAGE_ERROR_ABILITY_INVALID);
@@ -48,7 +48,7 @@ public class UnlockCommand implements CommandExecutor {
         PlayerManager playerManager = PlayerManager.get(player);
 
         playerManager.addAbility(ability);
-        player.sendMessage(Config.MESSAGE_PREFIX + " §7You unlocked the ability §e" + ability.getName() + "§8.");
+        player.sendMessage(Config.MESSAGE_PREFIX + " §7You unlocked the ability §e" + ability.name() + "§8.");
 
         return false;
 

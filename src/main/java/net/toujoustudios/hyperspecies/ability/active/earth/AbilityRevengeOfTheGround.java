@@ -4,6 +4,7 @@ import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.element.Element;
+import net.toujoustudios.hyperspecies.item.MaterialType;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.*;
@@ -51,14 +52,6 @@ public class AbilityRevengeOfTheGround extends Ability {
         int damage = getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(this));
         Block center = player.getLocation().add(0, -1, 0).getBlock();
 
-        List<Material> materials = List.of(
-                Material.STONE,
-                Material.COBBLESTONE,
-                Material.DEEPSLATE,
-                Material.COBBLED_DEEPSLATE,
-                Material.BLACKSTONE
-        );
-
         BukkitTask task = new BukkitRunnable() {
 
             @Override
@@ -73,11 +66,11 @@ public class AbilityRevengeOfTheGround extends Ability {
                         for (int z = -radius; z <= radius; z++) {
                             Block b = center.getRelative(x, y, z);
                             if (center.getLocation().distance(b.getLocation()) <= radius) {
-                                if (materials.contains(b.getType())) {
+                                if (MaterialType.BLOCKS_STONE.contains(b.getType())) {
                                     Bukkit.getOnlinePlayers().forEach(all -> {
                                         if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(center.getLocation()) <= radiusSquared) {
                                             Block playerBlock = all.getLocation().getBlock().getRelative(BlockFace.DOWN);
-                                            if (materials.contains(playerBlock.getType()) && player != all) {
+                                            if (MaterialType.BLOCKS_STONE.contains(playerBlock.getType()) && player != all) {
                                                 FallingBlock block = all.getWorld().spawnFallingBlock(all.getLocation(), playerBlock.getType().createBlockData());
                                                 block.setDropItem(true);
                                                 block.setCancelDrop(true);

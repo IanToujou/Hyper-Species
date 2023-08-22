@@ -18,28 +18,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Loadout {
+public class AbilityTree {
 
-    private static final HashMap<String, Loadout> trees = new HashMap<>();
+    private static final HashMap<String, AbilityTree> trees = new HashMap<>();
 
     private final HashMap<Integer, Ability> abilities;
     private List<Integer> links = new ArrayList<>();
 
-    public Loadout(HashMap<Integer, Ability> abilities) {
+    public AbilityTree(HashMap<Integer, Ability> abilities) {
         this.abilities = abilities;
         links.add(-1);
     }
 
-    public Loadout(HashMap<Integer, Ability> abilities, List<Integer> links) {
+    public AbilityTree(HashMap<Integer, Ability> abilities, List<Integer> links) {
         this.abilities = abilities;
         this.links = links;
     }
 
-    public static void create(String name, Loadout tree) {
+    public static void create(String name, AbilityTree tree) {
         trees.put(name, tree);
     }
 
-    public static Loadout get(String name) {
+    public static AbilityTree get(String name) {
         if (trees.containsKey(name)) return trees.get(name);
         return null;
     }
@@ -60,8 +60,8 @@ public class Loadout {
 
         PlayerManager playerManager = PlayerManager.get(player);
 
-        Inventory inventory = Bukkit.createInventory(null, 9 * 6, "Tree: " + getBaseAbility().getName());
-        ItemStack element = new ItemStack(getBaseAbility().getElement().getMaterial());
+        Inventory inventory = Bukkit.createInventory(null, 9 * 6, "Tree: " + getBaseAbility().name());
+        ItemStack element = new ItemStack(getBaseAbility().element().getMaterial());
         ItemMeta elementMeta = element.getItemMeta();
         assert elementMeta != null;
         elementMeta.setDisplayName(" ");
@@ -72,14 +72,14 @@ public class Loadout {
 
         abilities.forEach((slot, ability) -> {
 
-            if ((ability.isAvailableForSpecies(playerManager.getSpecies()) && ability.isAvailableForSubSpecies(playerManager.getSubSpecies())) || player.getGameMode() == GameMode.CREATIVE) {
+            if ((ability.available(playerManager.getSpecies()) && ability.available(playerManager.getSubSpecies())) || player.getGameMode() == GameMode.CREATIVE) {
 
                 int xp = playerManager.getAbilityExperience(ability);
                 int level = playerManager.getLevelFromExperience(xp);
                 double filledBars = ((double) playerManager.getExperienceSinceLastLevel(xp) / playerManager.getRelativeLevelThreshold(level)) * 50;
                 double emptyBars = 50 - filledBars;
 
-                ItemStack item = ability.getItem();
+                ItemStack item = ability.item();
                 if (!playerManager.hasAbility(ability)) item.setType(Material.GRAY_WOOL);
                 if (slot == 0) item.setType(Material.RED_WOOL);
                 if (slot < 10) {
@@ -143,7 +143,7 @@ public class Loadout {
                     line = line.replace("{shield}", String.valueOf(ability.getFieldValue(AbilityField.SHIELD, level)));
                     line = line.replace("{lockStatus}", playerManager.hasAbility(ability) ? "§a§lUNLOCKED" : "§c§lLOCKED");
                     if (line.contains("{xpBar}")) {
-                        if (ability.getMaxLevel() <= playerManager.getAbilityLevel(ability)) {
+                        if (ability.maxLevel() <= playerManager.getAbilityLevel(ability)) {
                             line = line.replace("{xpBar}", "§a§lMax Level");
                             line = line.replace("{xpLeft}", "");
                         } else {
@@ -156,11 +156,11 @@ public class Loadout {
 
                 if (!playerManager.hasAbility(ability)) {
                     if (item.getType() == Material.RED_WOOL) {
-                        newLore.add("§7Click to unlock this ability: §eⓄ " + ability.getCost() + " Skill Points");
+                        newLore.add("§7Click to unlock this ability: §eⓄ " + ability.cost() + " Skill Points");
                     } else if (item.getType() == Material.GRAY_WOOL)
                         newLore.add("§cYou cannot unlock this ability yet.");
                 } else {
-                    item.setType(ability.getItem().getType());
+                    item.setType(ability.item().getType());
                     if (!playerManager.getActiveAbilities().contains(ability)) {
                         newLore.add("§aClick to equip this ability.");
                     } else newLore.add("§eClick to un-equip this ability.");
@@ -209,7 +209,7 @@ public class Loadout {
 
     }
 
-    public static HashMap<String, Loadout> getTrees() {
+    public static HashMap<String, AbilityTree> getTrees() {
         return trees;
     }
 
@@ -237,16 +237,16 @@ public class Loadout {
             int indexFlora = 0;
             int indexFairy = 0;
 
-            for (Map.Entry<String, Loadout> entry : trees.entrySet()) {
+            for (Map.Entry<String, AbilityTree> entry : trees.entrySet()) {
 
-                Loadout tree = trees.get(entry.getKey());
-                if ((tree.getBaseAbility().isAvailableForSpecies(playerManager.getSpecies()) && tree.getBaseAbility().isAvailableForSubSpecies(playerManager.getSubSpecies())) || player.getGameMode() == GameMode.CREATIVE) {
-                    Element element = tree.getBaseAbility().getElement();
+                AbilityTree tree = trees.get(entry.getKey());
+                if ((tree.getBaseAbility().available(playerManager.getSpecies()) && tree.getBaseAbility().available(playerManager.getSubSpecies())) || player.getGameMode() == GameMode.CREATIVE) {
+                    Element element = tree.getBaseAbility().element();
 
                     ItemStack item = new ItemStack(Material.NETHER_STAR);
                     ItemMeta itemMeta = item.getItemMeta();
                     assert itemMeta != null;
-                    itemMeta.setDisplayName(tree.getBaseAbility().getElement().getEmoji() + " " + tree.getBaseAbility().getName());
+                    itemMeta.setDisplayName(tree.getBaseAbility().element().getEmoji() + " " + tree.getBaseAbility().name());
                     itemMeta.setLore(List.of("§7View this ability tree."));
                     item.setItemMeta(itemMeta);
 
@@ -293,17 +293,17 @@ public class Loadout {
             int indexNormal = 0;
             int indexLight = 0;
 
-            for (Map.Entry<String, Loadout> entry : trees.entrySet()) {
+            for (Map.Entry<String, AbilityTree> entry : trees.entrySet()) {
 
-                Loadout tree = trees.get(entry.getKey());
+                AbilityTree tree = trees.get(entry.getKey());
                 if (tree.getBaseAbility().getSpecies().contains(playerManager.getSpecies().name()) || player.getGameMode() == GameMode.CREATIVE) {
 
-                    Element element = tree.getBaseAbility().getElement();
+                    Element element = tree.getBaseAbility().element();
 
                     ItemStack item = new ItemStack(Material.NETHER_STAR);
                     ItemMeta itemMeta = item.getItemMeta();
                     assert itemMeta != null;
-                    itemMeta.setDisplayName(tree.getBaseAbility().getElement().getEmoji() + " " + tree.getBaseAbility().getName());
+                    itemMeta.setDisplayName(tree.getBaseAbility().element().getEmoji() + " " + tree.getBaseAbility().name());
                     itemMeta.setLore(List.of("§7View this ability tree."));
                     item.setItemMeta(itemMeta);
 
@@ -342,17 +342,17 @@ public class Loadout {
 
             int indexDark = 0;
 
-            for (Map.Entry<String, Loadout> entry : trees.entrySet()) {
+            for (Map.Entry<String, AbilityTree> entry : trees.entrySet()) {
 
-                Loadout tree = trees.get(entry.getKey());
+                AbilityTree tree = trees.get(entry.getKey());
                 if (tree.getBaseAbility().getSpecies().contains(playerManager.getSpecies().name()) || player.getGameMode() == GameMode.CREATIVE) {
 
-                    Element element = tree.getBaseAbility().getElement();
+                    Element element = tree.getBaseAbility().element();
 
                     ItemStack item = new ItemStack(Material.NETHER_STAR);
                     ItemMeta itemMeta = item.getItemMeta();
                     assert itemMeta != null;
-                    itemMeta.setDisplayName(tree.getBaseAbility().getElement().getEmoji() + " " + tree.getBaseAbility().getName());
+                    itemMeta.setDisplayName(tree.getBaseAbility().element().getEmoji() + " " + tree.getBaseAbility().name());
                     itemMeta.setLore(List.of("§7View this ability tree."));
                     item.setItemMeta(itemMeta);
 

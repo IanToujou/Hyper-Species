@@ -1,6 +1,6 @@
 package net.toujoustudios.hyperspecies.command;
 
-import net.toujoustudios.hyperspecies.ability.tree.Loadout;
+import net.toujoustudios.hyperspecies.ability.tree.AbilityTree;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
@@ -33,7 +33,7 @@ public class LoadoutCommand implements CommandExecutor {
         }
 
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-        player.openInventory(Loadout.buildMainInventory(player, 0));
+        player.openInventory(AbilityTree.buildMainInventory(player, 0));
 
         return false;
 

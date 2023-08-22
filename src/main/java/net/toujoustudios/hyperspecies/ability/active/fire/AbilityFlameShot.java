@@ -57,6 +57,7 @@ public class AbilityFlameShot extends Ability {
         projectile.setDamage(damage);
         projectile.setVisualFire(true);
         projectile.setVelocity(projectile.getVelocity().multiply(1.5));
+        projectile.setBounce(false);
 
         BukkitTask task = new BukkitRunnable() {
             @Override

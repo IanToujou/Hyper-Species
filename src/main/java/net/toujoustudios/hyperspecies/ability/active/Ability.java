@@ -98,8 +98,8 @@ public abstract class Ability {
         this.subSpecies = subSpecies;
     }
 
-    public static void createAbility(Ability ability) {
-        abilities.put(ability.getName(), ability);
+    public static void create(Ability ability) {
+        abilities.put(ability.name(), ability);
     }
 
     /**
@@ -108,7 +108,7 @@ public abstract class Ability {
      * @param name The name of the ability.
      * @return The ability if it is present.
      */
-    public static Ability getAbility(String name) {
+    public static Ability get(String name) {
         if (abilities.containsKey(name)) return abilities.get(name);
         return null;
     }
@@ -121,21 +121,21 @@ public abstract class Ability {
      */
     public abstract boolean execute(Player player);
 
-    public String getName() {
+    public String name() {
         return name;
     }
 
-    public String getFullName() {
+    public String fullName() {
         if (secondaryElement != null)
             return element.getEmoji() + " " + secondaryElement.getEmoji() + element.getColor() + " " + name;
         else return element.getEmoji() + " " + name;
     }
 
-    public List<String> getDescription() {
+    public List<String> description() {
         return description;
     }
 
-    public Element getElement() {
+    public Element element() {
         return element;
     }
 
@@ -147,29 +147,29 @@ public abstract class Ability {
         return type;
     }
 
-    public int getManaCost() {
+    public int manaCost() {
         return manaCost;
     }
 
-    public int getDelay() {
+    public int delay() {
         return delay;
     }
 
-    public Material getMaterial() {
+    public Material material() {
         return material;
     }
 
-    public int getMaxLevel() {
+    public int maxLevel() {
         return maxLevel;
     }
 
-    public ItemStack getItem() {
+    public ItemStack item() {
 
         ItemStack item = new ItemStack(material);
         ItemMeta itemMeta = item.getItemMeta();
         assert itemMeta != null;
 
-        itemMeta.setDisplayName(getFullName() + " §7(§aLVL {level}§7)");
+        itemMeta.setDisplayName(fullName() + " §7(§aLVL {level}§7)");
         List<String> lore = new ArrayList<>();
         lore.add("§8" + type.getName() + " Spell");
         lore.add("§b" + manaCost + " Mana §8/ §6" + delay + "s §8/ §5" + weight + " Weight");
@@ -192,7 +192,7 @@ public abstract class Ability {
         this.fields = fields;
     }
 
-    public void addField(AbilityField field, ArrayList<Integer> list) {
+    public void addField(AbilityField field, List<Integer> list) {
         fields.put(field, list);
     }
 
@@ -210,33 +210,29 @@ public abstract class Ability {
         return species;
     }
 
-    public boolean isAvailableForSpecies(Species species) {
+    public boolean available(Species species) {
         return this.species.contains(species.name());
     }
 
-    public boolean isAvailableForSubSpecies(SubSpecies subSpecies) {
-        if (hasSubSpecies()) {
+    public boolean available(SubSpecies subSpecies) {
+        if (subSpecies()!=null) {
             return subSpecies != null && subSpecies.equals(this.subSpecies);
         } else return true;
     }
 
-    public int getCost() {
+    public int cost() {
         return cost;
     }
 
-    public int getWeight() {
+    public int weight() {
         return weight;
     }
 
-    public SubSpecies getSubSpecies() {
+    public SubSpecies subSpecies() {
         return subSpecies;
     }
 
-    public boolean hasSubSpecies() {
-        return subSpecies != null;
-    }
-
-    public static HashMap<String, Ability> getAbilities() {
+    public static HashMap<String, Ability> get() {
         return abilities;
     }
 

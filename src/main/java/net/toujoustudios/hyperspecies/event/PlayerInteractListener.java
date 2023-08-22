@@ -1,7 +1,7 @@
 package net.toujoustudios.hyperspecies.event;
 
 import net.toujoustudios.hyperspecies.ability.active.Ability;
-import net.toujoustudios.hyperspecies.ability.tree.Loadout;
+import net.toujoustudios.hyperspecies.ability.tree.AbilityTree;
 import net.toujoustudios.hyperspecies.config.Config;
 import net.toujoustudios.hyperspecies.item.ItemListUI;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
@@ -61,7 +61,7 @@ public class PlayerInteractListener implements Listener {
                     if (item.getItemMeta().getLore() == null) return;
                     if (item.getItemMeta().getLore().isEmpty()) return;
                     String abilityName = item.getItemMeta().getLore().get(0).substring(2);
-                    Ability ability = Ability.getAbility(abilityName);
+                    Ability ability = Ability.get(abilityName);
 
                     if (ability == null) {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.4f);
@@ -75,14 +75,14 @@ public class PlayerInteractListener implements Listener {
                         return;
                     }
 
-                    if (playerManager.getMana() < ability.getManaCost()) {
+                    if (playerManager.getMana() < ability.manaCost()) {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.4f);
                         player.sendTitle("", "§cNo Mana", 5, 10, 5);
                         return;
                     }
 
                     if (playerManager.useAbility(ability)) {
-                        player.sendTitle("", "§a" + ability.getName(), 5, 10, 5);
+                        player.sendTitle("", "§a" + ability.name(), 5, 10, 5);
                     } else {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.4f);
                         player.sendTitle("", "§cFailed", 5, 10, 5);
@@ -144,7 +144,7 @@ public class PlayerInteractListener implements Listener {
                         }
                     } else {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
-                        player.openInventory(Loadout.buildMainInventory(player, 0));
+                        player.openInventory(AbilityTree.buildMainInventory(player, 0));
                     }
                 }
 
@@ -189,16 +189,16 @@ public class PlayerInteractListener implements Listener {
 
             Ability ability = playerManager.getActiveAbilities().get(i);
             ItemStack item = new ItemStack(Material.LIME_STAINED_GLASS_PANE);
-            if (playerManager.getMana() < ability.getManaCost()) item.setType(Material.ORANGE_STAINED_GLASS_PANE);
+            if (playerManager.getMana() < ability.manaCost()) item.setType(Material.ORANGE_STAINED_GLASS_PANE);
             if (playerManager.getCooldownAbilities().contains(ability)) item.setType(Material.RED_STAINED_GLASS_PANE);
             ItemMeta itemMeta = item.getItemMeta();
             assert itemMeta != null;
-            itemMeta.setDisplayName(ability.getFullName() + " §7(§aLVL " + playerManager.getAbilityLevel(ability) + "§7) §8- §b" + ability.getManaCost() + " Mana");
-            if (playerManager.getMana() < ability.getManaCost())
-                itemMeta.setDisplayName(ability.getFullName() + " §7(§aLVL " + playerManager.getAbilityLevel(ability) + "§7) §8- §b" + ability.getManaCost() + " Mana");
+            itemMeta.setDisplayName(ability.fullName() + " §7(§aLVL " + playerManager.getAbilityLevel(ability) + "§7) §8- §b" + ability.manaCost() + " Mana");
+            if (playerManager.getMana() < ability.manaCost())
+                itemMeta.setDisplayName(ability.fullName() + " §7(§aLVL " + playerManager.getAbilityLevel(ability) + "§7) §8- §b" + ability.manaCost() + " Mana");
             if (playerManager.getCooldownAbilities().contains(ability))
-                itemMeta.setDisplayName(ability.getFullName() + " §7(§aLVL " + playerManager.getAbilityLevel(ability) + "§7) §8- §6Cooldown");
-            itemMeta.setLore(List.of("§7" + ability.getName()));
+                itemMeta.setDisplayName(ability.fullName() + " §7(§aLVL " + playerManager.getAbilityLevel(ability) + "§7) §8- §6Cooldown");
+            itemMeta.setLore(List.of("§7" + ability.name()));
             item.setItemMeta(itemMeta);
             player.getInventory().setItem(1 + i, item);
 

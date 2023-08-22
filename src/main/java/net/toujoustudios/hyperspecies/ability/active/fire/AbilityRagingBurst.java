@@ -21,7 +21,7 @@ public class AbilityRagingBurst extends Ability {
     public AbilityRagingBurst() {
         super(
                 "Raging Burst",
-                List.of("§8Can only be used if the user deals", "§8damage with " + Objects.requireNonNull(Ability.getAbility("Demonic Rage")).getFullName() + "§8 to someone.", "§8Gives the user a resistance buff of§8.", "§d{duration}s§8."),
+                List.of("§8Can only be used if the user deals", "§8damage with " + Objects.requireNonNull(Ability.get("Demonic Rage")).fullName() + "§8 to someone.", "§8Gives the user a resistance buff of§8.", "§d{duration}s§8."),
                 Element.FIRE,
                 AbilityType.BUFF,
                 8,

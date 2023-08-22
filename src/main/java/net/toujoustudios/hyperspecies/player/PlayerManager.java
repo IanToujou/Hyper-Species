@@ -77,15 +77,15 @@ public class PlayerManager {
 
         abilities = new ArrayList<>();
         playerConfig.getStringList("Data." + uuid + ".Character.Abilities").forEach(item -> {
-            if (!abilities.contains(Ability.getAbility(item))) abilities.add(Ability.getAbility(item));
+            if (!abilities.contains(Ability.get(item))) abilities.add(Ability.get(item));
         });
 
         activeAbilities = new ArrayList<>();
         playerConfig.getStringList("Data." + uuid + ".Character.ActiveAbilities").forEach(item -> {
-            if (!activeAbilities.contains(Ability.getAbility(item))) activeAbilities.add(Ability.getAbility(item));
+            if (!activeAbilities.contains(Ability.get(item))) activeAbilities.add(Ability.get(item));
         });
 
-        abilities.forEach(ability -> abilityExperiences.put(ability.getName(), playerConfig.getInt("Data." + uuid + ".Character.Experience.Ability." + ability.getName())));
+        abilities.forEach(ability -> abilityExperiences.put(ability.name(), playerConfig.getInt("Data." + uuid + ".Character.Experience.Ability." + ability.name())));
 
         refreshScoreboard();
 
@@ -128,10 +128,10 @@ public class PlayerManager {
         playerConfig.set("Data." + uuid + ".Character.Team", team);
         playerConfig.set("Data." + uuid + ".Character.SubSpecies", (subSpecies != null ? subSpecies.name() : null));
         ArrayList<String> abilityNames = new ArrayList<>();
-        abilities.forEach(ability -> abilityNames.add(ability.getName()));
+        abilities.forEach(ability -> abilityNames.add(ability.name()));
         playerConfig.set("Data." + uuid + ".Character.Abilities", abilityNames);
         ArrayList<String> activeAbilityNames = new ArrayList<>();
-        activeAbilities.forEach(ability -> activeAbilityNames.add(ability.getName()));
+        activeAbilities.forEach(ability -> activeAbilityNames.add(ability.name()));
         playerConfig.set("Data." + uuid + ".Character.ActiveAbilities", activeAbilityNames);
 
         Config.saveToFile(playerConfig, "players.yml");
@@ -166,13 +166,13 @@ public class PlayerManager {
     public boolean useAbility(Ability ability) {
         if (Bukkit.getPlayer(uuid) == null) return false;
         if (getCooldownAbilities().contains(ability)) return false;
-        if (getMana() < ability.getManaCost()) return false;
-        if (getAbilityLevel(ability) > ability.getMaxLevel()) setAbilityLevel(ability, ability.getMaxLevel());
+        if (getMana() < ability.manaCost()) return false;
+        if (getAbilityLevel(ability) > ability.maxLevel()) setAbilityLevel(ability, ability.maxLevel());
         if (ability.execute(Bukkit.getPlayer(uuid))) {
-            setMana(getMana() - ability.getManaCost());
+            setMana(getMana() - ability.manaCost());
             abilityCooldowns.add(ability);
-            if (getAbilityLevel(ability) < ability.getMaxLevel()) addAbilityExperience(ability, 1);
-            Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> abilityCooldowns.remove(ability), ability.getDelay() * 20L);
+            if (getAbilityLevel(ability) < ability.maxLevel()) addAbilityExperience(ability, 1);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> abilityCooldowns.remove(ability), ability.delay() * 20L);
             return true;
         } else return false;
     }
@@ -375,12 +375,12 @@ public class PlayerManager {
     }
 
     public int getAbilityExperience(Ability ability) {
-        return abilityExperiences.getOrDefault(ability.getName(), 0);
+        return abilityExperiences.getOrDefault(ability.name(), 0);
     }
 
     public void setAbilityExperience(Ability ability, int experience) {
-        abilityExperiences.remove(ability.getName());
-        abilityExperiences.put(ability.getName(), experience);
+        abilityExperiences.remove(ability.name());
+        abilityExperiences.put(ability.name(), experience);
     }
 
     public int getAbilityLevel(Ability ability) {
@@ -392,9 +392,9 @@ public class PlayerManager {
     }
 
     public void addAbilityExperience(Ability ability, int experience) {
-        int oldExperience = abilityExperiences.getOrDefault(ability.getName(), 0);
-        abilityExperiences.remove(ability.getName());
-        abilityExperiences.put(ability.getName(), oldExperience + experience);
+        int oldExperience = abilityExperiences.getOrDefault(ability.name(), 0);
+        abilityExperiences.remove(ability.name());
+        abilityExperiences.put(ability.name(), oldExperience + experience);
     }
 
     public double getDrunkenness() {
@@ -435,7 +435,7 @@ public class PlayerManager {
             addAbility(ability);
             Player player = Bukkit.getPlayer(uuid);
             if (player != null) {
-                player.sendMessage(Config.MESSAGE_PREFIX + "§7 You unlocked the ability§8: §b" + ability.getName());
+                player.sendMessage(Config.MESSAGE_PREFIX + "§7 You unlocked the ability§8: §b" + ability.name());
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
             }
         }
@@ -448,7 +448,7 @@ public class PlayerManager {
     public int getAbilityWeight() {
         int weight = 0;
         for (Ability ability : activeAbilities) {
-            weight += ability.getWeight();
+            weight += ability.weight();
         }
         return weight;
     }

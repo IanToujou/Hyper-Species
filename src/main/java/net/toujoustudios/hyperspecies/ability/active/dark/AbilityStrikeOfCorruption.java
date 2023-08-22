@@ -62,6 +62,7 @@ public class AbilityStrikeOfCorruption extends Ability {
             arrow.setVelocity(arrow.getVelocity().multiply(1.2f));
             arrow.setDamage(0);
             arrow.setCustomName("Strike Of Corruption of " + player.getName());
+            arrow.setBounce(false);
 
             BukkitTask task = new BukkitRunnable() {
 

@@ -55,7 +55,7 @@ public class ProjectileHitListener implements Listener {
         if (projectile.getType() == EntityType.FIREBALL && projectile.getName().startsWith("Fireball of ")) {
 
             Player player = Bukkit.getPlayer(projectile.getName().split(" ")[2]);
-            Ability ability = Ability.getAbility("Fireball");
+            Ability ability = Ability.get("Fireball");
 
             if (player == null) return;
             if (ability == null) return;
@@ -82,7 +82,7 @@ public class ProjectileHitListener implements Listener {
         if (projectile.getType() == EntityType.FIREBALL && projectile.getName().startsWith("Meteor Strike of ")) {
 
             Player player = Bukkit.getPlayer(projectile.getName().split(" ")[3]);
-            Ability ability = Ability.getAbility("Meteor Strike");
+            Ability ability = Ability.get("Meteor Strike");
 
             if (player == null) return;
             if (ability == null) return;
@@ -132,7 +132,7 @@ public class ProjectileHitListener implements Listener {
         if (projectile.getType() == EntityType.FIREBALL && projectile.getName().startsWith("Total Annihilation of ")) {
 
             Player player = Bukkit.getPlayer(projectile.getName().split(" ")[3]);
-            Ability ability = Ability.getAbility("Total Annihilation");
+            Ability ability = Ability.get("Total Annihilation");
 
             if (player == null) return;
             if (ability == null) return;
@@ -215,7 +215,7 @@ public class ProjectileHitListener implements Listener {
 
             Location location = event.getEntity().getLocation();
             Player player = Bukkit.getPlayer(projectile.getName().split(" ")[4]);
-            Ability ability = Ability.getAbility("Strike Of Corruption");
+            Ability ability = Ability.get("Strike Of Corruption");
 
             if (player == null) return;
             if (ability == null) return;
@@ -240,7 +240,7 @@ public class ProjectileHitListener implements Listener {
 
             Location location = event.getEntity().getLocation();
             Player player = Bukkit.getPlayer(projectile.getName().split(" ")[3]);
-            Ability ability = Ability.getAbility("Celestial Shot");
+            Ability ability = Ability.get("Celestial Shot");
 
             if (player == null) return;
             if (ability == null) return;
