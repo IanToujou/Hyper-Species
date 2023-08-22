@@ -92,12 +92,17 @@ public final class HyperSpecies extends JavaPlugin {
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(text));
             if (!player.isDead()) {
                 if (realHealth > 0) player.setHealth(realHealth);
-                else player.setHealth(0);
+                else {
+                    player.setHealth(0);
+                    for (int i = 0; i < 9; i++) player.getInventory().setItem(i, playerManager.getSavedInventory().get(i));
+                    playerManager.setSelectingAbility(false);
+                }
             } else {
                 playerManager.setHealth(playerManager.getMaxHealth());
                 playerManager.setShield(0);
                 playerManager.setMana(playerManager.getMaxMana());
                 playerManager.setDrunkenness(0);
+                playerManager.setSelectingAbility(false);
             }
 
             player.setScoreboard(scoreboard);
