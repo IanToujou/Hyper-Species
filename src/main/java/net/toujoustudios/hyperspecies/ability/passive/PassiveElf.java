@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.ability.passive;
 
+import net.toujoustudios.hyperspecies.item.MaterialType;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.Material;
 import org.bukkit.block.Biome;
@@ -53,44 +54,11 @@ public class PassiveElf extends PassiveAbility {
             }
         }
 
-        // Mana regeneration on leaf blocks
-        ArrayList<Material> leafBlocks = new ArrayList<>();
-        leafBlocks.add(Material.OAK_LEAVES);
-        leafBlocks.add(Material.BIRCH_LEAVES);
-        leafBlocks.add(Material.ACACIA_LEAVES);
-        leafBlocks.add(Material.AZALEA_LEAVES);
-        leafBlocks.add(Material.JUNGLE_LEAVES);
-        leafBlocks.add(Material.MANGROVE_LEAVES);
-        leafBlocks.add(Material.DARK_OAK_LEAVES);
-        leafBlocks.add(Material.FLOWERING_AZALEA_LEAVES);
-        leafBlocks.add(Material.SPRUCE_LEAVES);
-
-        if (leafBlocks.contains(player.getLocation().subtract(0, 1, 0).getBlock().getType()) || leafBlocks.contains(player.getLocation().getBlock().getType())) {
+        if (MaterialType.BLOCKS_LEAVES.contains(player.getLocation().subtract(0, 1, 0).getBlock().getType())) {
             playerManager.setManaRegeneration(0.3);
         } else playerManager.setManaRegeneration(0.1);
 
-        // Strength on wood blocks
-        ArrayList<Material> woodBlocks = new ArrayList<>();
-        woodBlocks.add(Material.OAK_LOG);
-        woodBlocks.add(Material.OAK_PLANKS);
-        woodBlocks.add(Material.BIRCH_LOG);
-        woodBlocks.add(Material.BIRCH_PLANKS);
-        woodBlocks.add(Material.ACACIA_LOG);
-        woodBlocks.add(Material.ACACIA_PLANKS);
-        woodBlocks.add(Material.DARK_OAK_LOG);
-        woodBlocks.add(Material.DARK_OAK_PLANKS);
-        woodBlocks.add(Material.JUNGLE_LOG);
-        woodBlocks.add(Material.JUNGLE_PLANKS);
-        woodBlocks.add(Material.SPRUCE_LOG);
-        woodBlocks.add(Material.SPRUCE_PLANKS);
-        woodBlocks.add(Material.MANGROVE_LOG);
-        woodBlocks.add(Material.MANGROVE_PLANKS);
-        woodBlocks.add(Material.WARPED_STEM);
-        woodBlocks.add(Material.WARPED_PLANKS);
-        woodBlocks.add(Material.CRIMSON_STEM);
-        woodBlocks.add(Material.CRIMSON_PLANKS);
-
-        if (woodBlocks.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
+        if (MaterialType.BLOCKS_WOOD.contains(player.getLocation().add(0, -1, 0).getBlock().getType())) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * 10, 0, false, false, true));
         }
 

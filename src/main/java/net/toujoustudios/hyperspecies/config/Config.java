@@ -11,11 +11,10 @@ import java.io.IOException;
 public class Config {
 
     // General
-    public static boolean DEBUG;
+    public static boolean GENERAL_DEBUG;
 
     // Message
     public static String MESSAGE_PREFIX;
-    public static String MESSAGE_PREFIX_ROLEPLAY;
     public static String MESSAGE_ERROR_PERMISSION;
     public static String MESSAGE_ERROR_SYNTAX;
     public static String MESSAGE_ERROR_PLAYER_INVALID;
@@ -25,100 +24,49 @@ public class Config {
     public static String MESSAGE_ERROR_EMOTE_PERFORM;
     public static String MESSAGE_ERROR_ABILITY_INVALID;
     public static String MESSAGE_ERROR_NO_SPECIES;
-    public static boolean PASSIVES;
 
     @SuppressWarnings("all")
     public static void initialize() {
 
         Logger.log(LogLevel.INFORMATION, "Loading configuration files...");
-        File settingsConfigFile = new File("plugins/" + HyperSpecies.PLUGIN_NAME + "/general.yml");
+        File generalConfigFile = new File("plugins/" + HyperSpecies.PLUGIN_NAME + "/config/general.yml");
+        File messagesConfigFile = new File("plugins/" + HyperSpecies.PLUGIN_NAME + "/config/messages.yml");
 
-        if (settingsConfigFile.exists()) {
+        YamlConfiguration generalConfig = YamlConfiguration.loadConfiguration(generalConfigFile);
+        YamlConfiguration messagesConfig = YamlConfiguration.loadConfiguration(messagesConfigFile);
 
-            YamlConfiguration configuration = YamlConfiguration.loadConfiguration(settingsConfigFile);
+        messagesConfig.addDefault("Debug", false);
 
-            if (!configuration.isSet("General.Debug")) configuration.set("General.Debug", false);
-            if (!configuration.isSet("Message.Prefix")) configuration.set("Message.Prefix", "§2HyperSpecies §8|");
-            if (!configuration.isSet("Message.PrefixRoleplay")) configuration.set("Message.PrefixRoleplay", "§6RP §8|");
-            if (!configuration.isSet("Message.Error.Permission"))
-                configuration.set("Message.Error.Permission", "{Prefix} §cYou do not have the permission to perform this command§8.");
-            if (!configuration.isSet("Message.Error.Syntax"))
-                configuration.set("Message.Error.Syntax", "{Prefix} §cThe command syntax is not correct§8. §cUsage§8: §e{Usage}");
-            if (!configuration.isSet("Message.Error.PlayerInvalid"))
-                configuration.set("Message.Error.PlayerInvalid", "{Prefix} §cThe given player is invalid§8.");
-            if (!configuration.isSet("Message.Error.PlayerSelf"))
-                configuration.set("Message.Error.PlayerSelf", "{Prefix} §cYou cannot do that to yourself§8.");
-            if (!configuration.isSet("Message.Error.IntegerInvalid"))
-                configuration.set("Message.Error.IntegerInvalid", "{Prefix} §cThe given value is not a valid integer number§8.");
-            if (!configuration.isSet("Message.Error.EmoteInvalid"))
-                configuration.set("Message.Error.EmoteInvalid", "{Prefix} §cThe selected emote is invalid§8.");
-            if (!configuration.isSet("Message.Error.EmotePerform"))
-                configuration.set("Message.Error.EmotePerform", "{Prefix} §cThe emote could not be performed§8.");
-            if (!configuration.isSet("Message.Error.AbilityInvalid"))
-                configuration.set("Message.Error.AbilityInvalid", "{Prefix} §cThe ability does not exist§8.");
-            if (!configuration.isSet("Message.Error.NoSpecies"))
-                configuration.set("Message.Error.NoSpecies", "§cYou need to select a species in order to continue.");
-            if (!configuration.isSet("Temporary.Passives"))
-                configuration.set("Temporary.Passives", true);
+        messagesConfig.addDefault("General.Prefix", "§2HyperSpecies §8|");
+        messagesConfig.addDefault("Message.Error.Permission", "{Prefix} §cYou do not have the permission to perform this command§8.");
+        messagesConfig.addDefault("Message.Error.Syntax", "{Prefix} §cThe command syntax is not correct§8. §cUsage§8: §e{Usage}");
+        messagesConfig.addDefault("Message.Error.PlayerInvalid", "{Prefix} §cThe given player is invalid§8.");
+        messagesConfig.addDefault("Message.Error.PlayerSelf", "{Prefix} §cYou cannot do that to yourself§8.");
+        messagesConfig.addDefault("Message.Error.IntegerInvalid", "{Prefix} §cThe given value is not a valid integer number§8.");
+        messagesConfig.addDefault("Message.Error.EmoteInvalid", "{Prefix} §cThe selected emote is invalid§8.");
+        messagesConfig.addDefault("Message.Error.EmotePerform", "{Prefix} §cThe emote could not be performed§8.");
+        messagesConfig.addDefault("Message.Error.AbilityInvalid", "{Prefix} §cThe ability does not exist§8.");
+        messagesConfig.addDefault("Message.Error.NoSpecies", "§cYou need to select a species in order to continue.");
 
-            try {
-                configuration.save(settingsConfigFile);
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }
-
-        } else {
-
-            Logger.log(LogLevel.WARNING, "Configuration file settings.yml not found. Creating now...");
-            YamlConfiguration configuration = YamlConfiguration.loadConfiguration(new File("src/resources/" + HyperSpecies.PLUGIN_NAME + "/settings.yml"));
-
-            if (!configuration.isSet("General.Debug")) configuration.set("General.Debug", false);
-            if (!configuration.isSet("Message.Prefix")) configuration.set("Message.Prefix", "§2HyperSpecies §8|");
-            if (!configuration.isSet("Message.PrefixRoleplay")) configuration.set("Message.PrefixRoleplay", "§6RP §8|");
-            if (!configuration.isSet("Message.Error.Permission"))
-                configuration.set("Message.Error.Permission", "{Prefix} §cYou do not have the permission to perform this command§8.");
-            if (!configuration.isSet("Message.Error.Syntax"))
-                configuration.set("Message.Error.Syntax", "{Prefix} §cThe command syntax is not correct§8. §cUsage§8: §e{Usage}");
-            if (!configuration.isSet("Message.Error.PlayerInvalid"))
-                configuration.set("Message.Error.PlayerInvalid", "{Prefix} §cThe given player is invalid§8.");
-            if (!configuration.isSet("Message.Error.PlayerSelf"))
-                configuration.set("Message.Error.PlayerSelf", "{Prefix} §cYou cannot do that to yourself§8.");
-            if (!configuration.isSet("Message.Error.IntegerInvalid"))
-                configuration.set("Message.Error.IntegerInvalid", "{Prefix} §cThe given value is not a valid integer number§8.");
-            if (!configuration.isSet("Message.Error.EmoteInvalid"))
-                configuration.set("Message.Error.EmoteInvalid", "{Prefix} §cThe selected emote is invalid§8.");
-            if (!configuration.isSet("Message.Error.EmotePerform"))
-                configuration.set("Message.Error.EmotePerform", "{Prefix} §cThe emote could not be performed§8.");
-            if (!configuration.isSet("Message.Error.AbilityInvalid"))
-                configuration.set("Message.Error.AbilityInvalid", "{Prefix} §cThe ability does not exist§8.");
-            if (!configuration.isSet("Message.Error.NoSpecies"))
-                configuration.set("Message.Error.NoSpecies", "§cYou need to select a species in order to continue.");
-            if (!configuration.isSet("Temporary.Passives"))
-                configuration.set("Temporary.Passives", true);
-
-            try {
-                configuration.save(settingsConfigFile);
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }
-
+        try {
+            generalConfig.save(generalConfigFile);
+            messagesConfig.save(messagesConfigFile);
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
 
-        YamlConfiguration settingsConfig = YamlConfiguration.loadConfiguration(settingsConfigFile);
+        GENERAL_DEBUG = generalConfig.getBoolean("Debug");
 
-        DEBUG = settingsConfig.getBoolean("General.Debug");
-        MESSAGE_PREFIX = settingsConfig.getString("Message.Prefix");
-        MESSAGE_PREFIX_ROLEPLAY = settingsConfig.getString("Message.PrefixRoleplay");
-        MESSAGE_ERROR_PERMISSION = settingsConfig.getString("Message.Error.Permission").replace("{Prefix}", MESSAGE_PREFIX);
-        MESSAGE_ERROR_SYNTAX = settingsConfig.getString("Message.Error.Syntax").replace("{Prefix}", MESSAGE_PREFIX);
-        MESSAGE_ERROR_PLAYER_INVALID = settingsConfig.getString("Message.Error.PlayerInvalid").replace("{Prefix}", MESSAGE_PREFIX);
-        MESSAGE_ERROR_PLAYER_SELF = settingsConfig.getString("Message.Error.PlayerSelf").replace("{Prefix}", MESSAGE_PREFIX);
-        MESSAGE_ERROR_INTEGER_INVALID = settingsConfig.getString("Message.Error.IntegerInvalid").replace("{Prefix}", MESSAGE_PREFIX);
-        MESSAGE_ERROR_EMOTE_INVALID = settingsConfig.getString("Message.Error.EmoteInvalid").replace("{Prefix}", MESSAGE_PREFIX);
-        MESSAGE_ERROR_EMOTE_PERFORM = settingsConfig.getString("Message.Error.EmotePerform").replace("{Prefix}", MESSAGE_PREFIX);
-        MESSAGE_ERROR_ABILITY_INVALID = settingsConfig.getString("Message.Error.AbilityInvalid").replace("{Prefix}", MESSAGE_PREFIX);
-        MESSAGE_ERROR_NO_SPECIES = settingsConfig.getString("Message.Error.NoSpecies");
-        PASSIVES = settingsConfig.getBoolean("Temporary.Passives");
+        MESSAGE_PREFIX = messagesConfig.getString("Message.Prefix");
+        MESSAGE_ERROR_PERMISSION = messagesConfig.getString("Message.Error.Permission").replace("{Prefix}", MESSAGE_PREFIX);
+        MESSAGE_ERROR_SYNTAX = messagesConfig.getString("Message.Error.Syntax").replace("{Prefix}", MESSAGE_PREFIX);
+        MESSAGE_ERROR_PLAYER_INVALID = messagesConfig.getString("Message.Error.PlayerInvalid").replace("{Prefix}", MESSAGE_PREFIX);
+        MESSAGE_ERROR_PLAYER_SELF = messagesConfig.getString("Message.Error.PlayerSelf").replace("{Prefix}", MESSAGE_PREFIX);
+        MESSAGE_ERROR_INTEGER_INVALID = messagesConfig.getString("Message.Error.IntegerInvalid").replace("{Prefix}", MESSAGE_PREFIX);
+        MESSAGE_ERROR_EMOTE_INVALID = messagesConfig.getString("Message.Error.EmoteInvalid").replace("{Prefix}", MESSAGE_PREFIX);
+        MESSAGE_ERROR_EMOTE_PERFORM = messagesConfig.getString("Message.Error.EmotePerform").replace("{Prefix}", MESSAGE_PREFIX);
+        MESSAGE_ERROR_ABILITY_INVALID = messagesConfig.getString("Message.Error.AbilityInvalid").replace("{Prefix}", MESSAGE_PREFIX);
+        MESSAGE_ERROR_NO_SPECIES = messagesConfig.getString("Message.Error.NoSpecies");
 
         Logger.log(LogLevel.INFORMATION, "Successfully loaded the configuration files.");
 
@@ -134,7 +82,7 @@ public class Config {
         try {
             configuration.save(file);
         } catch (IOException exception) {
-            exception.printStackTrace();
+            Logger.log(LogLevel.ERROR, "Failed to write config file " + file.getName());
         }
     }
 

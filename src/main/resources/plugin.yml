@@ -53,9 +53,6 @@ commands:
   leave:
     description: Leave the farmworld.
     permission: hyperspecies.command.leave
-  passive:
-    description: Enable and disable the passives.
-    permission: hyperspecies.command.passive
   channel:
     description: Switch chat channels.
     permission: hyperspecies.command.channel
@@ -86,7 +83,6 @@ permissions:
       hyperspecies.command.setexperience: false
       hyperspecies.command.character: true
       hyperspecies.command.leave: true
-      hyperspecies.command.passive: false
       hyperspecies.command.channel: true
       hyperspecies.command.message: true
   hyperspecies.group.admin:
@@ -106,7 +102,6 @@ permissions:
       hyperspecies.command.setexperience: true
       hyperspecies.command.character: true
       hyperspecies.command.leave: true
-      hyperspecies.command.passive: true
       hyperspecies.command.channel: true
       hyperspecies.command.message: true
   hyperspecies.group.moderator:
@@ -126,7 +121,6 @@ permissions:
       hyperspecies.command.setexperience: false
       hyperspecies.command.character: true
       hyperspecies.command.leave: true
-      hyperspecies.command.passive: false
       hyperspecies.command.channel: true
       hyperspecies.command.message: true
   hyperspecies.command.species:
@@ -171,9 +165,6 @@ permissions:
   hyperspecies.command.leave:
     description: Allows players to use the leave command.
     default: true
-  hyperspecies.command.passive:
-    description: Allows players to use the passive command.
-    default: op
   hyperspecies.command.channel:
     description: Allows players to use the channel command.
     default: true

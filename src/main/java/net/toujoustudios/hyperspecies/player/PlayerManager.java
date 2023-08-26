@@ -21,9 +21,10 @@ import java.util.*;
 public class PlayerManager {
 
     private static final HashMap<UUID, PlayerManager> players = new HashMap<>();
-    private static final YamlConfiguration playerConfig = Config.getConfigFile("players.yml");
+    private static final YamlConfiguration playerConfig = Config.getConfigFile("data/players.yml");
 
     private final UUID uuid;
+    private String name;
     private int experience;
     private int skill;
     private double health;
@@ -50,6 +51,7 @@ public class PlayerManager {
 
         this.uuid = uuid;
 
+        name = playerConfig.getString("Data." + uuid + ".Character.Name");
         experience = playerConfig.getInt("Data." + uuid + ".Character.Experience.Main");
         skill = playerConfig.getInt("Data." + uuid + ".Character.Skill");
 
@@ -117,6 +119,7 @@ public class PlayerManager {
      */
     public void save() {
 
+        playerConfig.set("Data." + uuid + ".Character.Name", name);
         playerConfig.set("Data." + uuid + ".Points.Health", health);
         playerConfig.set("Data." + uuid + ".Points.Mana", mana);
         playerConfig.set("Data." + uuid + ".Points.Shield", shield);
@@ -134,7 +137,7 @@ public class PlayerManager {
         activeAbilities.forEach(ability -> activeAbilityNames.add(ability.name()));
         playerConfig.set("Data." + uuid + ".Character.ActiveAbilities", activeAbilityNames);
 
-        Config.saveToFile(playerConfig, "players.yml");
+        Config.saveToFile(playerConfig, "data/players.yml");
 
     }
 
@@ -225,15 +228,38 @@ public class PlayerManager {
         scoreboardTeam.setPrefix((species != null ? species.prefix() : "§7None") + " §7| ");
         scoreboardTeam.addEntry(Objects.requireNonNull(Bukkit.getPlayer(uuid)).getName());
 
+        if(name != null) {
+            Player player = Bukkit.getPlayer(uuid);
+            if(player != null) player.setDisplayName(name);
+        }
+
     }
 
-    // GETTERS AND SETTERS
+    /**
+     * Get the character name provided by the player. This is not the username, but a custom
+     * defined character name for roleplay.
+     *
+     * @return The player's character name.
+     */
+    public String name() {
+        return name;
+    }
 
-    public int getExperience() {
+    /**
+     * Provide a new name for this player. This will not override the username, it will only
+     * set a custom roleplay name.
+     *
+     * @param name The player's character name.
+     */
+    public void name(String name) {
+        this.name = name;
+    }
+
+    public int experience() {
         return experience;
     }
 
-    public void setExperience(int experience) {
+    public void experience(int experience) {
         this.experience = experience;
     }
 

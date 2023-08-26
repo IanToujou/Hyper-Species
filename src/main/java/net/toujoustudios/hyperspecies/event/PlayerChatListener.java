@@ -5,7 +5,6 @@ import net.toujoustudios.hyperspecies.log.LogLevel;
 import net.toujoustudios.hyperspecies.log.Logger;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
-import net.toujoustudios.hyperspecies.ui.TeamUI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,11 +20,6 @@ public class PlayerChatListener implements Listener {
     public void onPlayerChat(AsyncPlayerChatEvent event) {
 
         Player player = event.getPlayer();
-
-        if (TeamUI.getCreatingTeamPlayers().contains(player.getUniqueId())) {
-            event.setCancelled(true);
-            return;
-        }
 
         PlayerManager playerManager = PlayerManager.get(player);
         ChatChannel channel = playerManager.getChannel();

@@ -21,21 +21,25 @@ public class Character {
         Inventory inventory = Bukkit.createInventory(null, 9 * 5, "Your Character");
         for (int i = 0; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
 
+        String characterName = (playerManager.name()!=null?playerManager.name():player.getName());
+
         ItemStack character = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta characterMeta = (SkullMeta) character.getItemMeta();
         assert characterMeta != null;
         characterMeta.setOwningPlayer(Bukkit.getOfflinePlayer(player.getUniqueId()));
-        characterMeta.setDisplayName("§eYour Character");
+        characterMeta.setDisplayName("§e" + characterName + " §7(§bLVL " + playerManager.getLevel() + "§7)");
         characterMeta.setLore(List.of(
+                "§7Character Details:",
+                "",
                 "§7Species: " + playerManager.getSpecies().prefix(),
                 "§7Subspecies: §a" + (playerManager.getSubSpecies() != null ? playerManager.getSubSpecies().name() : "§8None"),
-                "§7Level: §b" + playerManager.getLevel(),
                 "§7Skill Points: §eⓄ " + playerManager.getSkill()
         ));
         character.setItemMeta(characterMeta);
 
         inventory.setItem(13, character);
         inventory.setItem(28, ItemListUI.PREVIOUS);
+        inventory.setItem(31, ItemListUI.CHARACTER_CHANGE_NAME);
 
         if (playerManager.getLevel() > 7) {
             if (playerManager.getSubSpecies() != null) {

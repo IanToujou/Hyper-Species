@@ -22,7 +22,7 @@ public class Logger {
      * @param message The message that should be displayed.
      */
     public static void log(LogLevel level, String message) {
-        if (level == LogLevel.DEBUG) if (!Config.DEBUG) return;
+        if (level == LogLevel.DEBUG) if (!Config.GENERAL_DEBUG) return;
         Bukkit.getConsoleSender().sendMessage(level.color() + "[" + HyperSpecies.PLUGIN_NAME + " - " + level + "] " + message);
     }
 

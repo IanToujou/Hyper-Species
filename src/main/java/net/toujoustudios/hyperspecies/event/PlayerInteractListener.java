@@ -121,18 +121,30 @@ public class PlayerInteractListener implements Listener {
 
             if (material == Material.LAPIS_BLOCK) {
 
+                if(playerManager.isSelectingAbility()) {
+                    for (int i = 0; i < 9; i++) player.getInventory().setItem(i, playerManager.getSavedInventory().get(i));
+                    playerManager.setSelectingAbility(false);
+                }
+
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
                     if (event.getItem() != null) {
                         if (event.getItem().getType() == Material.DIAMOND) {
-                            event.setCancelled(true);
-                            player.getItemInHand().setAmount(player.getItemInHand().getAmount() - 1);
-                            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
-                            player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, event.getClickedBlock().getLocation(), 100, 0.1, 1, 0.1);
-                            playerManager.setExperience(playerManager.getExperience() + 8);
-                            player.sendMessage(Config.MESSAGE_PREFIX + "§7 You just gained §a5 XP§8.");
-                            player.sendMessage(Config.MESSAGE_PREFIX + "§7 You are now §bLevel " + playerManager.getLevel() + "§8.");
-                            if (playerManager.getLevel() > 7 && playerManager.getSubSpecies() == null)
-                                player.sendMessage(Config.MESSAGE_PREFIX + "§a You can now select a subspecies with §b/character§8!");
+                            if(playerManager.getLevel() < 50) {
+                                event.setCancelled(true);
+                                player.getItemInHand().setAmount(player.getItemInHand().getAmount() - 1);
+                                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
+                                player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, event.getClickedBlock().getLocation(), 100, 0.1, 1, 0.1);
+                                playerManager.experience(playerManager.experience() + 8);
+                                player.sendMessage(Config.MESSAGE_PREFIX + "§7 You just gained §a8 XP§8.");
+                                player.sendMessage(Config.MESSAGE_PREFIX + "§7 You are now §bLevel " + playerManager.getLevel() + "§8.");
+                                if (playerManager.getLevel() > 7 && playerManager.getSubSpecies() == null)
+                                    player.sendMessage(Config.MESSAGE_PREFIX + "§a You can now select a subspecies with §b/character§8!");
+                            } else {
+                                event.setCancelled(true);
+                                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, SoundCategory.MASTER, 100, 1f);
+                                player.getWorld().spawnParticle(Particle.VILLAGER_ANGRY, event.getClickedBlock().getLocation(), 100, 0.1, 1, 0.1);
+                                player.sendMessage(Config.MESSAGE_PREFIX + "§c You already reached max level§8: §b50");
+                            }
                         } else if (event.getItem().getType() == Material.DIAMOND_BLOCK) {
                             event.setCancelled(true);
                             player.getItemInHand().setAmount(player.getItemInHand().getAmount() - 1);
@@ -184,6 +196,10 @@ public class PlayerInteractListener implements Listener {
         for (int i = 0; i < 9; i++) player.getInventory().setItem(i, ItemListUI.FILLER);
 
         player.getInventory().setItem(0, ItemListUI.CANCEL);
+        if(player.getGameMode() == GameMode.CREATIVE) {
+            playerManager.getCooldownAbilities().clear();
+            playerManager.setMana(playerManager.getMaxMana());
+        }
 
         for (int i = 0; i < playerManager.getActiveAbilities().size(); i++) {
 

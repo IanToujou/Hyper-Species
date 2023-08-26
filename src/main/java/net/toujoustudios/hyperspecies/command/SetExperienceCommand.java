@@ -37,7 +37,7 @@ public class SetExperienceCommand implements CommandExecutor {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
 
                 PlayerManager playerManager = PlayerManager.get(player);
-                playerManager.setExperience(experience);
+                playerManager.experience(experience);
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You are now level §b" + playerManager.getLevel() + "§8.");
 
             } catch (Exception exception) {
@@ -57,7 +57,7 @@ public class SetExperienceCommand implements CommandExecutor {
 
                 int experience = Integer.parseInt(args[0]);
                 PlayerManager playerManager = PlayerManager.get(target);
-                playerManager.setExperience(experience);
+                playerManager.experience(experience);
 
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7You set the experience of §e" + target.getName() + " §7to §b" + experience + " XP§8.");
                 player.sendMessage(Config.MESSAGE_PREFIX + " §7They are now level §b" + playerManager.getLevel() + "§8.");

@@ -15,33 +15,29 @@ import org.bukkit.entity.Player;
 
 public class Loader {
 
-    private static LoaderState state;
-    private static boolean cancelled = false;
 
-    public static void startLoading() {
-        preInitialize();
-        initialize();
-        postInitialize();
+    /**
+     * Static class cannot be initialized.
+     */
+    private Loader() {}
+
+    public static void load() {
+        preInit();
+        init();
+        postInit();
     }
 
-    public static void preInitialize() {
+    public static void preInit() {
 
-        if (cancelled) return;
-
-        state = LoaderState.PRE_INIT;
         Config.initialize();
         ItemListUI.initialize();
         ItemList.initialize();
-
-        if (cancelled) return;
 
         Logger.log(LogLevel.DEBUG, "Pre initialization completed.");
 
     }
 
-    public static void initialize() {
-        if (cancelled) return;
-        state = LoaderState.INIT;
+    public static void init() {
         HyperSpecies.getInstance().registerUI();
         HyperSpecies.getInstance().registerEvents();
         HyperSpecies.getInstance().registerCommands();
@@ -52,10 +48,7 @@ public class Loader {
         Logger.log(LogLevel.DEBUG, "Initialization completed.");
     }
 
-    public static void postInitialize() {
-
-        if (cancelled) return;
-        state = LoaderState.POST_INIT;
+    public static void postInit() {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player != null) {
@@ -70,17 +63,7 @@ public class Loader {
 
         Logger.log(LogLevel.DEBUG, "Post initialization completed.");
         Logger.log(LogLevel.INFORMATION, "Plugin loaded successfully.");
-        state = LoaderState.END;
 
-    }
-
-    public static void cancel() {
-        cancelled = true;
-        HyperSpecies.getInstance().getServer().getPluginManager().disablePlugin(HyperSpecies.getInstance());
-    }
-
-    public static LoaderState getState() {
-        return state;
     }
 
 }

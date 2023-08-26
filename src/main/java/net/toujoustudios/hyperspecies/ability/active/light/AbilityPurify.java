@@ -10,22 +10,22 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class AbilityCleanse extends Ability {
+public class AbilityPurify extends Ability {
 
-    public AbilityCleanse() {
+    public AbilityPurify() {
 
         super(
-                "Cleanse",
-                List.of("§8Clear all potion effects."),
+                "Purify",
+                List.of("§8Clear all negative potion effects."),
                 Element.LIGHT,
                 AbilityType.BUFF,
-                6,
-                180,
+                12,
+                240,
                 Material.FEATHER,
                 5,
-                List.of("Elf", "Angel"),
-                3,
-                2,
+                List.of("Angel"),
+                4,
+                4,
                 null
         );
 
@@ -34,8 +34,8 @@ public class AbilityCleanse extends Ability {
     @Override
     public boolean execute(Player player) {
         player.getActivePotionEffects().forEach(effect -> player.removePotionEffect(effect.getType()));
-        player.getWorld().spawnParticle(Particle.CLOUD, player.getLocation(), 50, 0.1, 0.1, 0.1);
-        player.playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXTINGUISH_FIRE, 2, 2f);
+        player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, player.getLocation(), 50, 0.1, 0.1, 0.1);
+        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 2f);
         return true;
     }
 

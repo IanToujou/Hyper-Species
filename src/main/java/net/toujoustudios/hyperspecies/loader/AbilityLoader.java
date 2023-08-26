@@ -109,6 +109,7 @@ public class AbilityLoader {
         Ability.create(new AbilityBlindingLight());
         Ability.create(new AbilityZaWarudo());
         Ability.create(new AbilityCleanse());
+        Ability.create(new AbilityPurify());
 
         HashMap<Integer, Ability> levitationAbilities = new HashMap<>();
         levitationAbilities.put(0, Ability.get("Levitation"));
@@ -116,7 +117,8 @@ public class AbilityLoader {
         levitationAbilities.put(2, Ability.get("Blinding Light"));
         levitationAbilities.put(3, Ability.get("Za Warudo"));
         levitationAbilities.put(10, Ability.get("Cleanse"));
-        AbilityTree.create("Levitation", new AbilityTree(levitationAbilities, List.of(0)));
+        levitationAbilities.put(11, Ability.get("Purify"));
+        AbilityTree.create("Levitation", new AbilityTree(levitationAbilities, List.of(0,1)));
 
         // Healing Nature
         Ability.create(new AbilityHealingNature());

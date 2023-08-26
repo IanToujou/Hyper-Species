@@ -42,7 +42,7 @@ public final class HyperSpecies extends JavaPlugin {
         ScoreboardManager scoreboardManager = Bukkit.getScoreboardManager();
         assert scoreboardManager != null;
         scoreboard = scoreboardManager.getNewScoreboard();
-        Loader.startLoading();
+        Loader.load();
 
         Bukkit.getServer().getWorlds().forEach(world -> {
             world.setGameRule(GameRule.NATURAL_REGENERATION, false);
@@ -195,7 +195,6 @@ public final class HyperSpecies extends JavaPlugin {
         getCommand("character").setExecutor(new CharacterCommand());
         getCommand("char").setExecutor(new CharacterCommand());
         getCommand("leave").setExecutor(new LeaveCommand());
-        getCommand("passive").setExecutor(new PassiveCommand());
         getCommand("channel").setExecutor(new ChannelCommand());
         getCommand("c").setExecutor(new ChannelCommand());
         getCommand("message").setExecutor(new MessageCommand());

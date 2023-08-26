@@ -21,7 +21,9 @@ public class PassiveAquatilia extends PassiveAbility {
         player.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 20 * 10, 0, false, false, true));
         player.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 20 * 10, 3, false, false, true));
 
-        if (player.getLocation().getBlock().getType() == Material.WATER || player.getLocation().subtract(0, 1, 0).getBlock().getType() == Material.WATER || player.getLocation().add(0, 1, 0).getBlock().getType() == Material.WATER || player.getLocation().add(1, 0, 0).getBlock().getType() == Material.WATER || player.getLocation().add(0, 0, 1).getBlock().getType() == Material.WATER || player.getLocation().subtract(1, 0, 0).getBlock().getType() == Material.WATER || player.getLocation().subtract(0, 0, 1).getBlock().getType() == Material.WATER) {
+        boolean inWater = player.getLocation().getBlock().getType() == Material.WATER || player.getLocation().subtract(0, 1, 0).getBlock().getType() == Material.WATER || player.getLocation().add(0, 1, 0).getBlock().getType() == Material.WATER || player.getLocation().add(1, 0, 0).getBlock().getType() == Material.WATER || player.getLocation().add(0, 0, 1).getBlock().getType() == Material.WATER || player.getLocation().subtract(1, 0, 0).getBlock().getType() == Material.WATER || player.getLocation().subtract(0, 0, 1).getBlock().getType() == Material.WATER;
+
+        if (inWater) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.CONDUIT_POWER, 20 * 10, 2, false, false, true));
         } else {
             if (!player.getWorld().isThundering() && !player.getWorld().hasStorm()) {
@@ -32,17 +34,18 @@ public class PassiveAquatilia extends PassiveAbility {
             }
         }
 
-        // TODO: Remove in release
-        if (!player.getWorld().getName().contains("farmworld")) {
-            if (player.getWorld().getTime() < 12500 || player.getWorld().getTime() > 23500) {
-                if (player.getWorld().getEnvironment() != World.Environment.THE_END) {
+        if (player.getWorld().getTime() < 12500 || player.getWorld().getTime() > 23500) {
+            if (player.getWorld().getEnvironment() != World.Environment.THE_END) {
+                if(!inWater) {
                     Block block = player.getWorld().getHighestBlockAt(player.getLocation());
-                    if (block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
-                        List<Biome> hotBiomes = List.of(Biome.DESERT, Biome.BADLANDS);
-                        if (hotBiomes.contains(player.getLocation().getBlock().getBiome())) {
-                            player.damage(3);
-                        } else if (!player.getWorld().isThundering() && !player.getWorld().hasStorm()) {
-                            player.damage(2);
+                    if (!player.getWorld().getName().contains("farmworld")) {
+                        if (block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {
+                            List<Biome> hotBiomes = List.of(Biome.DESERT, Biome.BADLANDS);
+                            if (hotBiomes.contains(player.getLocation().getBlock().getBiome())) {
+                                player.damage(3);
+                            } else if (!player.getWorld().isThundering() && !player.getWorld().hasStorm()) {
+                                player.damage(2);
+                            }
                         }
                     }
                 }

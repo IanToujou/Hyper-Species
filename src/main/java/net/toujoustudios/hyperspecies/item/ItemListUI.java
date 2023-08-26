@@ -51,6 +51,7 @@ public class ItemListUI {
     public static ItemStack TREE_TRACK_UNLOCKED = new ItemStack(Material.GREEN_DYE);
     public static ItemStack TREE_RESET = new ItemStack(Material.TNT);
     public static ItemStack TREE_HELP = new ItemStack(Material.NAME_TAG);
+    public static ItemStack CHARACTER_CHANGE_NAME = new ItemStack(Material.NAME_TAG);
 
     @SuppressWarnings("all")
     public static void initialize() {
@@ -425,6 +426,11 @@ public class ItemListUI {
                 "§eCheck the wiki for more information."
         ));
         TREE_HELP.setItemMeta(treeHelpMeta);
+
+        ItemMeta characterChangeNameMeta = CHARACTER_CHANGE_NAME.getItemMeta();
+        characterChangeNameMeta.setDisplayName("§eChange Name");
+        characterChangeNameMeta.setLore(List.of("§7Change your characters's name."));
+        CHARACTER_CHANGE_NAME.setItemMeta(characterChangeNameMeta);
 
     }
 
