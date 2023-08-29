@@ -35,18 +35,18 @@ public class Config {
         YamlConfiguration generalConfig = YamlConfiguration.loadConfiguration(generalConfigFile);
         YamlConfiguration messagesConfig = YamlConfiguration.loadConfiguration(messagesConfigFile);
 
-        messagesConfig.addDefault("Debug", false);
+        setIfAbsent(generalConfig, "General.Debug", false);
 
-        messagesConfig.addDefault("General.Prefix", "§2HyperSpecies §8|");
-        messagesConfig.addDefault("Message.Error.Permission", "{Prefix} §cYou do not have the permission to perform this command§8.");
-        messagesConfig.addDefault("Message.Error.Syntax", "{Prefix} §cThe command syntax is not correct§8. §cUsage§8: §e{Usage}");
-        messagesConfig.addDefault("Message.Error.PlayerInvalid", "{Prefix} §cThe given player is invalid§8.");
-        messagesConfig.addDefault("Message.Error.PlayerSelf", "{Prefix} §cYou cannot do that to yourself§8.");
-        messagesConfig.addDefault("Message.Error.IntegerInvalid", "{Prefix} §cThe given value is not a valid integer number§8.");
-        messagesConfig.addDefault("Message.Error.EmoteInvalid", "{Prefix} §cThe selected emote is invalid§8.");
-        messagesConfig.addDefault("Message.Error.EmotePerform", "{Prefix} §cThe emote could not be performed§8.");
-        messagesConfig.addDefault("Message.Error.AbilityInvalid", "{Prefix} §cThe ability does not exist§8.");
-        messagesConfig.addDefault("Message.Error.NoSpecies", "§cYou need to select a species in order to continue.");
+        setIfAbsent(messagesConfig, "Message.Prefix", "§2HyperSpecies §8|");
+        setIfAbsent(messagesConfig, "Message.Error.Permission", "{Prefix} §cYou do not have the permission to perform this command§8.");
+        setIfAbsent(messagesConfig, "Message.Error.Syntax", "{Prefix} §cThe command syntax is not correct§8. §cUsage§8: §e{Usage}");
+        setIfAbsent(messagesConfig, "Message.Error.PlayerInvalid", "{Prefix} §cThe given player is invalid§8.");
+        setIfAbsent(messagesConfig, "Message.Error.PlayerSelf", "{Prefix} §cYou cannot do that to yourself§8.");
+        setIfAbsent(messagesConfig, "Message.Error.IntegerInvalid", "{Prefix} §cThe given value is not a valid integer number§8.");
+        setIfAbsent(messagesConfig, "Message.Error.EmoteInvalid", "{Prefix} §cThe selected emote is invalid§8.");
+        setIfAbsent(messagesConfig, "Message.Error.EmotePerform", "{Prefix} §cThe emote could not be performed§8.");
+        setIfAbsent(messagesConfig, "Message.Error.AbilityInvalid", "{Prefix} §cThe ability does not exist§8.");
+        setIfAbsent(messagesConfig, "Message.Error.NoSpecies", "§cYou need to select a species in order to continue.");
 
         try {
             generalConfig.save(generalConfigFile);
@@ -55,7 +55,7 @@ public class Config {
             exception.printStackTrace();
         }
 
-        GENERAL_DEBUG = generalConfig.getBoolean("Debug");
+        GENERAL_DEBUG = generalConfig.getBoolean("General.Debug");
 
         MESSAGE_PREFIX = messagesConfig.getString("Message.Prefix");
         MESSAGE_ERROR_PERMISSION = messagesConfig.getString("Message.Error.Permission").replace("{Prefix}", MESSAGE_PREFIX);
@@ -84,6 +84,10 @@ public class Config {
         } catch (IOException exception) {
             Logger.log(LogLevel.ERROR, "Failed to write config file " + file.getName());
         }
+    }
+
+    private static void setIfAbsent(YamlConfiguration configuration, String field, Object value) {
+        if(!configuration.isSet(field)) configuration.set(field, value);
     }
 
 }

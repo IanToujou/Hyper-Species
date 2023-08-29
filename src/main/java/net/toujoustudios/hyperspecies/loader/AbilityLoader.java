@@ -51,7 +51,6 @@ public class AbilityLoader {
         Ability.create(new AbilityStrikeOfCorruption());
         Ability.create(new AbilityBurningRain());
         Ability.create(new AbilityStrikingTrail());
-        // TODO: Dark Matter
         // TODO: Black Hole
         // TODO: Collapsing Universe
 
@@ -119,6 +118,17 @@ public class AbilityLoader {
         levitationAbilities.put(10, Ability.get("Cleanse"));
         levitationAbilities.put(11, Ability.get("Purify"));
         AbilityTree.create("Levitation", new AbilityTree(levitationAbilities, List.of(0,1)));
+
+        // Focus
+        Ability.create(new AbilityFocus());
+        Ability.create(new AbilityCosmicSight());
+        // TODO: Trinity
+        // TODO: Wrath Of The Sun
+
+        HashMap<Integer, Ability> focusAbilities = new HashMap<>();
+        focusAbilities.put(0, Ability.get("Focus"));
+        focusAbilities.put(1, Ability.get("Cosmic Sight"));
+        AbilityTree.create("Focus", new AbilityTree(focusAbilities));
 
         // Healing Nature
         Ability.create(new AbilityHealingNature());
