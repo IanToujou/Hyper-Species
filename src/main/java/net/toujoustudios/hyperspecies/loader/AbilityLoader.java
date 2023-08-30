@@ -2,10 +2,7 @@ package net.toujoustudios.hyperspecies.loader;
 
 import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.air.*;
-import net.toujoustudios.hyperspecies.ability.active.dark.AbilityEndblight;
-import net.toujoustudios.hyperspecies.ability.active.dark.AbilityEngulfingDarkness;
-import net.toujoustudios.hyperspecies.ability.active.dark.AbilityStrikeOfCorruption;
-import net.toujoustudios.hyperspecies.ability.active.dark.AbilityTotalAnnihilation;
+import net.toujoustudios.hyperspecies.ability.active.dark.*;
 import net.toujoustudios.hyperspecies.ability.active.earth.*;
 import net.toujoustudios.hyperspecies.ability.active.electro.*;
 import net.toujoustudios.hyperspecies.ability.active.fairy.*;
@@ -51,8 +48,6 @@ public class AbilityLoader {
         Ability.create(new AbilityStrikeOfCorruption());
         Ability.create(new AbilityBurningRain());
         Ability.create(new AbilityStrikingTrail());
-        // TODO: Black Hole
-        // TODO: Collapsing Universe
 
         HashMap<Integer, Ability> flameShotAbilities = new HashMap<>();
         flameShotAbilities.put(0, Ability.get("Flame Shot"));
@@ -67,6 +62,17 @@ public class AbilityLoader {
         totalAnnihilationAbilities.put(0, Ability.get("Total Annihilation"));
         totalAnnihilationAbilities.put(1, Ability.get("Strike Of Corruption"));
         AbilityTree.create("Total Annihilation", new AbilityTree(totalAnnihilationAbilities));
+
+        // Dark Matter
+        Ability.create(new AbilityDarkMatter());
+        Ability.create(new AbilityCollapsingUniverse());
+        Ability.create(new AbilityJetBlackSimulation());
+
+        HashMap<Integer, Ability> darkMatterAbilities = new HashMap<>();
+        darkMatterAbilities.put(0, Ability.get("Dark Matter"));
+        darkMatterAbilities.put(1, Ability.get("Collapsing Universe"));
+        darkMatterAbilities.put(2, Ability.get("Jet Black Simulation"));
+        AbilityTree.create("Dark Matter", new AbilityTree(darkMatterAbilities));
 
         // Enhancing Flame
         Ability.create(new AbilityEnhancingFlame());

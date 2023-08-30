@@ -105,7 +105,7 @@ permissions:
       hyperspecies.command.channel: true
       hyperspecies.command.message: true
   hyperspecies.group.moderator:
-    description: The administrator group. Grants all permissions.
+    description: The moderator group.
     children:
       hyperspecies.command.species: true
       hyperspecies.command.team: true

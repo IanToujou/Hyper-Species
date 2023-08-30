@@ -45,7 +45,7 @@ public class SpeciesCommand implements CommandExecutor {
     }
 
     public String getUsage() {
-        return "/setspecies <species> [<player>]";
+        return "/species";
     }
 
 }
