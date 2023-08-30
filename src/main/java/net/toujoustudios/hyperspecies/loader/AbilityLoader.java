@@ -122,12 +122,14 @@ public class AbilityLoader {
         // Focus
         Ability.create(new AbilityFocus());
         Ability.create(new AbilityCosmicSight());
-        // TODO: Trinity
-        // TODO: Wrath Of The Sun
+        Ability.create(new AbilityTrinity());
+        Ability.create(new AbilityWrathOfTheSun());
 
         HashMap<Integer, Ability> focusAbilities = new HashMap<>();
         focusAbilities.put(0, Ability.get("Focus"));
         focusAbilities.put(1, Ability.get("Cosmic Sight"));
+        focusAbilities.put(2, Ability.get("Trinity"));
+        focusAbilities.put(3, Ability.get("Wrath Of The Sun"));
         AbilityTree.create("Focus", new AbilityTree(focusAbilities));
 
         // Healing Nature

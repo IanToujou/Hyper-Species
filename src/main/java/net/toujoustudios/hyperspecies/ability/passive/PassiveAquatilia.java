@@ -18,18 +18,19 @@ public class PassiveAquatilia extends PassiveAbility {
     public void execute(Player player) {
 
         PlayerManager playerManager = PlayerManager.get(player);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 20 * 10, 0, false, false, true));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 20 * 10, 3, false, false, true));
 
         boolean inWater = player.getLocation().getBlock().getType() == Material.WATER || player.getLocation().subtract(0, 1, 0).getBlock().getType() == Material.WATER || player.getLocation().add(0, 1, 0).getBlock().getType() == Material.WATER || player.getLocation().add(1, 0, 0).getBlock().getType() == Material.WATER || player.getLocation().add(0, 0, 1).getBlock().getType() == Material.WATER || player.getLocation().subtract(1, 0, 0).getBlock().getType() == Material.WATER || player.getLocation().subtract(0, 0, 1).getBlock().getType() == Material.WATER;
 
         if (inWater) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.CONDUIT_POWER, 20 * 10, 2, false, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 1, false, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 20 * 10, 0, false, false, true));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 20 * 10, 1, false, false, true));
         } else {
             if (!player.getWorld().isThundering() && !player.getWorld().hasStorm()) {
                 // TODO: Remove in release
                 if (!player.getWorld().getName().contains("farmworld")) {
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 10, 2, false, false, true));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20 * 3, 2, false, false, true));
                 }
             }
         }
