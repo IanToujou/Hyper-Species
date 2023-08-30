@@ -92,7 +92,9 @@ public class EntityDamageListener implements Listener {
 
             }
 
-            event.setDamage(trueDamage);
+            if(trueDamage >= 20)
+            event.setDamage(0);
+            else event.setDamage(trueDamage);
             playerManager.setHealth(health - trueDamage);
 
             player.getWorld().spawnParticle(Particle.BLOCK_CRACK, player.getLocation().add(0, 0.5, 0), 50, Material.REDSTONE_BLOCK.createBlockData());
