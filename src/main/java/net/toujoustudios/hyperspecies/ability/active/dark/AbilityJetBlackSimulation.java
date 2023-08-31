@@ -4,18 +4,21 @@ import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.element.Element;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class AbilityJetBlackSimulation extends Ability {
+
+    private static final HashMap<UUID, Location> challengers = new HashMap<>();
+    private static final HashMap<UUID, BukkitTask> tasks = new HashMap<>();
 
     public AbilityJetBlackSimulation() {
 
@@ -28,7 +31,7 @@ public class AbilityJetBlackSimulation extends Ability {
                 1000,
                 Material.DRAGON_EGG,
                 5,
-                List.of("Demon"),
+                List.of("Wolf"),
                 12,
                 10
         );
@@ -49,13 +52,20 @@ public class AbilityJetBlackSimulation extends Ability {
         }
         if (target == null) return false;
 
+        PlayerManager playerManager = PlayerManager.get(player);
+        playerManager.setHealth(playerManager.getHealth()/4);
+
         Location location = target.getLocation();
         World world = location.getWorld();
         assert world != null;
         Block center = location.getBlock();
         int radius = 18;
         int outerRadius = radius+2;
+        int redstoneCount = 0;
         HashMap<Block, Material> blockTypes = new HashMap<>();
+
+        boolean oldRule = Boolean.TRUE.equals(location.getWorld().getGameRuleValue(GameRule.DO_MOB_SPAWNING));
+        location.getWorld().setGameRule(GameRule.DO_MOB_SPAWNING, false);
 
         for (int x = -outerRadius; x <= outerRadius; x++) {
             for (int y = -outerRadius; y <= outerRadius; y++) {
@@ -78,11 +88,16 @@ public class AbilityJetBlackSimulation extends Ability {
                         Block copy = world.getBlockAt(new Location(world, b.getX(), 250+y, b.getZ()));
                         if(b.getType() == Material.WATER) copy.setType(Material.BLACK_STAINED_GLASS);
                         else if(b.getType() == Material.AIR) copy.setType(Material.AIR);
-                        else if(b.getType() == Material.GRASS || b.getType() == Material.TALL_GRASS) {
+                        else if(b.getType() != Material.GRASS || b.getType() != Material.TALL_GRASS) {
                             int random = new Random().nextInt(3);
+                            int redstoneRandom = new Random().nextInt(3000);
                             if(random == 0) copy.setType(Material.BLACK_WOOL);
                             if(random == 1) copy.setType(Material.BLACK_TERRACOTTA);
                             if(random == 2) copy.setType(Material.BLACKSTONE);
+                            if(redstoneRandom == 0) {
+                                copy.setType(Material.REDSTONE_BLOCK);
+                                redstoneCount++;
+                            }
                         }
                     }
                 }
@@ -91,14 +106,45 @@ public class AbilityJetBlackSimulation extends Ability {
 
         target.teleport(new Location(world, location.getX(), 250, location.getZ()));
         target.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 120, 0, false, false, true));
+        target.sendMessage("§8You have been teleported to a pocket dimension...");
+
+        boolean canFindBlock = redstoneCount > 1;
+        if(canFindBlock) {
+            target.sendMessage("§8You need to find §c1 of " + redstoneCount + "§8 redstone blocks to escape.");
+        } else {
+            target.sendMessage("§8You need to wait for §d120s§8 to escape.");
+        }
 
         world.playSound(new Location(world, location.getX(), 250, location.getZ()), Sound.ENTITY_WITHER_DEATH, SoundCategory.MASTER, 5, 0f);
-
+        challengers.put(target.getUniqueId(), location);
         Player finalTarget = target;
-        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> finalTarget.teleport(location), 20L * 120);
-        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> blockTypes.forEach(Block::setType), 20L * 121);
+
+        BukkitTask task = new BukkitRunnable() {
+
+            @Override
+            public void run() {
+                finalTarget.teleport(location);
+                if(challengers.containsKey(finalTarget.getUniqueId())) finalTarget.damage(10000, player);
+            }
+
+        }.runTaskLater(HyperSpecies.getInstance(), 20L * 120);
+
+        tasks.put(target.getUniqueId(), task);
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
+            blockTypes.forEach(Block::setType);
+            location.getWorld().setGameRule(GameRule.DO_MOB_SPAWNING, oldRule);
+        }, 20L * 121);
 
         return true;
+    }
+
+    public static HashMap<UUID, Location> getChallengers() {
+        return challengers;
+    }
+
+    public static HashMap<UUID, BukkitTask> getTasks() {
+        return tasks;
     }
 
 }

@@ -224,6 +224,7 @@ public final class HyperSpecies extends JavaPlugin {
         pluginManager.registerEvents(new PlayerMoveListener(), this);
         pluginManager.registerEvents(new EntityPickupItemListener(), this);
         pluginManager.registerEvents(new PlayerQuitListener(), this);
+        pluginManager.registerEvents(new BlockBreakListener(), this);
     }
 
     public void registerCrafting() {

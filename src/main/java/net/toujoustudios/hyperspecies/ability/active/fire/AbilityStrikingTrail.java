@@ -31,7 +31,7 @@ public class AbilityStrikingTrail extends Ability {
                 100,
                 Material.RED_DYE,
                 5,
-                List.of("Demon", "Reptile", "Human"),
+                List.of("Demon", "Reptile", "Human", "Wolf"),
                 5,
                 3
         );

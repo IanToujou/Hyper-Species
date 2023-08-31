@@ -27,7 +27,7 @@ public class AbilityCollapsingUniverse extends Ability {
                 600,
                 Material.DRAGON_EGG,
                 5,
-                List.of("Demon", "Reptile"),
+                List.of("Demon", "Wolf"),
                 10,
                 8
         );
