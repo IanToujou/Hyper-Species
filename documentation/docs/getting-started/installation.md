@@ -11,12 +11,13 @@ and role-play features into Minecraft. The plugin is currently available and sup
 - Spigot
 - Paper
 
-??? warning "Other Versions"
+??? warning "Other Software"
 
     Hyper Species may work on other software as well, but we will not provide official support and fixes for these
     versions.
 
-The plugin needs to run on **Minecraft 1.20.x** or later.
+The plugin needs to run on **Minecraft 1.20.x** or later. HyperSpecies uses a lot of new particles, items and sounds
+from the newer versions. Older Minecraft versions would make the plugin boring and spells would lose variety.
 
 ## How To Install
 

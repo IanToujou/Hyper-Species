@@ -29,7 +29,7 @@ public class AbilityDarkMatter extends Ability {
                 300,
                 Material.ENDER_PEARL,
                 5,
-                List.of("Demon", "Reptile", "Wolf"),
+                List.of("Demon", "Reptile"),
                 6,
                 5
         );

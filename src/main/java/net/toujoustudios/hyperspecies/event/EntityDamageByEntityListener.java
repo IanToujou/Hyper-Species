@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.event;
 
+import net.toujoustudios.hyperspecies.ability.active.dark.AbilityCollapsingUniverse;
 import net.toujoustudios.hyperspecies.ability.active.earth.AbilityBornIntoStone;
 import net.toujoustudios.hyperspecies.ability.active.fire.AbilityDemonicRage;
 import net.toujoustudios.hyperspecies.ability.active.fire.AbilityEndblaze;
@@ -40,6 +41,11 @@ public class EntityDamageByEntityListener implements Listener {
             if (AbilityBornIntoStone.getPlayers().contains(player.getUniqueId())) {
                 event.setCancelled(true);
                 return;
+            }
+
+            if(AbilityCollapsingUniverse.getChallengers().containsKey(player.getUniqueId())) {
+                int times = AbilityCollapsingUniverse.getChallengers().get(player.getUniqueId());
+                AbilityCollapsingUniverse.getChallengers().put(player.getUniqueId(), times+1);
             }
 
             playerManager.setRegenerationCoolingDown(true);

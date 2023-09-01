@@ -11,10 +11,13 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.*;
 
 public class AbilityCollapsingUniverse extends Ability {
+
+    private static final HashMap<UUID, Integer> challengers = new HashMap<>();
 
     public AbilityCollapsingUniverse() {
 
@@ -27,7 +30,7 @@ public class AbilityCollapsingUniverse extends Ability {
                 600,
                 Material.DRAGON_EGG,
                 5,
-                List.of("Demon", "Wolf"),
+                List.of("Demon", "Reptile"),
                 10,
                 8
         );
@@ -60,10 +63,16 @@ public class AbilityCollapsingUniverse extends Ability {
         World world = location.getWorld();
         assert world != null;
 
+        if(world.isUltraWarm()) return false;
+        if(location.getY() > 200) return false;
+
         Block center = location.getBlock();
         int radius = 18;
         int outerRadius = radius+2;
         HashMap<Block, Material> blockTypes = new HashMap<>();
+
+        boolean oldRule = Boolean.TRUE.equals(location.getWorld().getGameRuleValue(GameRule.DO_MOB_SPAWNING));
+        location.getWorld().setGameRule(GameRule.DO_MOB_SPAWNING, false);
 
         for (int x = -outerRadius; x <= outerRadius; x++) {
             for (int y = -outerRadius; y <= outerRadius; y++) {
@@ -91,20 +100,46 @@ public class AbilityCollapsingUniverse extends Ability {
         }
 
         player.teleport(new Location(world, location.getX() + (double) radius / 4, 250-radius+2, location.getZ()));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * duration, 0, false, false, true));
         player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * duration, 0, false, false, true));
-        target.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * duration-radius+2, 0, false, false, true));
+        target.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * duration, 0, false, false, true));
         target.teleport(new Location(world, location.getX() - (double) radius / 4, 250, location.getZ()));
+        target.sendMessage("§8Welcome to the arena.");
+        target.sendMessage("§8You need to hit your enemy §c10§8 times to end the fight.");
+        player.sendMessage("§8Welcome to the arena.");
+        player.sendMessage("§8If you get hit §c10§8 times, the fight will end.");
 
         world.playSound(new Location(world, location.getX(), 250, location.getZ()), Sound.ENTITY_WITHER_DEATH, SoundCategory.MASTER, 5, 0.5f);
+        challengers.put(target.getUniqueId(), 0);
 
-        Player finalTarget = target;
-        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
-            player.teleport(playerLocation);
-            finalTarget.teleport(location);
-        }, 20L * duration);
+        final int[] count = {0};
+        final Player finalTarget = target;
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if(!challengers.containsKey(finalTarget.getUniqueId())) this.cancel();
+                if (count[0] >= 120 || challengers.get(finalTarget.getUniqueId()) >= 10) {
+                    player.teleport(playerLocation);
+                    player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
+                    player.removePotionEffect(PotionEffectType.NIGHT_VISION);
+                    finalTarget.removePotionEffect(PotionEffectType.NIGHT_VISION);
+                    finalTarget.teleport(location);
+                    challengers.remove(finalTarget.getUniqueId());
+                    blockTypes.forEach(Block::setType);
+                    location.getWorld().setGameRule(GameRule.DO_MOB_SPAWNING, oldRule);
+                    this.cancel();
+                }
+                count[0] += 1;
+            }
+        }.runTaskTimer(HyperSpecies.getInstance(), 20, 20);
+
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> blockTypes.forEach(Block::setType), 20L * (duration+1));
 
         return true;
+    }
+
+    public static HashMap<UUID, Integer> getChallengers() {
+        return challengers;
     }
 
 }

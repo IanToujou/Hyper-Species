@@ -11,14 +11,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scheduler.BukkitTask;
 
 import java.util.*;
 
 public class AbilityJetBlackSimulation extends Ability {
 
-    private static final HashMap<UUID, Location> challengers = new HashMap<>();
-    private static final HashMap<UUID, BukkitTask> tasks = new HashMap<>();
+    private static final ArrayList<UUID> challengers = new ArrayList<>();
 
     public AbilityJetBlackSimulation() {
 
@@ -51,6 +49,7 @@ public class AbilityJetBlackSimulation extends Ability {
                 target = all;
         }
         if (target == null) return false;
+        if(challengers.contains(target.getUniqueId())) return false;
 
         PlayerManager playerManager = PlayerManager.get(player);
         playerManager.setHealth(playerManager.getHealth()/4);
@@ -111,40 +110,41 @@ public class AbilityJetBlackSimulation extends Ability {
         boolean canFindBlock = redstoneCount > 1;
         if(canFindBlock) {
             target.sendMessage("§8You need to find §c1 of " + redstoneCount + "§8 redstone blocks to escape.");
+            target.sendMessage("§8If you don't, you will die.");
         } else {
             target.sendMessage("§8You need to wait for §d120s§8 to escape.");
         }
 
         world.playSound(new Location(world, location.getX(), 250, location.getZ()), Sound.ENTITY_WITHER_DEATH, SoundCategory.MASTER, 5, 0f);
-        challengers.put(target.getUniqueId(), location);
-        Player finalTarget = target;
+        world.playSound(location, Sound.ENTITY_WITHER_DEATH, SoundCategory.MASTER, 5, 0f);
+        world.spawnParticle(Particle.SMOKE_NORMAL, location, 50, 0.1, 0.1, 0.1);
+        challengers.add(target.getUniqueId());
 
-        BukkitTask task = new BukkitRunnable() {
-
+        final int[] count = {0};
+        final Player finalTarget = target;
+        new BukkitRunnable() {
             @Override
             public void run() {
-                finalTarget.teleport(location);
-                if(challengers.containsKey(finalTarget.getUniqueId())) finalTarget.damage(10000, player);
+                if(!challengers.contains(finalTarget.getUniqueId())) this.cancel();
+                if (count[0] >= 120) {
+                    finalTarget.teleport(location);
+                    finalTarget.removePotionEffect(PotionEffectType.NIGHT_VISION);
+                    if(!canFindBlock) finalTarget.damage(10000, player);
+                    challengers.remove(finalTarget.getUniqueId());
+                    blockTypes.forEach(Block::setType);
+                    location.getWorld().setGameRule(GameRule.DO_MOB_SPAWNING, oldRule);
+                    this.cancel();
+                }
+                count[0] += 1;
             }
-
-        }.runTaskLater(HyperSpecies.getInstance(), 20L * 120);
-
-        tasks.put(target.getUniqueId(), task);
-
-        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
-            blockTypes.forEach(Block::setType);
-            location.getWorld().setGameRule(GameRule.DO_MOB_SPAWNING, oldRule);
-        }, 20L * 121);
+        }.runTaskTimer(HyperSpecies.getInstance(), 20, 20);
 
         return true;
+
     }
 
-    public static HashMap<UUID, Location> getChallengers() {
+    public static ArrayList<UUID> getChallengers() {
         return challengers;
-    }
-
-    public static HashMap<UUID, BukkitTask> getTasks() {
-        return tasks;
     }
 
 }
