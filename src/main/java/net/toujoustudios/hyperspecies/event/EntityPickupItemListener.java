@@ -1,5 +1,6 @@
 package net.toujoustudios.hyperspecies.event;
 
+import net.toujoustudios.hyperspecies.ability.active.dark.AbilityJetBlackSimulation;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,6 +14,7 @@ public class EntityPickupItemListener implements Listener {
         if (!(event.getEntity() instanceof Player)) return;
         PlayerManager playerManager = PlayerManager.get((Player) event.getEntity());
         if (playerManager.isSelectingAbility()) event.setCancelled(true);
+        if (AbilityJetBlackSimulation.getChallengers().contains(event.getEntity().getUniqueId())) event.setCancelled(true);
     }
 
 }

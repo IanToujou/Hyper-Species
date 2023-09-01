@@ -63,6 +63,9 @@ public class AbilityJetBlackSimulation extends Ability {
         int redstoneCount = 0;
         HashMap<Block, Material> blockTypes = new HashMap<>();
 
+        if(world.isUltraWarm()) return false;
+        if(location.getY() > 200) return false;
+
         boolean oldRule = Boolean.TRUE.equals(location.getWorld().getGameRuleValue(GameRule.DO_MOB_SPAWNING));
         location.getWorld().setGameRule(GameRule.DO_MOB_SPAWNING, false);
 
@@ -89,7 +92,7 @@ public class AbilityJetBlackSimulation extends Ability {
                         else if(b.getType() == Material.AIR) copy.setType(Material.AIR);
                         else if(b.getType() != Material.GRASS || b.getType() != Material.TALL_GRASS) {
                             int random = new Random().nextInt(3);
-                            int redstoneRandom = new Random().nextInt(3000);
+                            int redstoneRandom = new Random().nextInt(2700);
                             if(random == 0) copy.setType(Material.BLACK_WOOL);
                             if(random == 1) copy.setType(Material.BLACK_TERRACOTTA);
                             if(random == 2) copy.setType(Material.BLACKSTONE);
@@ -107,7 +110,7 @@ public class AbilityJetBlackSimulation extends Ability {
         target.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * 120, 0, false, false, true));
         target.sendMessage("§8You have been teleported to a pocket dimension...");
 
-        boolean canFindBlock = redstoneCount > 1;
+        boolean canFindBlock = redstoneCount > 2;
         if(canFindBlock) {
             target.sendMessage("§8You need to find §c1 of " + redstoneCount + "§8 redstone blocks to escape.");
             target.sendMessage("§8If you don't, you will die.");
@@ -125,15 +128,16 @@ public class AbilityJetBlackSimulation extends Ability {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if(!challengers.contains(finalTarget.getUniqueId())) this.cancel();
-                if (count[0] >= 120) {
+                if(!challengers.contains(finalTarget.getUniqueId())) {
                     finalTarget.teleport(location);
                     finalTarget.removePotionEffect(PotionEffectType.NIGHT_VISION);
-                    if(!canFindBlock) finalTarget.damage(10000, player);
-                    challengers.remove(finalTarget.getUniqueId());
                     blockTypes.forEach(Block::setType);
                     location.getWorld().setGameRule(GameRule.DO_MOB_SPAWNING, oldRule);
-                    this.cancel();
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), this::cancel, 15);
+                }
+                if (count[0] >= 120) {
+                    if(canFindBlock) finalTarget.damage(10000, player);
+                    challengers.remove(finalTarget.getUniqueId());
                 }
                 count[0] += 1;
             }

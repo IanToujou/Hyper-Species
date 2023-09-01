@@ -57,6 +57,7 @@ public class AbilityCollapsingUniverse extends Ability {
                 target = all;
         }
         if (target == null) return false;
+        if(challengers.containsKey(target.getUniqueId())) return false;
 
         Location playerLocation = player.getLocation();
         Location location = target.getLocation();
@@ -117,23 +118,20 @@ public class AbilityCollapsingUniverse extends Ability {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if(!challengers.containsKey(finalTarget.getUniqueId())) this.cancel();
-                if (count[0] >= 120 || challengers.get(finalTarget.getUniqueId()) >= 10) {
+                if(!challengers.containsKey(finalTarget.getUniqueId())) {
                     player.teleport(playerLocation);
                     player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
                     player.removePotionEffect(PotionEffectType.NIGHT_VISION);
                     finalTarget.removePotionEffect(PotionEffectType.NIGHT_VISION);
                     finalTarget.teleport(location);
-                    challengers.remove(finalTarget.getUniqueId());
                     blockTypes.forEach(Block::setType);
                     location.getWorld().setGameRule(GameRule.DO_MOB_SPAWNING, oldRule);
-                    this.cancel();
+                    Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), this::cancel, 15);
                 }
+                if (count[0] >= duration || challengers.get(finalTarget.getUniqueId()) >= 10) challengers.remove(finalTarget.getUniqueId());
                 count[0] += 1;
             }
         }.runTaskTimer(HyperSpecies.getInstance(), 20, 20);
-
-        Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> blockTypes.forEach(Block::setType), 20L * (duration+1));
 
         return true;
     }
