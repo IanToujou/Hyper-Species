@@ -66,12 +66,10 @@ public class AbilityLoader {
         // Dark Matter
         Ability.create(new AbilityDarkMatter());
         Ability.create(new AbilityCollapsingUniverse());
-        Ability.create(new AbilityJetBlackSimulation());
 
         HashMap<Integer, Ability> darkMatterAbilities = new HashMap<>();
         darkMatterAbilities.put(0, Ability.get("Dark Matter"));
         darkMatterAbilities.put(1, Ability.get("Collapsing Universe"));
-        darkMatterAbilities.put(2, Ability.get("Jet Black Simulation"));
         AbilityTree.create("Dark Matter", new AbilityTree(darkMatterAbilities));
 
         // Enhancing Flame
@@ -175,6 +173,17 @@ public class AbilityLoader {
         quickGrowthAbilities.put(0, Ability.get("Quick Growth"));
         quickGrowthAbilities.put(1, Ability.get("Fertilizing Rain"));
         AbilityTree.create("Quick Growth", new AbilityTree(quickGrowthAbilities));
+
+        // The Hunt
+        Ability.create(new AbilityTheHunt());
+        Ability.create(new AbilityDarkestNight());
+        Ability.create(new AbilityJetBlackSimulation());
+
+        HashMap<Integer, Ability> theHuntAbilities = new HashMap<>();
+        theHuntAbilities.put(0, Ability.get("The Hunt"));
+        theHuntAbilities.put(1, Ability.get("Darkest Night"));
+        theHuntAbilities.put(2, Ability.get("Jet Black Simulation"));
+        AbilityTree.create("The Hunt", new AbilityTree(theHuntAbilities));
 
         // Flash
         Ability.create(new AbilityFlash());

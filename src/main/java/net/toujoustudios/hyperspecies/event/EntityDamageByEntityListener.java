@@ -1,6 +1,7 @@
 package net.toujoustudios.hyperspecies.event;
 
 import net.toujoustudios.hyperspecies.ability.active.dark.AbilityCollapsingUniverse;
+import net.toujoustudios.hyperspecies.ability.active.dark.AbilityTheHunt;
 import net.toujoustudios.hyperspecies.ability.active.earth.AbilityBornIntoStone;
 import net.toujoustudios.hyperspecies.ability.active.fire.AbilityDemonicRage;
 import net.toujoustudios.hyperspecies.ability.active.fire.AbilityEndblaze;
@@ -43,11 +44,6 @@ public class EntityDamageByEntityListener implements Listener {
                 return;
             }
 
-            if(AbilityCollapsingUniverse.getChallengers().containsKey(player.getUniqueId())) {
-                int times = AbilityCollapsingUniverse.getChallengers().get(player.getUniqueId());
-                AbilityCollapsingUniverse.getChallengers().put(player.getUniqueId(), times+1);
-            }
-
             playerManager.setRegenerationCoolingDown(true);
             playerManager.setHealthRegeneration(0);
 
@@ -65,6 +61,17 @@ public class EntityDamageByEntityListener implements Listener {
                         player.getWorld().spawnParticle(Particle.BLOCK_CRACK, player.getLocation(), 100, Material.REDSTONE_BLOCK.createBlockData());
                         dealer.getWorld().playSound(dealer.getLocation(), Sound.ENTITY_SLIME_DEATH, SoundCategory.MASTER, 1, 0.5f);
                     }
+                }
+
+                if(AbilityCollapsingUniverse.getChallengers().containsKey(player.getUniqueId())) {
+                    int times = AbilityCollapsingUniverse.getChallengers().get(player.getUniqueId());
+                    AbilityCollapsingUniverse.getChallengers().put(player.getUniqueId(), times+1);
+                }
+
+                if(AbilityTheHunt.getPlayers().contains(player.getUniqueId())) {
+                    dealer.giveExp(1);
+                    player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, dealer.getLocation(), 10, 0, 0, 0);
+                    player.getWorld().playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 2, 1f);
                 }
 
                 if (AbilityEnhancingFlame.getPlayers().contains(dealer.getUniqueId())) {

@@ -1,6 +1,7 @@
 package net.toujoustudios.hyperspecies.ability.active;
 
 import net.toujoustudios.hyperspecies.element.Element;
+import net.toujoustudios.hyperspecies.player.PlayerManager;
 import net.toujoustudios.hyperspecies.species.Species;
 import net.toujoustudios.hyperspecies.species.SubSpecies;
 import org.bukkit.Material;
@@ -196,14 +197,14 @@ public abstract class Ability {
         fields.put(field, list);
     }
 
-    public List<Integer> getField(AbilityField field) {
-        return fields.getOrDefault(field, Collections.emptyList());
-    }
-
     public int getFieldValue(AbilityField field, int level) {
         if (fields.get(field) == null || fields.get(field).isEmpty()) return 0;
         if (fields.get(field).size() < level) return fields.get(field).get(fields.get(field).size() - 1);
         return fields.get(field).get(level);
+    }
+
+    public int getFieldValue(AbilityField field, Player player) {
+        return getFieldValue(field, PlayerManager.get(player).getAbilityLevel(this));
     }
 
     public List<String> getSpecies() {
