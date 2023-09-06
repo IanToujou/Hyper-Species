@@ -68,6 +68,7 @@ public class AbilityTheHunt extends Ability {
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> players.remove(finalTarget.getUniqueId()), 20L * duration);
 
         return true;
+
     }
 
     public static ArrayList<UUID> getPlayers() {

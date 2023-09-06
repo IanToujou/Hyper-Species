@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public class TeamLoader {
 
-    private static final YamlConfiguration teamConfig = Config.getConfigFile("teams.yml");
+    private static final YamlConfiguration teamConfig = Config.getConfigFile("data/teams.yml");
 
     public static void initialize() {
 
@@ -26,7 +26,7 @@ public class TeamLoader {
             TeamStatus status = TeamStatus.INVITE;
             if (statusString != null) status = TeamStatus.valueOf(statusString.toUpperCase());
             ArrayList<UUID> members = new ArrayList<>();
-            if (teamConfig.getStringList("Data." + team + ".Members").size() > 0)
+            if (!teamConfig.getStringList("Data." + team + ".Members").isEmpty())
                 teamConfig.getStringList("Data." + team + ".Members").forEach(member -> members.add(UUID.fromString(member)));
             Team.createTeam(team, description, color, (owner != null ? UUID.fromString(owner) : null), status, members);
 

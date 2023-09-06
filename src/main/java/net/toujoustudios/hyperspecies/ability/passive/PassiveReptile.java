@@ -24,8 +24,12 @@ public class PassiveReptile extends PassiveAbility {
                 Biome.DESERT
         );
 
-        if (player.getLocation().getBlock().getType() == Material.WATER || speedBiomes.contains(player.getLocation().getBlock().getBiome())) {
+        if (player.getLocation().getBlock().getType() == Material.WATER) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 20 * 10, 0, false, false, true));
+        }
+
+        if(speedBiomes.contains(player.getLocation().getBlock().getBiome())) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 0, false, false, true));
         }
 
         // Slowness in cold biomes

@@ -4,7 +4,6 @@ import net.toujoustudios.hyperspecies.ability.active.Ability;
 import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
 import net.toujoustudios.hyperspecies.player.PlayerManager;
-import net.toujoustudios.hyperspecies.util.BlockUtil;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
@@ -222,7 +221,7 @@ public class ProjectileHitListener implements Listener {
             if (ability == null) return;
 
             PlayerManager playerManager = PlayerManager.get(player);
-            projectile.getWorld().spawnEntity(location, EntityType.LIGHTNING);
+            projectile.getWorld().strikeLightningEffect(location);
             projectile.getWorld().spawnParticle(Particle.FLASH, location, 100, 0.1, 0.1, 0.1);
 
             int damage = ability.getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(ability));
@@ -247,7 +246,7 @@ public class ProjectileHitListener implements Listener {
             if (ability == null) return;
 
             PlayerManager playerManager = PlayerManager.get(player);
-            projectile.getWorld().spawnEntity(location, EntityType.LIGHTNING);
+            projectile.getWorld().strikeLightningEffect(location);
             projectile.getWorld().spawnParticle(Particle.FLASH, location, 100, 0.1, 0.1, 0.1);
 
             int damage = ability.getFieldValue(AbilityField.DAMAGE, playerManager.getAbilityLevel(ability));

@@ -9,7 +9,7 @@ import java.util.*;
 public class Team {
 
     private static final HashMap<String, Team> teams = new HashMap<>();
-    private static final YamlConfiguration teamConfig = Config.getConfigFile("teams.yml");
+    private static final YamlConfiguration teamConfig = Config.getConfigFile("data/teams.yml");
 
     private final ArrayList<String> oldNames = new ArrayList<>();
     private String name;
@@ -17,7 +17,7 @@ public class Team {
     private String color;
     private UUID owner;
     private TeamStatus status;
-    private ArrayList<UUID> members;
+    private final ArrayList<UUID> members;
 
     public Team(String name, String description, String color, UUID owner, TeamStatus status, ArrayList<UUID> members) {
         oldNames.add(name);
@@ -33,17 +33,17 @@ public class Team {
 
         oldNames.forEach(oldName -> teamConfig.set("Data." + oldName, null));
 
-        Config.saveToFile(teamConfig, "teams.yml");
+        Config.saveToFile(teamConfig, "data/teams.yml");
 
-        if (owner == null && members.size() > 0) {
+        if (owner == null && !members.isEmpty()) {
             int random = new Random().nextInt(members.size());
             owner = members.get(random);
             members.remove(random);
         }
 
-        if (owner == null && members.size() == 0) {
+        if (owner == null && members.isEmpty()) {
             teamConfig.set("Data." + name, null);
-            Config.saveToFile(teamConfig, "teams.yml");
+            Config.saveToFile(teamConfig, "data/teams.yml");
         } else {
             teamConfig.set("Data." + name + ".Color", color);
             teamConfig.set("Data." + name + ".Description", description);
@@ -52,7 +52,7 @@ public class Team {
             ArrayList<String> memberList = new ArrayList<>();
             members.forEach(member -> memberList.add(member.toString()));
             teamConfig.set("Data." + name + ".Members", memberList);
-            Config.saveToFile(teamConfig, "teams.yml");
+            Config.saveToFile(teamConfig, "data/teams.yml");
         }
 
     }
@@ -63,9 +63,9 @@ public class Team {
     }
 
     public static void saveAll() {
-        if (teams == null || teams.size() == 0) {
+        if (teams == null || teams.isEmpty()) {
             teamConfig.set("List", null);
-            Config.saveToFile(teamConfig, "teams.yml");
+            Config.saveToFile(teamConfig, "data/teams.yml");
             return;
         }
         ArrayList<String> list = new ArrayList<>();
@@ -74,7 +74,7 @@ public class Team {
             if (teams.get(entry.getKey()).getOwner() != null) list.add(entry.getKey());
         }
         teamConfig.set("List", list);
-        Config.saveToFile(teamConfig, "teams.yml");
+        Config.saveToFile(teamConfig, "data/teams.yml");
     }
 
     public static Team getTeam(String name) {
@@ -133,9 +133,7 @@ public class Team {
     }
 
     public void addMember(UUID uuid) {
-        ArrayList<UUID> newMembers = members;
-        newMembers.add(uuid);
-        members = newMembers;
+        members.add(uuid);
     }
 
     public void removeMember(UUID uuid) {
