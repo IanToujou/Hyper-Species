@@ -11,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 
 public class AbilitySlashingWind extends Ability {
@@ -23,8 +22,8 @@ public class AbilitySlashingWind extends Ability {
                 List.of("§8Throw slashing strikes through the air,", "§8dealing " + Element.AIR.getEmoji() + " {damage}§8 to enemies."),
                 Element.AIR,
                 AbilityType.DAMAGE,
-                8,
-                180,
+                6,
+                100,
                 Material.RABBIT_FOOT,
                 8,
                 List.of("Angel", "Feline", "Wolf"),

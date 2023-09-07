@@ -119,7 +119,7 @@ public class ProjectileHitListener implements Listener {
             double radiusSquared = range * range;
             players.forEach(all -> {
                 if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= radiusSquared) {
-                    all.damage(damage, projectile);
+                    all.damage(damage, player);
                 }
             });
 

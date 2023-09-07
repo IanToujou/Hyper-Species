@@ -185,6 +185,13 @@ public class AbilityLoader {
         theHuntAbilities.put(2, Ability.get("Jet Black Simulation"));
         AbilityTree.create("The Hunt", new AbilityTree(theHuntAbilities));
 
+        // Bite
+        Ability.create(new AbilityBite());
+
+        HashMap<Integer, Ability> biteAbilities = new HashMap<>();
+        biteAbilities.put(0, Ability.get("Bite"));
+        AbilityTree.create("Bite", new AbilityTree(biteAbilities));
+
         // Flash
         Ability.create(new AbilityFlash());
         Ability.create(new AbilityLightspeed());
