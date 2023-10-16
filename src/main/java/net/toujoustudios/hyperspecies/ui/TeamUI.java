@@ -51,7 +51,7 @@ public class TeamUI implements Listener {
             } else if (material == Material.NETHER_STAR) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
                 creatingTeamPlayers.add(player.getUniqueId());
-                player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in the §bname§7 of the new team§8. §7Type §bcancel§7 to cancel§8.");
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in the§b name§7 of the new team§8. §7Type§b cancel§7 to cancel§8.");
                 player.closeInventory();
             } else if (material == Material.BARRIER) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
@@ -125,8 +125,8 @@ public class TeamUI implements Listener {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
                     player.sendMessage(Config.MESSAGE_PREFIX + " §7You sent a join request to the team§8.");
                     target.sendMessage(Config.MESSAGE_PREFIX + " §e" + player.getName() + "§7 wants to join your team§8.");
-                    target.sendMessage(Config.MESSAGE_PREFIX + " §7Please use §b/team accept " + player.getName() + "§7 to §aaccept§8.");
-                    target.sendMessage(Config.MESSAGE_PREFIX + " §7Or use §b/team deny " + player.getName() + "§7 to §cdeny§8.");
+                    target.sendMessage(Config.MESSAGE_PREFIX + " §7Please use §b/team accept " + player.getName() + "§7 to§a accept§8.");
+                    target.sendMessage(Config.MESSAGE_PREFIX + " §7Or use §b/team deny " + player.getName() + "§7 to§c deny§8.");
                     teamJoinRequests.put(player.getUniqueId(), team.getName());
 
                 } else {
@@ -206,7 +206,7 @@ public class TeamUI implements Listener {
             } else if (material == Material.FIRE_CHARGE) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
-                player.sendMessage(Config.MESSAGE_PREFIX + " §cYou kicked §e" + target.getName() + " §cout of the team§8.");
+                player.sendMessage(Config.MESSAGE_PREFIX + " §cYou kicked §e" + target.getName() + "§c out of the team§8.");
                 playerManager.getTeam().removeMember(target.getUniqueId());
                 targetManager.setTeam(null);
                 player.closeInventory();
@@ -214,7 +214,7 @@ public class TeamUI implements Listener {
             } else if (material == Material.MAGMA_CREAM) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
-                player.sendMessage(Config.MESSAGE_PREFIX + " §7You promoted §e" + target.getName() + " §7to be the owner§8.");
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7You promoted §e" + target.getName() + "§7 to be the owner§8.");
                 playerManager.getTeam().setOwner(target.getUniqueId());
                 playerManager.getTeam().removeMember(target.getUniqueId());
                 playerManager.getTeam().addMember(player.getUniqueId());
@@ -243,14 +243,14 @@ public class TeamUI implements Listener {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.closeInventory();
-                player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in a new team name§8. §7Type §bcancel§7 to cancel§8.");
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in a new team name§8. §7Type§b cancel§7 to cancel§8.");
                 changingNamePlayers.add(player.getUniqueId());
 
             } else if (material == Material.MINECART) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.closeInventory();
-                player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in a new team description§8. §7Type §bcancel§7 to cancel§8.");
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7Please type in a new team description§8. §7Type§b cancel§7 to cancel§8.");
                 changingDescriptionPlayers.add(player.getUniqueId());
 
             } else if (material == Material.PURPLE_DYE) {
@@ -275,17 +275,17 @@ public class TeamUI implements Listener {
 
             } else if (material == Material.GRAY_DYE) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
-                player.sendMessage(Config.MESSAGE_PREFIX + " §7You changed the status to§8: §cClosed§8.");
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7You changed the status to§8:§c Closed§8.");
                 playerManager.getTeam().setStatus(TeamStatus.CLOSED);
                 player.closeInventory();
             } else if (material == Material.PURPLE_DYE) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
-                player.sendMessage(Config.MESSAGE_PREFIX + " §7You changed the status to§8: §dInvite§8.");
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7You changed the status to§8:§d Invite§8.");
                 playerManager.getTeam().setStatus(TeamStatus.INVITE);
                 player.closeInventory();
             } else if (material == Material.LIME_DYE) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
-                player.sendMessage(Config.MESSAGE_PREFIX + " §7You changed the status to§8: §aOpen§8.");
+                player.sendMessage(Config.MESSAGE_PREFIX + " §7You changed the status to§8:§a Open§8.");
                 playerManager.getTeam().setStatus(TeamStatus.OPEN);
                 player.closeInventory();
             }
@@ -417,12 +417,12 @@ public class TeamUI implements Listener {
             }
             if (!matcher.matches()) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
-                player.sendMessage(Config.MESSAGE_PREFIX + " §cThe team name can only contain letters and spaces§8.");
+                player.sendMessage(Config.MESSAGE_PREFIX + " §cThe team description can only contain letters and spaces§8.");
                 return;
             }
-            if (description.length() > 150) {
+            if (description.length() > 30) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BIT, 1, 0.5f);
-                player.sendMessage(Config.MESSAGE_PREFIX + " §cThe description cannot be longer than 150 characters§8.");
+                player.sendMessage(Config.MESSAGE_PREFIX + " §cThe description cannot be longer than 30 characters§8.");
                 return;
             }
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1.5f);
@@ -515,10 +515,7 @@ public class TeamUI implements Listener {
                     ArrayList<String> lore = new ArrayList<>();
 
                     if (team.getDescription() != null && !team.getDescription().isEmpty()) {
-                        String[] descriptionLines = team.getDescription().split(" ");
-                        for (String descriptionLine : descriptionLines) {
-                            lore.add("§7" + descriptionLine);
-                        }
+                        lore.add("§7" + team.getDescription());
                     } else {
                         lore.add("§8No Description");
                     }

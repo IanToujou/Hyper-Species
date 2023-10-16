@@ -148,7 +148,7 @@ public final class HyperSpecies extends JavaPlugin {
                 playerManager.setMana(playerManager.getMana() + playerManager.getManaRegeneration());
             } else playerManager.setMana(playerManager.getMaxMana());
 
-            if (!player.isDead() && playerManager.getHealth() > 0) {
+            if (!player.isDead() && playerManager.getHealth() > 0 && player.getFoodLevel() > 15) {
                 if (!playerManager.isRegenerationCoolingDown() && playerManager.getHealthRegeneration() <= 0) {
                     playerManager.setHealthRegeneration(0.2);
                 }
@@ -271,14 +271,6 @@ public final class HyperSpecies extends JavaPlugin {
         molotovCocktailRecipe.addIngredient(Material.PAPER);
         molotovCocktailRecipe.addIngredient(Material.LAVA_BUCKET);
         Bukkit.addRecipe(molotovCocktailRecipe);
-
-        ShapedRecipe animeGirlFluidsRecipe = new ShapedRecipe(new NamespacedKey(this, "animeGirlFluids"), ItemList.ANIME_GIRL_FLUIDS);
-        animeGirlFluidsRecipe.shape("AAA", "ABA", "DCD");
-        animeGirlFluidsRecipe.setIngredient('A', Material.DIAMOND);
-        animeGirlFluidsRecipe.setIngredient('B', Material.GLASS_BOTTLE);
-        animeGirlFluidsRecipe.setIngredient('C', Material.WATER_BUCKET);
-        animeGirlFluidsRecipe.setIngredient('D', Material.NETHERITE_INGOT);
-        Bukkit.addRecipe(animeGirlFluidsRecipe);
 
     }
 
