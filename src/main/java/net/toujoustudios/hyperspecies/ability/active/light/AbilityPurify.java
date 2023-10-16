@@ -49,7 +49,7 @@ public class AbilityPurify extends Ability {
         );
 
         player.getActivePotionEffects().forEach(effect -> {
-            if(negativeTypes.contains(effect.getType())) player.removePotionEffect(effect.getType());
+            if (negativeTypes.contains(effect.getType())) player.removePotionEffect(effect.getType());
         });
         player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, player.getLocation(), 50, 0.1, 0.1, 0.1);
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 2, 2f);

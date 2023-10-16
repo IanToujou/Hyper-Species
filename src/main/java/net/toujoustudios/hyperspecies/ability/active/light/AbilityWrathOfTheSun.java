@@ -56,14 +56,14 @@ public class AbilityWrathOfTheSun extends Ability {
                 target = all;
         }
 
-        if(target == null) return false;
+        if (target == null) return false;
 
         player.getWorld().playSound(player.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, SoundCategory.MASTER, 5, 1f);
 
         Player finalTarget = target;
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
-            finalTarget.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, finalTarget.getLocation().add(0,10,0), 50, 1, 20, 1);
+            finalTarget.getWorld().spawnParticle(Particle.EXPLOSION_HUGE, finalTarget.getLocation().add(0, 10, 0), 50, 1, 20, 1);
             finalTarget.getWorld().playSound(finalTarget.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_IMPACT, SoundCategory.MASTER, 3, 1f);
             finalTarget.getWorld().playSound(finalTarget.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 3, 1f);
             finalTarget.damage(damage, player);

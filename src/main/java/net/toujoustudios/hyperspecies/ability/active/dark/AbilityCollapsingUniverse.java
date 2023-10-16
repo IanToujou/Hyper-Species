@@ -13,7 +13,10 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 public class AbilityCollapsingUniverse extends Ability {
 
@@ -57,19 +60,19 @@ public class AbilityCollapsingUniverse extends Ability {
                 target = all;
         }
         if (target == null) return false;
-        if(challengers.containsKey(target.getUniqueId())) return false;
+        if (challengers.containsKey(target.getUniqueId())) return false;
 
         Location playerLocation = player.getLocation();
         Location location = target.getLocation();
         World world = location.getWorld();
         assert world != null;
 
-        if(world.isUltraWarm()) return false;
-        if(location.getY() > 200) return false;
+        if (world.isUltraWarm()) return false;
+        if (location.getY() > 200) return false;
 
         Block center = location.getBlock();
         int radius = 18;
-        int outerRadius = radius+2;
+        int outerRadius = radius + 2;
         HashMap<Block, Material> blockTypes = new HashMap<>();
 
         boolean oldRule = Boolean.TRUE.equals(location.getWorld().getGameRuleValue(GameRule.DO_MOB_SPAWNING));
@@ -80,7 +83,7 @@ public class AbilityCollapsingUniverse extends Ability {
                 for (int z = -outerRadius; z <= outerRadius; z++) {
                     Block b = center.getRelative(x, y, z);
                     if (center.getLocation().distance(b.getLocation()) <= outerRadius) {
-                        Block copy = world.getBlockAt(new Location(world, b.getX(), 250+y, b.getZ()));
+                        Block copy = world.getBlockAt(new Location(world, b.getX(), 250 + y, b.getZ()));
                         blockTypes.put(copy, copy.getType());
                         copy.setType(Material.BLACK_CONCRETE);
                     }
@@ -93,14 +96,14 @@ public class AbilityCollapsingUniverse extends Ability {
                 for (int z = -radius; z <= radius; z++) {
                     Block b = center.getRelative(x, y, z);
                     if (center.getLocation().distance(b.getLocation()) <= radius) {
-                        Block copy = world.getBlockAt(new Location(world, b.getX(), 250+y, b.getZ()));
+                        Block copy = world.getBlockAt(new Location(world, b.getX(), 250 + y, b.getZ()));
                         copy.setType(Material.AIR);
                     }
                 }
             }
         }
 
-        player.teleport(new Location(world, location.getX() + (double) radius / 4, 250-radius+2, location.getZ()));
+        player.teleport(new Location(world, location.getX() + (double) radius / 4, 250 - radius + 2, location.getZ()));
         player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * duration, 0, false, false, true));
         player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * duration, 0, false, false, true));
         target.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 20 * duration, 0, false, false, true));
@@ -118,7 +121,7 @@ public class AbilityCollapsingUniverse extends Ability {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if(!challengers.containsKey(finalTarget.getUniqueId())) {
+                if (!challengers.containsKey(finalTarget.getUniqueId())) {
                     player.teleport(playerLocation);
                     player.removePotionEffect(PotionEffectType.INCREASE_DAMAGE);
                     player.removePotionEffect(PotionEffectType.NIGHT_VISION);
@@ -128,7 +131,8 @@ public class AbilityCollapsingUniverse extends Ability {
                     location.getWorld().setGameRule(GameRule.DO_MOB_SPAWNING, oldRule);
                     Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), this::cancel, 15);
                 }
-                if (count[0] >= duration || challengers.get(finalTarget.getUniqueId()) >= 10) challengers.remove(finalTarget.getUniqueId());
+                if (count[0] >= duration || challengers.get(finalTarget.getUniqueId()) >= 10)
+                    challengers.remove(finalTarget.getUniqueId());
                 count[0] += 1;
             }
         }.runTaskTimer(HyperSpecies.getInstance(), 20, 20);

@@ -1,9 +1,13 @@
 [Modrinth]: https://modrinth.com/
+
 [CurseForge]: https://www.curseforge.com/
+
 [configuration guide]: /getting-started/configuration
 
 # Installation
+
 ## About
+
 Hyper Species is a powerful plugin that brings custom spells, species, weapons, abilities and a variety of fantasy
 and role-play features into Minecraft. The plugin is currently available and supported for the following software:
 

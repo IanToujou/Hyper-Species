@@ -87,7 +87,7 @@ public class Config {
     }
 
     private static void setIfAbsent(YamlConfiguration configuration, String field, Object value) {
-        if(!configuration.isSet(field)) configuration.set(field, value);
+        if (!configuration.isSet(field)) configuration.set(field, value);
     }
 
 }

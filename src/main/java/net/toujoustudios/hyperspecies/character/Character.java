@@ -21,7 +21,7 @@ public class Character {
         Inventory inventory = Bukkit.createInventory(null, 9 * 5, "Your Character");
         for (int i = 0; i < inventory.getSize(); i++) inventory.setItem(i, ItemListUI.FILLER);
 
-        String characterName = (playerManager.name()!=null?playerManager.name():player.getName());
+        String characterName = (playerManager.name() != null ? playerManager.name() : player.getName());
 
         ItemStack character = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta characterMeta = (SkullMeta) character.getItemMeta();

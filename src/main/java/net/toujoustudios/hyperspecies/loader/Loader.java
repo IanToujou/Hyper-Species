@@ -19,7 +19,8 @@ public class Loader {
     /**
      * Static class cannot be initialized.
      */
-    private Loader() {}
+    private Loader() {
+    }
 
     public static void load() {
         preInit();

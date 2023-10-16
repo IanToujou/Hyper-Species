@@ -46,7 +46,7 @@ public class AbilityFly extends Ability {
         player.setFlying(true);
         Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), () -> {
             player.setFlying(false);
-            if(player.getGameMode() != GameMode.CREATIVE) player.setAllowFlight(false);
+            if (player.getGameMode() != GameMode.CREATIVE) player.setAllowFlight(false);
         }, 20L * duration);
         return true;
     }

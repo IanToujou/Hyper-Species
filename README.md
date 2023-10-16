@@ -8,7 +8,8 @@
 
 ## 📝 DESCRIPTION
 
-HyperSpecies brings species into Minecraft, and much more! The goal of this project is to make Minecraft fantasy-styled roleplay possible and interesting by adding new species, or classes into Minecraft.
+HyperSpecies brings species into Minecraft, and much more! The goal of this project is to make Minecraft fantasy-styled
+roleplay possible and interesting by adding new species, or classes into Minecraft.
 
 ## 🔥 FEATURES
 
@@ -22,6 +23,7 @@ HyperSpecies brings species into Minecraft, and much more! The goal of this proj
 
 ## 🛠️ SUPPORT
 
-If you have any questions or problems regarding this project, you can reach me via any linked social media account on my profile. Just click the button below!
+If you have any questions or problems regarding this project, you can reach me via any linked social media account on my
+profile. Just click the button below!
 
 [![Support](https://img.shields.io/badge/-Support-teal?style=for-the-badge&logo=github)](https://github.com/IanToujou)

@@ -17,14 +17,14 @@ public class BlockBreakListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
-        if(event.getBlock().getType() == Material.REDSTONE_BLOCK) {
+        if (event.getBlock().getType() == Material.REDSTONE_BLOCK) {
             PlayerManager playerManager = PlayerManager.get(player);
-            if(playerManager.getSpecies()==null) return;
+            if (playerManager.getSpecies() == null) return;
             ArrayList<UUID> challengers = AbilityJetBlackSimulation.getChallengers();
             challengers.remove(player.getUniqueId());
         }
         if (AbilityJetBlackSimulation.getChallengers().contains(player.getUniqueId()) || AbilityCollapsingUniverse.getChallengers().containsKey(player.getUniqueId())) {
-            if(event.getBlock().getType() == Material.BLACK_CONCRETE) event.setCancelled(true);
+            if (event.getBlock().getType() == Material.BLACK_CONCRETE) event.setCancelled(true);
         }
     }
 

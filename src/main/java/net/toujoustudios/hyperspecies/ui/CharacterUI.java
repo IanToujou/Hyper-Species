@@ -40,7 +40,7 @@ public class CharacterUI implements Listener {
             Material material = event.getCurrentItem().getType();
             String name = event.getCurrentItem().getItemMeta().getDisplayName();
 
-            if(material == Material.NAME_TAG) {
+            if (material == Material.NAME_TAG) {
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_HAT, 1, 0.5f);
                 player.closeInventory();

@@ -15,7 +15,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
 
 public class AbilityTheHunt extends Ability {
 
@@ -53,12 +56,14 @@ public class AbilityTheHunt extends Ability {
         Player target = null;
         double radiusSquared = 5 * 5;
         for (Player all : HyperSpecies.getInstance().getServer().getOnlinePlayers()) {
-            if (all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared) target = all;
+            if (all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared)
+                target = all;
         }
         if (target == null) return false;
-        if(players.contains(target.getUniqueId())) return false;
+        if (players.contains(target.getUniqueId())) return false;
         PlayerManager manager = PlayerManager.get(target);
-        if(manager.getTeam() != null && playerManager.getTeam() != null && manager.getTeam() == playerManager.getTeam()) return false;
+        if (manager.getTeam() != null && playerManager.getTeam() != null && manager.getTeam() == playerManager.getTeam())
+            return false;
 
         players.add(target.getUniqueId());
         target.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 20 * duration, 0, false, false, true));

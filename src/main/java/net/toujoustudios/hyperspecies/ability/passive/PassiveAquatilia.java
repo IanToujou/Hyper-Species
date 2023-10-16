@@ -37,7 +37,7 @@ public class PassiveAquatilia extends PassiveAbility {
 
         if (player.getWorld().getTime() < 12500 || player.getWorld().getTime() > 23500) {
             if (player.getWorld().getEnvironment() != World.Environment.THE_END) {
-                if(!inWater) {
+                if (!inWater) {
                     Block block = player.getWorld().getHighestBlockAt(player.getLocation());
                     if (!player.getWorld().getName().contains("farmworld")) {
                         if (block.getType() == Material.AIR || block.getLocation().getY() < player.getLocation().getY()) {

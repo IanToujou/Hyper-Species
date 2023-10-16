@@ -121,7 +121,7 @@ public class AbilityLoader {
         levitationAbilities.put(3, Ability.get("Za Warudo"));
         levitationAbilities.put(10, Ability.get("Cleanse"));
         levitationAbilities.put(11, Ability.get("Purify"));
-        AbilityTree.create("Levitation", new AbilityTree(levitationAbilities, List.of(0,1)));
+        AbilityTree.create("Levitation", new AbilityTree(levitationAbilities, List.of(0, 1)));
 
         // Focus
         Ability.create(new AbilityFocus());

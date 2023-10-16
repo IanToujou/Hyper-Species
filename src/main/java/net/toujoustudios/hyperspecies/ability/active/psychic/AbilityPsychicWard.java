@@ -69,7 +69,8 @@ public class AbilityPsychicWard extends Ability {
                     double radiusSquared = 8 * 8;
                     for (Player all : players) {
                         if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared) {
-                            if(all != player) all.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * duration, 0, false, false, true));
+                            if (all != player)
+                                all.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 20 * duration, 0, false, false, true));
                         }
                     }
                 }

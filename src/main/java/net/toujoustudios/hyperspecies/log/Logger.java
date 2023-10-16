@@ -12,13 +12,14 @@ public class Logger {
     /**
      * Static class cannot be initialized.
      */
-    private Logger() {}
+    private Logger() {
+    }
 
     /**
      * Logs a provided message with a specific level. If the level is {@link LogLevel#DEBUG}, the logger will
      * only show something if debug more is turned on in the configuration file.
      *
-     * @param level The level of the output.
+     * @param level   The level of the output.
      * @param message The message that should be displayed.
      */
     public static void log(LogLevel level, String message) {

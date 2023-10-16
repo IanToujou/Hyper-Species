@@ -92,8 +92,8 @@ public class EntityDamageListener implements Listener {
 
             }
 
-            if(trueDamage >= 20)
-            event.setDamage(0);
+            if (trueDamage >= 20)
+                event.setDamage(0);
             else event.setDamage(trueDamage);
             playerManager.setHealth(health - trueDamage);
 

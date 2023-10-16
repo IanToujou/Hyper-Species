@@ -59,7 +59,7 @@ public class AbilityTrinity extends Ability {
                 target = all;
         }
 
-        if(target == null) return false;
+        if (target == null) return false;
 
         player.getWorld().playSound(player.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, SoundCategory.MASTER, 5, 2f);
 
@@ -70,7 +70,7 @@ public class AbilityTrinity extends Ability {
 
             @Override
             public void run() {
-                if(i >= 3) {
+                if (i >= 3) {
                     cancel();
                     return;
                 }

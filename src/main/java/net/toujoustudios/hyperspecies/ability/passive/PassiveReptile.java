@@ -28,7 +28,7 @@ public class PassiveReptile extends PassiveAbility {
             player.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE, 20 * 10, 0, false, false, true));
         }
 
-        if(speedBiomes.contains(player.getLocation().getBlock().getBiome())) {
+        if (speedBiomes.contains(player.getLocation().getBlock().getBiome())) {
             player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 10, 0, false, false, true));
         }
 

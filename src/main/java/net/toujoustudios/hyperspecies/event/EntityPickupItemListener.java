@@ -14,7 +14,8 @@ public class EntityPickupItemListener implements Listener {
         if (!(event.getEntity() instanceof Player)) return;
         PlayerManager playerManager = PlayerManager.get((Player) event.getEntity());
         if (playerManager.isSelectingAbility()) event.setCancelled(true);
-        if (AbilityJetBlackSimulation.getChallengers().contains(event.getEntity().getUniqueId())) event.setCancelled(true);
+        if (AbilityJetBlackSimulation.getChallengers().contains(event.getEntity().getUniqueId()))
+            event.setCancelled(true);
     }
 
 }

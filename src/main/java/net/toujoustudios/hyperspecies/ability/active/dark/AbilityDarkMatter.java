@@ -57,11 +57,11 @@ public class AbilityDarkMatter extends Ability {
 
             @Override
             public void run() {
-                world.spawnParticle(Particle.SMOKE_NORMAL, location.clone().add(0,1,0), 40, 0.1, 0.1, 0.1);
+                world.spawnParticle(Particle.SMOKE_NORMAL, location.clone().add(0, 1, 0), 40, 0.1, 0.1, 0.1);
                 player.getWorld().playSound(player.getLocation(), Sound.ENTITY_WITHER_AMBIENT, SoundCategory.MASTER, 5, 0.6f);
                 Collection<? extends Player> players = HyperSpecies.getInstance().getServer().getOnlinePlayers();
                 for (Player all : players) {
-                    if (all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= range*range) {
+                    if (all != player && all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(location) <= range * range) {
                         Vector vector = location.clone().subtract(all.getLocation()).toVector().normalize();
                         all.setVelocity(vector);
                     }

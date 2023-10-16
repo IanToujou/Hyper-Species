@@ -66,7 +66,8 @@ public class AbilityThornSeedling extends Ability {
                     double radiusSquared = 5 * 5;
                     for (Player all : players) {
                         if (all.getWorld() == player.getWorld() && all.getLocation().distanceSquared(block.getLocation()) <= radiusSquared) {
-                            if(all != player) all.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 20 * duration, 1, false, false, true));
+                            if (all != player)
+                                all.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 20 * duration, 1, false, false, true));
                         }
                     }
                 }

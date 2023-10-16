@@ -63,12 +63,12 @@ public class EntityDamageByEntityListener implements Listener {
                     }
                 }
 
-                if(AbilityCollapsingUniverse.getChallengers().containsKey(player.getUniqueId())) {
+                if (AbilityCollapsingUniverse.getChallengers().containsKey(player.getUniqueId())) {
                     int times = AbilityCollapsingUniverse.getChallengers().get(player.getUniqueId());
-                    AbilityCollapsingUniverse.getChallengers().put(player.getUniqueId(), times+1);
+                    AbilityCollapsingUniverse.getChallengers().put(player.getUniqueId(), times + 1);
                 }
 
-                if(AbilityTheHunt.getPlayers().contains(player.getUniqueId())) {
+                if (AbilityTheHunt.getPlayers().contains(player.getUniqueId())) {
                     dealer.giveExp(1);
                     player.getWorld().spawnParticle(Particle.VILLAGER_HAPPY, dealer.getLocation(), 10, 0, 0, 0);
                     player.getWorld().playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.MASTER, 2, 1f);
@@ -146,7 +146,7 @@ public class EntityDamageByEntityListener implements Listener {
 
             }
 
-            if(trueDamage >= 20) event.setDamage(0);
+            if (trueDamage >= 20) event.setDamage(0);
             else event.setDamage(trueDamage);
             playerManager.setHealth(health - trueDamage);
 

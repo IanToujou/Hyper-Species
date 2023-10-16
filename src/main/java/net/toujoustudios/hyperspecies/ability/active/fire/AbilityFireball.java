@@ -5,7 +5,6 @@ import net.toujoustudios.hyperspecies.ability.active.AbilityField;
 import net.toujoustudios.hyperspecies.ability.active.AbilityType;
 import net.toujoustudios.hyperspecies.element.Element;
 import net.toujoustudios.hyperspecies.main.HyperSpecies;
-import net.toujoustudios.hyperspecies.player.PlayerManager;
 import org.bukkit.*;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;

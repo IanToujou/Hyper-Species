@@ -114,8 +114,8 @@ public class PlayerManager {
      * Saves all the data that is stored in the in-memory hashmap to the config file.
      * This method does NOT clear any in-memory data.
      *
-     * @since 1.0.0
      * @see PlayerManager#destroy()
+     * @since 1.0.0
      */
     public void save() {
 
@@ -145,8 +145,8 @@ public class PlayerManager {
      * Destroys the data stored in the in-memory hashmap.
      * This method does NOT save the data. It simply removes it from the memory.
      *
-     * @since 1.0.0
      * @see PlayerManager#save()
+     * @since 1.0.0
      */
     public void destroy() {
         players.remove(uuid);
@@ -228,9 +228,9 @@ public class PlayerManager {
         scoreboardTeam.setPrefix((species != null ? species.prefix() : "§7None") + " §7| ");
         scoreboardTeam.addEntry(Objects.requireNonNull(Bukkit.getPlayer(uuid)).getName());
 
-        if(name != null) {
+        if (name != null) {
             Player player = Bukkit.getPlayer(uuid);
-            if(player != null) player.setDisplayName(name);
+            if (player != null) player.setDisplayName(name);
         }
 
     }
@@ -284,7 +284,7 @@ public class PlayerManager {
     }
 
     public double getMaxHealth() {
-        return 20+getLevel()*3;
+        return 20 + getLevel() * 3;
     }
 
     public double getHealthRegeneration() {
@@ -304,7 +304,7 @@ public class PlayerManager {
     }
 
     public double getMaxMana() {
-        return 20+getLevel();
+        return 20 + getLevel();
     }
 
     public double getManaRegeneration() {

@@ -29,7 +29,7 @@ public class AbilityBite extends Ability {
                 2
         );
 
-        addField(AbilityField.DAMAGE, List.of(5,6,7,8,9,10,12,14,15));
+        addField(AbilityField.DAMAGE, List.of(5, 6, 7, 8, 9, 10, 12, 14, 15));
 
     }
 

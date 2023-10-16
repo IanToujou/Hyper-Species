@@ -42,17 +42,18 @@ public class AbilityDarkestNight extends Ability {
     public boolean execute(Player player) {
 
         World world = player.getWorld();
-        if(world.isUltraWarm()) return false;
+        if (world.isUltraWarm()) return false;
         long oldTime = world.getFullTime();
         int duration = getFieldValue(AbilityField.DURATION, player);
         world.setTime(18000);
 
         Bukkit.getOnlinePlayers().forEach(all -> {
             PlayerManager manager = PlayerManager.get(all);
-            if(manager.getSpecies() != null && manager.getSpecies().name().equals("Wolf")) {
+            if (manager.getSpecies() != null && manager.getSpecies().name().equals("Wolf")) {
                 all.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 20 * duration, 0, false, false, true));
                 all.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * duration, 0, false, false, true));
-            } else all.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * duration, 0, false, false, true));
+            } else
+                all.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 20 * duration, 0, false, false, true));
         });
 
         world.playSound(player.getLocation(), Sound.ENTITY_WOLF_HOWL, SoundCategory.MASTER, 10, 1f);

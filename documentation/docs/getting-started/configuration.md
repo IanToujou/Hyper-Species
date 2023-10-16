@@ -16,7 +16,7 @@ HyperSpecies has a range of different configuration files.
 ### general.yml
 
 !!! info
-    
+
     ee
 
 e

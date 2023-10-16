@@ -51,7 +51,8 @@ public class AbilityFertilizingRain extends Ability {
                         for (int z = -radius; z <= radius; z++) {
                             Block block = center.getRelative(x, y, z);
                             if (center.getLocation().distance(block.getLocation()) <= radius) {
-                                if (block.applyBoneMeal(BlockFace.UP)) player.playSound(player.getLocation(), Sound.BLOCK_COMPOSTER_FILL_SUCCESS, SoundCategory.MASTER, 100, 1f);
+                                if (block.applyBoneMeal(BlockFace.UP))
+                                    player.playSound(player.getLocation(), Sound.BLOCK_COMPOSTER_FILL_SUCCESS, SoundCategory.MASTER, 100, 1f);
                             }
                         }
                     }

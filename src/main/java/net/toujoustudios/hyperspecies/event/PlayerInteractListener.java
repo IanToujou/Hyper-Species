@@ -121,15 +121,16 @@ public class PlayerInteractListener implements Listener {
 
             if (material == Material.LAPIS_BLOCK) {
 
-                if(playerManager.isSelectingAbility()) {
-                    for (int i = 0; i < 9; i++) player.getInventory().setItem(i, playerManager.getSavedInventory().get(i));
+                if (playerManager.isSelectingAbility()) {
+                    for (int i = 0; i < 9; i++)
+                        player.getInventory().setItem(i, playerManager.getSavedInventory().get(i));
                     playerManager.setSelectingAbility(false);
                 }
 
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
                     if (event.getItem() != null) {
                         if (event.getItem().getType() == Material.DIAMOND) {
-                            if(playerManager.getLevel() < 50) {
+                            if (playerManager.getLevel() < 50) {
                                 event.setCancelled(true);
                                 player.getItemInHand().setAmount(player.getItemInHand().getAmount() - 1);
                                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, SoundCategory.MASTER, 100, 1f);
@@ -196,7 +197,7 @@ public class PlayerInteractListener implements Listener {
         for (int i = 0; i < 9; i++) player.getInventory().setItem(i, ItemListUI.FILLER);
 
         player.getInventory().setItem(0, ItemListUI.CANCEL);
-        if(player.getGameMode() == GameMode.CREATIVE) {
+        if (player.getGameMode() == GameMode.CREATIVE) {
             playerManager.getCooldownAbilities().clear();
             playerManager.setMana(playerManager.getMaxMana());
         }

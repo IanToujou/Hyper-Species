@@ -49,22 +49,22 @@ public class AbilityJetBlackSimulation extends Ability {
                 target = all;
         }
         if (target == null) return false;
-        if(challengers.contains(target.getUniqueId())) return false;
+        if (challengers.contains(target.getUniqueId())) return false;
 
         PlayerManager playerManager = PlayerManager.get(player);
-        playerManager.setHealth(playerManager.getHealth()/4);
+        playerManager.setHealth(playerManager.getHealth() / 4);
 
         Location location = target.getLocation();
         World world = location.getWorld();
         assert world != null;
         Block center = location.getBlock();
         int radius = 18;
-        int outerRadius = radius+2;
+        int outerRadius = radius + 2;
         int redstoneCount = 0;
         HashMap<Block, Material> blockTypes = new HashMap<>();
 
-        if(world.isUltraWarm()) return false;
-        if(location.getY() > 200) return false;
+        if (world.isUltraWarm()) return false;
+        if (location.getY() > 200) return false;
 
         boolean oldRule = Boolean.TRUE.equals(location.getWorld().getGameRuleValue(GameRule.DO_MOB_SPAWNING));
         location.getWorld().setGameRule(GameRule.DO_MOB_SPAWNING, false);
@@ -74,7 +74,7 @@ public class AbilityJetBlackSimulation extends Ability {
                 for (int z = -outerRadius; z <= outerRadius; z++) {
                     Block b = center.getRelative(x, y, z);
                     if (center.getLocation().distance(b.getLocation()) <= outerRadius) {
-                        Block copy = world.getBlockAt(new Location(world, b.getX(), 250+y, b.getZ()));
+                        Block copy = world.getBlockAt(new Location(world, b.getX(), 250 + y, b.getZ()));
                         blockTypes.put(copy, copy.getType());
                         copy.setType(Material.BLACK_CONCRETE);
                     }
@@ -87,16 +87,16 @@ public class AbilityJetBlackSimulation extends Ability {
                 for (int z = -radius; z <= radius; z++) {
                     Block b = center.getRelative(x, y, z);
                     if (center.getLocation().distance(b.getLocation()) <= radius) {
-                        Block copy = world.getBlockAt(new Location(world, b.getX(), 250+y, b.getZ()));
-                        if(b.getType() == Material.WATER) copy.setType(Material.BLACK_STAINED_GLASS);
-                        else if(b.getType() == Material.AIR) copy.setType(Material.AIR);
-                        else if(b.getType() != Material.GRASS || b.getType() != Material.TALL_GRASS) {
+                        Block copy = world.getBlockAt(new Location(world, b.getX(), 250 + y, b.getZ()));
+                        if (b.getType() == Material.WATER) copy.setType(Material.BLACK_STAINED_GLASS);
+                        else if (b.getType() == Material.AIR) copy.setType(Material.AIR);
+                        else if (b.getType() != Material.GRASS || b.getType() != Material.TALL_GRASS) {
                             int random = new Random().nextInt(3);
                             int redstoneRandom = new Random().nextInt(2700);
-                            if(random == 0) copy.setType(Material.BLACK_WOOL);
-                            if(random == 1) copy.setType(Material.BLACK_TERRACOTTA);
-                            if(random == 2) copy.setType(Material.BLACKSTONE);
-                            if(redstoneRandom == 0) {
+                            if (random == 0) copy.setType(Material.BLACK_WOOL);
+                            if (random == 1) copy.setType(Material.BLACK_TERRACOTTA);
+                            if (random == 2) copy.setType(Material.BLACKSTONE);
+                            if (redstoneRandom == 0) {
                                 copy.setType(Material.REDSTONE_BLOCK);
                                 redstoneCount++;
                             }
@@ -111,7 +111,7 @@ public class AbilityJetBlackSimulation extends Ability {
         target.sendMessage("§8You have been teleported to a pocket dimension...");
 
         boolean canFindBlock = redstoneCount > 2;
-        if(canFindBlock) {
+        if (canFindBlock) {
             target.sendMessage("§8You need to find §c1 of " + redstoneCount + "§8 redstone blocks to escape.");
             target.sendMessage("§8If you don't, you will die.");
         } else {
@@ -128,7 +128,7 @@ public class AbilityJetBlackSimulation extends Ability {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if(!challengers.contains(finalTarget.getUniqueId())) {
+                if (!challengers.contains(finalTarget.getUniqueId())) {
                     finalTarget.teleport(location);
                     finalTarget.removePotionEffect(PotionEffectType.NIGHT_VISION);
                     blockTypes.forEach(Block::setType);
@@ -136,7 +136,7 @@ public class AbilityJetBlackSimulation extends Ability {
                     Bukkit.getScheduler().scheduleSyncDelayedTask(HyperSpecies.getInstance(), this::cancel, 15);
                 }
                 if (count[0] >= 120) {
-                    if(canFindBlock) finalTarget.damage(10000, player);
+                    if (canFindBlock) finalTarget.damage(10000, player);
                     challengers.remove(finalTarget.getUniqueId());
                 }
                 count[0] += 1;

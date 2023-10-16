@@ -10,7 +10,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Stream;
@@ -216,7 +215,7 @@ public abstract class Ability {
     }
 
     public boolean available(SubSpecies subSpecies) {
-        if (subSpecies()!=null) {
+        if (subSpecies() != null) {
             return subSpecies != null && subSpecies.equals(this.subSpecies);
         } else return true;
     }

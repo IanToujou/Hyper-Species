@@ -94,7 +94,8 @@ public final class HyperSpecies extends JavaPlugin {
                 if (realHealth > 0) player.setHealth(realHealth);
                 else {
                     player.setHealth(0);
-                    for (int i = 0; i < 9; i++) player.getInventory().setItem(i, playerManager.getSavedInventory().get(i));
+                    for (int i = 0; i < 9; i++)
+                        player.getInventory().setItem(i, playerManager.getSavedInventory().get(i));
                     playerManager.setSelectingAbility(false);
                 }
             } else {
@@ -136,7 +137,8 @@ public final class HyperSpecies extends JavaPlugin {
                 playerManager.setDrunkenness(playerManager.getDrunkenness() - 0.001);
             } else playerManager.setDrunkenness(0);
 
-            if (playerManager.getShield() > playerManager.getMaxHealth()/2) playerManager.setShield(playerManager.getMaxHealth()/2);
+            if (playerManager.getShield() > playerManager.getMaxHealth() / 2)
+                playerManager.setShield(playerManager.getMaxHealth() / 2);
 
         })), 5, 5);
 
